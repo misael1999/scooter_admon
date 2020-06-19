@@ -23,23 +23,23 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   steps = [
     {
       id: 1,
-      text: 'Fotografía',
+      text: 'General',
       icon: 'ti-camera',
       component: 'div-general',
       form: null
     },
     {
       id: 2,
-      text: 'Dirección',
-      icon: 'ti-map',
-      component: 'div-map',
+      text: 'Tarifas',
+      icon: 'ti-money',
+      component: 'div-categories',
       form: this.addressForm
     },
     {
       id: 3,
-      text: 'Categorias',
-      icon: 'ti-layout-grid3',
-      component: 'div-categories',
+      text: 'Dirección',
+      icon: 'ti-map',
+      component: 'div-map',
       form: null
     },
     {
@@ -218,6 +218,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       this.previousLi.classList.remove('active');
     }
     if (this.previousDiv) {
+      // For show or hidden content
       this.previousDiv.classList.toggle('content-tab');
     }
 

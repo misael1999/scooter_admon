@@ -2,17 +2,12 @@
 @import '../../mixins.scss';
 @import 'checkbox.scss';
 
-@font-face {
-  font-family: dalgona;
-  src: url('../../../../assets/fonts/Dalgona.ttf');
-}
-
 .image-container {
   min-height: 100vh;
   background-position: center center;
   background-size: cover;
   position: relative;
-  font-family: 'Muli', 'Helvetica', Arial, sans-serif;
+  font-family: 'aspira', 'Helvetica', Arial, sans-serif;
 
 }
 
@@ -22,7 +17,7 @@
   font-weight: $font-weight-light;
   color: $card-black-color;
   text-align: center;
-  font-family: 'Muli', 'Helvetica', Arial, sans-serif;
+  font-family: 'aspira', 'Helvetica', Arial, sans-serif;
 
 }
 
@@ -57,7 +52,7 @@
 
   .header-wizard {
     padding: 30px;
-    font-family: 'Muli', 'Helvetica', Arial, sans-serif;
+    font-family: 'aspira', 'Helvetica', Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,7 +115,7 @@
       text-align: center;
 
       .info-text {
-        font-family: 'Muli', 'Helvetica', Arial, sans-serif;
+        font-family: 'aspira', 'Helvetica', Arial, sans-serif;
         font-size: 14px;
         margin-top: 5px;
         color: $medium-gray;
