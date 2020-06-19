@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingLogin = false;
         this.setDataUserLocalStorage(data);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/complete-profile']);
 
       }, error => {
         this.loadingLogin = false;
@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
   }
 
   setDataUserLocalStorage(data) {
-    console.log(data);
     localStorage.setItem('access_token', data.access);
     localStorage.setItem('refresh_token', data.refresh);
     localStorage.setItem('station', JSON.stringify(data.station));

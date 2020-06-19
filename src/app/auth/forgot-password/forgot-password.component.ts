@@ -34,7 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     this.loadingForgot = true;
-    const email = this.forgotForm.get('email').value;
+    const email = this.forgotForm.get('username').value;
     this.message = `Se ha enviado un correo a ${email}
      para continuar con el proceso de recuperado de contraseña `;
 
@@ -52,7 +52,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   buildForgotForm() {
     this.forgotForm = this.fb.group({
-      email: [null, common_functions.globalValidEmail]
+      username: [null, common_functions.globalValidEmail]
     });
   }
 

@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   signup(user) {
-    const URL = `${environment.HOST_APIV1}/merchants/`;
+    const URL = `${environment.HOST_APIV1}/stations/`;
     return this.http.post(URL, user);
   }
 
@@ -25,9 +25,9 @@ export class AuthService {
     return this.http.post(URL, {token});
   }
 
-  forgotPassword(email) {
+  forgotPassword(username) {
     const URL = `${environment.HOST_APIV1}/users/forgot-password/`;
-    return this.http.post(URL, {email});
+    return this.http.post(URL, {username});
   }
 
   recoverPassword(token, password) {

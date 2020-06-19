@@ -48,10 +48,10 @@
         background: #0865f0;
         color: white;
         cursor: pointer;
-        transition-duration: .8s;
+        transition: .4s;
 
         &:hover {
-            transition-duration: .8s;
+            transition: .4s;
             transform: scale(1.1);
         }
     }

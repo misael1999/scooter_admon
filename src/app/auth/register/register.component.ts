@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
     const title = 'Gracias por registrarse, por favor verifique su cuenta';
     const message = `En breve recibira un correo electronico
-     a ${this.signupForm.get('email').value} para confirmar su cuenta`;
+     a ${this.signupForm.get('username').value} para confirmar su cuenta`;
 
     this.loadingSave = true;
 
@@ -41,19 +41,18 @@ export class RegisterComponent implements OnInit {
         this.alertService.openAlertConfirmSignup('/auth/', title, message);
       }, error => {
         this.loadingSave = false;
+        this.alertService.openErrorDialog(null, 'Oppss..', error.errors.message);
       });
 
   }
 
   buildSignupForm() {
     this.signupForm = this.fb.group({
-      contact_person_name: [null, commons_functions.globalValid],
-      contact_person_last_name: [null, commons_functions.globalValid],
-      email: [null, commons_functions.globalValidEmail],
-      phone_number: [null, commons_functions.globalValid],
+      station_name: [null, commons_functions.globalValid],
+      contact_person: [null, commons_functions.globalValid],
+      username: [null, commons_functions.globalValidEmail],
       password: [null, commons_functions.globalValid],
       confirmPassword: [null, commons_functions.globalValid],
-      business_name: [null, commons_functions.globalValid]
     }, { validators: commons_functions.globalValidator.confirmPassword });
   }
 
