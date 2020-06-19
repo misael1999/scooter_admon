@@ -1,0 +1,165 @@
+// Override Bootstrap default variables here
+// Do not edit any of the files in /vendor/bootstrap/scss/!
+
+// Color Variables
+// Bootstrap Color Overrides
+
+$white: #fff !default;
+$gray-100: #f8f9fc !default;
+$gray-200: #eaecf4 !default;
+$gray-300: #dddfeb !default;
+$gray-400: #d1d3e2 !default;
+$gray-500: #b7b9cc !default;
+$gray-600: #858796 !default;
+$gray-700: #6e707e !default;
+$gray-800: #5a5c69 !default;
+$gray-900: #3a3b45 !default;
+$black: #000 !default;
+
+$blue: #4e73df !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #e74a3b !default;
+$orange: #fd7e14 !default;
+$yellow: #f6c23e !default;
+$green: #1cc88a !default;
+$teal: #20c9a6 !default;
+$cyan: #36b9cc !default;
+
+// Custom Colors
+$brand-google: #ea4335;
+$brand-facebook: #3b5998;
+
+// Set Contrast Threshold
+$yiq-contrasted-threshold: 195 !default;
+
+// Typography
+$body-color: $gray-600 !default;
+
+$font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 'Noto Color Emoji' !default;
+
+$font-weight-light: 300 !default;
+// $font-weight-base: 400;
+$headings-font-weight: 400 !default;
+
+// Shadows
+$box-shadow-sm: 0 0.125rem 0.25rem 0 rgba($gray-900, .2) !default;
+$box-shadow: 0 0.15rem 1.75rem 0 rgba($gray-900, .15) !default;
+// $box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
+
+// Borders Radius
+$border-radius: 0.35rem !default;
+$border-color: darken($gray-200, 2%);
+
+// Spacing Variables
+// Change below variable if the height of the navbar changes
+$topbar-base-height: 4.375rem;
+// Change below variable to change the width of the sidenav
+$sidebar-base-width: 14rem;
+// Change below variable to change the width of the sidenav when collapsed
+$sidebar-collapsed-width: 6.5rem;
+
+// Card
+$card-cap-bg: $gray-100;
+$card-border-color: $border-color;
+
+// Adjust column spacing for symmetry
+$spacer: 1rem;
+$grid-gutter-width: $spacer * 1.5;
+
+// Transitions
+$transition-collapse: height .15s ease !default;
+
+// Dropdowns
+$dropdown-font-size: 0.85rem;
+$dropdown-border-color: $border-color;
+
+// in
+$gray-input-bg:              #F3F2EE !default;
+$gray-input-outline:         #e8e7e3 !default;
+$border-radius-base:             4px !default;
+$font-color:                 #66615b !default;
+$white-bg:                   #FFFFFF !default;
+$border-radius-large:           6px !default;
+$medium-gray:                #cfcfca !default;
+$success-color:              #7AC29A !default;
+$font-size-b:               14px !default;
+$danger-input-bg:            #FFC0A4 !default;
+$danger-color:               #EB5E28 !default;
+$padding-large-vertical:       11px !default;
+$padding-large-horizontal:     30px !default;
+$white-color:                #FFFFFF !default;
+$light-gray:                 #E3E3E3 !default;
+$dark-gray:                  #9A9A9A !default;
+
+$form-placeholder-color:     rgba(0,0,0,.2) !default;
+$border-thin:                1px !default;
+$padding-base-vertical:         7px !default;
+$padding-base-horizontal:       18px !default;
+$height-base:                  40px !default;
+$padding-round-vertical:        9px !default;
+$padding-round-horizontal:     18px !default;
+$padding-small-vertical:        4px !default;
+$padding-small-horizontal:     10px !default;
+$padding-xs-vertical:           2px !default;
+$padding-xs-horizontal:         5px !default;
+$font-weight-normal:         400 !default;
+$margin-large-vertical:        30px !default;
+$margin-base-vertical:         15px !default;
+
+$border-radius-btn-small:      26px !default;
+$border-radius-btn-base:       20px !default;
+$border-radius-btn-large:      50px !default;
+$border-radius-extreme:        6px !default;
+$card-black-color:          #252422 !default;
+$border-radius-none:            0px !default;
+$border-radius-small:           3px !default;
+$border-radius-none-top:      $border-radius-none $border-radius-none 0 0 !default;
+$border-radius-small-top:     $border-radius-small $border-radius-small 0 0 !default;
+
+$border-thick:               2px !default;
+$transparent-bg:             transparent !default;
+$default-color:              #66615B !default;
+$default-states-color:       darken($default-color,11%) !default;
+$fill-font-color:            rgba(255, 255, 255, 0.85);
+
+$fast-transition-time:           150ms !default;
+
+$primary-color:              #7A9E9F !default;
+$primary-states-color:       darken($primary-color,11%) !default;
+
+$success-states-color:       darken($success-color,11%) !default;
+
+$info-color:                 #68B3C8 !default;
+$info-states-color:          darken($info-color,11%) !default;
+
+$warning-color:              #F3BB45 !default;
+$warning-states-color:       darken($warning-color,11%) !default;
+
+$danger-states-color:        darken($danger-color,11%) !default;
+
+$none:                       0   !default;
+
+$font-size-large:              18px !default;
+$font-size-h1:                 3.2em   !default;
+$font-size-h2:                 2.6em     !default;
+$font-size-h3:                 1.825em !default;
+$font-size-h4:                 1.5em   !default;
+$font-size-h5:                 1.25em  !default;
+$font-size-h6:                 0.9em   !default;
+$font-paragraph:               16px    !default;
+$font-size-navbar:             16px    !default;
+$font-size-small:              12px    !default;
+$font-size-xs:                 12px !default;
+
+$font-weight-light:          300 !default;
+$font-weight-normal:         400 !default;
+$font-weight-semi:           500 !default;
+$font-weight-bold:           600 !default;
+
+$line-height-general:          1.4em !default;
+$line-height-small:            20px !default;
+
+
+

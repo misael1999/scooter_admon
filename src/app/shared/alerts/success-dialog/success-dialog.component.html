@@ -1,0 +1,22 @@
+<div class="header-close">
+    <a (click)="closeDialog()">&times;</a>
+</div>
+<div class="content">
+    
+    <div class="content-title">
+        <p>{{title}}.</p>
+    </div>
+    
+    <div class="content-image d-flex justify-content-center">
+        <img src="assets/images/alerts/undraw_confirmation.svg" width="250" height="250" alt="" srcset="">
+    </div>
+
+    <div class="message-body">
+        <p> {{message}}.</p>
+    </div>
+
+    <div class="btns">
+        <div (click)="closeDialog()" class="btn btn-confirm">Aceptar</div>
+    </div>
+
+</div>

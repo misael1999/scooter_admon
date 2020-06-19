@@ -1,0 +1,57 @@
+.header-close {
+    position: relative;
+
+    a {
+        position: absolute;
+        right: -10px;
+        top: -20px;
+        font-size: 130%;
+        cursor: pointer;
+    }
+}
+
+.content-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-size: 130%;
+        font-family: 'Nunito', sans-serif;
+        text-align: center;
+    }
+}
+
+.message-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-size: 100%;
+        font-weight: 300;
+        text-align: center;
+    }
+
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+
+    .btn-confirm {
+        padding: 10px;
+        margin: 10px 0px;
+        width: 80%;
+        border-radius: 20px;
+        background: #5ecd6d;
+        color: white;
+        cursor: pointer;
+        transition-duration: .8s;
+
+        &:hover {
+            transition-duration: .8s;
+            transform: scale(1.1);
+        }
+    }
+}

@@ -1,0 +1,193 @@
+@mixin btn-styles($btn-color, $btn-states-color) {
+    border-color: $btn-color;
+    color: $btn-color;
+  
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    &:active:focus,
+    &:active:hover,
+    .open > &.dropdown-toggle,
+    .open > &.dropdown-toggle:focus,
+    .open > &.dropdown-toggle:hover {
+        background-color: $btn-color ;
+        color: $fill-font-color ;
+        border-color: $btn-color ;
+        .caret{
+            border-top-color: $fill-font-color;
+        }
+    }
+  
+    &.disabled,
+    &:disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      &,
+      &:hover,
+      &:focus,
+      &.focus,
+      &:active,
+      &.active {
+        background-color: $transparent-bg;
+        border-color: $btn-color;
+      }
+    }
+  
+  
+    &.btn-fill {
+      color: $white-color;
+      background-color: $btn-color;
+      @include opacity(1);
+  
+      &:hover,
+      &:focus,
+      &:active,
+      &.active,
+      .open > &.dropdown-toggle{
+          background-color: $btn-states-color;
+          color: $white-color;
+          border-color: $btn-states-color;
+      }
+  
+      .caret{
+          border-top-color: $white-color;
+      }
+    }
+  
+    &.btn-simple {
+      &:hover,
+      &:focus,
+      &:active,
+      &.active,
+      .open > &.dropdown-toggle{
+          background-color: $transparent-bg;
+          color: $btn-states-color;
+      }
+  
+      .caret{
+          border-top-color: $white-color;
+      }
+    }
+  
+    .caret{
+        border-top-color: $btn-color;
+    }
+  }
+  
+  
+  @mixin btn-size($padding-vertical, $padding-horizontal, $font-size, $border, $line-height){
+     font-size: $font-size;
+     border-radius: $border;
+     padding: $padding-vertical $padding-horizontal;
+  
+     &.btn-simple{
+         padding: $padding-vertical + 2 $padding-horizontal;
+     }
+  
+  }
+
+  @mixin input-size($padding-vertical, $padding-horizontal, $height){
+    padding: $padding-vertical $padding-horizontal;
+    height: $height;
+}
+
+@mixin placeholder($color, $opacity){
+   color: $color;
+   @include opacity(1);
+}
+
+@mixin label-style(){
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: $white-color;
+    font-weight: 500;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    display: inline-block;
+    line-height: 1.5em;
+}
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    // IE8 filter
+    $opacity-ie: ($opacity * 100);
+    filter: #{alpha(opacity=$opacity-ie)};
+  }
+
+  @mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+            box-shadow: $shadow;
+  }
+  
+  @mixin transition($time, $type){
+      -webkit-transition: all $time $type;
+      -moz-transition: all $time $type;
+      -o-transition: all $time $type;
+      -ms-transition: all $time $type;
+      transition: all $time $type;
+  }
+  
+  @mixin transition-font-size($time, $type) {
+      -webkit-transition: font-size $time $type;
+      -moz-transition: font-size $time $type;
+      -o-transition: font-size $time $type;
+      -ms-transition: font-size $time $type;
+      transition: font-size $time $type;
+  }
+  
+  @mixin scale($value) {
+      -webkit-transform: scale($value);
+      -moz-transform: scale($value);
+      -o-transition: scale($value);
+      -ms-transform: scale($value);
+      transform: scale($value);
+  }
+  
+  @mixin translateY($value) {
+      -webkit-transform: translateY($value);
+      -moz-transform: translateY($value);
+      -o-transition: translateY($value);
+      -ms-transform: translateY($value);
+      transform: translateY($value);
+  }
+  
+  @mixin set-wizard-color($color) {
+      .picture{
+          &:hover{
+              border-color: $color;
+          }
+      }
+  
+      .nav-pills{
+          > li.active > a:after{
+              background-color: $color;
+          }
+  
+          > li.active > a{
+              color: $color;
+          }
+  
+          .icon-circle{
+              &.checked{
+                  border-color: $color;
+              }
+          }
+      }
+  
+  
+      .choice{
+          &.active{
+              .card-checkboxes{
+                  color: $color;
+              }
+          }
+      }
+  
+      .wizard-navigation{
+          .progress-bar{
+              background-color: $color;
+          }
+      }
+  }
+  
