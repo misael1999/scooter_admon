@@ -8,10 +8,10 @@ import { Merchant } from 'src/app/models/merchant.model';
 })
 export class SidebarComponent implements OnInit {
 
-  merchant: Merchant;
+  station;
 
   constructor() {
-    this.merchant = JSON.parse(localStorage.getItem('user'));
+    this.station = JSON.parse(localStorage.getItem('station'));
   }
 
   ngOnInit(): void {

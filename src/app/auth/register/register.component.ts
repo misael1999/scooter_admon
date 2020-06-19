@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import * as commons_functions from 'src/app/common/functions';
+import * as commons_functions from 'src/app/utils/functions';
 import { AlertsService } from 'src/app/services/alerts.service';
 
 

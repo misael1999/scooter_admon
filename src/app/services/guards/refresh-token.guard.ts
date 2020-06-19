@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Router } from '@angular/router';
-import * as CONSTANTS from 'src/app/common/constants';
+import * as CONSTANTS from 'src/app/utils/constants';
 import { AuthService } from '../auth.service';
 
 @Injectable({

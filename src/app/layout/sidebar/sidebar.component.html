@@ -1,11 +1,11 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 <!--     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div> -->
-    <div class="sidebar-brand-text mx-3">{{merchant.business_name | titlecase}}</div>
+    <div class="sidebar-brand-text mx-3">{{station.station_name | titlecase}}</div>
   </a>
 
   <!-- Divider -->
@@ -35,14 +35,13 @@
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
       <i class="fas fa-fw fa-clipboard-list"></i>
-      <span>Catálogo</span>
+      <span>Pedidos</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Productos:</h6>
-        <a class="collapse-item" href="buttons.html">Productos activos</a>
-        <a class="collapse-item" href="buttons.html">Productos por agotarse</a>
-        <a class="collapse-item" href="cards.html">Agregar producto</a>
+        <h6 class="collapse-header">Pedidos:</h6>
+        <a class="collapse-item" href="buttons.html">Pedidos activos</a>
+        <a class="collapse-item" href="buttons.html">Pedidos entregados</a>
       </div>
     </div>
   </li>
@@ -51,14 +50,13 @@
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
       <i class="fas fa-fw fa-tags"></i>
-      <span>Promociones</span>
+      <span>Vehiculos</span>
     </a>
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Promociones</h6>
-        <a class="collapse-item" href="utilities-color.html">Agregar promoción</a>
-        <a class="collapse-item" href="utilities-color.html">Promociones activas</a>
-        <a class="collapse-item" href="utilities-color.html">Promociones vencidas</a>
+        <h6 class="collapse-header">Vehiculos</h6>
+        <a class="collapse-item" href="utilities-color.html">Agregar vehiculo</a>
+        <a class="collapse-item" href="utilities-color.html">Listado de vehiculos</a>
       </div>
     </div>
   </li>
@@ -79,11 +77,11 @@
 
      <!-- Nav Item - Utilities Collapse Menu -->
      <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAuctions" aria-expanded="true" aria-controls="collapseAuctions">
-        <i class="fas fa-fw fa-gavel"></i>
-        <span>Subastas</span>
+      <a class="nav-link collapsed" href="#">
+        <i class="fas fa-fw fa-map"></i>
+        <span>Mapa de seguimiento</span>
       </a>
-      <div id="collapseAuctions" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+<!--       <div id="collapseAuctions" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Subastas</h6>
           <a class="collapse-item" href="utilities-color.html">Agregar subasta</a>
@@ -91,7 +89,7 @@
           <a class="collapse-item" href="utilities-color.html">Subastas vencidas</a>
   
         </div>
-      </div>
+      </div> -->
     </li>
 
   <!-- Divider -->
@@ -99,39 +97,36 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    Compras y ventas
+    Informes
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+    <a class="nav-link collapsed" href="#">
       <i class="fas fa-fw fa-dollar-sign"></i>
-      <span>Ventas</span>
+      <span>Reportes</span>
     </a>
-    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+    <!-- <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Historial</h6>
         <a class="collapse-item" href="login.html">Ventas pendientes</a>
-        <a class="collapse-item" href="register.html">Ventas marcadas</a>
-        <a class="collapse-item" href="forgot-password.html">Nuevas ventas</a>
-        <a class="collapse-item" href="forgot-password.html">Mensajes de ventas</a>
-
       </div>
-    </div>
+    </div> -->
   </li>
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuestion" aria-expanded="true" aria-controls="collapseQuestion">
       <i class="fas fa-fw fa-question"></i>
-      <span>Resolver preguntas</span>
+      <span>Evaluaciones a clientes</span>
     </a>
     <div id="collapseQuestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Mensajes</h6>
-        <a class="collapse-item" href="register.html">Preguntas nuevas</a>
-        <h6 class="collapse-header">FAQ</h6>
-        <a class="collapse-item" href="register.html">Agregar pre. frecuente</a>
-        <a class="collapse-item" href="register.html">Listado de FAQ</a>
+        <h6 class="collapse-header">Evaluaciones</h6>
+        <a class="collapse-item" href="register.html">Evaluaciones nuevas</a>
+        <a class="collapse-item" href="register.html">Evaluaciones anteriores</a>
+<!--         <h6 class="collapse-header">FAQ</h6> -->
+<!--         <a class="collapse-item" href="register.html">Agregar pre. frecuente</a>
+        <a class="collapse-item" href="register.html">Listado de FAQ</a> -->
 
 
       </div>
@@ -156,7 +151,7 @@
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNotice" aria-expanded="true" aria-controls="collapseNotice">
         <i class="fas fa-fw fa-folder"></i>
-        <span>Enviar anuncio</span>
+        <span>Atención al cliente</span>
       </a>
       <div id="collapseNotice" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">

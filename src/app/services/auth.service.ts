@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(user) {
-    const URL = `${environment.HOST_APIV1}/users/login/merchant/`;
+    const URL = `${environment.HOST_APIV1}/stations/login/`;
     return this.http.post(URL, user);
   }
 
@@ -36,10 +36,10 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('station');
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    this.router.navigate(['/auth/'])
+    this.router.navigate(['/auth/']);
   }
 
   refreshToken(refresh) {

@@ -16,9 +16,10 @@ export class CompleteProfileGuard implements CanActivate {
 
       // Verify that the merchant exists and does not have a complete configuration  ========
 
-      const merchant: Merchant = JSON.parse(localStorage.getItem('user'));
-      if (merchant) {
-        if (!merchant.config.complete_config) {
+      const station = JSON.parse(localStorage.getItem('station'));
+      console.log(station);
+      if (station) {
+        if (!station.information_is_complete) {
             this.router.navigate(['/complete-profile/']);
             return false;
         }

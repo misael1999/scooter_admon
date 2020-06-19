@@ -9,7 +9,8 @@ import { CompleteProfileGuard } from './services/guards/complete-profile.guard';
 const routes: Routes = [
   {
     path: '', component: PagesComponent,
-    canActivate: [CompleteProfileGuard, AuthGuard, RefreshTokenGuard],
+    // CompleteProfileGuard
+    canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
   },
   {

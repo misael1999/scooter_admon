@@ -2,6 +2,11 @@
 @import '../../mixins.scss';
 @import 'checkbox.scss';
 
+@font-face {
+  font-family: dalgona;
+  src: url('../../../../assets/fonts/Dalgona.ttf');
+}
+
 .image-container {
   min-height: 100vh;
   background-position: center center;
@@ -35,8 +40,10 @@
   }
 
   span.name {
-    font-size: 130%;
-    font-weight: bold;
+    font-size: 200%;
+    font-weight: normal;
+    color: $main-color;
+    font-family: 'dalgona', 'Helvetica', Arial, sans-serif;
   }
 }
 
@@ -92,7 +99,7 @@
       -o-transition: width .3s ease;
       transition: width .3s ease;
       height: 4px;
-      background: $warning-color;
+      background: $main-color;
     }
   }
 
@@ -125,10 +132,10 @@
       }
 
       &.active {
-        color: $warning-color;
+        color: $main-color;
 
         .icon-wizard {
-          background: $warning-color !important;
+          background: $main-color !important;
           transform: scale(1.1);
           transition-duration: 200ms;
           animation-duration: 200ms;
@@ -140,7 +147,7 @@
         }
 
         .info-text {
-          color: $warning-color;
+          color: $main-color;
         }
 
       }
@@ -158,7 +165,7 @@
         align-items: center;
 
         &.checked {
-          border-color: $warning-color !important;
+          border-color: $main-color !important;
         }
 
         i {
@@ -216,7 +223,7 @@
     width: auto;
     padding: 5px 10px;
     color: #ffffff;
-    background-color: $warning-color;
+    background-color: $main-color;
     /* 10px 20px */
   }
 
@@ -239,7 +246,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: $warning-color;
+  background: $main-color;
   padding: 5px;
   display: flex;
   justify-content: space-between;

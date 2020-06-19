@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as commons_functions from 'src/app/common/functions';
+import * as commons_functions from 'src/app/utils/functions';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { Router } from '@angular/router';
 
@@ -45,14 +45,15 @@ export class LoginComponent implements OnInit {
   }
 
   setDataUserLocalStorage(data) {
+    console.log(data);
     localStorage.setItem('access_token', data.access);
     localStorage.setItem('refresh_token', data.refresh);
-    localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.setItem('station', JSON.stringify(data.station));
   }
 
   buildLoginForm() {
     this.loginForm = this.fb.group({
-      email: [null, commons_functions.globalValidEmail],
+      username: [null, commons_functions.globalValidEmail],
       password: [null, Validators.required]
     });
   }
