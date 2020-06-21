@@ -1,0 +1,13 @@
+<div class="card-wrapper card cursor my-3">
+    <input [checked]="checked" (change)="selectService($event.target)"
+     [value]="service.id" class="c-card" type="checkbox" id="{{index}}">
+    <div class="card-content">
+        <label for="{{index}}">
+                <i class="ti {{service.slug_name == 'purchases'? 'ti-shopping-cart-full': 'ti-truck'}} icon"></i>
+                <div class="service-name">
+                    <span>{{service.name}}</span>
+                </div>
+        </label>
+
+    </div>
+</div>

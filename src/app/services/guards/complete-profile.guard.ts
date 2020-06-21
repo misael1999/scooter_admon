@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Merchant } from 'src/app/models/merchant.model';
+import { StationModel } from 'src/app/models/station.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class CompleteProfileGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      // Verify that the merchant exists and does not have a complete configuration  ========
+      // Verify that the station exists and does not have a complete configuration  ========
 
       const station = JSON.parse(localStorage.getItem('station'));
       console.log(station);

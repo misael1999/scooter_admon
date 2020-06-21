@@ -1,4 +1,4 @@
-export class ServiceModel {
+export class ScheduleModel {
 
     constructor(
         public id: number,

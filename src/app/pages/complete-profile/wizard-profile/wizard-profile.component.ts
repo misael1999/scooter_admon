@@ -1,7 +1,10 @@
 import { Component, OnInit, AfterContentInit, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import Swal from 'sweetalert2';
-declare var $;
+import { ConfigAccountService } from 'src/app/services/config-account.service';
+import { ServiceModel } from 'src/app/models/service.model';
+import { ScheduleModel } from 'src/app/models/schedule.model';
+
 
 // just an interface for type safety.
 export interface Marker {
@@ -18,8 +21,14 @@ export interface Marker {
 })
 export class WizardProfileComponent implements OnInit, AfterContentInit {
 
+  // Forms
   addressForm: FormGroup;
-
+  ratesServicesForm: FormGroup;
+  servicesSelected = [];
+  servicesForm;
+  // Data of services
+  services: Array<ServiceModel>;
+  schedules: Array<ScheduleModel>;
   steps = [
     {
       id: 1,
@@ -52,6 +61,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     },
   ];
 
+  // ======= WIZARD ELEMENTS ========
   iconsWizardLength = 0;
   currentIndex = 0;
   listOfElementLi: NodeListOf<HTMLElement>;
@@ -60,13 +70,15 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   hasNext: boolean;
   hasPrevious: boolean;
 
+  // ======= END WIZARD ELEMENTS ========
+
   // ======= STEP ONE ========
   binaryString;
   imageTemp;
   @ViewChild('myInput')
   myInputVariable: ElementRef;
 
-  // STEP 2
+  // STEP 3
   // google maps zoom level
   zoom = 15;
 
@@ -74,100 +86,130 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   lat = 51.673858;
   lng = 7.815982;
 
-  markers: Marker[] = [
-    {
-      lat: 51.673858,
-      lng: 7.815982,
-      label: 'A',
-      draggable: true
-    },
-    {
-      lat: 51.373858,
-      lng: 7.215982,
-      label: 'B',
-      draggable: false
-    },
-    {
-      lat: 51.723858,
-      lng: 7.895982,
-      label: 'C',
-      draggable: true
-    }
-  ];
 
-
-  constructor() { }
+  constructor(private configService: ConfigAccountService,
+              private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.getServices();
+    this.getSchedules();
+    this.buildRateServicefForm();
+    this.buildAddressForm();
+  }
+
+  // Get services availables
+  getServices() {
+    this.configService.getServices()
+      .subscribe((data: any) => this.services = data.data);
+  }
+
+  getSchedules() {
+    this.configService.getSchedules()
+      .subscribe((data: any) => this.schedules = data.data);
   }
 
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
-  }
-
-  mapClicked($event) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,
-      draggable: true
-    });
-  }
-
-  markerDragEnd(m: Marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
+    console.log(`clicked the marker: ${label || index}`);
   }
 
   ngAfterContentInit() {
     this.initWizard();
-    this.listenEventCheckBox();
   }
 
-  initWizard() {
-    setTimeout(() => {
-      // Get all elements
-      this.listOfElementLi = document.querySelectorAll('.li-wizard');
-      // Number of elements li
-      this.iconsWizardLength = this.listOfElementLi.length;
-      // Update progress bar
-      const progress = document.getElementById('progress-wizard');
-      progress.style.width = `${(100 / this.iconsWizardLength) - 5}%`;
+  // ======= FUNCTIONS FOR STEP ONE ========
 
-      // Get Ul for get the first element
-      const ulWizard = document.querySelector('.ul-wizard');
-      // Add class active and checked the first element li
-      const firstStep = ulWizard.querySelector('li');
+  onFileSelected(evt: any) {
+    const file = evt.target.files[0];
 
+    if (!file) {
+      this.imageTemp = null;
+      return;
+    }
 
-      // Get index
-      this.currentIndex = Number(firstStep.getAttribute('data-index'));
-      // Show component of first li
-      const component = String(firstStep.getAttribute('data-component'));
+    if (file.type.indexOf('image') < 0) {
 
-      // Hide previous div
-      this.previousDiv = document.getElementById(component);
-      this.previousDiv.classList.toggle('content-tab');
+      this.myInputVariable.nativeElement.value = '';
+      this.showMessageError('El archivo seleccionado no es una imagen');
+      this.binaryString = null;
+      return;
+    }
 
-      // Assign previous li
-      this.previousLi = firstStep;
-      this.previousLi.classList.add('active');
-      this.previousLi.querySelector('.icon-wizard').classList.add('checked');
-      this.showAndHideButtons();
-    }, 200);
+    const reader = new FileReader();
+    reader.onload = this.handleReaderLoaded.bind(this);
+    reader.readAsBinaryString(file);
+  }
+
+  handleReaderLoaded(e) {
+    this.binaryString = 'data:image/png;base64,' + btoa(e.target.result);
+  }
+
+  // Builds forms
+  buildRateServicefForm() {
+    this.ratesServicesForm = this._formBuilder.group({
+      services: this._formBuilder.array([], Validators.required),
+    });
+  }
+
+  buildAddressForm() {
+    this.addressForm = this._formBuilder.group({
+      street: [null, Validators.required],
+      suburb: [null, Validators.required],
+      postal_code: [null, Validators.required],
+      exterior_number: [null],
+      inside_number: [null],
+      references: [null]
+    });
 
   }
+
+  // Event OUTPUT from card-wizard.ts
+  addRateService(event): void {
+    if (event.checked) {
+      this.servicesForm = this.ratesServicesForm.get('services') as FormArray;
+      this.servicesForm.push(this.createRateService(event.service_id, event.service_name));
+    } else {
+      this.deleteRateService(event.service_id);
+    }
+  }
+
+  createRateService(serviceId, serviceName): FormGroup {
+    return this._formBuilder.group({
+      service_id: [serviceId],
+      service_name: [serviceName],
+      base_rate_price: [null, Validators.required],
+      from_kilometer: [null, Validators.required],
+      to_kilometer: [null, Validators.required],
+      price_kilometer: [null, Validators.required]
+    });
+  }
+
+  get rateServiceFormData(): any { return this.ratesServicesForm.get('services'); }
+
+
+  deleteRateService(serviceId: any) {
+    const rates = this.ratesServicesForm.get('services') as FormArray;
+    const index = rates.controls.findIndex((control) => {
+      return control.get('service_id').value === serviceId;
+    });
+    rates.removeAt(index);
+  }
+
+  // ======= END FUNCTIONS FOR STEP ONE ========
+
+  // WIZARD EVENTS
 
   onNext(element: HTMLElement = null) {
 
     if (element) {
-      /*  const index = element.getAttribute('data-index');
-       if (!(this.validPreviousSteps(index))) {
-         return;
-       } */
+      const index = element.getAttribute('data-index');
+      if (!(this.validPreviousSteps(index))) {
+        return;
+      }
       this.selectStep(element);
     } else {
-      /*       if (!(this.validateStepByIndex(this.currentIndex))) {
-              return;
-            } */
+      if (!(this.validateStepByIndex(this.currentIndex))) {
+        return;
+      }
       this.currentIndex += 1;
       this.showAndHideButtons();
       this.selectStep(this.listOfElementLi[this.currentIndex - 1]);
@@ -198,6 +240,63 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     this.showAndHideButtons();
     this.selectStep(this.listOfElementLi[this.currentIndex - 1]);
 
+  }
+
+  validateStepByIndex(index): boolean {
+    switch (index) {
+      case 1:
+        return this.validateStepImage();
+      case 2:
+        return this.validateStepCategories();
+      case 3:
+        return this.validateStepAddress();
+      case 4:
+        return this.validateStepConfig();
+      default:
+        return false;
+    }
+  }
+
+  validateStepImage(): boolean {
+    return true;
+    if (!this.binaryString) {
+      this.showMessageInfo('Por favor elige una imagen');
+      return false;
+    }
+    const services = this.ratesServicesForm.get('services') as FormArray;
+    if (services.length === 0) {
+      this.showMessageInfo('Por favor seleccione al menos un servicio');
+      return false;
+    }
+    return true;
+  }
+
+  validateStepAddress(): boolean {
+    return true;
+    if (this.addressForm.invalid) {
+      this.addressForm.markAllAsTouched();
+      return false;
+    }
+    return true;
+  }
+
+  validateStepCategories(): boolean {
+    return true;
+    const services = this.ratesServicesForm.get('services');
+    const forms = services as FormArray;
+
+    if (services.invalid) {
+      forms.markAllAsTouched();
+      services.markAsTouched({ onlySelf: true });
+      /*       this.showMessageInfo('Por favor completa las tarifas');
+       */
+      return false;
+    }
+    return true;
+  }
+
+  validateStepConfig(): boolean {
+    return true;
   }
 
   showAndHideButtons() {
@@ -238,87 +337,46 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     this.showAndHideButtons();
   }
 
+
+  initWizard() {
+    setTimeout(() => {
+      // Get all elements
+      this.listOfElementLi = document.querySelectorAll('.li-wizard');
+      // Number of elements li
+      this.iconsWizardLength = this.listOfElementLi.length;
+      // Update progress bar
+      const progress = document.getElementById('progress-wizard');
+      progress.style.width = `${(100 / this.iconsWizardLength) - 5}%`;
+
+      // Get Ul for get the first element
+      const ulWizard = document.querySelector('.ul-wizard');
+      // Add class active and checked the first element li
+      const firstStep = ulWizard.querySelector('li');
+
+
+      // Get index
+      this.currentIndex = Number(firstStep.getAttribute('data-index'));
+      // Show component of first li
+      const component = String(firstStep.getAttribute('data-component'));
+
+      // Hide previous div
+      this.previousDiv = document.getElementById(component);
+      this.previousDiv.classList.toggle('content-tab');
+
+      // Assign previous li
+      this.previousLi = firstStep;
+      this.previousLi.classList.add('active');
+      this.previousLi.querySelector('.icon-wizard').classList.add('checked');
+      this.showAndHideButtons();
+    }, 200);
+
+  }
+
   updateProgress(index) {
     const progress = document.getElementById('progress-wizard');
     let moveDistance = 100 / this.iconsWizardLength;
     moveDistance = (moveDistance * (index) - 10);
     progress.style.width = `${moveDistance}%`;
-  }
-
-  // ======= FUNCTIONS FOR STEP ONE ========
-
-  onFileSelected(evt: any) {
-    const file = evt.target.files[0];
-
-    if (!file) {
-      this.imageTemp = null;
-      return;
-    }
-
-    if (file.type.indexOf('image') < 0) {
-
-      this.myInputVariable.nativeElement.value = '';
-      this.showMessageError('El archivo seleccionado no es una imagen');
-      this.binaryString = null;
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = this.handleReaderLoaded.bind(this);
-    reader.readAsBinaryString(file);
-  }
-
-  handleReaderLoaded(e) {
-    this.binaryString = 'data:image/png;base64,' + btoa(e.target.result);
-  }
-
-  // ======= END FUNCTIONS FOR STEP ONE ========
-
-  validateStepByIndex(index): boolean {
-    switch (index) {
-      case 1:
-        return this.validateStepImage();
-      case 2:
-        return this.validateStepAddress();
-      case 3:
-        return this.validateStepCategories();
-      case 4:
-        return this.validateStepConfig();
-      default:
-        return false;
-    }
-  }
-
-  validateStepImage(): boolean {
-    if (!this.binaryString) {
-      this.showMessageInfo('Por favor elige una imagen');
-      return false;
-    }
-    return true;
-  }
-
-  validateStepAddress(): boolean {
-    return false;
-  }
-
-  validateStepCategories(): boolean {
-    return false;
-  }
-
-  validateStepConfig(): boolean {
-    return false;
-  }
-
-  listenEventCheckBox() {
-    $('[data-toggle="wizard-checkbox"]').click(function() {
-      if ($(this).hasClass('active')) {
-        $(this).removeClass('active');
-        $(this).find('[type="checkbox"]').removeAttr('checked');
-      } else {
-        $(this).addClass('active');
-        $(this).find('[type="checkbox"]').attr('checked', 'true');
-      }
-    });
   }
 
   showMessageError(message) {
@@ -341,5 +399,25 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     });
   }
 
+  isFieldInvalid(form: FormGroup, field: string) {
+    /*     console.log(form.get(field).valid);
+        console.log(form.get(field).value);
+        console.log(form.get(field).touched); */
+    return (
+      (!form.get(field).valid && form.get(field).touched)
+    );
+  }
+
+  isFieldValid(form: FormGroup, field: string) {
+    return (
+      (form.get(field).valid && form.get(field).touched)
+    );
+  }
+
+  isFieldHasError(form: FormGroup, field: string, error: string) {
+    return (
+      (form.get(field).hasError(error))
+    );
+  }
 
 }

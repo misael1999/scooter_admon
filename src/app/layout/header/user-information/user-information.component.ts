@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserInformationComponent implements OnInit {
 
-  @Input() merchant;
+  @Input() station;
 
   constructor(private authService: AuthService) { }
 

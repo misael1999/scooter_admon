@@ -1,6 +1,5 @@
 @import '../../variables.scss';
 @import '../../mixins.scss';
-@import 'checkbox.scss';
 
 .image-container {
   min-height: 100vh;
@@ -8,7 +7,6 @@
   background-size: cover;
   position: relative;
   font-family: 'aspira', 'Helvetica', Arial, sans-serif;
-
 }
 
 .title-component {
@@ -40,6 +38,11 @@
     color: $main-color;
     font-family: 'dalgona', 'Helvetica', Arial, sans-serif;
   }
+}
+
+.info-service {
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -244,7 +247,7 @@
   background: $main-color;
   padding: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
 
@@ -256,7 +259,7 @@
     font-weight: 600;
     padding: 7px 18px;
     border-color: #66615B;
-    color: #66615B;
+    color: #ffffff;
     -webkit-transition: all 150ms linear;
     -moz-transition: all 150ms linear;
     -o-transition: all 150ms linear;
@@ -283,6 +286,12 @@ agm-map {
 }
 
 // STEP CONFIG
+
+.list-schedules {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 
 .col-switches {
   .option {

@@ -1,0 +1,121 @@
+@import '../../../mixins.scss';
+.card {
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    background-color: #F3F2EE;
+    color: #a09e9ce1;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    width: 100% !important;
+}
+
+.card-content {
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 3px;
+    /*   padding: 25px 25px 10px 25px;
+   */
+    display: flex;
+
+
+    .icon {
+        font-size: 200%;
+    }
+
+    label {
+        //border: 1px solid red;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        .service-name {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 110%;
+        }
+
+    }
+}
+
+.card-content * {
+    cursor: pointer;
+}
+
+.card-wrapper {
+    position: relative;
+    height: 130px;
+    width: 100%;
+    cursor: pointer;
+    margin: 0 30px;
+
+    -webkit-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+    -moz-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+    -o-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+    -ms-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+    transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+
+    &:hover {
+        box-shadow: 0px 12px 17px -7px rgba(0, 0, 0, 0.3);
+        @include translateY(-10px);
+    }
+}
+
+.c-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+/* .c-card~.card-content {
+    transition: all 500ms ease-out;
+} */
+
+/* .c-card~.card-content .card-state-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 2;
+    width: 20px;
+    height: 20px;
+    display: none;
+    transition: all 100ms ease-out;
+} */
+
+.c-card~.card-content:before {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    content: "";
+    width: 0;
+    height: 0;
+}
+
+.c-card~.card-content:after {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    content: "";
+    width: 0;
+    height: 0;
+}
+
+
+
+.c-card:checked~.card-content {
+    color: orange;
+}
