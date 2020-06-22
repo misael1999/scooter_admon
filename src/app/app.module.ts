@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getPaginatorTranslate } from './shared/paginator';
 import { SharedModule } from './shared/shared.module';
+import { PageNoFound404Component } from './shared/page-no-found404/page-no-found404.component';
 
 registerLocaleData(localeEs);
 
@@ -19,6 +20,7 @@ registerLocaleData(localeEs);
   declarations: [
     AppComponent,
     PagesComponent,
+    PageNoFound404Component,
   ],
   imports: [
     BrowserModule,
