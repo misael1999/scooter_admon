@@ -4,6 +4,10 @@ import Swal from 'sweetalert2';
 import { ConfigAccountService } from 'src/app/services/config-account.service';
 import { ServiceModel } from 'src/app/models/service.model';
 import { ScheduleModel } from 'src/app/models/schedule.model';
+import { StationModel } from 'src/app/models/station.model';
+import { UpdateInfoStationModel } from 'src/app/models/update_info.model';
+import { AlertsService } from 'src/app/services/alerts.service';
+import { Router } from '@angular/router';
 
 
 // just an interface for type safety.
@@ -21,14 +25,20 @@ export interface Marker {
 })
 export class WizardProfileComponent implements OnInit, AfterContentInit {
 
+  station: StationModel;
   // Forms
   addressForm: FormGroup;
   ratesServicesForm: FormGroup;
-  servicesSelected = [];
   servicesForm;
   // Data of services
   services: Array<ServiceModel>;
   schedules: Array<ScheduleModel>;
+  scheduleSelected = [];
+  // Loaders
+  loadingUpdateConfig: boolean;
+
+  // Object to send update info
+  stationConfig: UpdateInfoStationModel = new UpdateInfoStationModel();
   steps = [
     {
       id: 1,
@@ -80,17 +90,26 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
 
   // STEP 3
   // google maps zoom level
-  zoom = 15;
+  zoom = 17;
+  currentMarker: Marker = {
+    lat: 18.462859841665864,
+    lng: -97.39279966871719,
+    draggable: false
+  };
 
   // initial center position for the map
-  lat = 51.673858;
-  lng = 7.815982;
+  lat = 18.462859841665864;
+  lng = -97.39279966871719;
 
+  // Step Config
+  assignDeliveryManually = true;
+  allowCancellations = true;
 
-  constructor(private configService: ConfigAccountService,
-              private _formBuilder: FormBuilder) { }
+  constructor(private configService: ConfigAccountService, private router: Router,
+              private _formBuilder: FormBuilder, private alertService: AlertsService) { }
 
   ngOnInit(): void {
+    this.station = JSON.parse(localStorage.getItem('station'));
     this.getServices();
     this.getSchedules();
     this.buildRateServicefForm();
@@ -155,8 +174,8 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       street: [null, Validators.required],
       suburb: [null, Validators.required],
       postal_code: [null, Validators.required],
-      exterior_number: [null],
-      inside_number: [null],
+      exterior_number: [null, Validators.required],
+      inside_number: [null, Validators.required],
       references: [null]
     });
 
@@ -192,6 +211,54 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       return control.get('service_id').value === serviceId;
     });
     rates.removeAt(index);
+  }
+
+  setMarkerMap($event) {
+    this.currentMarker.lat = $event.coords.lat;
+    this.currentMarker.lng = $event.coords.lng;
+    this.currentMarker.draggable = true;
+  }
+
+  addSchedule(schedule) {
+    if (schedule.checked) {
+      const index = this.scheduleSelected.findIndex((schedu) =>
+      schedu.schedule_id === schedule.schedule_id);
+
+      // If exist schedule, then update it
+      delete schedule.checked;
+      if (index >= 0) {
+        this.scheduleSelected[index] = {...schedule};
+        return;
+      }
+      // If not exist schedule, then add in array
+      this.scheduleSelected.push({
+        ...schedule
+      });
+    } else {
+      this.deleteSchedule(schedule.schedule_id);
+    }
+  }
+
+  deleteSchedule(scheduleId) {
+    const index = this.scheduleSelected.findIndex((schedule) => schedule.schedule_id === scheduleId);
+    if (index >= 0) {
+      this.scheduleSelected.splice(index, 1);
+    }
+  }
+
+  saveConfig() {
+    if (!(this.validateStepByIndex(this.currentIndex))) {
+      return;
+    }
+    this.loadingUpdateConfig = true;
+    this.configService.updateInfo(this.stationConfig)
+      .subscribe((data: any) => {
+        this.loadingUpdateConfig = false;
+        this.router.navigate(['/dashboard']);
+      }, (err) => {
+        this.loadingUpdateConfig = false;
+        this.alertService.openErrorDialog(null, 'Oppss..', err.errors.message);
+      });
   }
 
   // ======= END FUNCTIONS FOR STEP ONE ========
@@ -247,7 +314,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       case 1:
         return this.validateStepImage();
       case 2:
-        return this.validateStepCategories();
+        return this.validateStepRates();
       case 3:
         return this.validateStepAddress();
       case 4:
@@ -258,7 +325,6 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   }
 
   validateStepImage(): boolean {
-    return true;
     if (!this.binaryString) {
       this.showMessageInfo('Por favor elige una imagen');
       return false;
@@ -268,34 +334,53 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       this.showMessageInfo('Por favor seleccione al menos un servicio');
       return false;
     }
+    // Save in object to update info
+    this.stationConfig.general = {picture: this.binaryString};
     return true;
   }
 
   validateStepAddress(): boolean {
-    return true;
     if (this.addressForm.invalid) {
       this.addressForm.markAllAsTouched();
       return false;
     }
+    this.stationConfig.address = {...this.addressForm.value,
+       point: {lat: this.currentMarker.lat, lng: this.currentMarker.lat}};
     return true;
   }
 
-  validateStepCategories(): boolean {
-    return true;
+  validateStepRates(): boolean {
     const services = this.ratesServicesForm.get('services');
     const forms = services as FormArray;
 
     if (services.invalid) {
       forms.markAllAsTouched();
-      services.markAsTouched({ onlySelf: true });
-      /*       this.showMessageInfo('Por favor completa las tarifas');
-       */
       return false;
     }
+    this.stationConfig.services = services.value;
+    this.stationConfig.services = this.stationConfig.services.map((service: any) => {
+      delete service.service_name;
+      return service;
+    });
     return true;
   }
 
   validateStepConfig(): boolean {
+    if (this.scheduleSelected.length === 0) {
+      this.showMessageInfo('Selecciona al menos un día');
+      return false;
+    }
+
+    this.stationConfig.config = {
+      allow_cancellations: this.allowCancellations,
+      assign_delivery_manually: this.assignDeliveryManually,
+      schedules: this.scheduleSelected,
+      cancellation_policies: 'Sin politicas prro'
+    };
+
+    console.log('AQUIIII');
+    console.log(this.stationConfig);
+
     return true;
   }
 

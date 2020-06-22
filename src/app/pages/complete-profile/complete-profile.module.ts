@@ -7,6 +7,7 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardServiceComponent } from './wizard-profile/card-service/card-service.component';
 import { ScheduleComponent } from './wizard-profile/schedule/schedule.component';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 
 
@@ -16,6 +17,7 @@ import { ScheduleComponent } from './wizard-profile/schedule/schedule.component'
     CommonModule,
     CompleteProfileRoutingModule,
     FormsModule,
+    AmazingTimePickerModule,
     ReactiveFormsModule,
     AngularMaterialModule,
     AgmCoreModule.forRoot({

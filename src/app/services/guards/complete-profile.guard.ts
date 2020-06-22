@@ -17,7 +17,6 @@ export class CompleteProfileGuard implements CanActivate {
       // Verify that the station exists and does not have a complete configuration  ========
 
       const station = JSON.parse(localStorage.getItem('station'));
-      console.log(station);
       if (station) {
         if (!station.information_is_complete) {
             this.router.navigate(['/complete-profile/']);
