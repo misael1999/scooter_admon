@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
       }, error => {
         this.loadingLogin = false;
-        this.alertService.openErrorDialog(null, 'Oppss..', error.errors.message);
+        this.alertService.openErrorDialog(null, 'Opss..', error.errors.message);
       });
 
   }

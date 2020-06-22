@@ -196,7 +196,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       service_id: [serviceId],
       service_name: [serviceName],
       base_rate_price: [null, Validators.required],
-      from_kilometer: [null, Validators.required],
+      from_kilometer: [0, Validators.required],
       to_kilometer: [null, Validators.required],
       price_kilometer: [null, Validators.required]
     });

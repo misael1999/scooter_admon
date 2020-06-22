@@ -116,7 +116,7 @@
                         <div class="col-sm-6 col-sm-offset-1">
                           <div class="form-group">
                             <label>Desde el KM</label>
-                            <input formControlName="from_kilometer" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'from_kilometer'),
+                            <input readonly formControlName="from_kilometer" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'from_kilometer'),
                             'has-success valid': isFieldValid(serviceForm, 'from_kilometer')}" type="number"
                               class="form-control-eco w-100">
 
@@ -326,7 +326,7 @@
                               <div class="text">
                                 Asignar repartidor manualmente
                               </div>
-                              <mat-slide-toggle [checked]="true" [(ngModel)]="assignDeliveryManually"></mat-slide-toggle>
+                              <mat-slide-toggle [checked]="false" [(ngModel)]="assignDeliveryManually"></mat-slide-toggle>
                             </div>
 
                           </li>
