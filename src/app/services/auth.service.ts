@@ -35,6 +35,11 @@ export class AuthService {
     return this.http.post(URL, {token, password});
   }
 
+  setTokenNotifications(token) {
+    const URL = `${environment.HOST_APIV1}/devices/`;
+    return this.http.post(URL, {registration_id: token, type: 'web'});
+  }
+
   logout() {
     localStorage.removeItem('station');
     localStorage.removeItem('access_token');

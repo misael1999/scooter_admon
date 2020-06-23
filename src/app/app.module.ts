@@ -13,6 +13,10 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getPaginatorTranslate } from './shared/paginator';
 import { SharedModule } from './shared/shared.module';
 import { PageNoFound404Component } from './shared/page-no-found404/page-no-found404.component';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { FirebaseMessagingService } from './services/firebase-messaging.service';
 
 registerLocaleData(localeEs);
 
@@ -26,11 +30,14 @@ registerLocaleData(localeEs);
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule
   ],
   providers: [
+    FirebaseMessagingService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
