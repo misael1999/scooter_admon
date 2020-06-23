@@ -12,10 +12,10 @@ export class PagesComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit(): void {
+    init_sb_adminjs();
   }
 
   ngAfterContentInit() {
-    init_sb_adminjs();
   }
 
 }

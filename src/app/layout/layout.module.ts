@@ -6,6 +6,7 @@ import { NotificationsComponent } from './header/notifications/notifications.com
 import { MessagesComponent } from './header/messages/messages.component';
 import { UserInformationComponent } from './header/user-information/user-information.component';
 import { SearchComponent } from './header/search/search.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -23,7 +24,8 @@ import { SearchComponent } from './header/search/search.component';
     SidebarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class LayoutModule { }
