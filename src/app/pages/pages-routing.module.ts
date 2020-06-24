@@ -11,6 +11,16 @@ const routes: Routes = [
     path: 'orders',
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
   },
+  {
+    path: 'vehicles',
+    loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule )
+  },
+  {
+    path: 'client',
+    loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule )
+  },
+
+
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
