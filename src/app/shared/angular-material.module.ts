@@ -9,6 +9,9 @@ import { MatListModule } from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -22,7 +25,10 @@ const components = [
   MatListModule,
   MatCheckboxModule,
   MatSlideToggleModule,
-  MatTableModule
+  MatTableModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

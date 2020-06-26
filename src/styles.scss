@@ -1,16 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
-    font-family: dalgona;
-    src: url('./assets/fonts/Dalgona.ttf');
+    font-family: slant;
+    src: url('./assets/fonts/Slant.ttf');
   }
 @font-face {
     font-family: aspira;
     src: url('./assets/fonts/Aspira.ttf');
   }
 
+// Para hacer los select mas chicos
+.select-form {
+  height: 35px !important;
+  font-size: 90% !important;
+}
+
 .invalid-feedback-form {
   display: flex;
   flex-direction: column;
   font-size: 80%;
   color: rgb(255, 81, 0);
+}
+
+// Para hacer los form control mas chicos
+.fm-size {
+  height: 35px !important;
+  font-size: 90% !important;
+}
+
+.cursor {
+  cursor: pointer;
 }

@@ -5,19 +5,31 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 import { OrdersInProcessComponent } from './orders-in-process/orders-in-process.component';
 import { DeliveredOrdersComponent } from './delivered-orders/delivered-orders.component';
 import { NewOrdersComponent } from './new-orders/new-orders.component';
+import { NoFoundDataComponent } from 'src/app/shared/no-found-data/no-found-data.component';
+import { AssignDeliveryDialogComponent } from './new-orders/assign-delivery-dialog/assign-delivery-dialog.component';
+import { RejectOrderDialogComponent } from './new-orders/reject-order-dialog/reject-order-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     OrdersInProcessComponent,
-     DeliveredOrdersComponent,
-      NewOrdersComponent
-    ],
+    DeliveredOrdersComponent,
+    NewOrdersComponent,
+    NoFoundDataComponent,
+    AssignDeliveryDialogComponent,
+    RejectOrderDialogComponent
+  ],
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    AssignDeliveryDialogComponent,
+    RejectOrderDialogComponent
   ]
 })
 export class OrdersModule { }

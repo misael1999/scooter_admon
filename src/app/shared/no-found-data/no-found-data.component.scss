@@ -1,0 +1,17 @@
+.no-found-data {
+    margin: 15px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    img {
+      height: 200px;
+      width: 200px;
+    }
+  
+    p {
+      font-size: 120%;
+      align-items: center;
+    }
+  }

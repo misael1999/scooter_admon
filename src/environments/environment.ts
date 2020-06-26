@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   HOST_APIV1: 'https://www.scooter-app.team/appback/api/v1',
+  // HOST_APIV1: 'http://127.0.0.1:8000/api/v1',
   firebase: {
     apiKey: 'AIzaSyDcAruMxBUQlW9S672oSoe1dyr7l8WIxlU',
     authDomain: 'scooter-277719.firebaseapp.com',
