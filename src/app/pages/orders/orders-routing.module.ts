@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewOrdersComponent } from './new-orders/new-orders.component';
 import { OrdersInProcessComponent } from './orders-in-process/orders-in-process.component';
 import { DeliveredOrdersComponent } from './delivered-orders/delivered-orders.component';
+import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,9 @@ const routes: Routes = [
   },
   {
     path: 'delivered', component: DeliveredOrdersComponent,
+  },
+  {
+    path: 'cancelled', component: OrdersCancelledComponent,
   },
   { path: '', redirectTo: 'news', pathMatch: 'full' }
 

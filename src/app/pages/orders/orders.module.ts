@@ -9,6 +9,7 @@ import { NoFoundDataComponent } from 'src/app/shared/no-found-data/no-found-data
 import { AssignDeliveryDialogComponent } from './new-orders/assign-delivery-dialog/assign-delivery-dialog.component';
 import { RejectOrderDialogComponent } from './new-orders/reject-order-dialog/reject-order-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.component';
 
 
 
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NewOrdersComponent,
     NoFoundDataComponent,
     AssignDeliveryDialogComponent,
-    RejectOrderDialogComponent
+    RejectOrderDialogComponent,
+    OrdersCancelledComponent
   ],
   imports: [
     CommonModule,
