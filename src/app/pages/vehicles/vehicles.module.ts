@@ -5,6 +5,7 @@ import { VehiclesdRoutingModule } from './vehicles-routing.module';
 import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { ViewVehiclesComponent } from './view-vehicles/view-vehicles.component';
 
+import { VehiclesService } from '../../services/vehicles.service';
 
 
 @NgModule({
@@ -15,6 +16,9 @@ import { ViewVehiclesComponent } from './view-vehicles/view-vehicles.component';
     CommonModule,
     VehiclesdRoutingModule,
     AngularMaterialModule
+  ],
+  providers: [
+    VehiclesService
   ]
 })
 export class VehiclesModule { }

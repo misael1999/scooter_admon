@@ -41,7 +41,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Pedidos:</h6>
                 <a class="collapse-item cursor" routerLink="/orders/news" routerLinkActive="active">Pedidos nuevos</a>
-                <a class="collapse-item cursor" routerLink="/orders/process" routerLinkActive="active">Pedidos en proceso</a>
+                <a class="collapse-item cursor" routerLink="/orders/process" routerLinkActive="active">Pedidos en
+                    proceso</a>
                 <a class="collapse-item" routerLink="/orders/delivered" routerLinkActive="active">Pedidos entregados</a>
                 <a class="collapse-item" routerLink="/orders/cancelled" routerLinkActive="active">Pedidos rechazados</a>
             </div>
@@ -63,6 +64,27 @@
         </div>
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
+
+
+
+    <!-- Nav Item - delivery Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDelivery" aria-expanded="true" aria-controls="collapseDelivery">
+            <i class="fas fa-fw fa-car"></i>
+            <span>Repartidores</span>
+        </a>
+        <div id="collapseDelivery" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Vehiculos</h6>
+                <a class="collapse-item" routerLink="/delivery/add" routerLinkActive="active">Agregar repartidor</a>
+                <a class="collapse-item" routerLink="/delivery/list" routerLinkActive="active">Listado de
+                    repartidoress</a>
+            </div>
+        </div>
+    </li>
+    <!-- Nav Item - delivery Collapse Menu -->
+
+
     <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClients" aria-expanded="true" aria-controls="collapseClients">
             <i class="fas fa-fw fa-users"></i>
@@ -87,22 +109,16 @@
     </li>
 
 
-    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- Nav Item - Map the traicing -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" routerLink="/traicing" routerLinkActive="active">
             <i class="fas fa-fw fa-map"></i>
             <span>Mapa de seguimiento</span>
         </a>
-        <!--       <div id="collapseAuctions" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Subastas</h6>
-          <a class="collapse-item" href="utilities-color.html">Agregar subasta</a>
-          <a class="collapse-item" href="utilities-color.html">Subastas activas</a>
-          <a class="collapse-item" href="utilities-color.html">Subastas vencidas</a>
-  
-        </div>
-      </div> -->
     </li>
+    <!-- Fin Nav Item - Map the traicing -->
+
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">

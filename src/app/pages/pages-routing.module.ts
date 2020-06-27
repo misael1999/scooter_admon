@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'client',
     loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule )
   },
+  {
+    path: 'delivery',
+    loadChildren: () => import('./delivery-men/delivery-men.module').then(m => m.DeliveryMenModule )
+  },
+  {
+    path: 'traicing',
+    loadChildren: () => import('./traicing/traicing.module').then(m => m.TraicingModule )
+  },
 
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }

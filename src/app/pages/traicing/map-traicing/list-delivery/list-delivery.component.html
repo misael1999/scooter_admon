@@ -1,0 +1,15 @@
+<mat-list class="list" role="list">
+    <mat-list-item style="margin-bottom: 15px !important;" *ngFor="let delivery of deliverys" class="item grid grid--contact">
+        <img class="avatar" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="avatar">
+
+
+        <div class="flex">
+            <span> {{ delivery.name| titlecase }} </span>
+            <span>{{delivery.phone_number}}</span>
+            <span style="font-size: 60%;" class="badge badge-success"> {{ delivery.delivery_status}} </span>
+        </div>
+
+
+
+    </mat-list-item>
+</mat-list>
