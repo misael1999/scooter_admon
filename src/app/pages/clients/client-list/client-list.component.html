@@ -27,6 +27,8 @@
                     </tr>
                 </thead>
                 <tbody>
+
+
                     <tr *ngFor="let item of [1,2,3]">
                         <td>Juan</td>
                         <td>Sanches Vazques</td>
@@ -35,20 +37,25 @@
                         <td>2</td>
                         <td>Regular</td>
                         <td class="text-center bt-edit">
-                            <button class="btn"> 
-                                <i class="ti-marker-alt" ></i>
+                            <button class="btn" routerLink="/client/info"> 
+                                <i class="ti-plus" ></i>
                             </button>
                         </td>
                         <td class="text-center bt-remove">
                             <button class="btn ">
-                                <i class="ti-trash"></i>
+                                <i class="ti-comment-alt"></i>
+                            </button>
+                        </td>
+                        <td class="text-center bt-remove">
+                            <button class="btn ">
+                                <i class="ti-lock"></i>
                             </button>
                         </td>
                     </tr>
+
+
                 </tbody>
             </table>
-
         </div>
-
     </div>
 </div>
