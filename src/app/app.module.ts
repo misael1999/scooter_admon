@@ -17,6 +17,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { FirebaseMessagingService } from './services/firebase-messaging.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 registerLocaleData(localeEs);
 
@@ -34,7 +35,8 @@ registerLocaleData(localeEs);
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('./combine-sw.js', { enabled: environment.production })
   ],
   providers: [
     FirebaseMessagingService,

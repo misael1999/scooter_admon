@@ -74,6 +74,7 @@
                             <th>Lugar de entrega</th>
                             <th>Precio del servicio</th>
                             <th>Fecha del pedido </th>
+                            <th>Estatus </th>
                             <th>Acciones </th>
                         </tr>
                     </thead>
@@ -105,6 +106,9 @@
                             <td>${{order.service_price}}</td>
                             <td>
                                 {{order.order_date | date:'medium'}}
+                            </td>
+                            <td>
+                                {{order.order_status.name}}
                             </td>
                             <td>
                                 <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;"

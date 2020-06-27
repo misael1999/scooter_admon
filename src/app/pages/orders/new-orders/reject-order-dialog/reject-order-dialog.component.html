@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
-    <button [disabled]="rejectForm.invalid || loadingSave" (click)="rejectOrder()"
+    <button [disabled]="loadingSave" (click)="rejectOrder()"
      class="btn btn-secondary w-50">
      Rechazar orden
      <div class="load" *ngIf="loadingSave">
