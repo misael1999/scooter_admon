@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders.service';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignDeliveryDialogComponent } from './assign-delivery-dialog/assign-delivery-dialog.component';
 import { RejectOrderDialogComponent } from './reject-order-dialog/reject-order-dialog.component';
+import { Observable, Subscription } from 'rxjs';
+import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-orders',
@@ -11,8 +16,10 @@ import { RejectOrderDialogComponent } from './reject-order-dialog/reject-order-d
   styleUrls: ['./new-orders.component.scss']
 })
 
-export class NewOrdersComponent implements OnInit {
-
+export class NewOrdersComponent implements OnInit, OnDestroy {
+  stationId = localStorage.getItem('station_id');
+  token = localStorage.getItem('access_token');
+  WS_SOCKET = `${environment.WS_SOCKET}/ws/orders/${this.stationId}/?token=${this.token}`;
   // MatPaginator Inputs
   length = 100;
   pageSize = 15;
@@ -21,14 +28,22 @@ export class NewOrdersComponent implements OnInit {
   pageEvent: PageEvent;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status : 8, ordering: '' };
+  params = { limit: 15, offset: 0, search: '', order_status: 8, ordering: '' };
   orders: Array<any> = [];
   loadingOrders: boolean;
+  liveData$: Subscription;
 
-  constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
+  constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
+              private dialog: MatDialog, private webSocketService: WebSocketService) { }
 
   ngOnInit(): void {
     this.getOrders();
+    this.connectToWebSocket();
+  }
+
+  ngOnDestroy(): void {
+    this.webSocketService.closeConnection();
+    /*     this.webSocketService.close(); */
   }
 
   getOrders() {
@@ -38,7 +53,6 @@ export class NewOrdersComponent implements OnInit {
         this.orders = data.results;
         this.loadingOrders = false;
         this.length = data.count;
-        console.log(this.orders);
       }, error => {
         this.loadingOrders = false;
       });
@@ -46,9 +60,9 @@ export class NewOrdersComponent implements OnInit {
 
   searchBy(value: string) {
     this.params.search = value;
-/*     if (value === '') {
-      return;
-    } */
+    /*     if (value === '') {
+          return;
+        } */
     this.getOrders();
   }
 
@@ -58,7 +72,7 @@ export class NewOrdersComponent implements OnInit {
       width: '60%',
       minHeight: '500px',
       minWidth: '350px',
-      data: {orderId}
+      data: { orderId }
     });
 
     dialogref.afterClosed().subscribe(data => {
@@ -74,7 +88,7 @@ export class NewOrdersComponent implements OnInit {
       width: '40%',
       minHeight: '300px',
       minWidth: '300px',
-      data: {orderId}
+      data: { orderId }
     });
 
     dialogref.afterClosed().subscribe(data => {
@@ -95,5 +109,30 @@ export class NewOrdersComponent implements OnInit {
     this.getOrders();
   }
 
+  connectToWebSocket() {
+    this.webSocketService.connect(this.WS_SOCKET).pipe(
+      retryWhen((errors) => errors.pipe(delay(5000)))
+    ).subscribe((data: any) => {
+      if (data.data.type && data.data.type === 'NEW_ORDER') {
+        this.openSnackbarNewOrder();
+      }
+    });
+  }
+
+  openSnackbarNewOrder() {
+    const snackBarRef = this.snackBar.open('Nuevo pedido', 'Recargar', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.params = { limit: 15, offset: 0, search: '', order_status: 8, ordering: '' };
+      this.getOrders();
+    });
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      console.log('The snack-bar was dismissed');
+    });
+  }
 
 }

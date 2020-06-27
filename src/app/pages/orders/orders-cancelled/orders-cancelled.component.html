@@ -2,10 +2,9 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Nuevos pedidos</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pedidos cancelados o rechazados</h1>
     </div>
-    <mat-slide-toggle [checked]="true" class="my-3"  [labelPosition]="'before'"><span style="font-weight: bold;">Asignar repartidor
-        manualmente</span></mat-slide-toggle>
+
     <div>
         <!-- FILTROS  -->
         <div class="filters mb-3">
@@ -68,13 +67,15 @@
  -->
                             <th>QR code</th>
                             <th>Cliente</th>
+                            <th>Repartidor</th>
                             <th>Pedido</th>
                             <th>Servicio</th>
-                            <th>Lugar de origen o compra</th>
-                            <th>Lugar de entrega</th>
                             <th>Precio del servicio</th>
+                            <th>Razón</th>
                             <th>Fecha del pedido </th>
-                            <th>Acciones </th>
+                            <th>Estatus </th>
+                            <!--                             <th>Acciones </th>
+ -->
                         </tr>
                     </thead>
                     <tbody>
@@ -84,38 +85,27 @@
                             <td>{{order.qr_code}}</td>
                             <td>{{order.customer}}</td>
                             <td>
+                                <span *ngIf="order.delivery_man">{{order.delivery_man.name}}</span>
+                                <span *ngIf="!order.delivery_man">Sin repartidor</span>
+                            </td>
+                            <td>
                                 <ul *ngFor="let detail of order.details">
                                     <li>{{detail.product_name}}</li>
                                 </ul>
                             </td>
                             <td>{{order.service}}</td>
-                            <td>
-                                <div class="address" *ngIf="order.service != 'Compras'">
-                                    <p>Calle: {{order.from_address.street}}</p>
-                                    <p>Colonia: {{order.from_address.suburb}} </p>
-                                </div>
-                                <div class="place" *ngIf="order.service === 'Compras'">
-                                    <p>{{order.from_address.alias}}</p>
-                                </div>
-                            </td>
-                            <td>
-                                <p>Calle: {{order.to_address.street}}</p>
-                                <p>Colonia: {{order.to_address.suburb}} </p>
-                            </td>
                             <td>${{order.service_price}}</td>
+                            <td>{{order.reason_rejection}}</td>
                             <td>
                                 {{order.order_date | date:'medium'}}
                             </td>
                             <td>
-                                <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;"
-                                    class="btn btn-success">Asignar</button>
-                                <br>
-                                <br>
-                                <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;"
-                                    class="btn btn-danger">Rechazar</button>
-
-
+                                {{order.order_status.name}}
                             </td>
+                            <!-- <td>
+                                <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;"
+                                    class="btn btn-success">Más detalles</button>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
