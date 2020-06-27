@@ -37,7 +37,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
               private dialog: MatDialog, private webSocketService: WebSocketService) { }
 
   ngOnInit(): void {
-    // this.getOrders();
+    this.getOrders();
     this.connectToWebSocket();
   }
 
