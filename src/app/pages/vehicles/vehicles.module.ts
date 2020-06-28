@@ -6,6 +6,7 @@ import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { ViewVehiclesComponent } from './view-vehicles/view-vehicles.component';
 
 import { VehiclesService } from '../../services/vehicles.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { VehiclesService } from '../../services/vehicles.service';
   imports: [
     CommonModule,
     VehiclesdRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     VehiclesService

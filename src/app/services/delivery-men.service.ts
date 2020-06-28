@@ -16,4 +16,11 @@ export class DeliveryMenService {
     return this.http.get(url);
   }
 
+  createDelevery(delivery) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/`;
+    return this.http.post(url, delivery );
+  }
+
+
 }

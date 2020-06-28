@@ -10,13 +10,10 @@ export class ClientsService {
   constructor(private http: HttpClient) { }
 
 
-  getClient() {
+  getClients() {
     const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/clients/`;
     return this.http.get(url);
-
-
-
   }
 
 }

@@ -4,6 +4,7 @@ import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
 import { InfoDeliveryComponent } from './info-delivery/info-delivery.component';
 import { ListDeliveryComponent } from './list-delivery/list-delivery.component';
 import { DeliveryRoutingModule } from './delivery-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,7 +15,8 @@ import { DeliveryRoutingModule } from './delivery-routing.module';
     ListDeliveryComponent],
   imports: [
     CommonModule,
-    DeliveryRoutingModule
+    DeliveryRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class DeliveryMenModule { }

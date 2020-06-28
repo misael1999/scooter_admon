@@ -19,7 +19,8 @@
                         <th scope="col">Correo</th>
                         <th scope="col">Pedidos realizados </th>
                         <th scope="col">Pedidos cancelados </th>
-                        <th scope="col">Reputacion</th>
+                        <th scope="col">Primer pedido</th>
+                        <th scope="col">Ultimo pedido</th>
                         <th scope="col">Ver mas</th>
                         <th scope="col">Mensaje</th>
                         <th scope="col">Bloquear</th>
@@ -29,16 +30,17 @@
                 <tbody>
 
 
-                    <tr *ngFor="let item of [1,2,3]">
-                        <td>Juan</td>
+                    <tr *ngFor="let client of clients ">
+                        <td>{{ client.customer }}</td>
                         <td>Sanches Vazques</td>
                         <td>juanito34@hotmail.com</td>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>Regular</td>
+                        <td> {{client.total_orders}} </td>
+                        <td> {{client.total_orders_cancelled }} </td>
+                        <td> {{client.first_order_date | date }} </td>
+                        <td> {{client.last_order_date | date }} </td>
                         <td class="text-center bt-edit">
-                            <button class="btn" routerLink="/client/info"> 
-                                <i class="ti-plus" ></i>
+                            <button class="btn" [routerLink]="['/client/info',client.id]">
+                                <i class="ti-plus"></i>
                             </button>
                         </td>
                         <td class="text-center bt-remove">
