@@ -10,6 +10,7 @@ import { AssignDeliveryDialogComponent } from './new-orders/assign-delivery-dial
 import { RejectOrderDialogComponent } from './new-orders/reject-order-dialog/reject-order-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -18,7 +19,6 @@ import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.co
     OrdersInProcessComponent,
     DeliveredOrdersComponent,
     NewOrdersComponent,
-    NoFoundDataComponent,
     AssignDeliveryDialogComponent,
     RejectOrderDialogComponent,
     OrdersCancelledComponent
@@ -27,7 +27,8 @@ import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.co
     CommonModule,
     OrdersRoutingModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   entryComponents: [
     AssignDeliveryDialogComponent,

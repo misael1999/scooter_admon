@@ -8,26 +8,35 @@ import { environment } from '../../environments/environment';
 })
 export class VehiclesService {
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private httpClient: HttpClient) { }
 
   getVehicles() {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
-    return this.http.get(url);
-  }
-
-  createVehicle(vehicle) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
-    return this.http.post(url, vehicle );
+    return this.httpClient.get(url);
   }
 
   getVehiclesId(idVehicle) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
-    return this.http.post(url, idVehicle );
+    return this.httpClient.post(url, idVehicle);
   }
+
+  createVehicle(vehicle: any) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
+    return this.httpClient.post(url, vehicle);
+  }
+
+  editVehicle(Vehicles) {
+
+  }
+
+  deleteVehicle(idVehicle) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
+    return this.httpClient.delete(url, idVehicle);
+  }
+
 
 }

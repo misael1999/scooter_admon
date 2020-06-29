@@ -37,15 +37,13 @@ export class ListDeliveryComponent implements OnInit {
 
     for (const delivery of deliveryMen ) {
       if (delivery.location) {
-
+        const marker = {
+          lat: delivery.location.coordinates[1],
+          lng: delivery.location.coordinates[0],
+          label: delivery.name.charAt(0)
+        };
+        markerList.push(marker);
       }
-      const marker = {
-        lat: delivery.location.coordinates[1],
-        lng: delivery.location.coordinates[0],
-        label: delivery.name.charAt(0)
-      };
-      markerList.push(marker);
-
     }
 
     this.markers.emit(markerList);

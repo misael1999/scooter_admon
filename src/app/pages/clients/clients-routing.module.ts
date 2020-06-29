@@ -4,9 +4,8 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { InfoClientComponent } from './info-client/info-client.component';
 
 const routes: Routes = [
-    { path: 'list', component: ClientListComponent },
+    { path: '', component: ClientListComponent },
     { path: 'info/:id', component: InfoClientComponent },
-    { path: '', redirectTo: 'client', pathMatch: 'full'}
 ];
 
 @NgModule({

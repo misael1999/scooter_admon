@@ -5,22 +5,22 @@ import { VehiclesdRoutingModule } from './vehicles-routing.module';
 import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { ViewVehiclesComponent } from './view-vehicles/view-vehicles.component';
 
-import { VehiclesService } from '../../services/vehicles.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NoFoundDataComponent } from 'src/app/shared/no-found-data/no-found-data.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
     AddVehiclesComponent,
-    ViewVehiclesComponent],
+    ViewVehiclesComponent,
+  ],
   imports: [
     CommonModule,
     VehiclesdRoutingModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
-  providers: [
-    VehiclesService
-  ]
+
 })
 export class VehiclesModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { DeliveryMenService } from '../../../services/delivery-men.service';
 import { MatDialog } from '@angular/material/dialog';
+import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
 
 @Component({
   selector: 'app-list-delivery',
@@ -11,8 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class ListDeliveryComponent implements OnInit {
   // MatPaginator Inputs
   length = 100;
-  pageSize = 15;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSize = 25;
+  pageSizeOptions: number[] = [25, 50, 75, 100];
 
   // MatPaginator Output
   pageEvent: PageEvent;
@@ -28,6 +29,18 @@ export class ListDeliveryComponent implements OnInit {
     this.getDelivery();
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddDeliveryComponent, {
+      width: '600px',
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.animal = result;
+    // });
+  }
+
+
   getDelivery() {
     this.loadingDelivery = true;
     this.deliveryService.getDeliverys()
@@ -42,6 +55,17 @@ export class ListDeliveryComponent implements OnInit {
 
   }
 
+  // Metodo paginator
+  getPages(e): PageEvent {
+    if (this.deliverys.length === 0) {
+      this.pageSize = 25;
+      return;
+    }
+    this.params.limit = e.pageSize;
+    this.params.offset = this.params.limit * e.pageIndex;
+    this.getDelivery();
+  }
+  // ==========================================
 
 
 

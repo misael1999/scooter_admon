@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListDeliveryComponent } from './list-delivery/list-delivery.component';
-import { AddDeliveryComponent } from './add-delivery/add-delivery.component';
+import { InfoDeliveryComponent } from './info-delivery/info-delivery.component';
 
 const routes: Routes = [
-    { path: 'list', component: ListDeliveryComponent },
-    { path: 'add', component: AddDeliveryComponent },
-    { path: 'info', component: AddDeliveryComponent },
-    { path: '', redirectTo: 'list', pathMatch: 'full'}
+    { path: '', component: ListDeliveryComponent },
+    { path: 'info', component: InfoDeliveryComponent },
 ];
 
 @NgModule({

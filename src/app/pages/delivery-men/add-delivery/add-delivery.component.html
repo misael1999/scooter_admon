@@ -6,42 +6,70 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8 card m-auto ">
+        <div class="col-md-12 m-auto ">
             <!-- Form add vehicle -->
-            <form>
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" class="form-control" name="alias" placeholder="Alias">
-                </div>
-                <div class="form-group">
-                    <label>Apellidos</label>
-                    <input type="text" class="form-control" name="modelo" placeholder="Modelo">
-                </div>
+            <form [formGroup]='deliveryForm'>
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Telefono</label>
-                        <input type="text" class="form-control" name="anio" placeholder="Año">
+                        <label>Nombre</label>
+                        <input type="text" formControlName="name" class="form-control" placeholder="Nombre">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label>Salrio</label>
-                        <input type="text" class="form-control" name="placa" placeholder="Placa">
+                    <div class="form- col-lg-6">
+                        <label>Apellidos</label>
+                        <input type="text" formControlName="last_name" class="form-control" placeholder="Apellidos">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Direccion</label>
-                    <input type="text" class="form-control" name="modelo" placeholder="Modelo">
-                </div>
-                <div class="form-group">
-                    <label>Usuario</label>
-                    <input type="text" class="form-control" name="modelo" placeholder="Modelo">
-                </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="text" class="form-control" name="modelo" placeholder="Modelo">
                 </div>
 
-                <button type="submit" class="btn btn-primary">Agregar</button>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Telefono</label>
+                        <input type="text" formControlName="phone_number" class="form-control" placeholder="Telefono">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Salario</label>
+                        <input type="text" autocomplete="false" formControlName="salary_per_order" class="form-control" placeholder="Salario">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Contraseña</label>
+                        <input type="password" formControlName="password" class="form-control">
+                    </div>
+                </div>
             </form>
+
+            <form [formGroup]='adressForm'>
+                <small>Direccion de repartidor</small>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Calle</label>
+                        <input type="text" class="form-control" placeholder="Calle">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Colonia</label>
+                        <input type="text" class="form-control" placeholder="Colonia">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Código postal</label>
+                        <input type="text" class="form-control" placeholder="Código postal">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Numero exterior</label>
+                        <input type="text" class="form-control" placeholder="Numero exterior">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Numero interior</label>
+                        <input type="text" class="form-control" placeholder="Numero interior">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Referencias</label>
+                        <input type="text" class="form-control" placeholder="Referencias">
+                    </div>
+                </div>
+                <button type="submit" (click)="addDelivery()" class="btn btn-primary">Agregar</button>
+
+
+            </form>
+
             <!-- Fin form add vehicle -->
 
         </div>

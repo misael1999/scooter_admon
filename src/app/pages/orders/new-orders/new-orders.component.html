@@ -4,7 +4,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Nuevos pedidos</h1>
     </div>
-    <mat-slide-toggle [checked]="true" class="my-3"  [labelPosition]="'before'"><span style="font-weight: bold;">Asignar repartidor
+    <mat-slide-toggle [checked]="true" class="my-3" [labelPosition]="'before'"><span style="font-weight: bold;">Asignar repartidor
         manualmente</span></mat-slide-toggle>
     <div>
         <!-- FILTROS  -->
@@ -26,9 +26,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text"
-                            class="form-control fm-size" placeholder="Buscar por cliente, dirección"
-                            aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por cliente, dirección" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="ti ti-search"></i>
@@ -46,9 +44,8 @@
         <div class="row" class="content">
             <!-- PAGINADOR  -->
             <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize"
-                    [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                </mat-paginator>
+                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                    </mat-paginator>
             </div>
             <!-- TERMINA EL PAGINADOR  -->
 
@@ -111,12 +108,10 @@
                                 {{order.order_status.name}}
                             </td>
                             <td>
-                                <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;"
-                                    class="btn btn-success">Asignar</button>
+                                <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
                                 <br>
                                 <br>
-                                <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;"
-                                    class="btn btn-danger">Rechazar</button>
+                                <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
 
 
                             </td>
@@ -125,7 +120,7 @@
                 </table>
             </div>
             <!-- TERMINA LA TABLA  -->
-            <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  [message]="'No hay pedidos que mostrar'">
+            <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  >
             </app-no-found-data>
         </div>
     </div>

@@ -4,6 +4,7 @@ import { ConfirmSignupDialogComponent } from './alerts/confirm-signup-dialog/con
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorDialogComponent } from './alerts/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from './alerts/success-dialog/success-dialog.component';
+import { NoFoundDataComponent } from './no-found-data/no-found-data.component';
 
 
 
@@ -11,7 +12,8 @@ import { SuccessDialogComponent } from './alerts/success-dialog/success-dialog.c
   declarations: [
     ConfirmSignupDialogComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    NoFoundDataComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { SuccessDialogComponent } from './alerts/success-dialog/success-dialog.c
   exports: [
     ConfirmSignupDialogComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    NoFoundDataComponent
   ]
 })
 export class SharedModule { }

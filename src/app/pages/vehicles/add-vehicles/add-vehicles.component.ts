@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { VehiclesService } from '../../../services/vehicles.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ViewVehiclesComponent } from '../view-vehicles/view-vehicles.component';
+
+
+
 
 @Component({
   selector: 'app-add-vehicles',
@@ -10,11 +15,18 @@ import { VehiclesService } from '../../../services/vehicles.service';
 export class AddVehiclesComponent implements OnInit {
   vehicleForm: FormGroup;
 
-  constructor(private vehicleService: VehiclesService, private fb: FormBuilder) { }
+  constructor(private vehicleService: VehiclesService, private fb: FormBuilder, public dialog: MatDialog,
+              public dialogRef: MatDialogRef<ViewVehiclesComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: ViewVehiclesComponent) { }
 
   ngOnInit(): void {
     this.buildVehicleForm();
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 
   addVehicle() {
     if (this.vehicleForm.invalid) {
@@ -25,15 +37,13 @@ export class AddVehiclesComponent implements OnInit {
     this.vehicleService.createVehicle(vehicle)
       .subscribe((data: any) => {
         alert(data.message);
+
         console.log(data);
 
       }, error => {
         console.log('Error' + error);
       }
       );
-
-
-
   }
 
 
