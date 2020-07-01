@@ -13,6 +13,7 @@
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
 
+                <!-- Filter by order -->
                 <div class="col-lg-3">
                     <select name="" id="" class="form-control select-form">
                         <option value="">Ordenar por:</option>
@@ -20,20 +21,25 @@
                         <option value="">Modelo</option>
                     </select>
                 </div>
+                <!-- Fin filter by order -->
 
                 <div class="col-lg-6">
                 </div>
 
+                <!-- Filter by search vehicles -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput type="text" class="form-control fm-size" placeholder="Buscar por placa o modelo" aria-label="Username" aria-describedby="basic-addon1">
-                        <div class="input-group-prepend cursor">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por cliente, dirección" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="ti ti-search"></i>
                             </span>
                         </div>
                     </div>
                 </div>
+                <!-- Fin Filter by search vehicles -->
+
+
             </div>
         </div>
         <!-- Fin filter  -->
@@ -47,7 +53,6 @@
                     </mat-paginator>
             </div>
             <!-- TERMINA EL PAGINADOR  -->
-
 
 
             <!-- Preloader  -->
@@ -82,10 +87,10 @@
                             <td> {{ vehicle.plate}} </td>
                             <td> {{ vehicle.status.name }} </td>
                             <td class="text-center bt-edit">
-                                <button class="btn bt-edit"> 
-                                    <i class="ti-marker-alt" ></i>
+                                <button class="btn bt-edit" (click)="editarVehicle(vehicle.id)">
+                                    <i class="ti-marker-alt"></i>
                                 </button>
-                                <button class="btn bt-remove ">
+                                <button class="btn bt-remove" (click)="deleteVehicle(vehicle.alias, vehicle.id)">
                                     <i class="ti-trash"></i>
                                 </button>
                             </td>

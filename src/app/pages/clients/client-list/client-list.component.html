@@ -71,9 +71,7 @@
                             <th scope="col">Pedidos cancelados </th>
                             <th scope="col">Primer pedido</th>
                             <th scope="col">Ultimo pedido</th>
-                            <th scope="col">Ver mas</th>
-                            <th scope="col">Mensaje</th>
-                            <th scope="col">Bloquear</th>
+                            <th scope="col" class="text-center">Acciones</th>
 
                         </tr>
                     </thead>
@@ -81,31 +79,29 @@
 
 
                         <tr *ngFor="let client of clients ">
-                            <td>{{ client.customer }}</td>
-                            <td>Sanches Vazques</td>
+                            <td>{{ client.customer.name }}</td>
+                            <td> {{ client.customer.phone_number}} </td>
                             <td>juanito34@hotmail.com</td>
                             <td> {{client.total_orders}} </td>
                             <td> {{client.total_orders_cancelled }} </td>
                             <td> {{client.first_order_date | date }} </td>
                             <td> {{client.last_order_date | date }} </td>
-                            <td class="text-center bt-edit">
+                            <td>
                                 <button class="btn" [routerLink]="['/client/info',client.id]">
                                     <i class="ti-plus"></i>
                                 </button>
-                            </td>
-                            <td class="text-center bt-remove">
+
                                 <button class="btn ">
                                     <i class="ti-comment-alt"></i>
                                 </button>
-                            </td>
-                            <td class="text-center bt-remove">
+
                                 <button class="btn ">
                                     <i class="ti-lock"></i>
                                 </button>
+
                             </td>
+
                         </tr>
-
-
                     </tbody>
                 </table>
             </div>

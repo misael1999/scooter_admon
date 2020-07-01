@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Agregar vehículo</h1>
+        <h1 class="h3 mb-0 text-gray-800"> {{ (vehicleForm === null || vehicleForm === undefined )? 'Agregar vehiculo': 'Editar vehiculo' }} </h1>
     </div>
 
     <div class="row">
@@ -44,6 +44,7 @@
                                 requerido</span>
                         </div>
                     </div>
+
                     <div class="form-group col-md-6">
                         <label>Placa</label>
                         <input type="text" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'plate'),

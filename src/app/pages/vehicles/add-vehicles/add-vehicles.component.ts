@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { VehiclesService } from '../../../services/vehicles.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewVehiclesComponent } from '../view-vehicles/view-vehicles.component';
+import Swal from 'sweetalert2';
 
 
 
@@ -15,16 +16,15 @@ import { ViewVehiclesComponent } from '../view-vehicles/view-vehicles.component'
 export class AddVehiclesComponent implements OnInit {
   vehicleForm: FormGroup;
 
-  constructor(private vehicleService: VehiclesService, private fb: FormBuilder, public dialog: MatDialog,
-              public dialogRef: MatDialogRef<ViewVehiclesComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: ViewVehiclesComponent) { }
+  constructor(private vehicleService: VehiclesService, private fb: FormBuilder, public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.buildVehicleForm();
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
 
@@ -36,6 +36,12 @@ export class AddVehiclesComponent implements OnInit {
     const vehicle = this.vehicleForm.value;
     this.vehicleService.createVehicle(vehicle)
       .subscribe((data: any) => {
+        Swal.fire({
+          title: 'Vehiculo Agregado',
+          imageAlt: 'add'
+          ,
+          timer: 1500
+        });
         alert(data.message);
 
         console.log(data);
