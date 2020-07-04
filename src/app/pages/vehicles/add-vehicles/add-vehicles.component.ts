@@ -28,6 +28,22 @@ export class AddVehiclesComponent implements OnInit {
   }
 
 
+
+  
+  editVehicle() {
+    if (this.vehicleForm.invalid) {
+      this.vehicleForm.markAllAsTouched();
+      return;
+    }
+    const vehicle = this.vehicleForm.value;
+
+    this.vehicleService.editVehicle(vehicle)
+    .subscribe((data: any) => {
+
+    } );
+
+  }
+
   addVehicle() {
     if (this.vehicleForm.invalid) {
       this.vehicleForm.markAllAsTouched();
@@ -52,7 +68,6 @@ export class AddVehiclesComponent implements OnInit {
       );
   }
 
-
   buildVehicleForm() {
     this.vehicleForm = this.fb.group({
       alias: [null, Validators.required],
@@ -61,6 +76,7 @@ export class AddVehiclesComponent implements OnInit {
       plate: [null, Validators.required],
     });
   }
+
 
 
   isFieldInvalid(form: FormGroup, field: string) {

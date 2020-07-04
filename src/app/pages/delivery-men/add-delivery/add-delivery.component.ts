@@ -8,6 +8,7 @@ import { DeliveryMenService } from '../../../services/delivery-men.service';
   styleUrls: ['./add-delivery.component.scss']
 })
 export class AddDeliveryComponent implements OnInit {
+
   deliveryForm: FormGroup;
   adressForm: FormGroup;
 
@@ -22,23 +23,24 @@ export class AddDeliveryComponent implements OnInit {
   }
 
   addDelivery() {
-    if (this.deliveryForm.invalid && this.adressForm.invalid) {
+    if (this.deliveryForm.invalid) {
       this.deliveryForm.markAllAsTouched();
-      this.adressForm.markAllAsTouched();
+      // this.adressForm.markAllAsTouched();
       return;
     }
     const delivery = this.deliveryForm.value;
-    delivery.address = this.adressForm.value;
+    // delivery.address = this.adressForm.value;
     console.log(delivery);
     this.deliveryService.createDelevery(delivery)
       .subscribe((data: any) => {
         alert(data.message);
         console.log(data);
       }, error => {
-        console.log('Error' + error);
+        console.log('Error al agregar' + error);
       });
 
   }
+
   buildDeliveryForm() {
     this.deliveryForm = this.fb.group({
       name: [null, Validators.required],
@@ -63,6 +65,7 @@ export class AddDeliveryComponent implements OnInit {
 
 
 
+  // Methods the verification in the form
   isFieldInvalid(form: FormGroup, field: string) {
     return (
       (!form.get(field).valid && form.get(field).touched)

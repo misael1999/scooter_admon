@@ -36,6 +36,10 @@ export class ClientListComponent implements OnInit {
   }
 
 
+  searchBy(value: string) {
+    this.params.search = value;
+    this.gettClients();
+  }
   gettClients() {
     this.clientService.getClients()
       .subscribe((data: any) => {

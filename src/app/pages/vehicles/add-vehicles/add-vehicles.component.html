@@ -1,12 +1,18 @@
-<div class="container-fluid">
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"> {{ (vehicleForm === null || vehicleForm === undefined )? 'Agregar vehiculo': 'Editar vehiculo' }} </h1>
-    </div>
+<h1 mat-dialog-title class="d-flex justify-content-between" *ngIf="!vehicleForm">
+    Agregar vehiculo
 
+</h1>
+<h1 mat-dialog-title class="d-flex justify-content-between" *ngIf="vehicleForm">
+    Editar vehiculo
+    <button mat-dialog-close mat-flat-button class="btn ">
+        <i class="ti ti-close"></i>
+      </button>
+</h1>
+
+
+<div mat-dialog-content>
     <div class="row">
         <div class="col-md-12 ">
-
 
             <!-- Form the add vehicle -->
             <form [formGroup]='vehicleForm'>
@@ -26,7 +32,7 @@
                     <input type="text" class="form-control" formControlName='model' placeholder="Modelo" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'model'), 'is-valid': isFieldValid(vehicleForm, 'model')}">
                     <!-- MESSAGES ERRORS  -->
                     <div class="invalid-feedback">
-                        <span *ngIf="isFieldHasError(vehicleForm, 'model','required')">Este campo esrequerido</span>
+                        <span *ngIf="isFieldHasError(vehicleForm, 'model','required')">Este campo es requerido</span>
                     </div>
                 </div>
 
@@ -36,29 +42,35 @@
                     <div class="form-group col-md-6">
                         <label>Año</label>
                         <input type="text" class="form-control" formControlName='year' placeholder="Año" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'year'),
-                        'is-valid': isFieldValid(vehicleForm, 'year')}">
+                            'is-valid': isFieldValid(vehicleForm, 'year')}">
                         <div class="invalid-feedback">
-                            <span *ngIf="isFieldHasError(vehicleForm, 'year','required')">Este
-                                campo
-                                es
-                                requerido</span>
+                            <span *ngIf="isFieldHasError(vehicleForm, 'year','required')">Este campo es requerido</span>
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label>Placa</label>
                         <input type="text" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'plate'),
-                        'is-valid': isFieldValid(vehicleForm, 'plate')}" class="form-control" formControlName='plate' placeholder="Placa">
+                            'is-valid': isFieldValid(vehicleForm, 'plate')}" class="form-control" formControlName='plate' placeholder="Placa">
                         <div class="invalid-feedback">
-                            <span *ngIf="isFieldHasError(vehicleForm, 'plate','required')">Este
-                                campo
-                                es
-                                requerido</span>
+                            <span *ngIf="isFieldHasError(vehicleForm, 'plate','required')">Este campo es requerido</span>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" (click)="addVehicle()" class="btn btn-primary">Agregar</button>
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-light right " mat-dialog-close mat-flat-button color="primary">Cancelar</button>
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" (click)="addVehicle()" class="btn btn-primary fa-pull-right">Agregar</button>
+
+                    </div>
+                </div>
+
+
             </form>
             <!-- Fin form add vehicle -->
 

@@ -10,13 +10,13 @@ import { ClientsService } from '../../../services/clients.service';
 export class InfoClientComponent implements OnInit {
 
   idCustomer: number;
-  infoCustomer: Array<any> = [];
+  infoCustomer;
 
 
 
   constructor(private clientService: ClientsService, private activatedRouted: ActivatedRoute) {
     this.idCustomer = this.activatedRouted.snapshot.params.id;
-    console.log(this.idCustomer);
+    console.log( 'El id obtenido es', this.idCustomer);
   }
 
   ngOnInit(): void {
@@ -27,9 +27,10 @@ export class InfoClientComponent implements OnInit {
   getCustomerId() {
     this.clientService.getClientId(this.idCustomer)
       .subscribe((data: any) => {
-        this.infoCustomer = data.customer;
+        this.infoCustomer = data;
         console.log(this.infoCustomer);
       }, error => {
+        console.log(error);
 
       });
   }

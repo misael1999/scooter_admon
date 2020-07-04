@@ -6,7 +6,6 @@ import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { ViewVehiclesComponent } from './view-vehicles/view-vehicles.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { NoFoundDataComponent } from 'src/app/shared/no-found-data/no-found-data.component';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({

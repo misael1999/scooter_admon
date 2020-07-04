@@ -17,7 +17,7 @@ export class ClientsService {
   }
 
 
-  getClientId(id) {
+  getClientId(id: number) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/customers/${id}/`;
     return this.http.get(url);

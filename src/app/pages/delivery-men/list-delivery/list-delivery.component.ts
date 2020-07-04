@@ -55,6 +55,11 @@ export class ListDeliveryComponent implements OnInit {
 
   }
 
+  searchBy(value: string) {
+    this.params.search = value;
+    this.getDelivery();
+  }
+
   // Metodo paginator
   getPages(e): PageEvent {
     if (this.deliverys.length === 0) {

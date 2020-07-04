@@ -3,7 +3,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Vehículos</h1>
-        <button (click)="openDialog()" class="btn btn-secondary btn-sm">Agregar</button>
+        <button (click)="openDialogAddV()" class="btn btn-secondary btn-sm">Agregar</button>
     </div>
 
 
@@ -15,10 +15,12 @@
 
                 <!-- Filter by order -->
                 <div class="col-lg-3">
-                    <select name="" id="" class="form-control select-form">
+                    <select class="form-control select-form" (change)="onChenge($event)">
                         <option value="">Ordenar por:</option>
-                        <option value="">Placa</option>
-                        <option value="">Modelo</option>
+                        <option value="plate">Placa</option>
+                        <option value="model">Modelo</option>
+                        <option value="year">Año</option>
+                        <option value="plate">Placa</option>
                     </select>
                 </div>
                 <!-- Fin filter by order -->
@@ -29,7 +31,7 @@
                 <!-- Filter by search vehicles -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por cliente, dirección" aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por alias o modelo" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="ti ti-search"></i>
@@ -82,7 +84,7 @@
                         <tr *ngFor="let vehicle of vehicles">
                             <td> {{ vehicle.id}} </td>
                             <td> {{ vehicle.alias | titlecase }} </td>
-                            <td> {{vehicle.model}} </td>
+                            <td> {{ vehicle.model}} </td>
                             <td> {{ vehicle.year }} </td>
                             <td> {{ vehicle.plate}} </td>
                             <td> {{ vehicle.status.name }} </td>
@@ -99,13 +101,13 @@
                 </table>
             </div>
             <!-- Fin table the vehicles  -->
+
+            <!-- Component the message -->
             <app-no-found-data *ngIf="!loadingVehicles && vehicles.length == 0"  [message]="'No hay vehiculos que mostrar'">
             </app-no-found-data>
+            <!-- Fin component message -->
+
 
         </div>
-
     </div>
-
-
-
 </div>

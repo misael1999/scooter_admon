@@ -2,35 +2,44 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <!--     <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-laugh-wink"></i>
-    </div> -->
+        <div>
+            <!-- <i class="fas fa-laugh-wink"></i> -->
+        </div>
+        <p> {{ station.station_name |slice:0:1 |lowercase }} </p>
         <div class="sidebar-brand-text mx-3">{{station.station_name | titlecase}}</div>
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - Dashboard Collapso Menu -->
     <li class="nav-item cursor">
         <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-    <li class="nav-item" routerLink="/statistics">
+    <!-- Nav Item - Fin the Dashboard Collapso Menu -->
+
+
+    <!-- Nav Item - Statistics Collapso Menu -->
+    <li class="nav-item">
         <a class="nav-link">
             <i class="fas fa-fw fa-chart-line"></i>
-            <span>Estadisticas</span></a>
+            <span>Estadisticas <small class="badge badge-pill badge-info">v2</small> </span></a>
     </li>
+    <!-- Nav Item - Fin the Statistics Collapso Menu -->
+
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
+
+
 
     <!-- Heading -->
     <div class="sidebar-heading">
         Gestión
     </div>
-
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="k#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -49,22 +58,15 @@
         </div>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
+
+    <!-- Nav Item - Vehicles Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" routerLink="/vehicles">
             <i class="fas fa-fw fa-car"></i>
             <span>Vehiculos</span>
         </a>
-        <!-- <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Vehiculos</h6>
-                <a class="collapse-item" routerLink="/vehicles/add" routerLinkActive="active">Agregar vehiculo</a>
-                <a class="collapse-item" routerLink="/vehicles/view" routerLinkActive="active">Listado de vehiculos</a>
-            </div>
-        </div> -->
     </li>
-    <!-- Nav Item - Utilities Collapse Menu -->
-
+    <!-- Nav Item - Fin the Vehicles Collapse Menu -->
 
 
     <!-- Nav Item - Delivery Collapse Menu -->
@@ -74,29 +76,27 @@
             <span>Repartidores</span>
         </a>
     </li>
-    <!-- Nav Item - Fin Delivery Collapse Menu -->
+    <!-- Nav Item - Fin the Delivery Collapse Menu -->
 
 
-    <!-- Nav Item - Clients Menu -->
+    <!-- Nav Item - Clients Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" routerLink="/client">
             <i class="fas fa-fw fa-users"></i>
             <span>Clientes</span>
         </a>
     </li>
-    <!-- Nav Item - Fin Clients Menu  -->
+    <!-- Nav Item - Fin the Clients Collapse Menu  -->
 
 
-    <!-- Nav Item - Map the traicing -->
+    <!-- Nav Item - Map the traicing Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" routerLink="/traicing">
             <i class="fas fa-fw fa-map"></i>
             <span>Mapa de seguimiento</span>
         </a>
     </li>
-    <!-- Fin Nav Item - Map the traicing -->
-
-
+    <!-- Fin Nav Item - Map the traicing Collapse Menu -->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -108,43 +108,32 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed">
             <i class="fas fa-fw fa-dollar-sign"></i>
-            <span>Reportes</span>
+            <span>Reportes <small class="badge badge-pill badge-info">v2</small></span>
         </a>
-        <!-- <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Historial</h6>
-        <a class="collapse-item" href="login.html">Ventas pendientes</a>
-      </div>
-    </div> -->
+
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuestion" aria-expanded="true" aria-controls="collapseQuestion">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseQuestion" aria-expanded="true" aria-controls="collapseQuestion">
             <i class="fas fa-fw fa-question"></i>
-            <span>Evaluaciones a clientes</span>
+            <span>Evaluaciones a clientes <small class="badge badge-pill badge-info">v2</small></span>
         </a>
-        <div id="collapseQuestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <!-- <div id="collapseQuestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Evaluaciones</h6>
                 <a class="collapse-item" href="register.html">Evaluaciones nuevas</a>
                 <a class="collapse-item" href="register.html">Evaluaciones anteriores</a>
                 <!--         <h6 class="collapse-header">FAQ</h6> -->
-                <!--         <a class="collapse-item" href="register.html">Agregar pre. frecuente</a>
+        <!--         <a class="collapse-item" href="register.html">Agregar pre. frecuente</a>
         <a class="collapse-item" href="register.html">Listado de FAQ</a> -->
 
 
-            </div>
-        </div>
+        <!-- </div>
+        </div> -->-->
     </li>
 
-    <!-- Nav Item - Charts -->
-    <!--   <li class="nav-item">
-    <a class="nav-link" href="charts.html">
-      <i class="fas fa-fw fa-chart-area"></i>
-      <span>Charts</span></a>
-  </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -155,16 +144,16 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNotice" aria-expanded="true" aria-controls="collapseNotice">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseNotice" aria-expanded="true" aria-controls="collapseNotice">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Atención al cliente</span>
+            <span>Atención al cliente <small class="badge badge-pill badge-info">v2</small> </span>
         </a>
-        <div id="collapseNotice" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <!-- <div id="collapseNotice" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="404.html">404 Page</a>
                 <a class="collapse-item" href="blank.html">Blank Page</a>
             </div>
-        </div>
+        </div> -->
     </li>
 
     <!-- Sidebar Toggler (Sidebar) -->

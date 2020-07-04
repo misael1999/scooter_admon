@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-info-delivery',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info-delivery.component.scss']
 })
 export class InfoDeliveryComponent implements OnInit {
+  idDelivery: number;
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.idDelivery = this.activatedRoute.snapshot.params.id;
+    console.log('El id es', this.idDelivery);
+  }
 
   ngOnInit(): void {
   }

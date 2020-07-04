@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ViewProfileModule } from './view-profile/view-profile.module';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'traicing',
     loadChildren: () => import('./traicing/traicing.module').then(m => m.TraicingModule )
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./view-profile/view-profile.module').then(m => m.ViewProfileModule )
   },
 
 

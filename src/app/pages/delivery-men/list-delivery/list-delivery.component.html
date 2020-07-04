@@ -15,24 +15,30 @@
                 <div class="col-lg-3">
                     <select name="" id="" class="form-control select-form">
                         <option value="">Ordenar por:</option>
-                        <option value="">Placa</option>
-                        <option value="">Modelo</option>
+                        <option value="">Nombre</option>
+                        <option value="">Apellidos</option>
+                        <option value="">Telefono</option>
                     </select>
                 </div>
 
                 <div class="col-lg-6">
                 </div>
 
+
+                <!-- Filter by search vehicles -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput type="text" class="form-control fm-size" placeholder="Buscar por placa o modelo" aria-label="Username" aria-describedby="basic-addon1">
-                        <div class="input-group-prepend cursor">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="ti ti-search"></i>
                             </span>
                         </div>
                     </div>
                 </div>
+                <!-- Fin Filter by search vehicles -->
+
+
             </div>
         </div>
         <!-- Fin filter  -->
@@ -80,10 +86,10 @@
                             <td> {{ delivery.total_orders}} </td>
                             <td> {{ delivery.reputation}} </td>
                             <td> {{ delivery.salary_per_order}} </td>
-                            <td> {{ delivery.delivery_status }}
+                            <td *ngIf="delivery.delivery_status"> {{ delivery.delivery_status }}
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-mas">
+                                <button class="btn btn-mas" [routerLink]="['/delivery/info', delivery.id]">                                    
                                     <i class="ti-plus"></i>
                                 </button>
                                 <button class="btn btn-edit ">
@@ -103,11 +109,4 @@
 
         </div>
     </div>
-
-
-
-
-
-
-
 </div>

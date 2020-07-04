@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddVehiclesComponent } from '../add-vehicles/add-vehicles.component';
 import Swal from 'sweetalert2';
+import { VehiclesModel } from '../../../models/vehicles.model';
 
 @Component({
   selector: 'app-view-vehicles',
@@ -19,10 +20,11 @@ export class ViewVehiclesComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', vehicles_status: '1,2,3,4' };
+  params = { limit: 25, offset: 0, search: '', ordering: '' };
 
   loadingVehicles: boolean;
   vehicles: Array<any> = [];
+  // vehicles: VehiclesModel;
 
   constructor(private vehiculeService: VehiclesService, private dialog: MatDialog) {
   }
@@ -31,9 +33,9 @@ export class ViewVehiclesComponent implements OnInit {
     this.getVehicles();
 
   }
-  openDialog() {
+  openDialogAddV() {
     const dialogRef = this.dialog.open(AddVehiclesComponent, {
-      disableClose: true,
+      disableClose: false,
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(data => {
@@ -57,23 +59,46 @@ export class ViewVehiclesComponent implements OnInit {
       });
   }
 
+  onChenge(value: string) {
+    this.params.ordering = value;
+    this.getVehicles();
+  }
+
   searchBy(value: string) {
     this.params.search = value;
     this.getVehicles();
   }
 
-  editarVehicle(id) {
-    const dialog = this.dialog.open(AddVehiclesComponent);
+  editarVehicle(vehicleID) {
+    const dialogRef = this.dialog.open(AddVehiclesComponent, {
+      disableClose: true,
+      width: '500px',
+      data: {
+        vehicleID
+      }
+    });
+    this.vehiculeService.getVehiclesId(vehicleID)
+      .subscribe((data: any) => {
+        this.vehicles = data.results;
+        console.log('el id mas data es', this.vehicles);
+      });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.getVehicles();
+      }
+    });
   }
 
 
-  deleteVehicle(vehicle: string, id: number) {
+  deleteVehicle(vehicle: VehiclesModel, id: number) {
     Swal.fire({
       title: '¿Esta seguro?',
-      text: `Esta seguro que desea borrar a: ${this.vehicles[vehicle]}`,
-      type: 'question',
+      text: `Esta seguro que desea borrar a: `,
+      type: 'warning',
       showConfirmButton: true,
-      showCancelButton: true
+      confirmButtonText: 'Eliminar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
         this.vehicles.splice(1);

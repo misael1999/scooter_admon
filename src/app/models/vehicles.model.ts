@@ -1,4 +1,4 @@
-export class Vehicles {
+export class VehiclesModel {
 
     constructor(
         public id: number,
@@ -8,5 +8,5 @@ export class Vehicles {
         public year: string,
         public plate: string,
         public status_id: string
-        ) {}
+    ) { }
 }
