@@ -14,10 +14,12 @@
             <div class="row d-flex justify-content-end">
 
                 <div class="col-lg-3">
-                    <select name="" id="" class="form-control select-form">
-                        <option value="">Ordenar por:</option>
-                        <option value="">Nombre</option>
-                        <option value="">Correo</option>
+                    <select name="" id="" class="form-control select-form" (change)="ordenamiento($event.target.value)">
+                        <option>Ordenar por:</option>
+                        <option value="customer_name">Nombre</option>
+                        <option value="customer_reputation">Reputacion</option>
+                        <option value="total_orders">Total de ordenes</option>
+                        <option value="total_orders_cancelled">Ordenes canceladas</option>
                     </select>
                 </div>
 
@@ -96,9 +98,9 @@
                                     <i class="ti-plus"></i>
                                 </button>
 
-                                <button class="btn btn-message ">
+                                <!-- <button class="btn btn-message ">
                                     <i class="ti-comment-alt"></i>
-                                </button>
+                                </button> -->
 
                                 <button class="btn btn-block ">
                                     <i class="ti-lock"></i>

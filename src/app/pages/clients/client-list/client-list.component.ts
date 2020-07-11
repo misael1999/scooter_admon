@@ -18,36 +18,35 @@ export class ClientListComponent implements OnInit {
   pageEvent: PageEvent;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status: 8, ordering: '' };
-  // vehicles: [];
-  animal: string;
-  name: string;
+  params = { limit: 15, offset: 0, search: '', ordering: '' };
   loadingClient: boolean;
-
-
   clients: Array<any> = [];
 
   constructor(private clientService: ClientsService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.gettClients();
-
-
+    this.getClients();
   }
 
+  getClients() {
+    this.loadingClient = true;
+    this.clientService.getClients(this.params)
+      .subscribe((data: any) => {
+        this.clients = data.results;
+        this.loadingClient = false;
+        this.length = data.count;
+      }, error => {
+        this.loadingClient = false;
+      });
+  }
 
   searchBy(value: string) {
     this.params.search = value;
-    this.gettClients();
+    this.getClients();
   }
-  gettClients() {
-    this.clientService.getClients()
-      .subscribe((data: any) => {
-        this.clients = data.results;
-        console.log('Los clientes registrados son ', this.clients);
-      }, error => {
-        console.log('Error');
-      });
+  ordenamiento(value: string) {
+    this.params.ordering = value;
+    this.getClients();
   }
 
   // Metodo paginator
@@ -58,9 +57,8 @@ export class ClientListComponent implements OnInit {
     }
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
-    this.gettClients();
+    this.getClients();
   }
-  // ==========================================
 
 
 }

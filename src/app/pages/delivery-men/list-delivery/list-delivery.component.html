@@ -13,17 +13,20 @@
             <div class="row d-flex justify-content-end">
 
                 <div class="col-lg-3">
-                    <select name="" id="" class="form-control select-form">
-                        <option value="">Ordenar por:</option>
-                        <option value="">Nombre</option>
-                        <option value="">Apellidos</option>
-                        <option value="">Telefono</option>
+                    <select class="form-control select-form" (change)="ordenamiento($event.target.value)">
+                        <option value="">Ordenar por:</option>                        
+                        <option value="name">Nombre</option>
+                        <option value="last_name">Apellidos</option>
+                        <option value="reputation">Reputacion</option>
                     </select>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                 </div>
 
+                <div class="col-md-2">
+                    <button class="btn btn-dark btn-block" (click)="status = !status">Filtros <small> <i class="ti-filter"></i>  </small>  </button>
+                </div>
 
                 <!-- Filter by search vehicles -->
                 <div class="col-lg-3">
@@ -37,22 +40,29 @@
                     </div>
                 </div>
                 <!-- Fin Filter by search vehicles -->
-
-
             </div>
+
+            <div class="row" *ngIf="status">
+                <div class="col-md-10"></div>
+                <div class="form-group block">
+                    <label>Estatus</label>
+                    <select class="form-control">
+                      <option>Activos</option>
+                      <option>Bloqueados</option>
+                    </select>
+                </div>
+            </div>
+
         </div>
         <!-- Fin filter  -->
 
         <div class="row" class="content">
-
             <!-- PAGINADOR  -->
             <div class="col-lg-12 d-flex justify-content-end">
                 <mat-paginator [disabled]="loadingDelivery || deliverys.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
                     </mat-paginator>
             </div>
             <!-- TERMINA EL PAGINADOR  -->
-
-
 
             <!-- Preloader  -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingDelivery">
@@ -61,7 +71,6 @@
                 </div>
             </div>
             <!-- Fin Preloader  -->
-
 
             <!-- Table the vehicles  -->
             <div class="col-md-12" *ngIf="!loadingDelivery && deliverys.length > 0 ">

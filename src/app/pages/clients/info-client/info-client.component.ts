@@ -8,15 +8,14 @@ import { ClientsService } from '../../../services/clients.service';
   styleUrls: ['./info-client.component.scss']
 })
 export class InfoClientComponent implements OnInit {
-
   idCustomer: number;
   infoCustomer;
 
 
 
-  constructor(private clientService: ClientsService, private activatedRouted: ActivatedRoute) {
+  constructor(private clientService: ClientsService, private activatedRouted: ActivatedRoute, private router: Router) {
     this.idCustomer = this.activatedRouted.snapshot.params.id;
-    console.log( 'El id obtenido es', this.idCustomer);
+    // console.log( 'El id obtenido es', this.idCustomer);
   }
 
   ngOnInit(): void {
@@ -30,8 +29,11 @@ export class InfoClientComponent implements OnInit {
         this.infoCustomer = data;
         console.log(this.infoCustomer);
       }, error => {
-        console.log(error);
-
+        if ( error.errors.code === 'not_found' ) {
+          this.router.navigate(['not_found']);
+          return;
+        }
+        console.log(error.errors.code);
       });
   }
 

@@ -6,21 +6,18 @@
         <button (click)="openDialogAddV()" class="btn btn-secondary btn-sm">Agregar</button>
     </div>
 
-
     <div>
-
         <!-- Filter  -->
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
 
                 <!-- Filter by order -->
                 <div class="col-lg-3">
-                    <select class="form-control select-form" (change)="onChenge($event)">
+                    <select class="form-control select-form" (change)="ordenamiento($event.target.value)">
                         <option value="">Ordenar por:</option>
                         <option value="plate">Placa</option>
                         <option value="model">Modelo</option>
                         <option value="year">Año</option>
-                        <option value="plate">Placa</option>
                     </select>
                 </div>
                 <!-- Fin filter by order -->
@@ -40,7 +37,6 @@
                     </div>
                 </div>
                 <!-- Fin Filter by search vehicles -->
-
 
             </div>
         </div>
@@ -70,13 +66,14 @@
             <div class="col-md-12" *ngIf="!loadingVehicles && vehicles.length > 0 ">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <tr class="">
+                        <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Alias </th>
+                            <th scope="col">Tipo de vehiculo </th>
                             <th scope="col">Modelo </th>
                             <th scope="col">Año </th>
                             <th scope="col">Placa </th>
-                            <th scope="col">Estatus</th>
+                            <th scope="col">Estatus </th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -84,15 +81,17 @@
                         <tr *ngFor="let vehicle of vehicles">
                             <td> {{ vehicle.id}} </td>
                             <td> {{ vehicle.alias | titlecase }} </td>
+                            <td *ngIf="vehicle.type_vehicle_id == '1'"> Motocicleta </td>
+                            <td *ngIf="vehicle.type_vehicle_id == '2'"> Bicicleta </td>
                             <td> {{ vehicle.model}} </td>
                             <td> {{ vehicle.year }} </td>
                             <td> {{ vehicle.plate}} </td>
                             <td> {{ vehicle.status.name }} </td>
                             <td class="text-center bt-edit">
-                                <button class="btn bt-edit" (click)="editarVehicle(vehicle.id)">
+                                <button class="btn bt-edit" (click)="editarVehicle(vehicle)">
                                     <i class="ti-marker-alt"></i>
                                 </button>
-                                <button class="btn bt-remove" (click)="deleteVehicle(vehicle.alias, vehicle.id)">
+                                <button class="btn bt-remove" (click)="deleteVehicle(vehicle.id, vehicle.alias)">
                                     <i class="ti-trash"></i>
                                 </button>
                             </td>
@@ -106,7 +105,6 @@
             <app-no-found-data *ngIf="!loadingVehicles && vehicles.length == 0"  [message]="'No hay vehiculos que mostrar'">
             </app-no-found-data>
             <!-- Fin component message -->
-
 
         </div>
     </div>

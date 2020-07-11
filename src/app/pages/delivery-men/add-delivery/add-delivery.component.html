@@ -1,12 +1,14 @@
-<div class="container-fluid">
+<h1 mat-dialog-title class="d-flex justify-content-between">
+    Agregar repartidor
+    <button mat-dialog-close mat-flat-button class="btn ">
+        <i class="ti ti-close"></i>
+      </button>
+</h1>
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Agregar repartidor</h1>
-    </div>
-
+<div mat-dialog-content>
     <div class="row">
-        <div class="col-md-12 m-auto ">
+        <div class="col-md-12 ">
+
             <!-- Form add vehicle -->
             <form [formGroup]='deliveryForm'>
 
@@ -19,9 +21,10 @@
                             <span *ngIf="isFieldHasError(deliveryForm, 'name','required')">Este campo es requerido</span>
                         </div>
                     </div>
-                    <div class=" form- col-lg-6 ">
+
+                    <div class="form- col-lg-6 ">
                         <label>Apellidos</label>
-                        <input formControlName="last_name " type="text " class="form-control " placeholder="Apellidos" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'last_name'), 'is-valid': isFieldValid(deliveryForm, 'last_name')}">
+                        <input formControlName="last_name" type="text " class="form-control " placeholder="Apellidos" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'last_name'), 'is-valid': isFieldValid(deliveryForm, 'last_name')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(deliveryForm, 'last_name','required')">Este campo es requerido</span>
@@ -32,61 +35,86 @@
                 <div class="form-row ">
                     <div class="form-group col-md-4 ">
                         <label>Telefono</label>
-                        <input formControlName="phone_number " type="text " class="form-control " placeholder="Telefono" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'phone_number'), 'is-valid': isFieldValid(deliveryForm, 'phone_number')}">
+                        <input formControlName="phone_number" type="text " class="form-control " placeholder="Telefono" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'phone_number'), 'is-valid': isFieldValid(deliveryForm, 'phone_number')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(deliveryForm, 'phone_number','required')">Este campo es requerido</span>
                         </div>
                     </div>
+
                     <div class="form-group col-md-4 ">
                         <label>Salario</label>
-                        <input formControlName="salary_per_order " type="text " autocomplete="false " class="form-control" placeholder="Salario" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'salary_per_order'), 'is-valid': isFieldValid(deliveryForm, 'salary_per_order')}">
+                        <input formControlName="salary_per_order" type="text " autocomplete="false " class="form-control" placeholder="Salario" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'salary_per_order'), 'is-valid': isFieldValid(deliveryForm, 'salary_per_order')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(deliveryForm, 'salary_per_order','required')">Este campo es requerido</span>
                         </div>
                     </div>
+
                     <div class="form-group col-md-4 ">
                         <label>Contraseña</label>
-                        <input formControlName="password " type="password " class="form-control" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'password'), 'is-valid': isFieldValid(deliveryForm, 'password')}">
+                        <input formControlName="password" type="password " class="form-control" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'password'), 'is-valid': isFieldValid(deliveryForm, 'password')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(deliveryForm, 'password','required')">Este campo es requerido</span>
                         </div>
                     </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Vehiculo</label>
+                        <select class="form-control select-form" formControlName="vehicle_id" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'vehicle_id'), 'is-valid': isFieldValid(deliveryForm, 'vehicle_id')}">
+                            <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.alias}}</option>
+                        </select>
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="isFieldHasError(deliveryForm, 'vehicle_id','required')">Este campo es requerido</span>
+                        </div>
+                    </div>
+                </div>
+
             </form>
+
+
+
 
             <form [formGroup]='adressForm'>
                 <small>Direccion de repartidor</small>
-                <div class="form-row ">
+
+                <div class="form-row">
                     <div class="form-group col-md-6 ">
                         <label>Calle</label>
-                        <input formControlName="street " type="text " class="form-control " placeholder="Calle " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'street'), 'is-valid': isFieldValid(adressForm, 'street')}">
+                        <input formControlName="street" type="text " class="form-control " placeholder="Calle " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'street'), 'is-valid': isFieldValid(adressForm, 'street')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(adressForm, 'street','required')">Este campo es requerido</span>
                         </div>
                     </div>
+
                     <div class="form-group col-md-6 ">
                         <label>Colonia</label>
-                        <input formControlName="suburd " type="text " class="form-control " placeholder="Colonia " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'suburb'), 'is-valid': isFieldValid(adressForm, 'suburb')}">
+                        <input formControlName="suburb" type="text " class="form-control " placeholder="Colonia " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'suburb'), 'is-valid': isFieldValid(adressForm, 'suburb')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
-                            <span *ngIf="isFieldHasError(adressForm, 'suburd','required')">Este campo es requerido</span>
+                            <span *ngIf="isFieldHasError(adressForm, 'suburb','required')">Este campo es requerido</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group col-md-4 ">
                         <label>Código postal</label>
-                        <input formControlName="postal_code " type="text " class="form-control " placeholder="Código postal " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'postal_code'), 'is-valid': isFieldValid(adressForm, 'postal_code')}">
+                        <input formControlName="postal_code" type="text " class="form-control " placeholder="Código postal " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'postal_code'), 'is-valid': isFieldValid(adressForm, 'postal_code')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(adressForm, 'postal_code','required')">Este campo es requerido</span>
                         </div>
                     </div>
+
                     <div class="form-group col-md-4 ">
                         <label>Numero exterior</label>
-                        <input formControlName="exterior_number " type="text " class="form-control " placeholder="Numero exterior " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'exterior_number'), 'is-valid': isFieldValid(adressForm, 'exterior_number')}">
+                        <input formControlName="exterior_number" type="text " class="form-control " placeholder="Numero exterior " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'exterior_number'), 'is-valid': isFieldValid(adressForm, 'exterior_number')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(adressForm, 'exterior_number','required')">Este campo es requerido</span>
@@ -94,27 +122,37 @@
                     </div>
                     <div class="form-group col-md-4 ">
                         <label>Numero interior</label>
-                        <input formControlName="inside_number " type="text " class="form-control " placeholder="Numero interior " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'inside_number'), 'is-valid': isFieldValid(adressForm, 'inside_number')}">
+                        <input formControlName="inside_number" type="text " class="form-control " placeholder="Numero interior " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'inside_number'), 'is-valid': isFieldValid(adressForm, 'inside_number')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(adressForm, 'inside_number','required')">Este campo es requerido</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="form-group col-md-12 ">
                         <label>Referencias</label>
-                        <input formControlName="references " type="text " class="form-control " placeholder="Referencias " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'references'), 'is-valid': isFieldValid(adressForm, 'references')}">
+                        <input formControlName="references" type="text " class="form-control " placeholder="Referencias " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'references'), 'is-valid': isFieldValid(adressForm, 'references')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(adressForm, 'references','required')">Este campo es requerido</span>
                         </div>
                     </div>
                 </div>
-                <!-- <button class="btn btn-info ">Cancelar</button> -->
-                <button type="submit " (click)="addDelivery() " class="btn btn-primary fa-pull-right ">Agregar</button>
+
+
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-light right " mat-dialog-close mat-flat-button color="primary">Cancelar</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" (click)="addDelivery()" class="btn btn-primary fa-pull-right">Agregar</button>
+                    </div>
+                </div>
             </form>
             <!-- Fin form add vehicle -->
-
-
         </div>
     </div>
 </div>

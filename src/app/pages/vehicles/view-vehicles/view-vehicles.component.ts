@@ -4,7 +4,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddVehiclesComponent } from '../add-vehicles/add-vehicles.component';
 import Swal from 'sweetalert2';
-import { VehiclesModel } from '../../../models/vehicles.model';
 
 @Component({
   selector: 'app-view-vehicles',
@@ -20,23 +19,23 @@ export class ViewVehiclesComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', ordering: '' };
+  params = { limit: 25, offset: 0, search: '', ordering: '', estatus: '1,2' };
 
   loadingVehicles: boolean;
   vehicles: Array<any> = [];
-  // vehicles: VehiclesModel;
 
   constructor(private vehiculeService: VehiclesService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getVehicles();
-
   }
+
   openDialogAddV() {
     const dialogRef = this.dialog.open(AddVehiclesComponent, {
-      disableClose: false,
+      disableClose: true,
       width: '500px',
+      data: ''
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
@@ -53,13 +52,12 @@ export class ViewVehiclesComponent implements OnInit {
         this.vehicles = data.results;
         this.loadingVehicles = false;
         this.length = data.count;
-        console.log(this.vehicles);
       }, error => {
         this.loadingVehicles = false;
       });
   }
 
-  onChenge(value: string) {
+  ordenamiento(value: string) {
     this.params.ordering = value;
     this.getVehicles();
   }
@@ -69,15 +67,14 @@ export class ViewVehiclesComponent implements OnInit {
     this.getVehicles();
   }
 
-  editarVehicle(vehicleID) {
+  editarVehicle(vehicle) {
     const dialogRef = this.dialog.open(AddVehiclesComponent, {
       disableClose: true,
       width: '500px',
       data: {
-        vehicleID
       }
     });
-    this.vehiculeService.getVehiclesId(vehicleID)
+    this.vehiculeService.getVehiclesId(vehicle)
       .subscribe((data: any) => {
         this.vehicles = data.results;
         console.log('el id mas data es', this.vehicles);
@@ -90,10 +87,10 @@ export class ViewVehiclesComponent implements OnInit {
   }
 
 
-  deleteVehicle(vehicle: VehiclesModel, id: number) {
+  deleteVehicle(id: number, alias) {
     Swal.fire({
-      title: '¿Esta seguro?',
-      text: `Esta seguro que desea borrar a: `,
+      title: 'Eliminar',
+      text: `Esta seguro de eliminar a ${alias}`,
       type: 'warning',
       showConfirmButton: true,
       confirmButtonText: 'Eliminar',
@@ -106,10 +103,12 @@ export class ViewVehiclesComponent implements OnInit {
           .subscribe();
         Swal.fire({
           title: 'Eliminado',
-          text: 'El vehiculo se elimino corrctamente',
-          timer: 1000
+          type: 'success',
+          text: 'El vehiculo se elimino correctamente',
+          timer: 2000
         });
       }
+      this.getVehicles();
     });
   }
 

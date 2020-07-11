@@ -49,7 +49,9 @@ export class InterceptorService implements HttpInterceptor {
       return throwError('No authorization');
     } */
 
-    if (errorResponse.status >= 400 && errorResponse.status <= 404) {
+    
+
+    if (errorResponse.status >= 400 && errorResponse.status <= 404  ) {
       errorResponse = error.error;
 
       // Cuando descargamos un archivo y tenemos un error, lo recibimos en tipo blob a si que los convirtimos en json

@@ -18,8 +18,13 @@ export class VehiclesService {
 
   getVehiclesId(idVehicle: number) {
     const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
-    return this.httpClient.post(url, idVehicle);
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/${idVehicle}/`;
+    return this.httpClient.get(url);
+  }
+
+  getTypeVehicles() {
+    const url = `${environment.HOST_APIV1}/commons/type_vehicles/`;
+    return this.httpClient.get(url);
   }
 
   createVehicle(vehicle: any) {
@@ -28,10 +33,10 @@ export class VehiclesService {
     return this.httpClient.post(url, vehicle);
   }
 
-  editVehicle(vehicles: any) {
+  editVehicle(idVehicle: number, vehicle: any) {
     const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/`;
-    return this.httpClient.patch(url, vehicles);
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/${idVehicle}/`;
+    return this.httpClient.patch(url, vehicle);
   }
 
   deleteVehicle(idVehicle: number) {

@@ -1,14 +1,6 @@
-<h1 mat-dialog-title class="d-flex justify-content-between" *ngIf="!vehicleForm">
+<h1 mat-dialog-title class="d-flex justify-content-between">
     Agregar vehiculo
-
 </h1>
-<h1 mat-dialog-title class="d-flex justify-content-between" *ngIf="vehicleForm">
-    Editar vehiculo
-    <button mat-dialog-close mat-flat-button class="btn ">
-        <i class="ti ti-close"></i>
-      </button>
-</h1>
-
 
 <div mat-dialog-content>
     <div class="row">
@@ -16,7 +8,6 @@
 
             <!-- Form the add vehicle -->
             <form [formGroup]='vehicleForm'>
-
                 <div class="form-group">
                     <label>Alias</label>
                     <input formControlName="alias" type="text" class="form-control" placeholder="Alias" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'alias'), 'is-valid': isFieldValid(vehicleForm, 'alias')}">
@@ -26,23 +17,34 @@
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Modelo</label>
+                        <input type="text" class="form-control" formControlName='model' placeholder="Modelo" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'model'), 'is-valid': isFieldValid(vehicleForm, 'model')}">
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="isFieldHasError(vehicleForm, 'model','required')">Este campo es requerido</span>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label>Modelo</label>
-                    <input type="text" class="form-control" formControlName='model' placeholder="Modelo" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'model'), 'is-valid': isFieldValid(vehicleForm, 'model')}">
-                    <!-- MESSAGES ERRORS  -->
-                    <div class="invalid-feedback">
-                        <span *ngIf="isFieldHasError(vehicleForm, 'model','required')">Este campo es requerido</span>
+                    <div class="form-group col-md-6">
+                        <label>Tipo de vehiculo</label>
+                        <select class="form-control select-form" formControlName="type_vehicle_id" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'type_vehicle_id'),'is-valid': isFieldValid(vehicleForm, 'type_vehicle_id')}">  
+                            <option *ngFor="let tVehicles of typeVehicles" [value]="tVehicles.id " > {{ tVehicles.name }} </option>
+                        </select>
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="isFieldHasError(vehicleForm, 'type_vehicle_id','required')">Selecciona un campo</span>
+                        </div>
                     </div>
                 </div>
 
-
                 <div class="form-row">
-
                     <div class="form-group col-md-6">
                         <label>Año</label>
                         <input type="text" class="form-control" formControlName='year' placeholder="Año" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'year'),
                             'is-valid': isFieldValid(vehicleForm, 'year')}">
+                        <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(vehicleForm, 'year','required')">Este campo es requerido</span>
                         </div>
@@ -52,6 +54,7 @@
                         <label>Placa</label>
                         <input type="text" [ngClass]="{'is-invalid': isFieldInvalid(vehicleForm, 'plate'),
                             'is-valid': isFieldValid(vehicleForm, 'plate')}" class="form-control" formControlName='plate' placeholder="Placa">
+                        <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(vehicleForm, 'plate','required')">Este campo es requerido</span>
                         </div>
@@ -62,15 +65,11 @@
                     <div class="col-md-7"></div>
                     <div class="col-md-3">
                         <button class="btn btn-light right " mat-dialog-close mat-flat-button color="primary">Cancelar</button>
-
                     </div>
                     <div class="col-md-2">
                         <button type="submit" (click)="addVehicle()" class="btn btn-primary fa-pull-right">Agregar</button>
-
                     </div>
                 </div>
-
-
             </form>
             <!-- Fin form add vehicle -->
 

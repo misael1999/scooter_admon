@@ -5,7 +5,7 @@ import { InfoDeliveryComponent } from './info-delivery/info-delivery.component';
 
 const routes: Routes = [
     { path: '', component: ListDeliveryComponent },
-    { path: 'info:/id', component: InfoDeliveryComponent },
+    { path: 'info/:id', component: InfoDeliveryComponent },
 ];
 
 @NgModule({

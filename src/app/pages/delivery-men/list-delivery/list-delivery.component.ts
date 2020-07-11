@@ -18,8 +18,10 @@ export class ListDeliveryComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
 
+  status: boolean;
+
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status: 8, ordering: '' };
+  params = { limit: 15, offset: 0, search: '', ordering: '', status: '1' };
   deliverys: Array<any> = [];
   loadingDelivery: boolean;
 
@@ -32,31 +34,32 @@ export class ListDeliveryComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddDeliveryComponent, {
       width: '600px',
+      disableClose: false,
     });
+    dialogRef.afterClosed().subscribe();
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   this.animal = result;
-    // });
   }
 
 
   getDelivery() {
     this.loadingDelivery = true;
-    this.deliveryService.getDeliverys()
-    .subscribe( (data: any) => {
-      this.deliverys = data.results;
-      this.loadingDelivery = false;
-      this.length = data.count;
-      console.log('Los repartidores registrados son ', this.deliverys);
-    }, error => {
-      this.loadingDelivery = false;
-    });
-
+    this.deliveryService.getDeliverys(this.params)
+      .subscribe((data: any) => {
+        this.deliverys = data.results;
+        this.loadingDelivery = false;
+        this.length = data.count;
+      }, error => {
+        this.loadingDelivery = false;
+        return;
+      });
   }
 
   searchBy(value: string) {
     this.params.search = value;
+    this.getDelivery();
+  }
+  ordenamiento(value: string) {
+    this.params.ordering = value;
     this.getDelivery();
   }
 

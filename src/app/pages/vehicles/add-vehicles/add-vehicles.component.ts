@@ -4,8 +4,8 @@ import { VehiclesService } from '../../../services/vehicles.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewVehiclesComponent } from '../view-vehicles/view-vehicles.component';
 import Swal from 'sweetalert2';
-
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { timer } from 'rxjs';
 
 
 @Component({
@@ -13,35 +13,33 @@ import Swal from 'sweetalert2';
   templateUrl: './add-vehicles.component.html',
   styleUrls: ['./add-vehicles.component.scss']
 })
+
 export class AddVehiclesComponent implements OnInit {
+  typeVehicles: Array<any> = [];
   vehicleForm: FormGroup;
 
-  constructor(private vehicleService: VehiclesService, private fb: FormBuilder, public dialog: MatDialog
-  ) { }
+  constructor(private vehicleService: VehiclesService, private fb: FormBuilder, public dialogRef: MatDialogRef<AddVehiclesComponent>) { }
 
   ngOnInit(): void {
+    this.getTypeVehicle();
     this.buildVehicleForm();
   }
 
-  onNoClick(): void {
-    // this.dialogRef.close();
+  getTypeVehicle() {
+    this.vehicleService.getTypeVehicles()
+      .subscribe((data: any) => {
+        this.typeVehicles = data.data;
+        console.log('Los tipos', this.typeVehicles);
+      }, error => {
+      });
   }
 
-
-
-  
   editVehicle() {
     if (this.vehicleForm.invalid) {
       this.vehicleForm.markAllAsTouched();
       return;
     }
     const vehicle = this.vehicleForm.value;
-
-    this.vehicleService.editVehicle(vehicle)
-    .subscribe((data: any) => {
-
-    } );
-
   }
 
   addVehicle() {
@@ -53,15 +51,11 @@ export class AddVehiclesComponent implements OnInit {
     this.vehicleService.createVehicle(vehicle)
       .subscribe((data: any) => {
         Swal.fire({
-          title: 'Vehiculo Agregado',
-          imageAlt: 'add'
-          ,
-          timer: 1500
+          title: 'Se agrego un nuevo vehiculo',
+          type: 'success',
+          timer: 2000
         });
-        alert(data.message);
-
-        console.log(data);
-
+        this.dialogRef.close(true);
       }, error => {
         console.log('Error' + error);
       }
@@ -72,13 +66,13 @@ export class AddVehiclesComponent implements OnInit {
     this.vehicleForm = this.fb.group({
       alias: [null, Validators.required],
       model: [null, Validators.required],
+      type_vehicle_id: [null, Validators.required],
       year: [null, Validators.required],
       plate: [null, Validators.required],
     });
   }
 
-
-
+  // Metodos para validar ==============================
   isFieldInvalid(form: FormGroup, field: string) {
     return (
       (!form.get(field).valid && form.get(field).touched)
@@ -96,7 +90,6 @@ export class AddVehiclesComponent implements OnInit {
       (form.get(field).hasError(error))
     );
   }
-
 }
 
 
