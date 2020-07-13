@@ -31,20 +31,6 @@ export class ViewVehiclesComponent implements OnInit {
     this.getVehicles();
   }
 
-  openDialogAddV() {
-    const dialogRef = this.dialog.open(AddVehiclesComponent, {
-      disableClose: true,
-      width: '500px',
-      data: ''
-    });
-    dialogRef.afterClosed().subscribe(data => {
-      if (data) {
-        this.getVehicles();
-      }
-    });
-  }
-
-
   getVehicles() {
     this.loadingVehicles = true;
     this.vehiculeService.getVehicles(this.params)
@@ -57,28 +43,25 @@ export class ViewVehiclesComponent implements OnInit {
       });
   }
 
-  ordenamiento(value: string) {
-    this.params.ordering = value;
-    this.getVehicles();
-  }
-
-  searchBy(value: string) {
-    this.params.search = value;
-    this.getVehicles();
+  openDialogAddV() {
+    const dialogRef = this.dialog.open(AddVehiclesComponent, {
+      disableClose: true,
+      width: '500px',
+      data: {vehicle: null}
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.getVehicles();
+      }
+    });
   }
 
   editarVehicle(vehicle) {
     const dialogRef = this.dialog.open(AddVehiclesComponent, {
       disableClose: true,
       width: '500px',
-      data: {
-      }
+      data: {vehicle}
     });
-    this.vehiculeService.getVehiclesId(vehicle)
-      .subscribe((data: any) => {
-        this.vehicles = data.results;
-        console.log('el id mas data es', this.vehicles);
-      });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
         this.getVehicles();
@@ -98,9 +81,9 @@ export class ViewVehiclesComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
-        this.vehicles.splice(1);
         this.vehiculeService.deleteVehicle(id)
-          .subscribe();
+        .subscribe();
+        this.vehicles.splice(1);
         Swal.fire({
           title: 'Eliminado',
           type: 'success',
@@ -112,6 +95,15 @@ export class ViewVehiclesComponent implements OnInit {
     });
   }
 
+  ordenamiento(value: string) {
+    this.params.ordering = value;
+    this.getVehicles();
+  }
+
+  searchBy(value: string) {
+    this.params.search = value;
+    this.getVehicles();
+  }
 
   // Metodo paginator
   getPages(e): PageEvent {

@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { VehiclesService } from '../../../services/vehicles.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ViewVehiclesComponent } from '../view-vehicles/view-vehicles.component';
 import Swal from 'sweetalert2';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { timer } from 'rxjs';
 
+export interface DialogData {
+  vehicle: any;
+}
 
 @Component({
   selector: 'app-add-vehicles',
@@ -17,29 +17,33 @@ import { timer } from 'rxjs';
 export class AddVehiclesComponent implements OnInit {
   typeVehicles: Array<any> = [];
   vehicleForm: FormGroup;
+  vehicle: any;
 
-  constructor(private vehicleService: VehiclesService, private fb: FormBuilder, public dialogRef: MatDialogRef<AddVehiclesComponent>) { }
+  constructor(private vehicleService: VehiclesService,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddVehiclesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+    this.vehicle = data.vehicle;
+    if (this.vehicle) {
+      this.buildEditVehicleForm(this.vehicle);
+    } else {
+      this.buildVehicleForm();
+
+    }
+  }
 
   ngOnInit(): void {
     this.getTypeVehicle();
-    this.buildVehicleForm();
   }
 
   getTypeVehicle() {
     this.vehicleService.getTypeVehicles()
       .subscribe((data: any) => {
         this.typeVehicles = data.data;
-        console.log('Los tipos', this.typeVehicles);
       }, error => {
+        return;
       });
-  }
-
-  editVehicle() {
-    if (this.vehicleForm.invalid) {
-      this.vehicleForm.markAllAsTouched();
-      return;
-    }
-    const vehicle = this.vehicleForm.value;
   }
 
   addVehicle() {
@@ -48,6 +52,11 @@ export class AddVehiclesComponent implements OnInit {
       return;
     }
     const vehicle = this.vehicleForm.value;
+
+    if (this.vehicle) {
+      this.editVehicle(vehicle, this.vehicle.id);
+      return;
+    }
     this.vehicleService.createVehicle(vehicle)
       .subscribe((data: any) => {
         Swal.fire({
@@ -60,6 +69,7 @@ export class AddVehiclesComponent implements OnInit {
         console.log('Error' + error);
       }
       );
+
   }
 
   buildVehicleForm() {
@@ -72,19 +82,42 @@ export class AddVehiclesComponent implements OnInit {
     });
   }
 
-  // Metodos para validar ==============================
+  editVehicle(vehicle, idVehicle) {
+    this.vehicleService.editVehicle(idVehicle, vehicle)
+      .subscribe((data: any) => {
+        Swal.fire({
+          title: 'Se edito el vehiculo',
+          type: 'success',
+          confirmButtonText: 'Aceptar',
+          timer: 2000
+        });
+        this.dialogRef.close(true);
+        this.vehicleForm = data;
+        // console.log(this.vehicleForm);
+      });
+  }
+
+  buildEditVehicleForm(vehicle) {
+    this.vehicleForm = this.fb.group({
+      alias: [vehicle.alias, Validators.required],
+      model: [vehicle.model, Validators.required],
+      type_vehicle_id: [vehicle.type_vehicle_id, Validators.required],
+      year: [vehicle.year, Validators.required],
+      plate: [vehicle.plate, Validators.required],
+    });
+  }
+
+  // Metodos para validar
   isFieldInvalid(form: FormGroup, field: string) {
     return (
       (!form.get(field).valid && form.get(field).touched)
     );
   }
-
   isFieldValid(form: FormGroup, field: string) {
     return (
       (form.get(field).valid && form.get(field).touched)
     );
   }
-
   isFieldHasError(form: FormGroup, field: string, error: string) {
     return (
       (form.get(field).hasError(error))

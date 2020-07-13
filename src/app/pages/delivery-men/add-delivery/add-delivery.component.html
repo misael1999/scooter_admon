@@ -105,7 +105,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4 ">
                         <label>Código postal</label>
-                        <input formControlName="postal_code" type="text " class="form-control " placeholder="Código postal " [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'postal_code'), 'is-valid': isFieldValid(adressForm, 'postal_code')}">
+                        <input formControlName="postal_code" type="text " class="form-control " placeholder="Código postal" maxlength="5" minlength="5" [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'postal_code'), 'is-valid': isFieldValid(adressForm, 'postal_code')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(adressForm, 'postal_code','required')">Este campo es requerido</span>
@@ -148,7 +148,7 @@
                         <button class="btn btn-light right " mat-dialog-close mat-flat-button color="primary">Cancelar</button>
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" (click)="addDelivery()" class="btn btn-primary fa-pull-right">Agregar</button>
+                        <button type="submit" (click)="addDelivery()" class="btn btn-primary fa-pull-right">Guardar</button>
                     </div>
                 </div>
             </form>

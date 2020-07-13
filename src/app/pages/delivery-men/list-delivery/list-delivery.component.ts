@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { DeliveryMenService } from '../../../services/delivery-men.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-delivery',
@@ -31,13 +32,18 @@ export class ListDeliveryComponent implements OnInit {
     this.getDelivery();
   }
 
-  openDialog(): void {
+  dialogAddDelivery() {
     const dialogRef = this.dialog.open(AddDeliveryComponent, {
+      disableClose: true,
       width: '600px',
-      disableClose: false,
+      height: '700px',
+      data: { delivery: null }
     });
-    dialogRef.afterClosed().subscribe();
-
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.getDelivery();
+      }
+    });
   }
 
 
@@ -52,6 +58,33 @@ export class ListDeliveryComponent implements OnInit {
         this.loadingDelivery = false;
         return;
       });
+  }
+
+
+  deleteDelivery(id: number, nombre: string) {
+    Swal.fire({
+      title: 'Eliminar',
+      text: `Esta seguro de eliminar a ${nombre}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Eliminar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        this.deliverys.splice(1);
+        this.deliveryService.deleteDelivery(id)
+          .subscribe();
+        Swal.fire({
+          title: 'Eliminado',
+          type: 'success',
+          text: 'El vehiculo se elimino correctamente',
+          timer: 2000
+        });
+        this.getDelivery();
+      }
+    });
+
   }
 
   searchBy(value: string) {

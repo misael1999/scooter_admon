@@ -1,5 +1,5 @@
 <h1 mat-dialog-title class="d-flex justify-content-between">
-    Agregar vehiculo
+    {{vehicle != null ? 'Editar': 'Agregar' }} vehiculo
 </h1>
 
 <div mat-dialog-content>
@@ -67,7 +67,7 @@
                         <button class="btn btn-light right " mat-dialog-close mat-flat-button color="primary">Cancelar</button>
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" (click)="addVehicle()" class="btn btn-primary fa-pull-right">Agregar</button>
+                        <button type="submit" (click)="addVehicle()" class="btn btn-primary fa-pull-right">Guardar</button>
                     </div>
                 </div>
             </form>
