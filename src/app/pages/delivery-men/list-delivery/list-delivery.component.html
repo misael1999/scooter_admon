@@ -93,7 +93,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let delivery of deliverys ">
-                            <td> {{delivery.name}} </td>
+                            <td> {{ delivery.name }} </td>
                             <td> {{ delivery.last_name }} </td>
                             <td> {{ delivery.phone_number }} </td>
                             <td> {{ delivery.total_orders}} </td>
@@ -105,7 +105,7 @@
                                 <button class="btn btn-mas" [routerLink]="['/delivery/info', delivery.id]">                                    
                                     <i class="ti-plus"></i>
                                 </button>
-                                <button class="btn btn-edit ">
+                                <button class="btn btn-edit" (click)="dialogEditDelivery(delivery)">
                                     <i class="ti-pencil"></i>
                                 </button>
                                 <button class="btn btn-remove" (click)="deleteDelivery(delivery.id, delivery.name)">

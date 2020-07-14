@@ -35,9 +35,22 @@ export class ListDeliveryComponent implements OnInit {
   dialogAddDelivery() {
     const dialogRef = this.dialog.open(AddDeliveryComponent, {
       disableClose: true,
-      width: '600px',
-      height: '700px',
+      // width: '600px',
+      // height: '700px',
       data: { delivery: null }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.getDelivery();
+      }
+    });
+  }
+
+  dialogEditDelivery(delivery) {
+    const dialogRef = this.dialog.open(AddDeliveryComponent, {
+      disableClose: true,
+      // width: '600',
+      data: {delivery}
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {

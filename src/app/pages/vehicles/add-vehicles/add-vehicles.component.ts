@@ -46,6 +46,8 @@ export class AddVehiclesComponent implements OnInit {
       });
   }
 
+
+
   addVehicle() {
     if (this.vehicleForm.invalid) {
       this.vehicleForm.markAllAsTouched();
@@ -69,7 +71,6 @@ export class AddVehiclesComponent implements OnInit {
         console.log('Error' + error);
       }
       );
-
   }
 
   buildVehicleForm() {
@@ -82,6 +83,7 @@ export class AddVehiclesComponent implements OnInit {
     });
   }
 
+  // Editar vehiculo
   editVehicle(vehicle, idVehicle) {
     this.vehicleService.editVehicle(idVehicle, vehicle)
       .subscribe((data: any) => {
@@ -96,7 +98,6 @@ export class AddVehiclesComponent implements OnInit {
         // console.log(this.vehicleForm);
       });
   }
-
   buildEditVehicleForm(vehicle) {
     this.vehicleForm = this.fb.group({
       alias: [vehicle.alias, Validators.required],

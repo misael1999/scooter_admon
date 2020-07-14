@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DeliveryMenService } from '../../../services/delivery-men.service';
 import { VehiclesService } from '../../../services/vehicles.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+
+
+export interface DialogData {
+  delivery: any;
+}
+
 
 @Component({
   selector: 'app-add-delivery',
@@ -13,15 +19,24 @@ import Swal from 'sweetalert2';
 export class AddDeliveryComponent implements OnInit {
   deliveryForm: FormGroup;
   adressForm: FormGroup;
-  vehicles: Array<any> = [];
+  vehicles;
+  delivery: any;
 
   constructor(private deliveryService: DeliveryMenService, private vehicleService: VehiclesService,
-    private fb: FormBuilder, public dialogRef: MatDialogRef<AddDeliveryComponent>) {
+    private fb: FormBuilder, public dialogRef: MatDialogRef<AddDeliveryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+    this.delivery = data.delivery;
+    if (this.delivery) {
+      this.builEditAdressDeliveryForm(this.delivery);
+    } else {
+      this.buildDeliveryForm();
+    }
   }
 
   ngOnInit(): void {
     this.getVehicles();
-    this.buildDeliveryForm();
+    // this.buildDeliveryForm();
     this.builAdressDeliveryForm();
   }
 
@@ -45,7 +60,10 @@ export class AddDeliveryComponent implements OnInit {
     }
     const delivery = this.deliveryForm.value;
     const deliveryAdress = this.adressForm.value;
-    delivery.address = deliveryAdress;
+
+    if (this.delivery) {
+      this.editDelivery(delivery, this.delivery.id);
+    }
     this.deliveryService.createDelevery(delivery)
       .subscribe((data: any) => {
         Swal.fire({
@@ -80,10 +98,10 @@ export class AddDeliveryComponent implements OnInit {
       references: [null, Validators.required],
     });
   }
-  // Fin ==========================
+  // Fin
 
 
-  // Editar un repartidor
+  // Editar un repartidor ==========================================
   editDelivery(delivery, idDelivery) {
     this.deliveryService.editDelivery(idDelivery, delivery)
       .subscribe((data: any) => {
@@ -97,7 +115,6 @@ export class AddDeliveryComponent implements OnInit {
         this.adressForm = data;
       });
   }
-
   buildEditDeliveryForm(delivery) {
     this.deliveryForm = this.fb.group({
       name: [delivery.name, Validators.required],
@@ -108,9 +125,16 @@ export class AddDeliveryComponent implements OnInit {
       vehicle_id: [delivery.vehicle_id, Validators.required],
     });
   }
-
-
-
+  builEditAdressDeliveryForm(delivery) {
+    this.adressForm = this.fb.group({
+      street: [delivery.street, Validators.required],
+      suburb: [delivery.suburb, Validators.required],
+      postal_code: [delivery.postal_code, Validators.required],
+      exterior_number: [delivery.exterior_number, Validators.required],
+      inside_number: [delivery.inside_number, Validators.required],
+      references: [delivery.references, Validators.required],
+    });
+  }
 
   // Methods the verification in the form
   isFieldInvalid(form: FormGroup, field: string) {

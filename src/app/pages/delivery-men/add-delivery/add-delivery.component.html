@@ -1,9 +1,12 @@
 <h1 mat-dialog-title class="d-flex justify-content-between">
-    Agregar repartidor
+
+    {{delivery != null ? 'Editar': 'Agregar' }} vehiculo
+
     <button mat-dialog-close mat-flat-button class="btn ">
         <i class="ti ti-close"></i>
       </button>
 </h1>
+
 
 <div mat-dialog-content>
     <div class="row">
@@ -22,7 +25,7 @@
                         </div>
                     </div>
 
-                    <div class="form- col-lg-6 ">
+                    <div class="form- col-lg-6">
                         <label>Apellidos</label>
                         <input formControlName="last_name" type="text " class="form-control " placeholder="Apellidos" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'last_name'), 'is-valid': isFieldValid(deliveryForm, 'last_name')}">
                         <!-- MESSAGES ERRORS  -->
@@ -32,8 +35,9 @@
                     </div>
                 </div>
 
+
                 <div class="form-row ">
-                    <div class="form-group col-md-4 ">
+                    <div class="form-group col-md-3">
                         <label>Telefono</label>
                         <input formControlName="phone_number" type="text " class="form-control " placeholder="Telefono" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'phone_number'), 'is-valid': isFieldValid(deliveryForm, 'phone_number')}">
                         <!-- MESSAGES ERRORS  -->
@@ -41,8 +45,7 @@
                             <span *ngIf="isFieldHasError(deliveryForm, 'phone_number','required')">Este campo es requerido</span>
                         </div>
                     </div>
-
-                    <div class="form-group col-md-4 ">
+                    <div class="form-group col-md-3">
                         <label>Salario</label>
                         <input formControlName="salary_per_order" type="text " autocomplete="false " class="form-control" placeholder="Salario" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'salary_per_order'), 'is-valid': isFieldValid(deliveryForm, 'salary_per_order')}">
                         <!-- MESSAGES ERRORS  -->
@@ -51,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4 ">
+                    <div class="form-group col-md-3">
                         <label>Contraseña</label>
                         <input formControlName="password" type="password " class="form-control" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'password'), 'is-valid': isFieldValid(deliveryForm, 'password')}">
                         <!-- MESSAGES ERRORS  -->
@@ -59,10 +62,7 @@
                             <span *ngIf="isFieldHasError(deliveryForm, 'password','required')">Este campo es requerido</span>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label>Vehiculo</label>
                         <select class="form-control select-form" formControlName="vehicle_id" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'vehicle_id'), 'is-valid': isFieldValid(deliveryForm, 'vehicle_id')}">
                             <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.alias}}</option>
@@ -73,7 +73,6 @@
                         </div>
                     </div>
                 </div>
-
             </form>
 
 
