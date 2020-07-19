@@ -29,7 +29,7 @@ export class InfoClientComponent implements OnInit {
         this.infoCustomer = data;
         console.log(this.infoCustomer);
       }, error => {
-        if ( error.errors.code === 'not_found' ) {
+        if (error.errors.code === 'not_found') {
           this.router.navigate(['not_found']);
           return;
         }

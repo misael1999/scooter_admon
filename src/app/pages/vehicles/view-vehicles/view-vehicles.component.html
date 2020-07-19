@@ -81,15 +81,15 @@
                         <tr *ngFor="let vehicle of vehicles">
                             <!-- <td> {{ vehicle.id}} </td> -->
                             <td> {{ vehicle.alias | titlecase }} </td>
-                            <td *ngIf="vehicle.type_vehicle_id == '1'"> Motocicleta </td>
-                            <td *ngIf="vehicle.type_vehicle_id == '2'"> Bicicleta </td>
+                            <td *ngIf="vehicle.type_vehicle_id == '1'"> <span class="badge badge-pill badge-secondary">Motocicleta</span></td>
+                            <td *ngIf="vehicle.type_vehicle_id == '2'"> <span class="badge badge-pill badge-success">Bicicleta</span></td>
                             <td> {{ vehicle.model}} </td>
                             <td> {{ vehicle.year }} </td>
                             <td> {{ vehicle.plate}} </td>
                             <td> {{ vehicle.status.name }} </td>
                             <td class="text-center bt-edit">
                                 <button class="btn bt-edit" (click)="editarVehicle(vehicle)">
-                                    <i class="ti-marker-alt"></i>
+                                    <i class="ti-pencil-alt"></i>
                                 </button>
                                 <button class="btn bt-remove" (click)="deleteVehicle(vehicle.id, vehicle.alias)">
                                     <i class="ti-trash"></i>

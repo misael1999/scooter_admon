@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ViewProfileModule } from './view-profile/view-profile.module';
 
 
 const routes: Routes = [
@@ -14,23 +13,27 @@ const routes: Routes = [
   },
   {
     path: 'vehicles',
-    loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule )
+    loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule)
   },
   {
     path: 'client',
-    loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule )
+    loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
   },
   {
     path: 'delivery',
-    loadChildren: () => import('./delivery-men/delivery-men.module').then(m => m.DeliveryMenModule )
+    loadChildren: () => import('./delivery-men/delivery-men.module').then(m => m.DeliveryMenModule)
   },
   {
     path: 'traicing',
-    loadChildren: () => import('./traicing/traicing.module').then(m => m.TraicingModule )
+    loadChildren: () => import('./traicing/traicing.module').then(m => m.TraicingModule)
   },
   {
     path: 'profile',
-    loadChildren: () => import('./view-profile/view-profile.module').then(m => m.ViewProfileModule )
+    loadChildren: () => import('./view-profile/view-profile.module').then(m => m.ViewProfileModule)
+  },
+  {
+    path: 'reports',
+    loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)
   },
 
 

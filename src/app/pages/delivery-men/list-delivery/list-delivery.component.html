@@ -7,10 +7,17 @@
     </div>
 
     <div>
-
         <!-- Filter  -->
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
+
+                <div class="col-md-12 tabPading">
+                    <mat-tab-group>
+                        <mat-tab label="Activos"> </mat-tab>
+                        <mat-tab label="Inactivos"> </mat-tab>
+                    </mat-tab-group>
+                </div>
+                <br>
 
                 <!-- Orderin in the tables for delivery -->
                 <div class="col-lg-3">
@@ -23,13 +30,7 @@
                 </div>
                 <!-- Fin Orderin in the tables for delivery -->
 
-                <div class="col-lg-4">
-                </div>
-
-                <div class="col-md-2">
-                    <small>
-                        <button class="btn btn-dark btn-block" (click)="status = !status">Filtros <small> <i class="ti-filter"></i>  </small> </button>
-                    </small>
+                <div class="col-lg-6">
                 </div>
 
                 <!-- Filter by search vehicles -->
@@ -45,18 +46,6 @@
                 </div>
                 <!-- Fin Filter by search vehicles -->
             </div>
-
-            <div class="row" *ngIf="status">
-                <div class="col-md-10"></div>
-                <div class="form-group block">
-                    <label>Estatus</label>
-                    <select class="form-control">
-                      <option>Activos</option>
-                      <option>Bloqueados</option>
-                    </select>
-                </div>
-            </div>
-
         </div>
         <!-- Fin filter  -->
 
@@ -99,14 +88,15 @@
                             <td> {{ delivery.total_orders}} </td>
                             <td> {{ delivery.reputation}} </td>
                             <td> {{ delivery.salary_per_order}} </td>
-                            <td *ngIf="delivery.delivery_status"> {{ delivery.delivery_status }}
-                            </td>
+                            <td *ngIf="delivery.delivery_status == 'Disponible'"> <span class="badge badge-pill badge-secondary">{{ delivery.delivery_status }}</span></td>
+                            <td *ngIf="delivery.delivery_status == 'Ocupado'"> <span class="badge badge-pill badge-info"> {{ delivery.delivery_status }}</span></td>
+                            <td *ngIf="delivery.delivery_status == 'Fuera de servicio'"> <span class="badge badge-pill badge-warning"> {{ delivery.delivery_status }}</span></td>
                             <td class="text-center">
                                 <button class="btn btn-mas" [routerLink]="['/delivery/info', delivery.id]">                                    
-                                    <i class="ti-plus"></i>
+                                    <i class="ti-eye"></i>
                                 </button>
                                 <button class="btn btn-edit" (click)="dialogEditDelivery(delivery)">
-                                    <i class="ti-pencil"></i>
+                                    <i class="ti-pencil-alt"></i>
                                 </button>
                                 <button class="btn btn-remove" (click)="deleteDelivery(delivery.id, delivery.name)">
                                     <i class="ti-trash"></i>

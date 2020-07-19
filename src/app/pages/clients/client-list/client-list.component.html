@@ -72,8 +72,7 @@
                     <thead>
                         <tr class="">
                             <th scope="col">Nombre </th>
-                            <th scope="col">Apellidos </th>
-                            <th scope="col">Correo</th>
+                            <th scope="col">Teléfono </th>
                             <th scope="col">Pedidos realizados </th>
                             <th scope="col">Pedidos cancelados </th>
                             <th scope="col">Primer pedido</th>
@@ -86,25 +85,21 @@
 
 
                         <tr *ngFor="let client of clients ">
-                            <td>{{ client.customer.name }}</td>
+                            <td> {{ client.customer.name }}</td>
                             <td> {{ client.customer.phone_number}} </td>
-                            <td>juanito34@hotmail.com</td>
-                            <td> {{client.total_orders}} </td>
-                            <td> {{client.total_orders_cancelled }} </td>
-                            <td> {{client.first_order_date | date }} </td>
-                            <td> {{client.last_order_date | date }} </td>
-                            <td>
-                                <button class="btn btn-mas " [routerLink]="['/client/info',client.id]">
-                                    <i class="ti-plus"></i>
+                            <td> {{ client.total_orders}} </td>
+                            <td> {{ client.total_orders_cancelled }} </td>
+                            <td> {{ client.first_order_date | date }} </td>
+                            <td> {{ client.last_order_date | date }} </td>
+                            <td class="text-center">
+                                <button class="btn btn-mas" [routerLink]="['/client/info',client.id]">
+                                    <i class="ti-eye"></i>
                                 </button>
 
-                                <!-- <button class="btn btn-message ">
-                                    <i class="ti-comment-alt"></i>
-                                </button> -->
-
-                                <button class="btn btn-block ">
+                                <!--                     
+                                <button class="btn btn-block">
                                     <i class="ti-lock"></i>
-                                </button>
+                                </button> -->
 
                             </td>
 

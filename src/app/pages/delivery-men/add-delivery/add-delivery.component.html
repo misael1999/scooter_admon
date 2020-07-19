@@ -39,10 +39,11 @@
                 <div class="form-row ">
                     <div class="form-group col-md-3">
                         <label>Telefono</label>
-                        <input formControlName="phone_number" type="text " class="form-control " placeholder="Telefono" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'phone_number'), 'is-valid': isFieldValid(deliveryForm, 'phone_number')}">
+                        <input formControlName="phone_number" type="text" class="form-control" placeholder="Telefono" maxlength="10" [ngClass]="{'is-invalid': isFieldInvalid(deliveryForm, 'phone_number'), 'is-valid': isFieldValid(deliveryForm, 'phone_number')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
                             <span *ngIf="isFieldHasError(deliveryForm, 'phone_number','required')">Este campo es requerido</span>
+                            <span *ngIf="isFieldHasError(deliveryForm, 'phone_number','pattern')">No es el formato correcto</span>
                         </div>
                     </div>
                     <div class="form-group col-md-3">
@@ -107,6 +108,7 @@
                         <input formControlName="postal_code" type="text " class="form-control " placeholder="Código postal" maxlength="5" minlength="5" [ngClass]="{'is-invalid': isFieldInvalid(adressForm, 'postal_code'), 'is-valid': isFieldValid(adressForm, 'postal_code')}">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
+                            <span *ngIf="isFieldHasError(adressForm, 'postal_code','minlength')">Como minimo 5 Caracteres</span>
                             <span *ngIf="isFieldHasError(adressForm, 'postal_code','required')">Este campo es requerido</span>
                         </div>
                     </div>

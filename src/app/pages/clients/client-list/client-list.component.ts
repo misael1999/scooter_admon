@@ -33,6 +33,7 @@ export class ClientListComponent implements OnInit {
     this.clientService.getClients(this.params)
       .subscribe((data: any) => {
         this.clients = data.results;
+        console.log(this.clients);
         this.loadingClient = false;
         this.length = data.count;
       }, error => {

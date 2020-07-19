@@ -1,78 +1,76 @@
 <div class="background-login">
-  
-  <div class="container">
-  
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-  
-      <div class="col-xl-10 col-lg-12 col-md-9">
-  
-        <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-              <div class="col-lg-6">
-                <div class="p-5">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">¡Bienvenido de vuelta!</h1>
-                  </div>
-                  <form [formGroup]="loginForm" class="user">
-                    <div class="form-group">
-                      <input formControlName="username" [ngClass]="{'is-invalid': isFieldInvalid(loginForm, 'username'),
-                        'is-valid': isFieldValid(loginForm, 'username')}" type="email"
-                        class="form-control form-control-user" placeholder="Ingresa tu correo">
-                      <!-- MESSAGES ERRORS  -->
-                      <div class="invalid-feedback">
-                        <span *ngIf="isFieldHasError(loginForm, 'username','required')">Este
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">¡Bienvenido de vuelta!</h1>
+                                    </div>
+                                    <form [formGroup]="loginForm" class="user">
+                                        <div class="form-group">
+                                            <input formControlName="username" [ngClass]="{'is-invalid': isFieldInvalid(loginForm, 'username'),
+                        'is-valid': isFieldValid(loginForm, 'username')}" type="email" class="form-control form-control-user" placeholder="Ingresa tu correo">
+                                            <!-- MESSAGES ERRORS  -->
+                                            <div class="invalid-feedback">
+                                                <span *ngIf="isFieldHasError(loginForm, 'username','required')">Este
                           campo
                           es
                           requerido</span>
-                        <span *ngIf="isFieldHasError(loginForm, 'username','incorrectMailFormat')">No es un correo valido.</span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input formControlName="password" [ngClass]="{'is-invalid': isFieldInvalid(loginForm, 'password'),
-                      'is-valid': isFieldValid(loginForm, 'password')}" type="password"
-                        class="form-control form-control-user" placeholder="Ingresa tu contraseña">
-                      <!-- MESSAGES ERRORS  -->
-                      <div class="invalid-feedback">
-                        <span *ngIf="isFieldHasError(loginForm, 'password','required')">Este
+                                                <span *ngIf="isFieldHasError(loginForm, 'username','incorrectMailFormat')">No es un correo valido.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input formControlName="password" [ngClass]="{'is-invalid': isFieldInvalid(loginForm, 'password'),
+                      'is-valid': isFieldValid(loginForm, 'password')}" type="password" class="form-control form-control-user" placeholder="Ingresa tu contraseña">
+                                            <!-- MESSAGES ERRORS  -->
+                                            <div class="invalid-feedback">
+                                                <span *ngIf="isFieldHasError(loginForm, 'password','required')">Este
                           campo
                           es
                           requerido</span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Recuerdame</label>
-                      </div>
-                    </div>
-                    <button [disabled]="loadingLogin" (click)="login()" class="btn btn-primary btn-user btn-block">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Recuérdame</label>
+                                            </div>
+                                        </div>
+                                        <button [disabled]="loadingLogin" (click)="login()" class="btn btn-primary btn-user btn-block">
                       <span *ngIf="!loadingLogin">Iniciar sesión</span>
                       <div *ngIf="loadingLogin" class="spinner-border text-warning" role="status">
                         <span class="sr-only">Loading...</span>
                       </div>
                     </button>
-                  </form>
-                  <hr>
-                  <div class="text-center">
-                    <a class="small" style="color: #0084ff;" routerLink="/auth/forgot-password">¿Olvidaste la
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" style="color: #0084ff;" routerLink="/auth/forgot-password">¿Olvidaste tu
                       contraseña?</a>
-                  </div>
-                  <div class="text-center">
+                                    </div>
+                                    <!-- <div class="text-center">
                     <a class="small" style="color: #0084ff;" routerLink="/auth/register">Crear una cuenta</a>
-                  </div>
+                  </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
             </div>
-          </div>
+
         </div>
-  
-      </div>
-  
+
     </div>
-  
-  </div>
 </div>

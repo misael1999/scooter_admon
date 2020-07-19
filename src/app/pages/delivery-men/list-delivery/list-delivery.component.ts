@@ -19,10 +19,10 @@ export class ListDeliveryComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
 
-  status: boolean;
+  statusFilter: boolean;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', ordering: '', status: '1' };
+  params = { limit: 15, offset: 0, search: '', ordering: '', status: '1, 2' };
   deliverys: Array<any> = [];
   loadingDelivery: boolean;
 
@@ -50,7 +50,7 @@ export class ListDeliveryComponent implements OnInit {
     const dialogRef = this.dialog.open(AddDeliveryComponent, {
       disableClose: true,
       // width: '600',
-      data: {delivery}
+      data: { delivery }
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
@@ -65,6 +65,8 @@ export class ListDeliveryComponent implements OnInit {
     this.deliveryService.getDeliverys(this.params)
       .subscribe((data: any) => {
         this.deliverys = data.results;
+        console.log(this.deliverys);
+        console.log(this.deliverys);
         this.loadingDelivery = false;
         this.length = data.count;
       }, error => {

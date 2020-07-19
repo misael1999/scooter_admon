@@ -28,16 +28,18 @@ export class AddDeliveryComponent implements OnInit {
 
     this.delivery = data.delivery;
     if (this.delivery) {
+      this.buildEditDeliveryForm(this.delivery);
       this.builEditAdressDeliveryForm(this.delivery);
     } else {
       this.buildDeliveryForm();
+      this.builAdressDeliveryForm();
     }
   }
 
   ngOnInit(): void {
     this.getVehicles();
     // this.buildDeliveryForm();
-    this.builAdressDeliveryForm();
+    // this.builAdressDeliveryForm();
   }
 
   // Se obtienen los vehiculos para mostrarlos en el select
@@ -82,7 +84,8 @@ export class AddDeliveryComponent implements OnInit {
     this.deliveryForm = this.fb.group({
       name: [null, Validators.required],
       last_name: [null, Validators.required],
-      phone_number: [null, Validators.required],
+      phone_number: [null, [Validators.required, Validators.pattern(new RegExp('[0-9 ]{10}')), Validators.maxLength(10),
+      Validators.minLength(10)]],
       salary_per_order: [null, Validators.required],
       password: [null, Validators.required],
       vehicle_id: [null, Validators.required],
@@ -119,20 +122,22 @@ export class AddDeliveryComponent implements OnInit {
     this.deliveryForm = this.fb.group({
       name: [delivery.name, Validators.required],
       last_name: [delivery.last_name, Validators.required],
-      phone_number: [delivery.phone_number, Validators.required],
+      phone_number: [delivery.phone_number, [Validators.required, Validators.pattern(new RegExp('[0-9 ]{10}')), Validators.maxLength(10),
+      Validators.minLength(10)]],
       salary_per_order: [delivery.salary_per_order, Validators.required],
       password: [delivery.password, Validators.required],
       vehicle_id: [delivery.vehicle_id, Validators.required],
     });
   }
   builEditAdressDeliveryForm(delivery) {
+    console.log(this.delivery.address);
     this.adressForm = this.fb.group({
-      street: [delivery.street, Validators.required],
-      suburb: [delivery.suburb, Validators.required],
-      postal_code: [delivery.postal_code, Validators.required],
-      exterior_number: [delivery.exterior_number, Validators.required],
-      inside_number: [delivery.inside_number, Validators.required],
-      references: [delivery.references, Validators.required],
+      street: [delivery.address.street, Validators.required],
+      suburb: [delivery.address.suburb, Validators.required],
+      postal_code: [delivery.address.postal_code, Validators.required],
+      exterior_number: [delivery.address.exterior_number, Validators.required],
+      inside_number: [delivery.address.inside_number, Validators.required],
+      references: [delivery.address.references, Validators.required],
     });
   }
 

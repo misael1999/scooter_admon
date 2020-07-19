@@ -15,10 +15,10 @@ export class DeliveryMenService {
     return this.httpClient.get(url, {params});
   }
 
-  getDeliveryById(idDelivery: number) {
+  getDeliveryById(idDelivery, params = {}) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/`;
-    return this.httpClient.get(url);
+    return this.httpClient.get(url, {params});
   }
 
   createDelevery(delivery: any) {

@@ -11,19 +11,23 @@ export class InfoDeliveryComponent implements OnInit {
 
   idDelivery: number;
   delivery: Array<any> = [];
+  paramsDate = { fromDate: new Date(), toDate: new Date() };
 
   constructor(private deliveryService: DeliveryMenService, private activatedRoute: ActivatedRoute) {
     this.idDelivery = this.activatedRoute.snapshot.params.id;
     console.log('El id es', this.idDelivery);
+
   }
 
   ngOnInit(): void {
   }
 
-  getDelivery(id) {
-    this.deliveryService.getDeliveryById(id)
+  getDelivery(id, number) {
+    this.deliveryService.getDeliveryById(id, this.paramsDate)
       .subscribe((data: any) => {
         this.delivery = data;
+        console.log(this.delivery);
+
       }, error => {
 
       });
