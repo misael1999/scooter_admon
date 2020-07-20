@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
 
 
+
 const components = [
   MatDialogModule,
   MatPaginatorModule,

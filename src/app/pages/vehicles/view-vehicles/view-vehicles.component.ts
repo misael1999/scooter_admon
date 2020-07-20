@@ -4,6 +4,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddVehiclesComponent } from '../add-vehicles/add-vehicles.component';
 import Swal from 'sweetalert2';
+import { ThemePalette } from '@angular/material/core';
+
+
 
 @Component({
   selector: 'app-view-vehicles',
@@ -23,6 +26,7 @@ export class ViewVehiclesComponent implements OnInit {
 
   loadingVehicles: boolean;
   vehicles: Array<any> = [];
+  // background: ThemePalette = 'primary';
 
   constructor(private vehiculeService: VehiclesService, private dialog: MatDialog) {
   }
@@ -47,7 +51,7 @@ export class ViewVehiclesComponent implements OnInit {
     const dialogRef = this.dialog.open(AddVehiclesComponent, {
       disableClose: true,
       width: '500px',
-      data: {vehicle: null}
+      data: { vehicle: null }
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
@@ -60,7 +64,7 @@ export class ViewVehiclesComponent implements OnInit {
     const dialogRef = this.dialog.open(AddVehiclesComponent, {
       disableClose: true,
       width: '500px',
-      data: {vehicle}
+      data: { vehicle }
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
@@ -82,7 +86,7 @@ export class ViewVehiclesComponent implements OnInit {
     }).then(resp => {
       if (resp.value) {
         this.vehiculeService.deleteVehicle(id)
-        .subscribe();
+          .subscribe();
         this.vehicles.splice(1);
         Swal.fire({
           title: 'Eliminado',

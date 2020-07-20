@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { VehiclesService } from 'src/app/services/vehicles.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddVehiclesComponent } from '../add-vehicles/add-vehicles.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-vehicles-block',
@@ -7,9 +12,70 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewVehiclesBlockComponent implements OnInit {
 
-  constructor() { }
+
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 25;
+  pageSizeOptions: number[] = [25, 50, 75, 100];
+  // MatPaginator Output
+  pageEvent: PageEvent;
+  // Parametros para el paginado
+  params = { limit: 25, offset: 0, search: '', status: '1,2' };
+
+  loadingVehicles: boolean;
+  vehicles: Array<any> = [];
+
+  constructor(private vehiculeService: VehiclesService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getVehicles();
+  }
+
+  getVehicles() {
+    this.loadingVehicles = true;
+    this.vehiculeService.getVehicles(this.params.status = '2')
+      .subscribe((data: any) => {
+        this.vehicles = data.results;
+        this.loadingVehicles = false;
+        this.length = data.count;
+      }, error => {
+        this.loadingVehicles = false;
+      });
+  }
+
+
+  desbloquear(vehicle) {
+    Swal.fire({
+      title: 'Desbloquear',
+      text: `El vehiculo se va a desbloquear`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Desbloquear',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        // this.vehiculeService.editVehicle()
+
+      }
+    });
+
+  }
+
+  searchBy(value: string) {
+    this.params.search = value;
+    this.getVehicles();
+  }
+
+  // Metodo paginator
+  getPages(e): PageEvent {
+    if (this.vehicles.length === 0) {
+      this.pageSize = 25;
+      return;
+    }
+    this.params.limit = e.pageSize;
+    this.params.offset = this.params.limit * e.pageIndex;
+    this.getVehicles();
   }
 
 }

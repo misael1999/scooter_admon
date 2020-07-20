@@ -7,6 +7,7 @@ import { DeliveryRoutingModule } from './delivery-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
+import { ListDeliveryBlockComponent } from './list-delivery-block/list-delivery-block.component';
 
 
 
@@ -14,7 +15,8 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [
     AddDeliveryComponent,
     InfoDeliveryComponent,
-    ListDeliveryComponent],
+    ListDeliveryComponent,
+    ListDeliveryBlockComponent],
   imports: [
     CommonModule,
     DeliveryRoutingModule,
