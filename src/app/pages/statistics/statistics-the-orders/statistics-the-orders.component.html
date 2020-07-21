@@ -1,0 +1,35 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Estadísticas</h1>
+        <h5> {{fecha|date:'longDate' }} </h5>
+    </div>
+
+    <div>
+        <!-- Filter  -->
+        <div class="filters mb-3">
+            <div class="row d-flex">
+
+                <div class="col-md-12 tabPading">
+                    <nav mat-tab-nav-bar>
+                        <a mat-tab-link routerLink="/statistics/orders" active="activeLink" routerLinkActive="active">Por pedidos </a>
+                        <a mat-tab-link routerLink="/statistics/vehicles" active="activeLink" routerLinkActive="active">Por Vehiculos </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" class="content">
+            <div class="col-md-8 d-flex">
+                <div>
+                    <div>
+                        <div style="display: block">
+                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
