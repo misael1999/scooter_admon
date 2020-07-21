@@ -20,7 +20,7 @@ export class ViewVehiclesBlockComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', status: '1,2' };
+  params = { limit: 25, offset: 0, search: '', status: 2 };
 
   loadingVehicles: boolean;
   vehicles: Array<any> = [];
@@ -33,7 +33,7 @@ export class ViewVehiclesBlockComponent implements OnInit {
 
   getVehicles() {
     this.loadingVehicles = true;
-    this.vehiculeService.getVehicles(this.params.status = '2')
+    this.vehiculeService.getVehicles(this.params)
       .subscribe((data: any) => {
         this.vehicles = data.results;
         this.loadingVehicles = false;
@@ -60,6 +60,30 @@ export class ViewVehiclesBlockComponent implements OnInit {
       }
     });
 
+  }
+  deleteVehicle(id: number, alias) {
+    Swal.fire({
+      title: 'Eliminar',
+      text: `Esta seguro de eliminar a ${alias}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Eliminar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        this.vehiculeService.deleteVehicle(id)
+          .subscribe();
+        this.vehicles.splice(1);
+        Swal.fire({
+          title: 'Eliminado',
+          type: 'success',
+          text: 'El vehiculo se elimino correctamente',
+          timer: 2000
+        });
+      }
+      this.getVehicles();
+    });
   }
 
   searchBy(value: string) {

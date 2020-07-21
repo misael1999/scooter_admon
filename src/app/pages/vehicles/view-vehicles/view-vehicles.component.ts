@@ -22,7 +22,7 @@ export class ViewVehiclesComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', ordering: '', estatus: '1,2' };
+  params = { limit: 25, offset: 0, search: '', ordering: '', estatus: 1 };
 
   loadingVehicles: boolean;
   vehicles: Array<any> = [];

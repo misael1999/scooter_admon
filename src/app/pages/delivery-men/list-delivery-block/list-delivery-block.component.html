@@ -81,8 +81,11 @@
                             <td *ngIf="delivery.delivery_status == 'Ocupado'"> <span class="badge badge-pill badge-info"> {{ delivery.delivery_status }}</span></td>
                             <td *ngIf="delivery.delivery_status == 'Fuera de servicio'"> <span class="badge badge-pill badge-warning"> {{ delivery.delivery_status }}</span></td>
                             <td class="text-center">
-                                <button class="btn btn-remove" (click)="desbloquear(delivery)">
+                                <button class="btn btn-lock" (click)="desbloquear(delivery)">
                                     <i class="ti-unlock"></i>
+                                </button>
+                                <button class="btn btn-remove" (click)="deleteDelivery(delivery.id, delivery.name)">
+                                    <i class="ti-trash"></i>
                                 </button>
                             </td>
                         </tr>

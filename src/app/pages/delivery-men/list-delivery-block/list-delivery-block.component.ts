@@ -23,7 +23,7 @@ export class ListDeliveryBlockComponent implements OnInit {
   statusFilter: boolean;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', ordering: '', status: '1, 2' };
+  params = { limit: 15, offset: 0, search: '', ordering: '', status: 2 };
   deliverys: Array<any> = [];
   loadingDelivery: boolean;
 
@@ -60,6 +60,31 @@ export class ListDeliveryBlockComponent implements OnInit {
 
 
 
+  deleteDelivery(id: number, nombre: string) {
+    Swal.fire({
+      title: 'Eliminar',
+      text: `Esta seguro de eliminar a ${nombre}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Eliminar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        this.deliverys.splice(1);
+        this.deliveryService.deleteDelivery(id)
+          .subscribe();
+        Swal.fire({
+          title: 'Eliminado',
+          type: 'success',
+          text: 'El vehiculo se elimino correctamente',
+          timer: 2000
+        });
+        this.getDelivery();
+      }
+    });
+
+  }
 
   searchBy(value: string) {
     this.params.search = value;

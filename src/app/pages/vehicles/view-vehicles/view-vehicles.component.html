@@ -102,6 +102,9 @@
                                 <button class="btn bt-edit" (click)="editarVehicle(vehicle)">
                                     <i class="ti-pencil-alt"></i>
                                 </button>
+                                <button class="btn bt-lock" (click)="deleteVehicle(vehicle.id, vehicle.alias)">
+                                    <i class="ti-lock fa-primary"></i>
+                                </button>
                                 <button class="btn bt-remove" (click)="deleteVehicle(vehicle.id, vehicle.alias)">
                                     <i class="ti-trash"></i>
                                 </button>
