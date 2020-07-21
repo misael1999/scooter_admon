@@ -28,7 +28,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   pageEvent: PageEvent;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status: 8, ordering: '' };
+  params = { limit: 15, offset: 0, search: '', order_status: '1', ordering: '' };
   orders: Array<any> = [];
   loadingOrders: boolean;
   liveData$: Subscription;
@@ -126,7 +126,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     });
 
     snackBarRef.onAction().subscribe(() => {
-      this.params = { limit: 15, offset: 0, search: '', order_status: 8, ordering: '' };
+      this.params = { limit: 15, offset: 0, search: '', order_status: '1', ordering: '' };
       this.getOrders();
     });
 

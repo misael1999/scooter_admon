@@ -3,79 +3,36 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Informacion de:<span class="text-info">  {{infoCustomer.customer.name}} </span></h1>
+        <h1 class="h3 mb-0 text-gray-800">Informacion de:<span class="text-info"> {{infoCustomer.customer.name}} </span>
+        </h1>
         <p> {{infoCustomer.customer.phone_number}} </p>
     </div>
+    
+    <!-- FILTROS DE FECHA  -->
+    <h5>Filtros:</h5>
 
-
-    <!-- Content Row -->
     <div class="row">
-
-        <div class="col-lg-4 mb-4">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Pedidos entregados</h6>
-                </div>
-                <div class="card-body">
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <mat-form-field autocomplete="off" class="example-full-width" appearance="fill">
+                <mat-label>Desde la fecha</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+              </mat-form-field>
         </div>
-
-
-        <!-- Project Card Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Pedidos entregados</h6>
-            </div>
-            <div class="card-body">
-                <div class="card" *ngFor="let detalle of infoCustomer.history_orders_delivered" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"> {{detalle.service}} </h5>
-                        <h6 class="card-subtitle mb-2 text-muted" *ngFor="let producto of detalle.details"> {{ producto.product_name }} </h6>
-
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <mat-form-field autocomplete="off" class="example-full-width" appearance="fill">
+                <mat-label>Hasta la fecha</mat-label>
+                <input matInput [matDatepicker]="picker2">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker2></mat-datepicker>
+              </mat-form-field>
         </div>
-
-
     </div>
+    <app-card-info [customer]="infoCustomer"></app-card-info>
 
-    <div class="col-lg-4 mb-4">
+    
+    <app-history-orders [customer]="infoCustomer"></app-history-orders>
 
-        <!-- Project Card Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Pedidos rechazados o cancelados</h6>
-            </div>
-            <div class="card-body">
-                <div class="card" *ngFor="let detalle of infoCustomer.history_orders_rejected" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"> {{detalle.service}} </h5>
-                        <h6 class="card-subtitle mb-2 text-muted" *ngFor="let producto of detalle.details"> {{ producto.product_name }} </h6>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 </div>

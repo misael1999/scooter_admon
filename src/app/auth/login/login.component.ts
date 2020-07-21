@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('access_token', data.access);
     localStorage.setItem('station_id', data.station.id);
     localStorage.setItem('refresh_token', data.refresh);
+    localStorage.setItem('information_is_complete', data.station.information_is_complete);
     localStorage.setItem('station', JSON.stringify(data.station));
   }
 

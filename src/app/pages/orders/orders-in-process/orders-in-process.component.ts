@@ -20,7 +20,7 @@ export class OrdersInProcessComponent implements OnInit {
  pageEvent: PageEvent;
 
  // Parametros para el paginado
- params = { limit: 15, offset: 0, search: '', order_status : '1,2,3,4' };
+ params = { limit: 15, offset: 0, search: '', in_process : true };
  orders: Array<any> = [];
  loadingOrders: boolean;
  liveData$: Subscription;

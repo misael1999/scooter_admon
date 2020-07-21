@@ -43,28 +43,28 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     {
       id: 1,
       text: 'General',
-      icon: 'ti-camera',
+      icon: 'fas fa-camera',
       component: 'div-general',
       form: null
     },
     {
       id: 2,
       text: 'Tarifas',
-      icon: 'ti-money',
+      icon: 'fas fa-dollar-sign',
       component: 'div-categories',
       form: this.addressForm
     },
     {
       id: 3,
       text: 'Dirección',
-      icon: 'ti-map',
+      icon: 'fas fa-map',
       component: 'div-map',
       form: null
     },
     {
       id: 4,
       text: 'Configuración',
-      icon: 'ti-settings',
+      icon: 'fas fa-cog',
       component: 'div-config',
       form: null
 
@@ -175,7 +175,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       suburb: [null, Validators.required],
       postal_code: [null, Validators.required],
       exterior_number: [null, Validators.required],
-      inside_number: [null, Validators.required],
+      inside_number: [null],
       references: [null]
     });
 
@@ -253,6 +253,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     this.loadingUpdateConfig = true;
     this.configService.updateInfo(this.stationConfig)
       .subscribe((data: any) => {
+        localStorage.setItem('information_is_complete', 'true');
         this.loadingUpdateConfig = false;
         this.router.navigate(['/dashboard']);
       }, (err) => {

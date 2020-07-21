@@ -1,0 +1,96 @@
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Project Card Example -->
+    <div class="col-lg-6 mb-4">
+
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Pedidos entregados</h6>
+            </div>
+            <div class="card-body overflow-card">
+                <div class="card shadow" *ngFor="let detail of customer.history_orders_delivered" style="width: 100%;">
+                    <div class="body-order">
+                        <div class="div-code">
+                            <span>{{detail.qr_code}}</span>
+                            <hr>
+                        </div>
+                        <div class="info-address">
+                            <span>De: {{detail.from_address | splitWord: 40}}</span>
+                            <span>A: {{detail.from_address | splitWord: 40}}</span>
+                        </div>
+
+                        <div class="order-details">
+                            <span>Descripcion</span>
+                            <p *ngIf="detail.service == 'Recolección'">
+                                {{detail.indications}}
+                            </p>
+                            <div *ngIf="detail.service == 'Compras'" class="list-detail">
+                                <span *ngFor="let product of detail.details">
+                                    - {{ product.product_name }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="info-service">
+                            <span style="color: orange;">{{detail.service}}</span>
+                            <span>${{detail.service_price | number}}</span>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6 mb-4">
+
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Pedidos rechazados o cancelados</h6>
+            </div>
+            <div class="card-body overflow-card">
+                <div class="no-found-data" *ngIf="customer.history_orders_rejected.length == 0">
+                    <app-no-found-data   >
+                    </app-no-found-data>
+                </div>
+                <div class="card" *ngFor="let detail of customer.history_orders_rejected" style="width: 100%;">
+                    <div class="body-order">
+                        <div class="div-code">
+                            <span>{{detail.qr_code}}</span>
+                            <hr>
+                        </div>
+                        <div class="info-address">
+                            <span>De: {{detail.from_address | splitWord: 70}}</span>
+                            <span>A: {{detail.from_address | splitWord: 70}}</span>
+                        </div>
+
+                        <div class="order-details">
+                            <span>Razón: {{detail.reason_rejection}}</span>
+                            <span>Descripcion</span>
+                            <p *ngIf="detail.service == 'Recolección'">
+                                {{detail.indications}}
+                            </p>
+                            <div *ngIf="detail.service == 'Compras'" class="list-detail">
+                                <span *ngFor="let product of detail.details">
+                                    - {{ product.product_name }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="info-service">
+                            <span style="color: orange;">{{detail.service}}</span>
+                            <span>${{detail.service_price | number}}</span>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
