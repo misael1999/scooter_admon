@@ -11,25 +11,50 @@
     <!-- Content Row -->
     <div class="row">
 
+
+        <!-- Card with table Information Client -->
         <div class="col-lg-4 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Pedidos entregados</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Datos del Cliente</h6>
                 </div>
                 <div class="card-body">
 
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Datos</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td> Nombre </td>
+                                <td> {{infoCustomer.customer.name}} </td>
+                            </tr>
+                            <tr>
+                                <td> Telefono </td>
+                                <td> {{infoCustomer.customer.phone_number}} </td>
+                            </tr>
+                            <tr>
+                                <td> Reputacion </td>
+                                <td> {{infoCustomer.customer.reputation}} </td>
+                            </tr>
+                            <tr>
+                                <td> Primer pedido </td>
+                                <td> {{infoCustomer.first_order_date | date}} </td>
+                            </tr>
+                            <tr>
+                                <td> Ultimo pedido </td>
+                                <td> {{infoCustomer.last_order_date | date}} </td>
+                            </tr>
+                            <tr>
+                                <td>Total de pedidos </td>
+                                <td> {{infoCustomer.total_orders}} </td>
+                            </tr>
+                            <tr>
+                                <td> Pedidos Cancelados</td>
+                                <td> {{infoCustomer.total_orders_cancelled}} </td>
                             </tr>
 
                         </tbody>
@@ -40,17 +65,37 @@
         </div>
 
 
-        <!-- Project Card Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Pedidos entregados</h6>
+        <!-- Card List Orders -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-secondary">Pedidos Entregados</h6>
+                </div>
+                <div class="card-body">
+                    <div class="card" *ngFor="let detalle of infoCustomer.history_orders_delivered" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{detalle.service}} </h5>
+                            <h6 class="card-subtitle mb-2 text-muted" *ngFor="let producto of detalle.details"> {{ producto.product_name }} </h6>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="card" *ngFor="let detalle of infoCustomer.history_orders_delivered" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"> {{detalle.service}} </h5>
-                        <h6 class="card-subtitle mb-2 text-muted" *ngFor="let producto of detalle.details"> {{ producto.product_name }} </h6>
+        </div>
 
+
+        <!-- Card Orders Cancelled -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-success">Pedidos Rechazados o Cancelados</h6>
+                </div>
+                <div class="card-body">
+                    <div class="card" *ngFor="let detalle of infoCustomer.history_orders_rejected" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{detalle.service}} </h5>
+                            <h6 class="card-subtitle mb-2 text-muted" *ngFor="let producto of detalle.details"> {{ producto.product_name }} </h6>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,24 +103,5 @@
 
 
     </div>
-
-    <div class="col-lg-4 mb-4">
-
-        <!-- Project Card Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Pedidos rechazados o cancelados</h6>
-            </div>
-            <div class="card-body">
-                <div class="card" *ngFor="let detalle of infoCustomer.history_orders_rejected" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"> {{detalle.service}} </h5>
-                        <h6 class="card-subtitle mb-2 text-muted" *ngFor="let producto of detalle.details"> {{ producto.product_name }} </h6>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <!-- Fin Content Row -->
 </div>
