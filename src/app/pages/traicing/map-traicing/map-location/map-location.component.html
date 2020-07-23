@@ -1,12 +1,9 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="true">
+<agm-map [streetViewControl]="false" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="true">
     <agm-marker *ngFor="let item of markerList" [latitude]=" item ['lat'] " [longitude]=" item ['lng'] " [label]=" item ['label'] ">
         <agm-info-window [disableAutoPan]="false" #infoWindow>
 
             <div>
-                lorem
-            </div>
-            <div>
-                <a class="btn btn-attention pull-right">Daje <i class="fa fa-angle-double-right"></i></a>
+              <span>{{item.name}}</span>
             </div>
 
         </agm-info-window>

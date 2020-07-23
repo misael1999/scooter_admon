@@ -21,7 +21,7 @@ export class DeliveredOrdersComponent implements OnInit {
   pageEvent: PageEvent;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status: '5' };
+  params = { limit: 15, offset: 0, search: '', order_status: '6' };
   orders: Array<any> = [];
   loadingOrders: boolean;
   liveData$: Subscription;

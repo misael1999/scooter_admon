@@ -11,6 +11,7 @@ import { RejectOrderDialogComponent } from './new-orders/reject-order-dialog/rej
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.component';
 import { SharedModule } from '../../shared/shared.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 
@@ -28,7 +29,8 @@ import { SharedModule } from '../../shared/shared.module';
     OrdersRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    PipesModule
   ],
   entryComponents: [
     AssignDeliveryDialogComponent,

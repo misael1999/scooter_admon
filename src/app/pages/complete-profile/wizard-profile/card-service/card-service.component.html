@@ -3,11 +3,10 @@
      [value]="service.id" class="c-card" type="checkbox" id="{{index}}">
     <div class="card-content">
         <label for="{{index}}">
-                <i class="ti {{service.slug_name == 'purchases'? 'ti-shopping-cart-full': 'ti-truck'}} icon"></i>
+                <i class="ti {{service.slug_name == 'purchase'? 'fas fa-cart-plus': 'fas fa-truck-moving'}} icon"></i>
                 <div class="service-name">
                     <span>{{service.name}}</span>
                 </div>
         </label>
-
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 
 // just an interface for type safety.
@@ -7,6 +7,7 @@ export interface Marker {
   lng: number;
   label?: string;
   draggable: boolean;
+  name?: string
 }
 
 @Component({
@@ -14,13 +15,14 @@ export interface Marker {
   templateUrl: './map-location.component.html',
   styleUrls: ['./map-location.component.scss']
 })
-export class MapLocationComponent implements OnInit {
+export class MapLocationComponent implements OnInit, OnChanges {
 
-@Input() markerList;
+  @Input() markerList;
+  @Input() coordinates;
 
 
-   // google maps zoom level
-   zoom = 17;
+  // google maps zoom level
+  zoom = 14;
   //  currentMarker: Marker = {
   //    lat: 18.462859841665864,
   //    lng: -97.39279966871719,
@@ -28,14 +30,22 @@ export class MapLocationComponent implements OnInit {
   //  };
 
 
-   // initial center position for the map
-   lat = 18.462859841665864;
-   lng = -97.39279966871719;
+  // initial center position for the map
+  lat = 18.462859841665864;
+  lng = -97.39279966871719;
 
   constructor() { }
 
   ngOnInit(): void {
     console.log(this.markerList);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.coordinates) {
+      this.lat = this.coordinates.lat;
+      this.lng = this.coordinates.lng;
+      this.zoom = 17;
+    }
   }
 
 }

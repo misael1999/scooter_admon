@@ -65,14 +65,14 @@
                         <tr>
                             <!--                             <th>Noº pedido</th>
  -->
+                            <th>Servicio</th>
+                            <th>Fecha del pedido</th>
                             <th>Cliente</th>
                             <th>Repartidor</th>
                             <th>Pedido</th>
-                            <th>Servicio</th>
-                            <th>Lugar de origen o compra</th>
+                            <th>Lugar de compra o recolección</th>
                             <th>Lugar de entrega</th>
                             <th>Precio del servicio</th>
-                            <th>Fecha del pedido</th>
                             <th>Fecha de entrega</th>
                             <th>Estatus</th>
                             <th>Acciones</th>
@@ -81,18 +81,29 @@
                     <tbody>
                         <tr *ngFor="let order of orders">
                             <!--                             <td>{{order.id}}</td>
- -->
-                            <td>{{order.customer}}</td>
+                            -->
+                            <td>
+                                <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
+                                'badge-warning': order.service == 'Recolección' }">{{order.service}}</span></td>
+                            <td>
+                                {{order.order_date | date:'medium'}}
+                            </td>
+                            <td>{{order.customer.name}}</td>
                             <td>
                                 <span *ngIf="order.delivery_man">{{order.delivery_man.name}}</span>
                                 <span *ngIf="!order.delivery_man">Sin repartidor</span>
                             </td>
-                            <td>
-                                <ul *ngFor="let detail of order.details">
-                                    <li>{{detail.product_name}}</li>
-                                </ul>
+                            <td *ngIf="order.service == 'Compras'">
+                                <div class="products-details">
+                                    <span *ngFor="let detail of order.details">
+                                        - {{detail.product_name | splitWord: 20}}
+                                    </span>
+                                </div>
+
                             </td>
-                            <td>{{order.service}}</td>
+                            <td *ngIf="order.service == 'Recolección'">
+                                <span>{{order.indications}}</span>
+                            </td>
                             <td>
                                 <div class="address" *ngIf="order.service != 'Compras'">
                                     <p>Calle: {{order.from_address.street}}</p>
@@ -106,10 +117,7 @@
                                 <p>Calle: {{order.to_address.street}}</p>
                                 <p>Colonia: {{order.to_address.suburb}} </p>
                             </td>
-                            <td>${{order.service_price}}</td>
-                            <td>
-                                {{order.order_date | date:'medium'}}
-                            </td>
+                            <td>${{order.service_price | number : '1.2-2'}}</td>
                             <td>
                                 {{order.date_delivered_order | date:'medium'}}
                             </td>
