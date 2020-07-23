@@ -9,12 +9,12 @@
     <div class="row">
 
         <div class="col-md-3 content-list">
-            <app-list-delivery (markers)="getMarkers($event)"></app-list-delivery>
+            <app-list-delivery (markers)="getMarkers($event)" (location)="navigationToLocation($event)"></app-list-delivery>
         </div>
 
 
         <div class="col-md-9">
-            <app-map-location [markerList]='markerList' *ngIf="markerList"></app-map-location>
+            <app-map-location [markerList]='markerList' [coordinates]="coordinates" *ngIf="markerList"></app-map-location>
         </div>
 
 
