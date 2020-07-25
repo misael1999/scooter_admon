@@ -4,6 +4,7 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddVehiclesComponent } from '../add-vehicles/add-vehicles.component';
 import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-vehicles-block',
@@ -25,7 +26,8 @@ export class ViewVehiclesBlockComponent implements OnInit {
   loadingVehicles: boolean;
   vehicles: Array<any> = [];
 
-  constructor(private vehiculeService: VehiclesService, private dialog: MatDialog) { }
+  constructor(private vehiculeService: VehiclesService,
+     private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getVehicles();
@@ -55,16 +57,39 @@ export class ViewVehiclesBlockComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
-        // this.vehiculeService.editVehicle()
+        this.vehiculeService.unLockVehicle(vehicle.id)
+          .subscribe(data => {
+            this.showMessageSuccess("Vehiculo activado");
+            this.getVehicles();
+          }, error => {
+            this.showMessageError(error.errors.message);
+          });
 
       }
     });
 
   }
+
+  // ==========================================
+
+  showMessageSuccess(message) {
+    this.snackBar.open(message, 'Aceptar', {
+      duration: 3000,
+      panelClass: ['main-snackbar']
+    });
+  }
+
+  showMessageError(message) {
+    this.snackBar.open(message, 'Aceptar', {
+      duration: 3000,
+      panelClass: ['error-snackbar']
+    });
+  }
+
   deleteVehicle(id: number, alias) {
     Swal.fire({
       title: 'Eliminar',
-      text: `Esta seguro de eliminar a ${alias}`,
+      text: `Esta seguro de bloquear a ${alias}`,
       type: 'warning',
       showConfirmButton: true,
       confirmButtonText: 'Eliminar',
@@ -73,16 +98,18 @@ export class ViewVehiclesBlockComponent implements OnInit {
     }).then(resp => {
       if (resp.value) {
         this.vehiculeService.deleteVehicle(id)
-          .subscribe();
-        this.vehicles.splice(1);
-        Swal.fire({
-          title: 'Eliminado',
-          type: 'success',
-          text: 'El vehiculo se elimino correctamente',
-          timer: 2000
-        });
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Eliminado',
+              type: 'success',
+              text: 'El vehiculo se elimino correctamente',
+              timer: 2000
+            });
+            this.getVehicles();
+
+          });
+
       }
-      this.getVehicles();
     });
   }
 

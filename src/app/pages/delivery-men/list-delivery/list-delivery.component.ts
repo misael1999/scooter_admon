@@ -78,25 +78,27 @@ export class ListDeliveryComponent implements OnInit {
 
   deleteDelivery(id: number, nombre: string) {
     Swal.fire({
-      title: 'Eliminar',
-      text: `Esta seguro de eliminar a ${nombre}`,
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a ${nombre}`,
       type: 'warning',
       showConfirmButton: true,
-      confirmButtonText: 'Eliminar',
+      confirmButtonText: 'Bloquear',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
-        this.deliverys.splice(1);
+        // this.deliverys.splice(1);
         this.deliveryService.deleteDelivery(id)
-          .subscribe();
-        Swal.fire({
-          title: 'Eliminado',
-          type: 'success',
-          text: 'El vehiculo se elimino correctamente',
-          timer: 2000
-        });
-        this.getDelivery();
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Bloqueado',
+              type: 'success',
+              text: 'El repartidor ha sido bloqueado',
+              timer: 2000
+            });
+            this.getDelivery();
+          });
+
       }
     });
 

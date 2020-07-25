@@ -4,7 +4,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddVehiclesComponent } from '../add-vehicles/add-vehicles.component';
 import Swal from 'sweetalert2';
-import { ThemePalette } from '@angular/material/core';
 
 
 
@@ -22,7 +21,7 @@ export class ViewVehiclesComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', ordering: '', estatus: 1 };
+  params = { limit: 25, offset: 0, search: '', ordering: '', status: 1 };
 
   loadingVehicles: boolean;
   vehicles: Array<any> = [];
@@ -76,26 +75,26 @@ export class ViewVehiclesComponent implements OnInit {
 
   deleteVehicle(id: number, alias) {
     Swal.fire({
-      title: 'Eliminar',
-      text: `Esta seguro de eliminar a ${alias}`,
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a ${alias}`,
       type: 'warning',
       showConfirmButton: true,
-      confirmButtonText: 'Eliminar',
+      confirmButtonText: 'Bloquear',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
         this.vehiculeService.deleteVehicle(id)
-          .subscribe();
-        this.vehicles.splice(1);
-        Swal.fire({
-          title: 'Eliminado',
-          type: 'success',
-          text: 'El vehiculo se elimino correctamente',
-          timer: 2000
-        });
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Bloqueado',
+              type: 'success',
+              text: 'El vehiculo se bloqueado correctamente',
+              timer: 2000
+            });
+            this.getVehicles();
+          });
       }
-      this.getVehicles();
     });
   }
 

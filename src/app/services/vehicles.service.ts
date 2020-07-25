@@ -39,6 +39,12 @@ export class VehiclesService {
     return this.httpClient.patch(url, vehicle);
   }
 
+  unLockVehicle(idVehicle: number) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/${idVehicle}/unlock/`;
+    return this.httpClient.patch(url, {status: 1});
+  }
+
   deleteVehicle(idVehicle: number) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/vehicles/${idVehicle}/`;

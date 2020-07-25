@@ -9,6 +9,10 @@
                 <h6 class="m-0 font-weight-bold text-primary">Pedidos entregados</h6>
             </div>
             <div class="card-body overflow-card">
+                <div class="no-found-data" *ngIf="customer.history_orders_delivered.length == 0">
+                    <app-no-found-data  >
+                    </app-no-found-data>
+                </div>
                 <div class="card shadow" *ngFor="let detail of customer.history_orders_delivered" style="width: 100%;">
                     <div class="body-order">
                         <div class="div-code">
@@ -54,7 +58,7 @@
             </div>
             <div class="card-body overflow-card">
                 <div class="no-found-data" *ngIf="customer.history_orders_rejected.length == 0">
-                    <app-no-found-data   >
+                    <app-no-found-data  >
                     </app-no-found-data>
                 </div>
                 <div class="card" *ngFor="let detail of customer.history_orders_rejected" style="width: 100%;">

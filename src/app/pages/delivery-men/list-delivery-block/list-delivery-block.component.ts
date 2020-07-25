@@ -4,6 +4,7 @@ import { DeliveryMenService } from 'src/app/services/delivery-men.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
 import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list-delivery-block',
@@ -27,21 +28,23 @@ export class ListDeliveryBlockComponent implements OnInit {
   deliverys: Array<any> = [];
   loadingDelivery: boolean;
 
-  constructor(private deliveryService: DeliveryMenService, private dialog: MatDialog) { }
+  constructor(private deliveryService: DeliveryMenService,
+     private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getDelivery();
   }
 
-
-
   desbloquear(delivery) {
-
+    this.deliveryService.unLockDeliveryMan(delivery.id)
+      .subscribe((data) => {
+        console.log(data);
+        this.showMessageSuccess("Repartidor activado");
+        this.getDelivery();
+      }, error => {
+        this.showMessageError(error.errors.message);
+      });
   }
-
-
-
-
 
   getDelivery() {
     this.loadingDelivery = true;
@@ -107,5 +110,18 @@ export class ListDeliveryBlockComponent implements OnInit {
   }
   // ==========================================
 
+  showMessageSuccess(message) {
+    this.snackBar.open(message, 'Aceptar', {
+      duration: 3000,
+      panelClass: ['main-snackbar']
+    });
+  }
+
+  showMessageError(message) {
+    this.snackBar.open(message, 'Aceptar', {
+      duration: 3000,
+      panelClass: ['error-snackbar']
+    });
+  }
 
 }
