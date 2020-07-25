@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: any) => {
         this.station = data;
         console.log('La informacion', this.station);
+        this.profileService.station = this.station;
       }, error => {
         console.log(error);
         // return;

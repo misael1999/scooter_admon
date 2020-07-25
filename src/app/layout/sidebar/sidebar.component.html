@@ -12,8 +12,8 @@
 
 
     <!-- Nav Item - Dashboard Collapso Menu -->
-    <li class="nav-item cursor">
-        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+    <li class="nav-item cursor" routerLink="/dashboard" routerLinkActive="active">
+        <a class="nav-link">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -21,8 +21,8 @@
 
 
     <!-- Nav Item - Statistics Collapso Menu -->
-    <li class="nav-item">
-        <a class="nav-link" routerLink="/statistics/orders" routerLinkActive="active">
+    <li class="nav-item" routerLink="/statistics/orders" routerLinkActive="active">
+        <a class="nav-link">
             <i class="fas fa-fw fa-chart-line"></i>
             <span>Estadisticas </span></a>
     </li>
@@ -56,8 +56,8 @@
 
 
     <!-- Nav Item - Vehicles Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/vehicles/active">
+    <li class="nav-item" routerLink="/vehicles/active" routerLinkActive="active">
+        <a class="nav-link collapsed" >
             <i class="fas fa-motorcycle"></i>
             <span>Vehiculos</span>
         </a>
@@ -66,8 +66,8 @@
 
 
     <!-- Nav Item - Delivery Collapse Menu -->
-    <li class="nav-item active">
-        <a class="nav-link collapsed" routerLink="/delivery/active">
+    <li class="nav-item" routerLink="/delivery/active" routerLinkActive="active" >
+        <a class="nav-link collapsed">
             <i class="fas fa-fw fa-car"></i>
             <span>Repartidores</span>
         </a>
@@ -76,8 +76,8 @@
 
 
     <!-- Nav Item - Clients Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/client">
+    <li class="nav-item" routerLink="/client" routerLinkActive="active">
+        <a class="nav-link collapsed">
             <i class="fas fa-fw fa-users"></i>
             <span>Clientes</span>
         </a>
@@ -86,8 +86,8 @@
 
 
     <!-- Nav Item - Map the traicing Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/traicing">
+    <li class="nav-item" routerLink="/traicing" routerLinkActive="active">
+        <a class="nav-link collapsed">
             <i class="fas fa-fw fa-map"></i>
             <span>Mapa de seguimiento</span>
         </a>
@@ -103,10 +103,17 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/reports">
+    <li class="nav-item" routerLink="/reports" routerLinkActive="active">
+        <a class="nav-link collapsed">
             <i class="fas fa-fw fa-dollar-sign"></i>
             <span>Reportes</span>
+        </a>
+
+    </li>
+    <li class="nav-item" routerLink="/profile" routerLinkActive="active">
+        <a class="nav-link collapsed">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Configuración</span>
         </a>
 
     </li>

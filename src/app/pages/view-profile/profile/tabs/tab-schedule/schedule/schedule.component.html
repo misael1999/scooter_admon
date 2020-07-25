@@ -1,0 +1,8 @@
+<div class="schedule">
+    <mat-checkbox (change)="selectCheckbox($event)" [(ngModel)]="schedule.checked">{{schedule.name}}</mat-checkbox>
+    <div class="inputs" *ngIf="schedule.checked">
+        <input readonly (click)="openOpeningHourPicker()" class="form-control ml-2" placeholder="Apertura" [value]="schedule.from_hour || openingHour" />
+        <span>A</span>
+        <input readonly (click)="openClosedHourPicker()" class="form-control" placeholder="cerrado" [value]="schedule.to_hour || closedHour" />
+    </div>
+</div>

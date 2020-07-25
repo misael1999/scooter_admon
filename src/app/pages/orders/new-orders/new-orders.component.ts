@@ -66,13 +66,14 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     this.getOrders();
   }
 
-  openDialogAssignDelivery(orderId) {
+  openDialogAssignDelivery(order) {
+    console.log(order);
     const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
       disableClose: true,
       width: '60%',
       minHeight: '500px',
       minWidth: '350px',
-      data: { orderId }
+      data: { orderId: order.id, typeService: order.service_id}
     });
 
     dialogref.afterClosed().subscribe(data => {

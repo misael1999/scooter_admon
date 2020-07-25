@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-lg-6 col-step-image">
+
+        <p class="title-component">Cambiar imagen de tu central</p>
+        <!-- Image ========= -->
+
+        <div class="image-content">
+            <img *ngIf="!binaryString" [src]="station.picture" alt="">
+            <img *ngIf="binaryString" [src]="binaryString" alt="">
+
+        </div>
+
+
+        <div class="button-select-image">
+            <input (change)="onFileSelected($event)" #myInput type="file" name="file" id="file"
+                class="inputfile inputfile-1" />
+            <label for="file">
+                <span>Seleccionar imagen</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form px-3 mt-3">
+            <form [formGroup]="generalInfoForm">
+                <div class="form-group">
+                    <label>Número de teléfono *</label>
+                    <input formControlName="phone_number" type="text" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(generalInfoForm, 'phone_number'),
+                      'has-success valid': isFieldValid(generalInfoForm, 'phone_number')}">
+                    <!-- MESSAGES ERRORS  -->
+                    <div class="invalid-feedback-form" *ngIf="isFieldInvalid(generalInfoForm, 'phone_number')">
+                        <span *ngIf="isFieldHasError(generalInfoForm, 'phone_number','required')">Este campo es
+                            requerido</span>
+                    </div>
+                </div>
+                <!--   -->
+                <div class="form-group">
+                    <label>Persona de contacto *</label>
+                    <input formControlName="contact_person" type="text" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(generalInfoForm, 'contact_person'),
+                      'has-success valid': isFieldValid(generalInfoForm, 'contact_person')}">
+                    <!-- MESSAGES ERRORS  -->
+                    <div class="invalid-feedback-form" *ngIf="isFieldInvalid(generalInfoForm, 'contact_person')">
+                        <span *ngIf="isFieldHasError(generalInfoForm, 'contact_person','required')">Este campo es
+                            requerido</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="row mt-5 mb-3 mr-2">
+    <div class="col-lg-12 d-flex justify-content-end">
+        <div class="btns">
+            <button [disabled]="loadingSaveInfo || (!generalInfoForm.dirty && !changeImage)"  (click)="saveGeneralInfo()" style="color: white;" class="btn btn-primary">
+                <span *ngIf="!loadingSaveInfo">Guardar</span>
+                <div *ngIf="loadingSaveInfo" class="spinner-border text-warning" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

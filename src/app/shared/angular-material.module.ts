@@ -15,6 +15,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -34,7 +36,9 @@ const components = [
   MatDatepickerModule,
   MatSnackBarModule,
   MatNativeDateModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

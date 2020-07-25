@@ -1,0 +1,19 @@
+$main-color:              #FF724C !default;
+$font-weight-light:          300 !default;
+$card-black-color:          #252422 !default;
+
+
+.title-component {
+    font-size: 1.125em;
+    margin-top: 10px;
+    font-weight: $font-weight-light;
+    color: $card-black-color;
+    text-align: center;
+    font-family: 'aspira', 'Helvetica', Arial, sans-serif;
+  
+  }
+  
+agm-map {
+    height: 250px;
+  }
+  

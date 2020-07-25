@@ -1,0 +1,64 @@
+$main-color:              #FF724C !default;
+$font-weight-light:          300 !default;
+$card-black-color:          #252422 !default;
+
+
+.title-component {
+    font-size: 1.125em;
+    margin-top: 10px;
+    font-weight: $font-weight-light;
+    color: $card-black-color;
+    text-align: center;
+    font-family: 'aspira', 'Helvetica', Arial, sans-serif;
+  
+  }
+
+.col-step-image {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    // Div Image
+    .image-content {
+      margin-bottom: 10px;
+  
+      img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  
+    .inputfile {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+  
+    .inputfile+label {
+      width: auto;
+      padding: 5px 10px;
+      color: #ffffff;
+      background-color: $main-color;
+      /* 10px 20px */
+    }
+  
+    .inputfile:focus+label,
+    .inputfile.has-focus+label {
+      outline: 1px dotted #000;
+      outline: -webkit-focus-ring-color auto 5px;
+    }
+  
+  
+    .inputfile:focus+label,
+    .inputfile.has-focus+label,
+    .inputfile+label:hover {
+      cursor: pointer;
+    }
+  }
+  
+  

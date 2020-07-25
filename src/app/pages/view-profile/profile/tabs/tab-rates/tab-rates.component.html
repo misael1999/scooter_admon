@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-lg-12 d-flex justify-content-center">
+        <p class="title-component">¿Cuales son tus tarifas?</p>
+    </div>
+
+    <!-- Rate forms  -->
+    <form [formGroup]="ratesServicesForm">
+        <div class="row d-flex justify-content-around px-5">
+            <!-- ADD RATE  -->
+            <div formArrayName="services" *ngFor="let serviceForm of rateServiceFormData.controls; let i = index;"
+                class="col-lg-5 card p-3">
+                <p style="color: #ff9d09de;">Tarifa para {{(serviceForm.get('service_name').value) | lowercase}}
+                </p>
+                <div class="row" [formGroupName]="i">
+                    <!--   -->
+                    <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                            <label>Precio base</label>
+                            <input formControlName="base_rate_price" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'base_rate_price'),
+                'has-success valid': isFieldValid(serviceForm, 'base_rate_price')}" type="number">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'base_rate_price')">
+                                <span *ngIf="isFieldHasError(serviceForm, 'base_rate_price','required')">Este campo es
+                                    requerido</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--   -->
+                    <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                            <label>Desde el KM</label>
+                            <input readonly formControlName="from_kilometer" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'from_kilometer'),
+                'has-success valid': isFieldValid(serviceForm, 'from_kilometer')}" type="number"
+                                class="form-control-eco w-100">
+
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'from_kilometer')">
+                                <span *ngIf="isFieldHasError(serviceForm, 'from_kilometer','required')">Este campo es
+                                    requerido</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                            <label>Hasta el KM</label>
+                            <input formControlName="to_kilometer" type="number" class="form-control-eco w-100"
+                                [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'to_kilometer'),
+                'has-success valid': isFieldValid(serviceForm, 'to_kilometer')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'to_kilometer')">
+                                <span *ngIf="isFieldHasError(serviceForm, 'to_kilometer','required')">Este campo es
+                                    requerido</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--   -->
+                    <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                            <label>Precio por KM</label>
+                            <input formControlName="price_kilometer" type="number" class="form-control-eco w-100"
+                                class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'price_kilometer'),
+                'has-success valid': isFieldValid(serviceForm, 'price_kilometer')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'price_kilometer')">
+                                <span *ngIf="isFieldHasError(serviceForm, 'price_kilometer','required')">Este campo es
+                                    requerido</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--   -->
+
+                </div>
+                <!--   -->
+            </div>
+            <!-- END ADD RATE  -->
+        </div>
+
+    </form>
+
+</div>
+
+<div class="row mt-4 mb-2 px-5">
+    <div class="container d-flex justify-content-end">
+        <button [disabled]="loadingSaveInfo || !ratesServicesForm.dirty" (click)="saveRatesInfo()" style="color: white" class="btn btn-primary">
+            <span *ngIf="!loadingSaveInfo">Guardar</span>
+            <div *ngIf="loadingSaveInfo" class="spinner-border text-warning" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+        </button>
+    </div>
+</div>

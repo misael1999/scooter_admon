@@ -1,0 +1,128 @@
+<div class="row p-3">
+    <div class="col-lg-12">
+      <p class="title-component">Agrega la ubicación de tu central.</p>
+    </div>
+    <!-- FORM GROUP  -->
+    <div class="col-lg-7">
+      <form [formGroup]="addressForm">
+
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-1">
+            <div class="form-group">
+              <label>Calle *</label>
+              <input  formControlName="street" type="text" class="form-control-eco w-100"
+              [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'street'),
+                'has-success valid': isFieldValid(addressForm, 'street')}">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'street')">
+                  <span *ngIf="isFieldHasError(addressForm, 'street','required')">Este campo es
+                    requerido</span>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-sm-offset-1">
+            <div class="form-group">
+              <label>Colonia *</label>
+              <input formControlName="suburb" type="text" class="form-control-eco w-100"
+              [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'suburb'),
+                'has-success valid': isFieldValid(addressForm, 'suburb')}">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'suburb')">
+                  <span *ngIf="isFieldHasError(addressForm, 'suburb','required')">Este campo es
+                    requerido</span>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-sm-offset-1">
+            <div class="form-group">
+              <label>Código postal *</label>
+              <input formControlName="postal_code" type="numer" class="form-control-eco w-100"
+              [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'postal_code'),
+                'has-success valid': isFieldValid(addressForm, 'postal_code')}">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'postal_code')">
+                  <span *ngIf="isFieldHasError(addressForm, 'postal_code','required')">Este campo es
+                    requerido</span>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-sm-offset-1">
+            <div class="form-group">
+              <label>Numero ext</label>
+              <input formControlName="exterior_number" type="text" class="form-control-eco w-100"
+              [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'exterior_number'),
+                'has-success valid': isFieldValid(addressForm, 'exterior_number')}">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'exterior_number')">
+                  <span *ngIf="isFieldHasError(addressForm, 'exterior_number','required')">Este campo es
+                    requerido</span>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-sm-offset-1">
+            <div class="form-group">
+              <label>Numero int</label>
+              <input formControlName="inside_number" type="text" class="form-control-eco w-100"
+              [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'inside_number'),
+                'has-success valid': isFieldValid(addressForm, 'inside_number')}">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'inside_number')">
+                  <span *ngIf="isFieldHasError(addressForm, 'inside_number','required')">Este campo es
+                    requerido</span>
+                </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-6 col-sm-offset-1">
+            <div class="form-group">
+              <label>Referencias</label>
+              <input formControlName="references" type="text" class="form-control-eco w-100"
+              [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'references'),
+                'has-success valid': isFieldValid(addressForm, 'references')}">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'references')">
+                  <span *ngIf="isFieldHasError(addressForm, 'references','required')">Este campo es
+                    requerido</span>
+                </div>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+    <!-- MAP  -->
+    <div class="col-lg-5">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false"
+        [zoomControl]="true" (mapClick)="setMarkerMap($event)">
+        <agm-marker *ngIf="currentMarker" [latitude]="currentMarker.lat" [longitude]="currentMarker.lng" [label]="'C'">
+        </agm-marker>
+        <!-- <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
+          [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable"
+          (dragEnd)="markerDragEnd(m, $event)">
+
+          <agm-info-window>
+            <strong>InfoWindow content</strong>
+          </agm-info-window>
+
+        </agm-marker> -->
+
+      </agm-map>
+    </div>
+
+    <div class="col-lg-12 d-flex justify-content-end">
+        <button [disabled]="loadingSaveInfo || (!addressForm.dirty && !isChangeAddress)" (click)="saveAddressInfo()" style="color: white;" class="btn btn-primary">
+          <span *ngIf="!loadingSaveInfo">Guardar</span>
+            <div *ngIf="loadingSaveInfo" class="spinner-border text-warning" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+        </button>
+    </div>
+
+  </div>

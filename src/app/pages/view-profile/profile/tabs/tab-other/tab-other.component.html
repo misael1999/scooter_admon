@@ -1,0 +1,41 @@
+<!-- SWITCHS  -->
+<div class="row d-flex align-items-center flex-column p-3">
+  <div class="col-lg-6 col-switches my-4">
+    <!-- <label>Mas opciones</label> -->
+    <ul class="list-group">
+      <li class="list-group-item">
+
+        <div class="option">
+          <div class="text">
+            Asignar repartidor manualmente
+          </div>
+          <mat-slide-toggle (change)="changeSlide($event)" [checked]="assignDeliveryManually"></mat-slide-toggle>
+        </div>
+
+      </li>
+
+      <li class="list-group-item">
+
+        <div class="option">
+          <div class="text">
+            Permitir cancelaciones
+          </div>
+          <mat-slide-toggle (change)="changeSlideAllow($event)" [checked]="allowCancellations"></mat-slide-toggle>
+        </div>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div class="col-lg-12 d-flex justify-content-end">
+    <button [disabled]="loadingSaveInfo || !isChangeConfig" (click)="saveConfigInfo()" style="color: white;" class="btn btn-primary">
+      <span *ngIf="!loadingSaveInfo">Guardar</span>
+      <div *ngIf="loadingSaveInfo" class="spinner-border text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </button>
+  </div>
+
+</div>

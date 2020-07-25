@@ -20,11 +20,11 @@ export class RejectOrderDialogComponent implements OnInit {
   loadingSave: boolean;
 
   constructor(public dialogRef: MatDialogRef<RejectOrderDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData,
-              private orderService: OrdersService, private snackBar: MatSnackBar,
-              private formBuilder: FormBuilder) {
-                this.orderId = data.orderId;
-    }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private orderService: OrdersService, private snackBar: MatSnackBar,
+    private formBuilder: FormBuilder) {
+    this.orderId = data.orderId;
+  }
 
   ngOnInit(): void {
     this.buildRejectForm();
@@ -76,12 +76,14 @@ export class RejectOrderDialogComponent implements OnInit {
   showMessageSuccess(message) {
     this.snackBar.open(message, 'Aceptar', {
       duration: 3000,
+      panelClass: ['main-snackbar']
     });
   }
 
   showMessageError(message) {
     this.snackBar.open(message, 'Aceptar', {
       duration: 3000,
+      panelClass: ['error-snackbar']
     });
   }
 

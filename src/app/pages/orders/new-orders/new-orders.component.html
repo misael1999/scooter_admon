@@ -90,21 +90,19 @@
 
                             </td>
                             <td *ngIf="order.service == 'Recolección'">
-                                <span>{{order.indications}}</span>
+                                <span>{{order.indications | splitWord: 100}}</span>
                             </td>
                             <td>{{order.service}}</td>
                             <td>
                                 <div class="address" *ngIf="order.service != 'Compras'">
-                                    <p>Calle: {{order.from_address.street}}</p>
-                                    <p>Colonia: {{order.from_address.suburb}} </p>
+                                    {{order.from_address.full_address}}
                                 </div>
                                 <div class="place" *ngIf="order.service === 'Compras'">
                                     <p>{{order.from_address.alias}}</p>
                                 </div>
                             </td>
                             <td>
-                                <p>Calle: {{order.to_address.street}}</p>
-                                <p>Colonia: {{order.to_address.suburb}} </p>
+                                {{order.to_address.full_address}}
                             </td>
                             <td>${{order.service_price | number : '1.2-2'}}</td>
                             <td>
@@ -114,7 +112,7 @@
                                 {{order.order_status.name}}
                             </td>
                             <td>
-                                <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
+                                <button (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
                                 <br>
                                 <br>
                                 <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>

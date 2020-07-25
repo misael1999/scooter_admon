@@ -3,6 +3,7 @@ export class UpdateInfoStationModel {
     constructor(
         public general?: General,
         public config?: Config,
+        public schedules?: Array<Schedule>,
         public services?: Array<Service>,
         public address?: Address
     ) { }
@@ -37,7 +38,6 @@ interface Config {
     assign_delivery_manually: boolean;
     allow_cancellations: boolean;
     cancellation_policies: string;
-    schedules: Array<Schedule>;
 }
 
 interface General {

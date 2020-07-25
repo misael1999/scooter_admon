@@ -346,7 +346,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       return false;
     }
     this.stationConfig.address = {...this.addressForm.value,
-       point: {lat: this.currentMarker.lat, lng: this.currentMarker.lat}};
+       point: {lat: this.currentMarker.lat, lng: this.currentMarker.lng}};
     return true;
   }
 
@@ -375,12 +375,11 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     this.stationConfig.config = {
       allow_cancellations: this.allowCancellations,
       assign_delivery_manually: this.assignDeliveryManually,
-      schedules: this.scheduleSelected,
-      cancellation_policies: 'Sin politicas prro'
+      cancellation_policies: 'Sin politicas'
     };
 
-    console.log('AQUIIII');
-    console.log(this.stationConfig);
+    this.stationConfig.schedules = this.scheduleSelected;
+
 
     return true;
   }
