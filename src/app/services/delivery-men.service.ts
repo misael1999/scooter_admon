@@ -21,6 +21,12 @@ export class DeliveryMenService {
     return this.httpClient.get(url, {params});
   }
 
+  unLockDeliveryMan(idDelivery) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/`;
+    return this.httpClient.patch(url, {status_id: 1});
+  }
+
   createDelevery(delivery: any) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/`;
