@@ -16,10 +16,10 @@
                 <div class="col-lg-3">
                     <select name="" id="" class="form-control select-form" (change)="ordenamiento($event.target.value)">
                         <option>Ordenar por:</option>
-                        <option value="customer_name">Nombre</option>
-                        <option value="customer_reputation">Reputacion</option>
-                        <option value="total_orders">Total de ordenes</option>
-                        <option value="total_orders_cancelled">Ordenes canceladas</option>
+                        <option value="-customer_name">Nombre</option>
+                        <option value="-customer_reputation">Reputacion</option>
+                        <option value="-total_orders">Total de ordenes</option>
+                        <option value="-total_orders_cancelled">Ordenes canceladas</option>
                     </select>
                 </div>
 
@@ -33,7 +33,7 @@
                         <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
-                                <i class="ti ti-search"></i>
+                                <i class="fas fa-search"></i>
                             </span>
                         </div>
                     </div>
@@ -87,18 +87,18 @@
                         <tr *ngFor="let client of clients ">
                             <td> {{ client.customer.name }}</td>
                             <td> 2384080578 </td>
-                            <td> 1 </td>
+                            <td> {{client.total_orders}} </td>
                             <td> {{ client.total_orders_cancelled }} </td>
                             <td> {{ client.first_order_date | date }} </td>
                             <td> {{ client.last_order_date | date }} </td>
                             <td class="text-center">
                                 <button class="btn btn-mas" [routerLink]="['/client/info',client.id]">
-                                    <i class="ti-eye"></i>
+                                    <i class="fas fa-eye"></i>
                                 </button>
 
                                 <!--                     
                                 <button class="btn btn-block">
-                                    <i class="ti-lock"></i>
+                                    <i class="fas fa-lock"></i>
                                 </button> -->
 
                             </td>

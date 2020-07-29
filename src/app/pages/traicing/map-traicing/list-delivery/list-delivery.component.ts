@@ -19,7 +19,7 @@ export class ListDeliveryComponent implements OnInit {
   }
   getDelivery() {
     // this.loadingDelivery = true;
-    this.deliveryService.getDeliverys()
+    this.deliveryService.getDeliverys({status: 1})
       .subscribe((data: any) => {
         // this.deliverys = data.results;
         this.getCoordinates(data.results);

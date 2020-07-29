@@ -32,7 +32,7 @@
 .ti-user:before {
 	content: "\e602";
 }
-.ti-unlock:before {
+.fas fa-unlock-alt:before {
 	content: "\e603";
 }
 .ti-unlink:before {
@@ -110,7 +110,7 @@
 .ti-pencil:before {
 	content: "\e61c";
 }
-.ti-pencil-alt:before {
+.fas fa-pencil-alt:before {
 	content: "\e61d";
 }
 .ti-paint-roller:before {
@@ -152,7 +152,7 @@
 .ti-arrow-down:before {
 	content: "\e62a";
 }
-.ti-lock:before {
+.fas fa-lock:before {
 	content: "\e62b";
 }
 .ti-location-arrow:before {
@@ -206,7 +206,7 @@
 .ti-flag-alt-2:before {
 	content: "\e63c";
 }
-.ti-eye:before {
+.fas fa-eye:before {
 	content: "\e63d";
 }
 .ti-export:before {
@@ -692,7 +692,7 @@
 .ti-pin-alt:before {
 	content: "\e6de";
 }
-.ti-pencil-alt2:before {
+.fas fa-pencil-alt2:before {
 	content: "\e6df";
 }
 .ti-palette:before {

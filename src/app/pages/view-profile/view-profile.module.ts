@@ -13,6 +13,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { ScheduleProfileComponent } from './profile/tabs/tab-schedule/schedule/schedule.component';
+import { TabPromotionComponent } from './profile/tabs/tab-promotion/tab-promotion.component';
+import { SchedulePromotionComponent } from './profile/tabs/tab-promotion/schedule-promotion/schedule-promotion.component';
 
 
 
@@ -25,7 +27,9 @@ import { ScheduleProfileComponent } from './profile/tabs/tab-schedule/schedule/s
     TabAddressComponent,
     TabScheduleComponent,
     TabOtherComponent,
-    ScheduleProfileComponent
+    ScheduleProfileComponent,
+    TabPromotionComponent,
+    SchedulePromotionComponent
   ],
   imports: [
     CommonModule,

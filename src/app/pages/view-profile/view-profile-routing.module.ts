@@ -6,6 +6,7 @@ import { TabRatesComponent } from './profile/tabs/tab-rates/tab-rates.component'
 import { TabAddressComponent } from './profile/tabs/tab-address/tab-address.component';
 import { TabScheduleComponent } from './profile/tabs/tab-schedule/tab-schedule.component';
 import { TabOtherComponent } from './profile/tabs/tab-other/tab-other.component';
+import { TabPromotionComponent } from './profile/tabs/tab-promotion/tab-promotion.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path: 'address', component: TabAddressComponent},
       {path: 'schedule', component: TabScheduleComponent},
       {path: 'others', component: TabOtherComponent},
+      {path: 'promotions', component: TabPromotionComponent},
       {path: '', redirectTo: 'general'},
     ]
   },

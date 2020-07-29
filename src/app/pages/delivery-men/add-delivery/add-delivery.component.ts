@@ -44,7 +44,7 @@ export class AddDeliveryComponent implements OnInit {
 
   // Se obtienen los vehiculos para mostrarlos en el select
   getVehicles() {
-    this.vehicleService.getVehicles()
+    this.vehicleService.getVehicles({status: 1})
       .subscribe((data: any) => {
         this.vehicles = data.results;
       }, error => {
@@ -55,14 +55,14 @@ export class AddDeliveryComponent implements OnInit {
 
   // Agregamos un nuevo repartidor
   addDelivery() {
-    if (this.deliveryForm.invalid && this.adressForm.invalid) {
+    if (this.deliveryForm.invalid || this.adressForm.invalid) {
       this.deliveryForm.markAllAsTouched();
       this.adressForm.markAllAsTouched();
       return;
     }
     const delivery = this.deliveryForm.value;
     const deliveryAdress = this.adressForm.value;
-
+    delivery.address = deliveryAdress;
     if (this.delivery) {
       this.editDelivery(delivery, this.delivery.id);
     }
@@ -93,12 +93,12 @@ export class AddDeliveryComponent implements OnInit {
   }
   builAdressDeliveryForm() {
     this.adressForm = this.fb.group({
-      street: [null, Validators.required],
-      suburb: [null, Validators.required],
-      postal_code: [null, Validators.required],
-      exterior_number: [null, Validators.required],
-      inside_number: [null, Validators.required],
-      references: [null, Validators.required],
+      street: [null],
+      suburb: [null],
+      postal_code: [null],
+      exterior_number: [null],
+      inside_number: [null],
+      references: [null],
     });
   }
   // Fin
@@ -132,12 +132,12 @@ export class AddDeliveryComponent implements OnInit {
   builEditAdressDeliveryForm(delivery) {
     console.log(this.delivery.address);
     this.adressForm = this.fb.group({
-      street: [delivery.address.street, Validators.required],
-      suburb: [delivery.address.suburb, Validators.required],
-      postal_code: [delivery.address.postal_code, Validators.required],
-      exterior_number: [delivery.address.exterior_number, Validators.required],
-      inside_number: [delivery.address.inside_number, Validators.required],
-      references: [delivery.address.references, Validators.required],
+      street: [delivery.address.street],
+      suburb: [delivery.address.suburb],
+      postal_code: [delivery.address.postal_code],
+      exterior_number: [delivery.address.exterior_number],
+      inside_number: [delivery.address.inside_number],
+      references: [delivery.address.references],
     });
   }
 

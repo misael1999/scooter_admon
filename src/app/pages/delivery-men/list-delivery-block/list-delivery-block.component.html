@@ -28,7 +28,7 @@
                         <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
-                                <i class="ti ti-search"></i>
+                                <i class="fas fa-search"></i>
                             </span>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                             <td *ngIf="delivery.delivery_status == 'Fuera de servicio'"> <span class="badge badge-pill badge-warning"> {{ delivery.delivery_status }}</span></td>
                             <td class="text-center">
                                 <button class="btn btn-lock" (click)="desbloquear(delivery)">
-                                    <i class="ti-unlock"></i>
+                                    <i class="fas fa-unlock-alt"></i>
                                 </button>
             <!--                     <button class="btn btn-remove" (click)="deleteDelivery(delivery.id, delivery.name)">
                                     <i class="ti-trash"></i>

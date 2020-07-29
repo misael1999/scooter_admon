@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab-other',
@@ -17,13 +18,17 @@ export class TabOtherComponent implements OnInit {
   loadingSaveInfo = false;
   isChangeConfig;
 
+  otherForm: FormGroup;
 
-  constructor(private profileService: ProfileService, private snackBar: MatSnackBar) { }
+
+  constructor(private profileService: ProfileService,
+    private snackBar: MatSnackBar, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.station = this.profileService.station;
     this.assignDeliveryManually = this.station.assign_delivery_manually;
     this.allowCancellations = this.station.allow_cancellations;
+    this.buildOtherForm();
   }
 
   async changeSlide(e) {
@@ -39,7 +44,7 @@ export class TabOtherComponent implements OnInit {
     this.isChangeConfig = true;
   }
 
-  async changeSlideAllow(e) { 
+  async changeSlideAllow(e) {
     this.allowCancellations = e.source.checked;
     if (e.source.checked == false) {
       // this.allowCancellations = true;
@@ -49,30 +54,41 @@ export class TabOtherComponent implements OnInit {
         return;
       }
 
-      
+
     }
     this.isChangeConfig = true;
   }
 
   saveConfigInfo() {
+    if (this.otherForm.invalid) {
+      return;
+    }
     this.loadingSaveInfo = true;
     const config = {
       allow_cancellations: this.allowCancellations,
       assign_delivery_manually: this.assignDeliveryManually,
-      cancellation_policies: 'Sin politicas'
+      cancellation_policies: 'Sin politicas',
+      quantity_safe_order: this.otherForm.get('quantity_safe_order').value
     };
-    this.profileService.updateStation({config})
-    .subscribe((data: any) => {
-      this.showMessageSuccess('Configuración actualizada correctamente');
-      this.loadingSaveInfo = false;
-      localStorage.setItem('station', JSON.stringify(data.data));
-      this.isChangeConfig = false;
-      // location.reload();
-    }, error => {
+    this.profileService.updateStation({ config })
+      .subscribe((data: any) => {
+        this.showMessageSuccess('Configuración actualizada correctamente');
+        this.loadingSaveInfo = false;
+        localStorage.setItem('station', JSON.stringify(data.data));
+        this.isChangeConfig = false;
+        this.otherForm.markAsPristine();
+        location.reload();
+      }, error => {
         this.showMessageError(error.errors.message);
         this.loadingSaveInfo = false;
       });
 
+  }
+
+  buildOtherForm() {
+    this.otherForm = this.fb.group({
+      quantity_safe_order: [this.station.quantity_safe_order, Validators.required]
+    });
   }
 
   showMessageSuccess(message) {
@@ -100,6 +116,23 @@ export class TabOtherComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, desactivalo'
     });
+  }
+
+  // Metodos para validar
+  isFieldInvalid(form: FormGroup, field: string) {
+    return (
+      (!form.get(field).valid && form.get(field).touched)
+    );
+  }
+  isFieldValid(form: FormGroup, field: string) {
+    return (
+      (form.get(field).valid && form.get(field).touched)
+    );
+  }
+  isFieldHasError(form: FormGroup, field: string, error: string) {
+    return (
+      (form.get(field).hasError(error))
+    );
   }
 
   saveConfig() {
