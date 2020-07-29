@@ -14,22 +14,14 @@
                 <div class="col-md-12 tabPading">
                     <nav mat-tab-nav-bar>
                         <a mat-tab-link routerLink="/statistics/orders" active="activeLink" routerLinkActive="active">Por pedidos </a>
-                        <a mat-tab-link routerLink="/statistics/vehicles" active="activeLink" routerLinkActive="active">Por Vehiculos </a>
+                        <a mat-tab-link routerLink="/statistics/vehicles">Por Vehiculos </a>
+                        <a mat-tab-link routerLink="/statistics/delivery">Por Repartidores </a>
+                        <a mat-tab-link routerLink="/statistics/client">Por Clientes </a>
                     </nav>
                 </div>
             </div>
         </div>
 
-        <div class="row" class="content">
-            <div class="col-md-8 d-flex">
-                <div>
-                    <div>
-                        <div style="display: block">
-                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./statistics-the-client.component.scss']
 })
 export class StatisticsTheClientComponent implements OnInit {
+  fecha = new Date();
 
   constructor() { }
 
