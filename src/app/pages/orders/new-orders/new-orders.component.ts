@@ -115,13 +115,16 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       retryWhen((errors) => errors.pipe(delay(5000)))
     ).subscribe((data: any) => {
       if (data.data.type && data.data.type === 'NEW_ORDER') {
-        this.openSnackbarNewOrder();
+        this.openSnackbarNewOrder('Nuevo pedido');
+      }
+      if (data.data.type && data.data.type === 'ACCEPT_ORDER') {
+        this.openSnackbarNewOrder('Pedido aceptado por el repartidor');
       }
     });
   }
 
-  openSnackbarNewOrder() {
-    const snackBarRef = this.snackBar.open('Nuevo pedido', 'Recargar', {
+  openSnackbarNewOrder(message) {
+    const snackBarRef = this.snackBar.open(message, 'Recargar', {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });

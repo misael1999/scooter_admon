@@ -15,10 +15,10 @@ export class ClientsService {
     return this.http.get(url, { params });
   }
 
-  getClientId(id: number) {
+  getClientId(id: number, params = {}) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/customers/${id}/`;
-    return this.http.get(url);
+    return this.http.get(url, {params});
   }
 
 }

@@ -10,7 +10,7 @@ import { ClientsService } from '../../../services/clients.service';
 export class InfoClientComponent implements OnInit {
   idCustomer: number;
   infoCustomer;
-
+  params = {}
 
 
   constructor(private clientService: ClientsService, private activatedRouted: ActivatedRoute, private router: Router) {
@@ -22,9 +22,14 @@ export class InfoClientComponent implements OnInit {
     this.getCustomerId();
   }
 
+  selectFromDate(fromDate) {
+
+    console.log(fromDate);
+  }
+
 
   getCustomerId() {
-    this.clientService.getClientId(this.idCustomer)
+    this.clientService.getClientId(this.idCustomer, this.params)
       .subscribe((data: any) => {
         this.infoCustomer = data;
         console.log(this.infoCustomer);

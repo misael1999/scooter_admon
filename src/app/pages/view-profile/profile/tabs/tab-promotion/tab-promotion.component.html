@@ -1,0 +1,27 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="option my-2">
+                <div class="text">
+                    Pedidos gratis
+                </div>
+                <mat-slide-toggle (change)="changeSlideAllow($event)" [checked]="free_orders_activated">
+                </mat-slide-toggle>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <app-schedule-promotion *ngIf="schedule" [schedule]="schedule" (addSchedule)="addSchedule($event)">
+            </app-schedule-promotion>
+
+        </div>
+        <div class="col-lg-12 d-flex justify-content-end">
+            <button [disabled]="loadingSaveInfo || !isChangeConfig" (click)="saveConfigInfo()" style="color: white;"
+                class="btn btn-primary">
+                <span *ngIf="!loadingSaveInfo">Guardar</span>
+                <div *ngIf="loadingSaveInfo" class="spinner-border text-warning" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </button>
+
+        </div>
+    </div>

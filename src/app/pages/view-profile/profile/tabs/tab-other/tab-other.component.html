@@ -24,13 +24,27 @@
         </div>
 
       </li>
+      <li class="list-group-item">
+
+        <div [formGroup]="otherForm" class="form-group">
+          <label>Número de pedidos para cliente confiable</label>
+          <input formControlName="quantity_safe_order" type="number" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(otherForm, 'quantity_safe_order'),
+            'has-success valid': isFieldValid(otherForm, 'quantity_safe_order')}">
+          <!-- MESSAGES ERRORS  -->
+          <div class="invalid-feedback-form" *ngIf="isFieldInvalid(otherForm, 'quantity_safe_order')">
+              <span *ngIf="isFieldHasError(otherForm, 'quantity_safe_order','required')">Este campo es
+                  requerido</span>
+          </div>
+      </div>
+
+      </li>
 
     </ul>
 
   </div>
 
   <div class="col-lg-12 d-flex justify-content-end">
-    <button [disabled]="loadingSaveInfo || !isChangeConfig" (click)="saveConfigInfo()" style="color: white;" class="btn btn-primary">
+    <button [disabled]="loadingSaveInfo || !isChangeConfig && !otherForm.dirty" (click)="saveConfigInfo()" style="color: white;" class="btn btn-primary">
       <span *ngIf="!loadingSaveInfo">Guardar</span>
       <div *ngIf="loadingSaveInfo" class="spinner-border text-warning" role="status">
         <span class="sr-only">Loading...</span>

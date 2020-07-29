@@ -30,7 +30,7 @@
                             aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
-                                <i class="ti ti-search"></i>
+                                <i class="fas fa-search"></i>
                             </span>
                         </div>
                     </div>
@@ -112,8 +112,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p>Calle: {{order.to_address.street}}</p>
-                                <p>Colonia: {{order.to_address.suburb}} </p>
+                                {{order.full_street}}                               
                             </td>
                             <td>${{order.service_price | number : '1.2-2'}}</td>
                             <td>

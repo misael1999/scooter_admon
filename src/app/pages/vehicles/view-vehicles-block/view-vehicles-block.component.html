@@ -31,7 +31,7 @@
                         <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por alias o modelo" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
-                                <i class="ti ti-search"></i>
+                                <i class="fas fa-search"></i>
                             </span>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                             <td> {{ vehicle.status.name }} </td>
                             <td class="text-center bt-edit">
                                 <button class="btn bt-edit" (click)="desbloquear(vehicle)">
-                                    <i class="ti-unlock"></i>
+                                    <i class="fas fa-unlock-alt"></i>
                                 </button>
                                <!--  <button class="btn bt-remove" (click)="deleteVehicle(vehicle.id, vehicle.alias)">
                                     <i class="ti-trash"></i>
