@@ -96,7 +96,7 @@
                             <td *ngIf="order.service == 'Compras'">
                                 <div class="products-details">
                                     <span *ngFor="let detail of order.details">
-                                        - {{detail.product_name | splitWord: 20}}
+                                        - {{detail.product_name}}
                                     </span>
                                 </div>
 
@@ -114,8 +114,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p>Calle: {{order.to_address.street}}</p>
-                                <p>Colonia: {{order.to_address.suburb}} </p>
+                                {{order.to_address.full_address}}
                             </td>
                             <td>${{order.service_price | number : '1.2-2'}}</td>
                             <td>
