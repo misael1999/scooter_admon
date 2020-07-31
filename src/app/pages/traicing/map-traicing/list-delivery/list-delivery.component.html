@@ -1,6 +1,19 @@
 <div>
     <div>
+
+
+
         <div class="input-group mb-3">
+            <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+            <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
+                <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-search"></i>
+                    </span>
+            </div>
+        </div>
+
+
+        <!-- <div class="input-group mb-3">
             <input #searchInput type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
             <div class="input-group-prepend cursor">
                 <span class="input-group-text" id="basic-addon1">
@@ -8,8 +21,8 @@
             </span>
             </div>
         </div>
-    </div>
-<!--     <div class="list">
+    </div> -->
+        <!--     <div class="list">
 
         <div class="card-delivery">
 
@@ -29,21 +42,21 @@
 
 
     </div> -->
-    <mat-list class="list" role="list">
-        <mat-list-item (click)="navigationToLocation(delivery)" style="margin-bottom: 15px !important;" *ngFor="let delivery of deliverys" class="item grid grid--contact">
+        <mat-list class="list" role="list">
+            <mat-list-item (click)="navigationToLocation(delivery)" style="margin-bottom: 15px !important;" *ngFor="let delivery of deliverys" class="item grid grid--contact">
 
-            <img *ngIf="delivery.picture == null" class="avatar" src="assets/images/common/user.jpg" alt="avatar">
-            <img *ngIf="delivery.picture != null" class="avatar" [src]="delivery.picture" alt="avatar">
+                <img *ngIf="delivery.picture == null" class="avatar" src="assets/images/common/user.jpg" alt="avatar">
+                <img *ngIf="delivery.picture != null" class="avatar" [src]="delivery.picture" alt="avatar">
 
-            <div class="flex">
-                <span> {{ delivery.name| titlecase }} </span>
-                <span>{{delivery.phone_number}}</span>
-                <span>Disponible</span>
+                <div class="flex">
+                    <span> {{ delivery.name| titlecase }} </span>
+                    <span>{{delivery.phone_number}}</span>
+                    <span>Disponible</span>
 
-            </div>
+                </div>
 
 
 
-        </mat-list-item>
-    </mat-list>
-</div>
+            </mat-list-item>
+        </mat-list>
+    </div>

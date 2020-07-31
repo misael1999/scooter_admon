@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { VehiclesService } from '../../../services/vehicles.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
 export interface DialogData {
@@ -68,9 +68,14 @@ export class AddVehiclesComponent implements OnInit {
         });
         this.dialogRef.close(true);
       }, error => {
-        console.log('Error' + error);
-      }
-      );
+        console.error('El error es', error.errors.message);
+
+        Swal.fire({
+          title: 'error',
+          type: 'success',
+          confirmButtonText: 'Aceptar',
+        });
+      });
   }
 
   buildVehicleForm() {
