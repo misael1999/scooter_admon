@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-map-traicing',
@@ -12,9 +12,11 @@ export class MapTraicingComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
-  getMarkers (markerList) {
+
+  getMarkers(markerList) {
     this.markerList = markerList;
   }
 

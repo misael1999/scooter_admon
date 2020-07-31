@@ -71,7 +71,12 @@
                         <button class="btn btn-light right " mat-dialog-close mat-flat-button color="primary">Cancelar</button>
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" (click)="addVehicle()" class="btn btn-primary fa-pull-right">Guardar</button>
+                        <button type="submit" (click)="addVehicle()" class="btn btn-primary fa-pull-right">Guardar
+                            <div class="load">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </form>

@@ -1,25 +1,43 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { DeliveryMenService } from '../../../../services/delivery-men.service';
+import { timer, Observable, interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-delivery',
   templateUrl: './list-delivery.component.html',
   styleUrls: ['./list-delivery.component.scss']
 })
-export class ListDeliveryComponent implements OnInit {
+export class ListDeliveryComponent implements OnInit, OnDestroy {
+
+
   deliverys: Array<any> = [];
   @Output() markers = new EventEmitter<any>();
   @Output() location = new EventEmitter<any>();
 
+  params = { search: '', status: 1 };
+
+  private intervalDelivery: Observable<number> = interval(90000);
+  private subscription: Subscription;
+
+
 
   constructor(private deliveryService: DeliveryMenService) { }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.getDelivery();
+    this.subscription = this.intervalDelivery.subscribe((data: any) => {
+      this.getDelivery();
+      // console.log('Tiempo');
+    });
   }
+
+
   getDelivery() {
     // this.loadingDelivery = true;
-    this.deliveryService.getDeliverys({status: 1})
+    this.deliveryService.getDeliverys( this.params )
       .subscribe((data: any) => {
         // this.deliverys = data.results;
         this.getCoordinates(data.results);
@@ -53,6 +71,7 @@ export class ListDeliveryComponent implements OnInit {
     this.deliverys = delivery_men;
   }
 
+
   navigationToLocation(delivery) {
     if (delivery.location) {
       const coordinates = {
@@ -63,4 +82,8 @@ export class ListDeliveryComponent implements OnInit {
     }
   }
 
+  searchBy(value: string) {
+    this.params.search = value;
+    this.getDelivery();
+  }
 }
