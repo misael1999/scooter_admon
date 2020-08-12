@@ -36,7 +36,8 @@ registerLocaleData(localeEs);
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    ServiceWorkerModule.register('./combine-sw.js', { enabled: environment.production })
+    ServiceWorkerModule.register('./combine-sw.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     FirebaseMessagingService,
