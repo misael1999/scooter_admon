@@ -12,19 +12,19 @@ export class DeliveryMenService {
   getDeliverys(params = {}) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/`;
-    return this.httpClient.get(url, {params});
+    return this.httpClient.get(url, { params });
   }
 
-  getDeliveryById(idDelivery, params = {}) {
+  getDeliveryById(idDelivery: number, params = {}) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/`;
-    return this.httpClient.get(url, {params});
+    return this.httpClient.get(url, { params });
   }
 
   unLockDeliveryMan(idDelivery) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/`;
-    return this.httpClient.patch(url, {status_id: 1});
+    return this.httpClient.patch(url, { status_id: 1 });
   }
 
   createDelevery(delivery: any) {

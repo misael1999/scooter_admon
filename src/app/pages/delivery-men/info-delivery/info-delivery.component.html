@@ -1,34 +1,42 @@
-<!-- Begin Page Content -->
-<div class="container-fluid">
+<mat-progress-bar *ngIf="!infoDelivery" mode="indeterminate"></mat-progress-bar>
+<div class="container-fluid" *ngIf="infoDelivery">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Repartidor:</h1>
+        <h1 class="h3 mb-0 text-gray-800">Informacion de:
+            <span class="text-info"> {{infoDelivery.name }} {{ infoDelivery.last_name}}  </span>
+        </h1>
     </div>
+    <!-- End Page Heading -->
 
+
+    <h5>Filtro por fechas:</h5>
 
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-3">
-            <mat-form-field class="example-full-widths" appearance="fill">
-                <mat-label>Fecha de incio</mat-label>
-                <input matInput [matDatepicker]="fromDate">
-                <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
-                <mat-datepicker touchUi #fromDate></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-
-        <!-- <div class="col-md-3">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Hasta la fecha</mat-label>
-                <input matInput [matDatepicker]="picker">
+        <!-- Data Picker from date -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <mat-form-field autocomplete="off" class="example-full-width" appearance="fill">
+                <mat-label>Desde la fecha</mat-label>
+                <input (dateChange)="selectFromDate($event.value)" matInput [matDatepicker]="picker">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #picker></mat-datepicker>
             </mat-form-field>
-        </div> -->
+        </div>
+        <!-- End Data Picker from date -->
 
-
+        <!-- Data Picker to date -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <mat-form-field autocomplete="off" class="example-full-width" appearance="fill">
+                <mat-label>Hasta la fecha</mat-label>
+                <input (dateChange)="selectTodate($event.value)" matInput [matDatepicker]="pickerToDate">
+                <mat-datepicker-toggle matSuffix [for]="pickerToDate"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #pickerToDate></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <!-- End Data Picker to date -->
     </div>
+
+
+    <!-- <app-card-info [delivery]="infoDelivery"></app-card-info> -->
+    <app-history-orders [delivery]="infoDelivery"></app-history-orders>
 </div>
-<!-- /.container-fluid -->

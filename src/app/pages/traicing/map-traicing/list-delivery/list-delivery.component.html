@@ -1,62 +1,34 @@
 <div>
     <div>
-
-
-
+        <!-- Search for delivery -->
         <div class="input-group mb-3">
             <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
             <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                 <span class="input-group-text" id="basic-addon1">
-                        <i class="fas fa-search"></i>
-                    </span>
+                    <i class="fas fa-search"></i>
+                </span>
             </div>
         </div>
+        <!-- End Search for delivery -->
 
+        <!-- List the delivery -->
 
-        <!-- <div class="input-group mb-3">
-            <input #searchInput type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-            <div class="input-group-prepend cursor">
-                <span class="input-group-text" id="basic-addon1">
-                <i class="fas fa-search"></i>
-            </span>
-            </div>
-        </div>
-    </div> -->
-        <!--     <div class="list">
-
-        <div class="card-delivery">
-
-            <div class="image">
-                <img *ngIf="delivery.picture == null" class="avatar" src="assets/images/common/user.jpg" alt="avatar">
-                <img *ngIf="delivery.picture != null" class="avatar" [src]="delivery.picture" alt="avatar">
-            </div>
-            <div class="info">
-                <span>Jesús Alberto</span>
-                <span>2384080578</span>
-            </div>
-            <div class="status">
-                <span>Disponible</span>
-            </div>
-
-        </div>
-
-
-    </div> -->
         <mat-list class="list" role="list">
-            <mat-list-item (click)="navigationToLocation(delivery)" style="margin-bottom: 15px !important;" *ngFor="let delivery of deliverys" class="item grid grid--contact">
 
+            <mat-list-item (click)="navigationToLocation(delivery)" style="margin-bottom: 30px !important;" *ngFor="let delivery of deliverys" class="item grid grid--contact">
                 <img *ngIf="delivery.picture == null" class="avatar" src="assets/images/common/user.jpg" alt="avatar">
                 <img *ngIf="delivery.picture != null" class="avatar" [src]="delivery.picture" alt="avatar">
-
                 <div class="flex">
                     <span> {{ delivery.name| titlecase }} </span>
-                    <span>{{delivery.phone_number}}</span>
-                    <span>Disponible</span>
-
+                    <span> {{ delivery.phone_number}}</span>
+                    <span *ngIf="delivery.status == 'Activo'"><span class="badge badge-success">{{ delivery.status}}</span></span>
+                    <hr>
                 </div>
-
-
-
             </mat-list-item>
+
         </mat-list>
+
+        <!-- End list the delivery -->
+
     </div>
+</div>

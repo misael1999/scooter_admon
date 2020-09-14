@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { DeliveryMenService } from '../../../services/delivery-men.service';
 
 @Component({
@@ -8,30 +9,51 @@ import { DeliveryMenService } from '../../../services/delivery-men.service';
   styleUrls: ['./info-delivery.component.scss']
 })
 export class InfoDeliveryComponent implements OnInit {
-
   idDelivery: number;
-  delivery: Array<any> = [];
-  paramsDate = { fromDate: new Date(), toDate: new Date() };
+  infoDelivery;
+  from_date;
+  to_date;
+  params: {};
 
-  constructor(private deliveryService: DeliveryMenService, private activatedRoute: ActivatedRoute) {
+  constructor(private deliveryService: DeliveryMenService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.idDelivery = this.activatedRoute.snapshot.params.id;
-    console.log('El id es', this.idDelivery);
-
   }
 
   ngOnInit(): void {
+    this.getDeliveryId();
   }
 
-  getDelivery(id, number) {
-    this.deliveryService.getDeliveryById(id, this.paramsDate)
+  selectFromDate(fromDate) {
+    const momentDate = new Date(fromDate);
+    this.from_date = moment(fromDate).format('YYYY-MM-DD');
+    if (this.from_date && this.to_date) {
+      this.getDeliveryId({ from_date: this.from_date, to_date: this.to_date });
+
+    }
+  }
+
+  selectTodate(toDate) {
+    const momentDate = new Date(toDate);
+    this.to_date = moment(toDate).format('YYYY-MM-DD');
+    if (this.from_date && this.to_date) {
+      this.getDeliveryId({ from_date: this.from_date, to_date: this.to_date });
+
+
+    }
+  }
+
+  getDeliveryId(params = {}) {
+    this.deliveryService.getDeliveryById(this.idDelivery, params)
       .subscribe((data: any) => {
-        this.delivery = data;
-        console.log(this.delivery);
-
+        this.infoDelivery = data;
+        console.log(this.infoDelivery);
       }, error => {
-
+        if (error.errors.code === 'not_found') {
+          this.router.navigate(['not_found']);
+          return;
+        }
+        console.log(error.errors.code);
       });
-
   }
 
 }

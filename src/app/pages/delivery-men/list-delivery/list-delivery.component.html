@@ -73,9 +73,7 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos </th>
                             <th scope="col">Telefono </th>
-                            <th scope="col">Total de pedidos</th>
                             <th scope="col">Reputacion </th>
-                            <th scope="col">Salario</th>
                             <th scope="col">Vehiculo </th>
                             <th scope="col">Estatus</th>
                             <th scope="col" class="text-center">Acciones</th>
@@ -86,9 +84,7 @@
                             <td> {{ delivery.name }} </td>
                             <td> {{ delivery.last_name }} </td>
                             <td> {{ delivery.phone_number }} </td>
-                            <td> {{ delivery.total_orders}} </td>
                             <td> {{ delivery.reputation}} </td>
-                            <td> {{ delivery.salary_per_order}} </td>
                             <td> {{ delivery.vehicle ? delivery.vehicle.alias : ''}} </td>
                             <td *ngIf="delivery.delivery_status == 'Disponible'"> <span class="badge badge-pill badge-secondary">{{ delivery.delivery_status }}</span></td>
                             <td *ngIf="delivery.delivery_status == 'Ocupado'"> <span class="badge badge-pill badge-info"> {{ delivery.delivery_status }}</span></td>
@@ -103,7 +99,7 @@
                                 <button class="btn btn-lock" (click)="deleteDelivery(delivery.id, delivery.name)">
                                     <i class="fas fa-lock"></i>
                                 </button>
-<!--                                 <button class="btn btn-remove" >
+                                <!--                                 <button class="btn btn-remove" >
                                     <i class="ti-trash"></i>
                                 </button> -->
                             </td>
