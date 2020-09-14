@@ -84,7 +84,6 @@
                             <th scope="col">Modelo </th>
                             <th scope="col">Año </th>
                             <th scope="col">Placa </th>
-                            <th scope="col">Estatus </th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -93,11 +92,11 @@
                             <!-- <td> {{ vehicle.id}} </td> -->
                             <td> {{ vehicle.alias | titlecase }} </td>
                             <td *ngIf="vehicle.type_vehicle_id == '1'"> <span class="badge badge-pill badge-secondary">Motocicleta</span></td>
-                            <td *ngIf="vehicle.type_vehicle_id == '2'"> <span class="badge badge-pill badge-success">Bicicleta</span></td>
+                            <td *ngIf="vehicle.type_vehicle_id == '2'"> <span class="badge badge-pill badge-primary">Bicicleta</span></td>
+                            <td *ngIf="vehicle.type_vehicle_id == '3'"> <span class="badge badge-pill badge-success">Automovil</span></td>
                             <td> {{ vehicle.model}} </td>
                             <td> {{ vehicle.year }} </td>
                             <td> {{ vehicle.plate}} </td>
-                            <td> {{ vehicle.status.name }} </td>
                             <td class="text-center bt-edit">
                                 <button class="btn bt-edit" (click)="editarVehicle(vehicle)">
                                     <i class="fas fa-pencil-alt"></i>

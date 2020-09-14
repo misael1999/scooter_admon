@@ -39,7 +39,7 @@ export class ViewVehiclesComponent implements OnInit {
     this.vehiculeService.getVehicles(this.params)
       .subscribe((data: any) => {
         this.vehicles = data.results;
-        // console.log(this.vehicles);
+        console.log(this.vehicles);
         this.loadingVehicles = false;
         this.length = data.count;
       }, error => {
