@@ -4,7 +4,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Nuevos pedidos</h1>
     </div>
-    <!--  <mat-slide-toggle [checked]="true" class="my-3" [labelPosition]="'before'"><span style="font-weight: bold;">Asignar repartidor
+    <!-- <mat-slide-toggle [checked]="true" class="my-3" [labelPosition]="'before'"><span style="font-weight: bold;">Asignar repartidor
         manualmente</span></mat-slide-toggle> -->
     <div>
         <!-- FILTROS  -->
@@ -49,20 +49,21 @@
             </div>
             <!-- TERMINA EL PAGINADOR  -->
 
-            <!-- TABLA  -->
-            <!-- preloader  -->
+
+            <!-- Preloader  -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
                 <div class="spinner-border text-primary my-5" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <!-- termina preloader  -->
+            <!-- End preloader  -->
+
+
+            <!-- Table new orders -->
             <div class="col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
                 <table class="table table-striped table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <!--                             <th>Noº pedido</th>
- -->
                             <th>Servicio</th>
                             <th>Cliente</th>
                             <th>Detalles</th>
@@ -77,9 +78,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <!--                             <td>{{order.id}}</td>
- -->
-                            <td>{{order.service}}</td>
+                            <td> <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
+                                'badge-warning': order.service == 'Recolección' }">{{order.service}}</span>
+                            </td>
+
                             <td>{{order.customer.name}}</td>
                             <td *ngIf="order.service == 'Compras'">
                                 <div class="products-details">
@@ -93,12 +95,14 @@
                                 <span>{{order.indications | splitWord: 100}}</span>
                             </td>
                             <td>{{order.service}}</td>
+
+
                             <td>
                                 <div class="address" *ngIf="order.service != 'Compras'">
                                     {{order.from_address.full_address}}
                                 </div>
                                 <div class="place" *ngIf="order.service === 'Compras'">
-                                    <p>{{order.from_address.alias}}</p>
+                                    <!-- <p>{{order.from_address.alias}}</p> -->
                                 </div>
                             </td>
                             <td>

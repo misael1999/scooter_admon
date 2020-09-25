@@ -15,13 +15,13 @@ export class DeliveredOrdersComponent implements OnInit {
 
   // MatPaginator Inputs
   length = 100;
-  pageSize = 15;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSize = 25;
+  pageSizeOptions: number[] = [25, 50, 75, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status: '6' };
+  params = { limit: 25, offset: 0, search: '', order_status: '6' };
   orders: Array<any> = [];
   loadingOrders: boolean;
   liveData$: Subscription;
@@ -38,6 +38,7 @@ export class DeliveredOrdersComponent implements OnInit {
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
+        console.log(this.orders);
         this.loadingOrders = false;
         this.length = data.count;
       }, error => {

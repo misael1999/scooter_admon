@@ -6,26 +6,18 @@
     </div>
 
     <div>
-        <!-- Filter  -->
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
-
-
-
                 <div class="col-md-12 tabPading">
                     <nav mat-tab-nav-bar>
                         <a mat-tab-link routerLink="/vehicles/active">Activos </a>
                         <a mat-tab-link routerLink="/vehicles/block" active="activeLink">Bloqueados </a>
                     </nav>
                 </div>
-
-
-
-
                 <div class="col-lg-9">
                 </div>
 
-                <!-- Filter by search vehicles -->
+                <!-- Search vehicles -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por alias o modelo" aria-label="Username" aria-describedby="basic-addon1">
@@ -36,21 +28,19 @@
                         </div>
                     </div>
                 </div>
-                <!-- Fin Filter by search vehicles -->
-
+                <!-- End Search vehicles -->
             </div>
         </div>
-        <!-- Fin filter  -->
 
 
         <div class="row" class="content">
 
-            <!-- PAGINADOR  -->
+            <!-- Paginator  -->
             <div class="col-lg-12 d-flex justify-content-end">
                 <mat-paginator [disabled]="loadingVehicles || vehicles.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
                     </mat-paginator>
             </div>
-            <!-- TERMINA EL PAGINADOR  -->
+            <!-- End Paginator  -->
 
 
             <!-- Preloader  -->
@@ -59,41 +49,39 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <!-- Fin Preloader  -->
+            <!-- End Preloader  -->
 
 
-            <!-- Table the vehicles  -->
+            <!-- Table vehicles  -->
             <div class="col-md-12" *ngIf="!loadingVehicles && vehicles.length > 0 ">
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <!-- <th scope="col">ID</th> -->
                             <th scope="col">Alias </th>
                             <th scope="col">Tipo de vehiculo </th>
                             <th scope="col">Modelo </th>
                             <th scope="col">Año </th>
                             <th scope="col">Placa </th>
-                            <th scope="col">Estatus </th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr *ngFor="let vehicle of vehicles">
-                            <!-- <td> {{ vehicle.id}} </td> -->
                             <td> {{ vehicle.alias | titlecase }} </td>
-                            <td *ngIf="vehicle.type_vehicle_id == '1'"> <span class="badge badge-pill badge-secondary">Motocicleta</span></td>
-                            <td *ngIf="vehicle.type_vehicle_id == '2'"> <span class="badge badge-pill badge-success">Bicicleta</span></td>
+                            <td>
+                                <span *ngIf="vehicle.type_vehicle_id == '1'"> <span class="badge badge-pill badge-secondary">Motocicleta</span></span>
+                                <span *ngIf="vehicle.type_vehicle_id == '2'"> <span class="badge badge-pill badge-primary">Bicicleta</span></span>
+                                <span *ngIf="vehicle.type_vehicle_id == '3'"> <span class="badge badge-pill badge-success">Automovil</span></span>
+                            </td>
+
                             <td> {{ vehicle.model}} </td>
                             <td> {{ vehicle.year }} </td>
                             <td> {{ vehicle.plate}} </td>
-                            <td> {{ vehicle.status.name }} </td>
                             <td class="text-center bt-edit">
                                 <button class="btn bt-edit" (click)="desbloquear(vehicle)">
                                     <i class="fas fa-unlock-alt"></i>
                                 </button>
-                               <!--  <button class="btn bt-remove" (click)="deleteVehicle(vehicle.id, vehicle.alias)">
-                                    <i class="ti-trash"></i>
-                                </button> -->
                             </td>
                         </tr>
                     </tbody>

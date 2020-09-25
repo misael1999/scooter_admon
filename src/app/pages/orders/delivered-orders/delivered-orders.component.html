@@ -75,8 +75,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <!--                             <td>{{order.id}}</td>
-                            -->
                             <td>
                                 <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
                                 'badge-warning': order.service == 'Recolección' }">{{order.service}}</span></td>
@@ -100,11 +98,17 @@
                                 <span>{{order.indications}}</span>
                             </td>
                             <td>
+
+
+                                <div *ngIf="order.is_order_to_merchant == true "><span>{{order.merchant.merchant_name}}</span></div>
+                                <div *ngIf="order.is_order_to_merchant == false "><span>{{order.from_address.full_address}}</span></div>
+                                <!-- <div *ngIf="order.is_order_to_merchant == false "><span>{{order.from_address.full_address}}</span></div> -->
+
                                 <div class="address" *ngIf="order.service != 'Compras'">
                                     <p>{{order.from_address.full_address}}</p>
                                 </div>
                                 <div class="place" *ngIf="order.service === 'Compras'">
-                                    <p>{{order.from_address.alias}}</p>
+                                    <!-- <p>{{order.from_address.alias}}</p> -->
                                 </div>
                             </td>
                             <td>
