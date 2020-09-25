@@ -67,6 +67,7 @@
                             <th>Lugar de compra o recolección</th>
                             <th>Lugar de entrega</th>
                             <th>Precio del servicio</th>
+                            <th>Distancia</th>
                             <th>Fecha de entrega</th>
                             <th>Estatus</th>
                             <!-- <th>Acciones</th> -->
@@ -100,8 +101,7 @@
                             </td>
                             <td>
                                 <div class="address" *ngIf="order.service != 'Compras'">
-                                    <p>Calle: {{order.from_address.street}}</p>
-                                    <p>Colonia: {{order.from_address.suburb}} </p>
+                                    <p>{{order.from_address.full_address}}</p>
                                 </div>
                                 <div class="place" *ngIf="order.service === 'Compras'">
                                     <p>{{order.from_address.alias}}</p>
@@ -111,6 +111,7 @@
                                 {{order.to_address.full_address}}
                             </td>
                             <td>${{order.service_price | number : '1.2-2'}}</td>
+                            <td>{{order.distance | number : '1.2-2'}} KM</td>
                             <td>
                                 {{order.date_delivered_order | date:'medium'}}
                             </td>
