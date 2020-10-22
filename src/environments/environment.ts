@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   // HOST_APIV1: 'https://www.scooter-app.team/appback/api/v1',
-  // HOST_APIV1: 'https://www.scooterdev.tech/appback/api/v1',
+  HOST_APIV1: 'https://www.scooterdev.tech/appback/api/v1',
 
 
-  HOST_APIV1: 'http://127.0.0.1:8000/api/v1',
+  // HOST_APIV1: 'http://127.0.0.1:8000/api/v1',
   // HOST_APIV1: 'http://192.168.0.6:8000/api/v1',
   // WS_SOCKET: 'ws://192.168.0.6',
 
-  WS_SOCKET: 'wss://www.scooter-app.team/ws',
-  // WS_SOCKET: 'wss://www.scooterdev.tech/ws',
+  // WS_SOCKET: 'wss://www.scooter-app.team/ws',
+  WS_SOCKET: 'wss://www.scooterdev.tech/ws',
 
   firebase: {
     apiKey: 'AIzaSyDcAruMxBUQlW9S672oSoe1dyr7l8WIxlU',

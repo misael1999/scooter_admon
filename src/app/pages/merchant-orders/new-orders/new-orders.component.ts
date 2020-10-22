@@ -150,10 +150,14 @@ export class NewOrdersComponent implements OnInit {
       retryWhen((errors) => errors.pipe(delay(5000)))
     ).subscribe((data: any) => {
       if (data.data.type && data.data.type === 'NEW_ORDER') {
-        this.openSnackbarNewOrder('Nuevo pedido');
+        this.playAudio();
+        this.getOrders();
       }
       if (data.data.type && data.data.type === 'ACCEPT_ORDER') {
-        this.openSnackbarNewOrder('Pedido aceptado por el repartidor');
+        this.playAudio();
+        this.getOrders();
+
+        // this.openSnackbarNewOrder('Pedido aceptado por el repartidor');
       }
     });
   }
@@ -172,6 +176,13 @@ export class NewOrdersComponent implements OnInit {
     snackBarRef.afterDismissed().subscribe(() => {
       console.log('The snack-bar was dismissed');
     });
+  }
+
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "assets/sounds/ringtone_merchant.mp3";
+    audio.load();
+    audio.play();
   }
 
 }
