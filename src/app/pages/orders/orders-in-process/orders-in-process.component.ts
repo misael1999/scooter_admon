@@ -14,13 +14,13 @@ import { map, catchError, tap } from 'rxjs/operators';
 export class OrdersInProcessComponent implements OnInit {
  // MatPaginator Inputs
  length = 100;
- pageSize = 15;
+ pageSize = 25;
  pageSizeOptions: number[] = [5, 10, 25, 100];
  // MatPaginator Output
  pageEvent: PageEvent;
 
  // Parametros para el paginado
- params = { limit: 15, offset: 0, search: '', in_process : true };
+ params = { limit: 25, offset: 0, search: '', in_process : true };
  orders: Array<any> = [];
  loadingOrders: boolean;
  liveData$: Subscription;
@@ -88,7 +88,7 @@ export class OrdersInProcessComponent implements OnInit {
  // ======= PAGINADOR ========
  getPages(e): PageEvent {
    if (this.orders.length === 0) {
-     this.pageSize = 15;
+     this.pageSize = 25;
      return;
    }
    this.params.limit = e.pageSize;

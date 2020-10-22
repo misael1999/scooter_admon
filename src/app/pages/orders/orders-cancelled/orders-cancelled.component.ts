@@ -14,13 +14,13 @@ import { map, catchError, tap } from 'rxjs/operators';
 export class OrdersCancelledComponent implements OnInit {
 // MatPaginator Inputs
 length = 100;
-pageSize = 15;
+pageSize = 25;
 pageSizeOptions: number[] = [5, 10, 25, 100];
 // MatPaginator Output
 pageEvent: PageEvent;
 
 // Parametros para el paginado
-params = { limit: 15, offset: 0, search: '', order_status : '7,8,17' };
+params = { limit: 25, offset: 0, search: '', order_status : '7,8,17' };
 orders: Array<any> = [];
 loadingOrders: boolean;
 liveData$: Subscription;
