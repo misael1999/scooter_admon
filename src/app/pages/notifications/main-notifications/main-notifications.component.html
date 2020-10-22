@@ -7,52 +7,45 @@
 
 
     <!-- Content Row -->
-    <div class="row">
+    <div class="row d-flex justify-content-center">
 
         <div class="col-lg-6 mb-4">
 
             <!-- Project Card Example -->
             <div class="card shadow mb-4">
+                <form [formGroup]="notificationForm">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Notificaciones para usuarios</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Notificaciones para:</h6>
+                    <br>
+                    <select formControlName="type" class="form-control">
+                        <option value="1">Usuarios</option>
+                        <option value="2">Repartidores</option>
+                        <option value="3">Comercios</option>
+                    </select>
+                    
                 </div>
                 <div class="card-body">
                     <div class="card p-3" style="width: 100%;">
-                        <form>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mensaje a envíar</label>
-                                <textarea placeholder="Ingresa el texto" class="form-control" name="" id="" cols="20" rows="10"></textarea>
+                                <input formControlName="title" type="text" class="form-control" placeholder="Ingresa un titulo">
+                                <br>
+                                <textarea formControlName="body" placeholder="Ingresa el texto" class="form-control" name="" id="" cols="20" rows="10"></textarea>
                                 <small id="emailHelp" class="form-text text-muted">Máximo 300 caracteres</small>
                             </div>
-                        </form>
-                        <button class="btn btn-secondary">Enviar</button>
+                            <button [disabled]="loadingSend" (click)="sendNotifications()" class="btn btn-secondary">
+                                Enviar
+                                <div *ngIf="loadingSend" class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
 
         </div>
-        <div class="col-lg-6 mb-4">
-
-            <!-- Project Card Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Notificaciones para comercios</h6>
-                </div>
-                <div class="card-body">
-                    <div class="card p-3" style="width: 100%;">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Mensaje a envíar</label>
-                                <textarea placeholder="Ingresa el texto" class="form-control" name="" id="" cols="20" rows="10"></textarea>
-                                <small id="emailHelp" class="form-text text-muted">Máximo 300 caracteres</small>
-                            </div>
-                        </form>
-                        <button class="btn btn-primary">Enviar</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+    
     </div>
 
 </div>
