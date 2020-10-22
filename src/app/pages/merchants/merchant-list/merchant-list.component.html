@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Télefono</th>
+<!--         <th scope="col">Fecha de ingreso</th>
+ -->        <th scope="col">Horarios</th>
+        <th scope="col">Abierto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let merchant of merchants">
+        <td>{{merchant.merchant_name}}</td>
+        <td>{{merchant.category}}</td>
+        <td>{{merchant.phone_number}}</td>
+<!--         <td>{{merchant.created | date:'medium'}}</td>
+ -->        <td>
+            -Lunes: 09:00 - 18:00
+        </td>
+        <td>
+            <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>
+        </td>
+      </tr>
+    </tbody>
+  </table>

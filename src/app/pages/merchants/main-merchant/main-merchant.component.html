@@ -1,0 +1,72 @@
+<div class="container">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Listado de comercios</h1>
+        <button (click)="dialogAddMerchant()" class="btn btn-secondary btn-sm">Agregar</button>
+    </div>
+
+    <div>
+        <!-- Filter  -->
+        <div class="filters mb-3">
+            <div class="row d-flex justify-content-end">
+
+
+                <!-- Orderin in the tables for delivery -->
+                <div class="col-lg-3">
+                    <select class="form-control select-form" (change)="ordenamiento($event.target.value)">
+                        <option value="">Ordenar por:</option>
+                        <option value="-name">Fecha de ingreso</option>
+                        <option value="-last_name">Nombre</option>
+                        <option value="-reputation">Reputacion</option>
+                    </select>
+                </div>
+                <!-- Fin Orderin in the tables for delivery -->
+
+                <div class="col-lg-6">
+                </div>
+
+                <!-- Filter by search vehicles -->
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text"
+                            class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Filter by search vehicles -->
+            </div>
+        </div>
+        <!-- Fin filter  -->
+
+        <div class="row" class="content">
+            <!-- PAGINADOR  -->
+            <div class="col-lg-12 d-flex justify-content-end">
+                <mat-paginator [disabled]="loadingMerchants || merchants.length==0" [length]="length"
+                    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                </mat-paginator>
+            </div>
+            <!-- TERMINA EL PAGINADOR  -->
+
+            <!-- Preloader  -->
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingMerchants">
+                <div class="spinner-border text-primary my-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!-- Fin Preloader  -->
+            <!-- Table the vehicles  -->
+            <app-merchant-list *ngIf="!loadingMerchants && merchants.length > 0" [merchants]="merchants"></app-merchant-list>
+            <!-- Fin table the vehicles  -->
+            <app-no-found-data *ngIf="!loadingMerchants && merchants.length == 0"
+                 [message]="'No hay comercios que mostrar'">
+            </app-no-found-data>
+
+        </div>
+    </div>
+</div>

@@ -22,7 +22,7 @@ export class ListDeliveryComponent implements OnInit {
   statusFilter: boolean;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', ordering: '', status: 1 };
+  params = { limit: 25, offset: 0, search: '', ordering: '', status: 1 };
   deliverys: Array<any> = [];
   loadingDelivery: boolean;
 

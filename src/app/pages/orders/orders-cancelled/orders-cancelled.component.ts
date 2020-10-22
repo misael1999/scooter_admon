@@ -20,7 +20,7 @@ pageSizeOptions: number[] = [5, 10, 25, 100];
 pageEvent: PageEvent;
 
 // Parametros para el paginado
-params = { limit: 15, offset: 0, search: '', order_status : '7,8' };
+params = { limit: 15, offset: 0, search: '', order_status : '7,8,17' };
 orders: Array<any> = [];
 loadingOrders: boolean;
 liveData$: Subscription;

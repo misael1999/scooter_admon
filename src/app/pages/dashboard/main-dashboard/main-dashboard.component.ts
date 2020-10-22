@@ -20,9 +20,9 @@ export class MainDashboardComponent implements OnInit {
     private clientService: ClientsService) { }
 
   ngOnInit(): void {
-    this.getCountVehicles();
+/*     this.getCountVehicles();
     this.getCountDelivery();
-    this.getCountClient();
+    this.getCountClient(); */
   }
 
   getCountVehicles() {

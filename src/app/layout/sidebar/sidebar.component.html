@@ -1,7 +1,8 @@
 <ul class="navbar-nav bg-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/dashboard" routerLinkActive="active">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/dashboard"
+        routerLinkActive="active">
         <div>
         </div>
         <!--         <p> {{ station.station_name |slice:0:1 |lowercase }} </p>
@@ -37,9 +38,16 @@
     <div class="sidebar-heading">
         Gestión
     </div>
+    <li class="nav-item" routerLink="/merchants" routerLinkActive="active">
+        <a class="nav-link collapsed">
+            <i class="fas fa-fw fa-store"></i>
+            <span>Comercios</span>
+        </a>
+    </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
             <i class="fas fa-fw fa-clipboard-list"></i>
             <span>Pedidos</span>
         </a>
@@ -77,12 +85,12 @@
 
 
     <!-- Nav Item - Clients Collapse Menu -->
-    <li class="nav-item" routerLink="/client" routerLinkActive="active">
+    <!--     <li class="nav-item" routerLink="/client" routerLinkActive="active">
         <a class="nav-link collapsed">
             <i class="fas fa-fw fa-users"></i>
             <span>Clientes</span>
         </a>
-    </li>
+    </li> -->
     <!-- Nav Item - Fin the Clients Collapse Menu  -->
 
 
@@ -93,6 +101,7 @@
             <span>Mapa de seguimiento</span>
         </a>
     </li>
+
     <!-- Fin Nav Item - Map the traicing Collapse Menu -->
 
     <!-- Divider -->

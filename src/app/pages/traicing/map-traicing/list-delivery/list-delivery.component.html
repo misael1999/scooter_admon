@@ -21,7 +21,8 @@
                 <div class="flex">
                     <span> {{ delivery.name| titlecase }} </span>
                     <span> {{ delivery.phone_number}}</span>
-                    <span *ngIf="delivery.status == 'Activo'"><span class="badge badge-success">{{ delivery.status}}</span></span>
+                    <span><span class="badge" [ngClass]="{'badge-danger': delivery.delivery_status == 'Fuera de servicio',
+                         'badge-success': delivery.delivery_status == 'Disponible', 'badge-info': delivery.delivery_status == 'Ocupado' }">{{ delivery.delivery_status}}</span></span>
                     <hr>
                 </div>
             </mat-list-item>
