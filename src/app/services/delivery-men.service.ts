@@ -23,8 +23,8 @@ export class DeliveryMenService {
 
   unLockDeliveryMan(idDelivery) {
     const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/`;
-    return this.httpClient.patch(url, { status_id: 1 });
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/unlock/`;
+    return this.httpClient.put(url, { status_id: 1 });
   }
 
   createDelevery(delivery: any) {
@@ -35,8 +35,8 @@ export class DeliveryMenService {
 
   editDelivery(idDelivery: number, delivery: any) {
     const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}`;
-    return this.httpClient.post(url, delivery);
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/`;
+    return this.httpClient.patch(url, delivery);
   }
 
   deleteDelivery(idDelivery: number) {

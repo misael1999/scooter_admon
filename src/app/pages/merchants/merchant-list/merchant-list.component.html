@@ -1,7 +1,7 @@
-<table class="table table-striped table-bordered">
+<table class="table table-responsive table-striped table-bordered">
     <thead>
       <tr>
-        <th scope="col">Nombre</th>
+        <th style="width: 100%;" scope="col">Nombre</th>
         <th scope="col">Categoría</th>
         <th scope="col">Télefono</th>
 <!--         <th scope="col">Fecha de ingreso</th>
@@ -16,7 +16,7 @@
         <td>{{merchant.phone_number}}</td>
 <!--         <td>{{merchant.created | date:'medium'}}</td>
  -->        <td>
-            -Lunes: 09:00 - 18:00
+            -----
         </td>
         <td>
             <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>

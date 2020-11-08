@@ -34,7 +34,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   liveData$: Subscription;
 
   constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
-              private dialog: MatDialog, private webSocketService: WebSocketService) { }
+    private dialog: MatDialog, private webSocketService: WebSocketService) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -73,7 +73,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       width: '60%',
       minHeight: '500px',
       minWidth: '350px',
-      data: { orderId: order.id, typeService: order.service_id}
+      data: { orderId: order.id, typeService: order.service_id }
     });
 
     dialogref.afterClosed().subscribe(data => {
@@ -115,7 +115,11 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       retryWhen((errors) => errors.pipe(delay(5000)))
     ).subscribe((data: any) => {
       if (data.data.type && data.data.type === 'NEW_ORDER') {
-        this.openSnackbarNewOrder('Nuevo pedido');
+        if (data.data.type && data.data.type === 'NEW_ORDER') {
+          this.playAudio();
+          this.getOrders();
+        }
+        // this.openSnackbarNewOrder('Nuevo pedido');
       }
       if (data.data.type && data.data.type === 'ACCEPT_ORDER') {
         this.openSnackbarNewOrder('Pedido aceptado por el repartidor');
@@ -138,5 +142,14 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       console.log('The snack-bar was dismissed');
     });
   }
+
+  playAudio() {
+    let audio = new Audio();
+    audio.src = "assets/sounds/ringtone_merchant.mp3";
+    audio.load();
+    audio.play();
+  }
+
+
 
 }

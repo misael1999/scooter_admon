@@ -1,160 +1,116 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DeliveryMenService } from '../../../services/delivery-men.service';
-import { VehiclesService } from '../../../services/vehicles.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import Swal from 'sweetalert2';
-
-
-export interface DialogData {
-  delivery: any;
-}
-
+import { DeliveryMenService } from 'src/app/services/delivery-men.service';
+import { ValidationForms } from 'src/app/utils/validations-forms';
 
 @Component({
   selector: 'app-add-delivery',
   templateUrl: './add-delivery.component.html',
   styleUrls: ['./add-delivery.component.scss']
 })
-export class AddDeliveryComponent implements OnInit {
+export class AddDeliveryComponent extends ValidationForms implements OnInit {
   deliveryForm: FormGroup;
-  adressForm: FormGroup;
-  vehicles;
-  delivery: any;
+  deliveryMan: any;
+  loadingSave: boolean;
 
-  constructor(private deliveryService: DeliveryMenService, private vehicleService: VehiclesService,
-    private fb: FormBuilder, public dialogRef: MatDialogRef<AddDeliveryComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
-    this.delivery = data.delivery;
-    if (this.delivery) {
-      this.buildEditDeliveryForm(this.delivery);
-      this.builEditAdressDeliveryForm(this.delivery);
+  constructor(private fb: FormBuilder,
+    private deliveryService: DeliveryMenService,
+    public dialogRef: MatDialogRef<AddDeliveryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    super();
+    if (data.deliveryMan) {
+      this.deliveryMan = data.deliveryMan;
+      this.buildUpdateForm(this.deliveryMan);
     } else {
-      this.buildDeliveryForm();
-      this.builAdressDeliveryForm();
+      this.buildForm();
     }
   }
 
   ngOnInit(): void {
-    this.getVehicles();
-    // this.buildDeliveryForm();
-    // this.builAdressDeliveryForm();
   }
 
-  // Se obtienen los vehiculos para mostrarlos en el select
-  getVehicles() {
-    this.vehicleService.getVehicles({status: 1})
-      .subscribe((data: any) => {
-        this.vehicles = data.results;
-      }, error => {
-        return;
-      });
+  buildForm() {
+    this.deliveryForm = this.fb.group(
+      {
+        name: [null, Validators.required],
+        last_name: [null, Validators.required],
+        phone_number: [null, Validators.required],
+        password: [null, Validators.required],
+        vehicle_plate: [null, Validators.required],
+        vehicle_model: [null, Validators.required],
+        vehicle_year: [null, Validators.required],
+        vehicle_color: [null, Validators.required],
+        vehicle_type: ['1', Validators.required],
+      }
+    );
   }
 
+  buildUpdateForm(deliveryMan) {
+    this.deliveryForm = this.fb.group(
+      {
+        name: [deliveryMan.name, Validators.required],
+        last_name: [deliveryMan.last_name, Validators.required],
+        phone_number: [deliveryMan.phone_number, Validators.required],
+        password: [null],
+        vehicle_plate: [deliveryMan.vehicle_plate, Validators.required],
+        vehicle_model: [deliveryMan.vehicle_model, Validators.required],
+        vehicle_year: [deliveryMan.vehicle_year, Validators.required],
+        vehicle_color: [deliveryMan.vehicle_color, Validators.required],
+        vehicle_type: [deliveryMan.vehicle_type_id, Validators.required],
+      }
+    );
+  }
 
-  // Agregamos un nuevo repartidor
-  addDelivery() {
-    if (this.deliveryForm.invalid || this.adressForm.invalid) {
+  createDelivery() {
+
+    if (this.deliveryForm.invalid) {
       this.deliveryForm.markAllAsTouched();
-      this.adressForm.markAllAsTouched();
       return;
     }
+
     const delivery = this.deliveryForm.value;
-    const deliveryAdress = this.adressForm.value;
-    delivery.address = deliveryAdress;
-    if (this.delivery) {
-      this.editDelivery(delivery, this.delivery.id);
+    this.loadingSave = true;
+
+    if (this.deliveryMan) {
+      // ======= Actualizar repartidor ========
+      this.updateDelivery(this.deliveryMan.id, delivery);
+    } else {
+      // ======= Agregar repartidor ======== 
+      this.addDelivery(delivery);
     }
+
+  }
+
+  addDelivery(delivery) {
     this.deliveryService.createDelevery(delivery)
-      .subscribe((data: any) => {
-        Swal.fire({
-          title: 'Se agrego un nuevo repartidor',
-          type: 'success',
-          timer: 2000
-        });
+      .subscribe((data) => {
+
+        this.showSwalMessage('Repartidor agregado correctamente');
+        this.loadingSave = false;
         this.dialogRef.close(true);
+
       }, error => {
-        console.log('Error al agregar' + error);
+        this.showSwalMessage(error.errors.message, 'error');
+        this.loadingSave = false;
       });
   }
 
-  // Se contrulle el formulario para un repartidor nuevo
-  buildDeliveryForm() {
-    this.deliveryForm = this.fb.group({
-      name: [null, Validators.required],
-      last_name: [null, Validators.required],
-      phone_number: [null, [Validators.required, Validators.pattern(new RegExp('[0-9 ]{10}')), Validators.maxLength(10),
-      Validators.minLength(10)]],
-      salary_per_order: [null, Validators.required],
-      password: [null, Validators.required],
-      vehicle_id: [null, Validators.required],
-    });
-  }
-  builAdressDeliveryForm() {
-    this.adressForm = this.fb.group({
-      street: [null],
-      suburb: [null],
-      postal_code: [null],
-      exterior_number: [null],
-      inside_number: [null],
-      references: [null],
-    });
-  }
-  // Fin
+  updateDelivery(deliveryManId, delivery) {
+    if (delivery.password == null) {
+      delete delivery.password;
+    }
+    this.deliveryService.editDelivery(deliveryManId, delivery)
+      .subscribe((data) => {
 
-
-  // Editar un repartidor ==========================================
-  editDelivery(delivery, idDelivery) {
-    this.deliveryService.editDelivery(idDelivery, delivery)
-      .subscribe((data: any) => {
-        Swal.fire({
-          title: 'Se edito el repartidor',
-          type: 'success',
-          confirmButtonText: 'Aceptar',
-          timer: 2000
-        });
+        this.showSwalMessage('Repartidor actualizado correctamente');
+        this.loadingSave = false;
         this.dialogRef.close(true);
-        this.adressForm = data;
+
+      }, error => {
+        this.showSwalMessage(error.errors.message, 'error');
+        this.loadingSave = false;
       });
   }
-  buildEditDeliveryForm(delivery) {
-    this.deliveryForm = this.fb.group({
-      name: [delivery.name, Validators.required],
-      last_name: [delivery.last_name, Validators.required],
-      phone_number: [delivery.phone_number, [Validators.required, Validators.pattern(new RegExp('[0-9 ]{10}')), Validators.maxLength(10),
-      Validators.minLength(10)]],
-      salary_per_order: [delivery.salary_per_order, Validators.required],
-      password: [delivery.password, Validators.required],
-      vehicle_id: [delivery.vehicle_id, Validators.required],
-    });
-  }
-  builEditAdressDeliveryForm(delivery) {
-    console.log(this.delivery.address);
-    this.adressForm = this.fb.group({
-      street: [delivery.address.street],
-      suburb: [delivery.address.suburb],
-      postal_code: [delivery.address.postal_code],
-      exterior_number: [delivery.address.exterior_number],
-      inside_number: [delivery.address.inside_number],
-      references: [delivery.address.references],
-    });
-  }
 
-  // Methods the verification in the form
-  isFieldInvalid(form: FormGroup, field: string) {
-    return (
-      (!form.get(field).valid && form.get(field).touched)
-    );
-  }
-  isFieldValid(form: FormGroup, field: string) {
-    return (
-      (form.get(field).valid && form.get(field).touched)
-    );
-  }
-  isFieldHasError(form: FormGroup, field: string, error: string) {
-    return (
-      (form.get(field).hasError(error))
-    );
-  }
 }

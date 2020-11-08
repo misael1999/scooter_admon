@@ -154,8 +154,8 @@ export class NewOrdersComponent implements OnInit {
         this.getOrders();
       }
       if (data.data.type && data.data.type === 'ACCEPT_ORDER') {
-        this.playAudio();
-        this.getOrders();
+      /*   this.playAudio();
+        this.getOrders(); */
 
         // this.openSnackbarNewOrder('Pedido aceptado por el repartidor');
       }
