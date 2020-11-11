@@ -1,0 +1,113 @@
+<h1 mat-dialog-title class="d-flex justify-content-between">
+    {{zone ? 'Editar': 'Agregar'}} zona
+    <button mat-dialog-close mat-flat-button class="btn ">
+        <i class="ti ti-close"></i>
+    </button>
+</h1>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Form Add vehícle -->
+            <form [formGroup]="zoneForm" autocomplete="autocomplete_off_hack_xfr4!k">
+                <div class="form-row border p-2">
+                    <div class="form-group col-md-12 ">
+                        <label>Nombre</label>
+                        <input autocomplete="autocomplete_off_hack_xfr4!k" formControlName="name" type="text "
+                            class="form-control" placeholder="Nombre"
+                            [ngClass]="(isFieldInvalid(zoneForm, 'name'))? 'is-invalid': 'valid'">
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="hasFieldError(zoneForm, 'name','required')">Este campo es requerido</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 ">
+                        <label>Description</label>
+                        <input formControlName="description" type="text " class="form-control "
+                            placeholder="Descripción"
+                            [ngClass]="(isFieldInvalid(zoneForm, 'description'))? 'is-invalid': 'valid'">
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="hasFieldError(zoneForm, 'description','required')">Este campo es
+                                requerido</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Tipo de zona </label>
+                        <select formControlName="type" class="form-control"
+                            [ngClass]="(isFieldInvalid(zoneForm, 'type'))? 'is-invalid': 'valid'" id="">
+                            <option value="1">Zona restringida</option>
+                            <option value="2">Zona operativa</option>
+                            <option value="3">Zona de promoción</option>
+                        </select>
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="hasFieldError(zoneForm, 'type','required')">Este campo es
+                                requerido</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <mat-checkbox formControlName="has_price" class="example-margin">¿Tiene precio?</mat-checkbox>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <mat-checkbox formControlName="has_schedule" class="example-margin">¿Tiene horario?
+                        </mat-checkbox>
+                    </div>
+                    <div *ngIf="typeZone && typeZone == '2'" class="form-group col-md-12 ">
+                        <label>Precio base </label>
+                        <input formControlName="base_rate_price" type="text" class="form-control "
+                            placeholder="Precio base"
+                            [ngClass]="(isFieldInvalid(zoneForm, 'base_rate_price'))? 'is-invalid': 'valid'">
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="hasFieldError(zoneForm, 'base_rate_price','required')">Este campo es
+                                requerido</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 ">
+                        <label>Desde la hora </label>
+                        <input formControlName="from_hour" type="time" class="form-control " placeholder=""
+                            [ngClass]="(isFieldInvalid(zoneForm, 'from_hour'))? 'is-invalid': 'valid'">
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="hasFieldError(zoneForm, 'from_hour','required')">Este campo es
+                                requerido</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 ">
+                        <label>Hasta la hora </label>
+                        <input formControlName="to_hour" type="time" class="form-control " placeholder=""
+                            [ngClass]="(isFieldInvalid(zoneForm, 'to_hour'))? 'is-invalid': 'valid'">
+                        <!-- MESSAGES ERRORS  -->
+                        <div class="invalid-feedback">
+                            <span *ngIf="hasFieldError(zoneForm, 'to_hour','required')">Este campo es
+                                requerido</span>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="col-md-6">
+
+            <agm-map [streetViewControl]="false" [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                [disableDefaultUI]="false" [zoomControl]="true">
+                <agm-polygon *ngIf="paths.length > 0" [strokeColor]="'red'" [strokeOpacity]="0.5" [fillOpacity]="0"
+                    [(paths)]="paths">
+                </agm-polygon>
+            </agm-map>
+            <input accept=".kml,.kmz" (change)="selectFile($event)" type="file">
+
+        </div>
+    </div>
+    <div class="d-flex justify-content-end"> 
+        <button [disabled]="loadingSave" (click)="createZone()" type="submit" class="btn btn-info fa-pull-right">
+            Guardar
+            <div *ngIf="loadingSave" class="spinner-border text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </button>
+
+    </div>

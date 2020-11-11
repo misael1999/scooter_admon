@@ -1,0 +1,16 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h3>Zonas</h3>
+    </div>
+    <div class="card-body">
+       <div *ngFor="let zone of zones" class="card shadow p-2">
+           <p>Nombre: {{zone.name}}</p>
+           <p>Descripción: {{zone.description}}</p>
+           <p>Tipo: {{zone.type}}</p>
+           <div class="btns">
+               <button class="btn btn-warning btn-sm">Editar</button>
+               <button class="btn btn-danger btn-sm mx-2">Eliminar</button>
+           </div>
+       </div>
+    </div>
+</div>

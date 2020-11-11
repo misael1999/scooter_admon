@@ -26,7 +26,9 @@
                 </div> -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por cliente, dirección" aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text"
+                            class="form-control fm-size" placeholder="Buscar por cliente, dirección"
+                            aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="fas fa-search"></i>
@@ -44,8 +46,9 @@
         <div class="row" class="content">
             <!-- PAGINADOR  -->
             <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                    </mat-paginator>
+                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                </mat-paginator>
             </div>
             <!-- TERMINA EL PAGINADOR  -->
 
@@ -71,6 +74,7 @@
                             <th>Lugar de origen o compra</th>
                             <th>Lugar de entrega</th>
                             <th>Precio del servicio</th>
+                            <th>Distancia</th>
                             <th>Fecha del pedido </th>
                             <th>Estatus </th>
                             <th>Acciones </th>
@@ -99,15 +103,22 @@
                                 <div class="address" *ngIf="order.service != 'Compras'">
                                     {{order.from_address.full_address}}
                                 </div>
-                                <div class="place" *ngIf="order.service == 'Compras'">
+                                <div class="place" *ngIf="order.service == 'Compras' &&
+                                 order.is_order_to_merchant == false ">
                                     <p>{{order.from_address.alias}}</p>
                                     <p>{{order.from_address.full_address}}</p>
+                                </div>
+                                <div class="place" *ngIf="order.service == 'Compras' &&
+                                 order.is_order_to_merchant == true ">
+                                    <p>{{order.merchant.name}}</p>
+                                    <p>{{order.merchant.full_address}}</p>
                                 </div>
                             </td>
                             <td>
                                 {{order.to_address.full_address}}
                             </td>
                             <td>${{order.service_price | number : '1.2-2'}}</td>
+                            <td>{{order.distance}}</td>
                             <td>
                                 {{order.order_date | date:'medium'}}
                             </td>
@@ -115,10 +126,12 @@
                                 {{order.order_status.name}}
                             </td>
                             <td>
-                                <button (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
+                                <button (click)="openDialogAssignDelivery(order)" style="font-size: 90%;"
+                                    class="btn btn-success">Asignar</button>
                                 <br>
                                 <br>
-                                <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
+                                <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;"
+                                    class="btn btn-danger">Rechazar</button>
 
 
                             </td>

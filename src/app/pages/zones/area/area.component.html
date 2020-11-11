@@ -1,0 +1,12 @@
+<!-- Project Card Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h3>Zona de cobertura general</h3>
+    </div>
+    <div class="card-body">
+        <agm-map [streetViewControl]="false" [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+            [disableDefaultUI]="false" [zoomControl]="true">
+            <agm-polygon *ngIf="paths.length > 0" [strokeColor]="'red'" [strokeOpacity]="1" [fillOpacity]="0" [(paths)]="paths" ></agm-polygon>
+        </agm-map>
+    </div>
+</div>

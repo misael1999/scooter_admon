@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'notifications',
     loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule)
   },
+  {
+    path: 'zones',
+    loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule)
+  },
 
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
