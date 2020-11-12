@@ -37,7 +37,7 @@ export class TabPromotionComponent implements OnInit {
       const resp = await this.showMessageConfirm('pedidos gratuitos');
       if (resp.dismiss) {
         this.free_orders_activated = !this.free_orders_activated;
-        return;
+        return; 
       }
     }
     this.isChangeConfig = true;

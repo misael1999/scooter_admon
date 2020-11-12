@@ -33,4 +33,16 @@ export class ZonesService {
     return this.http.patch(url, data);
   }
 
+  deleteZone(zoneId) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/zones/${zoneId}/`;
+    return this.http.delete(url);
+  }
+
+  activeZone(zoneId) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/zones/${zoneId}/unlock/`;
+    return this.http.patch(url, {});
+  }
+
 }

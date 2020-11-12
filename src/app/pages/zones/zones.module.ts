@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AreaComponent } from './area/area.component';
 import { ZonesListComponent } from './zones-list/zones-list.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -25,6 +26,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ZonesRoutingModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSlideToggleModule,
     MatCheckboxModule,
     AgmCoreModule.forRoot({
       // please get your own API key here:

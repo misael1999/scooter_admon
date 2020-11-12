@@ -16,6 +16,8 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   kmlFile: File;
   loadingSave: boolean;
   typeZone: any;
+  has_price: boolean;
+  has_schedule: boolean;
 
   paths = [];
 
@@ -33,7 +35,8 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
     super();
     if (data.zone) {
       this.zone = data.zone;
-      this.buildUpdateForm(this.zone);
+      this.setShapeInMap(data.zone);
+      this.buildUpdateForm(data.zone);
     } else {
       this.buildForm();
     }
@@ -42,16 +45,25 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   ngOnInit(): void {
   }
 
+  setShapeInMap(zone) {
+    const coordinates = zone.poly.coordinates;
+    if (zone.poly.type == 'LineString') {
+      this.setLineString(coordinates);
+      return;
+    }
+    this.setPolygon(coordinates);
+  }
+
+
   buildForm() {
     this.zoneForm = this.fb.group(
       {
         name: [null, Validators.required],
         description: [null, Validators.required],
-        type: ['1', Validators.required],
+        type_id: ['', Validators.required],
         base_rate_price: [null],
         from_hour: [null],
         to_hour: [null],
-        has_price: [null],
         has_schedule: [null],
       }
     );
@@ -60,16 +72,21 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   buildUpdateForm(zone) {
     this.zoneForm = this.fb.group(
       {
-        name: [null, Validators.required],
-        description: [null, Validators.required],
-        type: ['1', Validators.required],
-        base_rate_price: [null],
-        from_hour: [null],
-        to_hour: [null],
-        has_price: [null],
-        has_schedule: [null],
+        name: [zone.name, Validators.required],
+        description: [zone.description, Validators.required],
+        type_id: [zone.type_id, Validators.required],
+        base_rate_price: [zone.base_rate_price],
+        from_hour: [zone.from_hour],
+        to_hour: [zone.to_hour],
+        has_schedule: [zone.has_schedule],
       }
     );
+    this.has_schedule = zone.has_schedule;
+    this.typeZone = zone.type_id.toString();
+  }
+
+  checkboxSchedule(value) {
+    this.has_schedule = value;
   }
 
   selectFile(event) {
@@ -80,9 +97,7 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   }
 
   changeTypeZone(value) {
-    if (value == '1') {
-
-    }
+    this.typeZone = value;
   }
 
 
@@ -93,31 +108,74 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
       return;
     }
 
-    if (this.kmlFile == null) {
-      this.showSwalMessage('Selecciona el archivo KML', 'info');
-      return;
+    const zone = this.zoneForm.value;
+    const formData: FormData = new FormData();
+
+    // Add kml
+    if (this.kmlFile) {
+      formData.append('kml_file', this.kmlFile, this.kmlFile.name);
+    }
+    
+    for (const property in zone) {
+      formData.append(property, zone[property]);
     }
 
-    const zone = this.zoneForm.value;
-    // this.loadingSave = true;
-
     if (this.zone) {
-      // ======= Actualizar repartidor ========
-      this.updateZone(this.zone.id, zone);
+      // ======= Actualizar zona ========
+      this.updateZone(this.zone.id, formData);
+
     } else {
-      const formData: FormData = new FormData();
-      formData.append('kml_file', this.kmlFile, this.kmlFile.name);
-      for (const property in zone) {
-        formData.append(property, zone[property]);
+
+      if (this.kmlFile == null) {
+        this.showSwalMessage('Selecciona el archivo KML', 'info');
+        return;
       }
-       
-      // ======= Agregar repartidor ======== 
+
+      if (!this.validTypeZone(zone)) {
+        return false;
+      }
+
+      // ======= Agregar zona ======== 
       this.addZone(formData);
     }
 
   }
 
+  validTypeZone(zone): boolean {
+    if (this.typeZone == '1') {
+      delete zone.base_rate_price;
+      if (this.has_schedule && (zone.from_hour == null || zone.to_hour == null)) {
+        this.showSwalMessage('Ingresa los horarios', 'info');
+        return false;
+      } else {
+        delete zone.from_hour;
+        delete zone.to_hour;
+        return true;
+      }
+    }
+    if (this.typeZone == '2') {
+      delete zone.from_hour;
+      delete zone.to_hour;
+      delete zone.base_rate_price;
+      delete zone.has_schedule;
+      return true;
+    }
+    if (this.typeZone == '3') {
+      if (zone.base_rate_price == null) {
+        this.showSwalMessage('Ingresa la tarifa', 'info');
+        return false;
+      }
+      if (this.has_schedule && (zone.from_hour == null || zone.to_hour == null)) {
+        this.showSwalMessage('Ingresa los horarios', 'info');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   addZone(zone) {
+    this.loadingSave = true;
     this.zoneService.addZone(zone)
       .subscribe((data) => {
 
@@ -132,13 +190,11 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   }
 
   updateZone(zoneId, zone) {
-    if (zone.password == null) {
-      delete zone.password;
-    }
+    this.loadingSave = true;
     this.zoneService.updateZone(zoneId, zone)
       .subscribe((data) => {
 
-        this.showSwalMessage('Repartidor actualizado correctamente');
+        this.showSwalMessage('zona actualizada correctamente');
         this.loadingSave = false;
         this.dialogRef.close(true);
 
@@ -160,20 +216,38 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
     fileReader.readAsText(file)
   }
 
+  setPolygon(coordinates) {
+    for (const points of coordinates) {
+      for (const coordinate of points) {
+        this.paths.push({ lat: coordinate[1], lng: coordinate[0] });
+      }
+    }
+  }
+
+  setLineString(coordinates) {
+    for (const points of coordinates) {
+
+      this.paths.push({ lat: points[1], lng: points[0] });
+
+    }
+  }
+
   async extractGoogleCoords(plainText) {
     let parser = new DOMParser()
     let xmlDoc = parser.parseFromString(plainText, "text/xml")
     let googlePolygons = []
+    let googleLine = []
     let googleMarkers = []
 
     if (xmlDoc.documentElement.nodeName == "kml") {
 
       for (const item of xmlDoc.getElementsByTagName('Placemark') as any) {
         let placeMarkName = item.getElementsByTagName('name')[0].childNodes[0].nodeValue.trim()
-        let polygons = item.getElementsByTagName('LineString')
+        let polygons = item.getElementsByTagName('Polygon')
+        let lineString = item.getElementsByTagName('LineString')
         let markers = item.getElementsByTagName('Point')
 
-        /** POLYGONS PARSE **/        
+        /** POLYGONS PARSE **/
         for (const polygon of polygons) {
           let coords = polygon.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
           let points = coords.split(" ")
@@ -185,8 +259,20 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
           }
           googlePolygons.push(googlePolygonsPaths)
         }
+        /** LINESTRING PARSE **/
+        for (const line of lineString) {
+          let coords = line.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
+          let points = coords.split(" ")
 
-        /** MARKER PARSE **/    
+          let googlePolygonsPaths = []
+          for (const point of points) {
+            let coord = point.split(",")
+            googlePolygonsPaths.push({ lat: +coord[1], lng: +coord[0] })
+          }
+          googlePolygons.push(googlePolygonsPaths)
+        }
+
+        /** MARKER PARSE **/
         for (const marker of markers) {
           var coords = marker.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
           let coord = coords.split(",")
@@ -197,7 +283,11 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
       throw "error while parsing"
     }
 
-    return { markers: googleMarkers, polygons: googlePolygons }
+    if (googlePolygons.length == 0) {
+      googlePolygons = googleLine;
+    }
+
+    return { markers: googleMarkers, polygons: googlePolygons, lines: googleLine }
 
   }
 

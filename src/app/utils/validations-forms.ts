@@ -1,6 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import Swal, { SweetAlertType } from 'sweetalert2';
+import Swal, { SweetAlertResult, SweetAlertType } from 'sweetalert2';
 
 
 
@@ -33,5 +33,17 @@ export class ValidationForms {
             timer: 3000
           });
     }
+
+    showMessageConfirm(message: string): Promise<SweetAlertResult> {
+        return Swal.fire({
+          title: '¿Estas seguro?',
+          text: message,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si'
+        });
+      }
 
 }

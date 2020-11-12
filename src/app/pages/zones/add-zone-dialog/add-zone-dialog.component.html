@@ -35,29 +35,27 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label>Tipo de zona </label>
-                        <select formControlName="type" class="form-control"
-                            [ngClass]="(isFieldInvalid(zoneForm, 'type'))? 'is-invalid': 'valid'" id="">
+                        <select (change)="changeTypeZone($event.target.value)" formControlName="type_id" class="form-control"
+                            [ngClass]="(isFieldInvalid(zoneForm, 'type_id'))? 'is-invalid': 'valid'" id="">
+                            <option value="">Seleccciona un tipo de zona</option>
                             <option value="1">Zona restringida</option>
-                            <option value="2">Zona operativa</option>
+                            <!-- <option value="2">Zona operativa</option> -->
                             <option value="3">Zona de promoción</option>
                         </select>
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
-                            <span *ngIf="hasFieldError(zoneForm, 'type','required')">Este campo es
+                            <span *ngIf="hasFieldError(zoneForm, 'type_id','required')">Este campo es
                                 requerido</span>
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <mat-checkbox formControlName="has_price" class="example-margin">¿Tiene precio?</mat-checkbox>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <mat-checkbox formControlName="has_schedule" class="example-margin">¿Tiene horario?
-                        </mat-checkbox>
-                    </div>
-                    <div *ngIf="typeZone && typeZone == '2'" class="form-group col-md-12 ">
-                        <label>Precio base </label>
-                        <input formControlName="base_rate_price" type="text" class="form-control "
-                            placeholder="Precio base"
+                    <!-- CAMPOS DINAMICOS  -->
+     <!--                <div *ngIf="typeZone == '3'" class="form-group col-md-12">
+                        <mat-checkbox formControlName="has_price" class="example-margin">¿Tiene tarifa?</mat-checkbox>
+                    </div> -->
+                    <div *ngIf="typeZone == '3'" class="form-group col-md-12 ">
+                        <label>Tarifa </label>
+                        <input formControlName="base_rate_price" type="number" class="form-control "
+                            placeholder="Tarifa"
                             [ngClass]="(isFieldInvalid(zoneForm, 'base_rate_price'))? 'is-invalid': 'valid'">
                         <!-- MESSAGES ERRORS  -->
                         <div class="invalid-feedback">
@@ -65,7 +63,11 @@
                                 requerido</span>
                         </div>
                     </div>
-                    <div class="form-group col-md-6 ">
+                    <div *ngIf="typeZone == '1' || typeZone == '3'" class="form-group col-md-12">
+                        <mat-checkbox (ngModelChange)="checkboxSchedule($event)"  formControlName="has_schedule" class="example-margin">¿Tiene horario?
+                        </mat-checkbox>
+                    </div>
+                    <div *ngIf="has_schedule && (typeZone == '1' || typeZone == '3')" class="form-group col-md-6 ">
                         <label>Desde la hora </label>
                         <input formControlName="from_hour" type="time" class="form-control " placeholder=""
                             [ngClass]="(isFieldInvalid(zoneForm, 'from_hour'))? 'is-invalid': 'valid'">
@@ -75,7 +77,7 @@
                                 requerido</span>
                         </div>
                     </div>
-                    <div class="form-group col-md-6 ">
+                    <div *ngIf="has_schedule && (typeZone == '1' || typeZone == '3')" class="form-group col-md-6 ">
                         <label>Hasta la hora </label>
                         <input formControlName="to_hour" type="time" class="form-control " placeholder=""
                             [ngClass]="(isFieldInvalid(zoneForm, 'to_hour'))? 'is-invalid': 'valid'">
@@ -98,7 +100,7 @@
                     [(paths)]="paths">
                 </agm-polygon>
             </agm-map>
-            <input accept=".kml,.kmz" (change)="selectFile($event)" type="file">
+            <input class="form-control mt-2" accept=".kml,.kmz" (change)="selectFile($event)" type="file">
 
         </div>
     </div>
