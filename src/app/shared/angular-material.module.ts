@@ -38,7 +38,8 @@ const components = [
   MatNativeDateModule,
   MatTabsModule,
   MatProgressBarModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+
 ];
 
 @NgModule({

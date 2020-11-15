@@ -115,7 +115,11 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
     if (this.kmlFile) {
       formData.append('kml_file', this.kmlFile, this.kmlFile.name);
     }
-    
+
+    if (!this.validTypeZone(zone)) {
+      return false;
+    }
+
     for (const property in zone) {
       formData.append(property, zone[property]);
     }
@@ -129,10 +133,6 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
       if (this.kmlFile == null) {
         this.showSwalMessage('Selecciona el archivo KML', 'info');
         return;
-      }
-
-      if (!this.validTypeZone(zone)) {
-        return false;
       }
 
       // ======= Agregar zona ======== 

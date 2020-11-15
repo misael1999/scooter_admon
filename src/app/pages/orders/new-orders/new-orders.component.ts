@@ -38,7 +38,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getOrders();
-    this.connectToWebSocket();
+    // this.connectToWebSocket();
   }
 
   ngOnDestroy(): void {

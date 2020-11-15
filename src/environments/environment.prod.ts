@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
-  WS_SOCKET: 'wss://www.scooterdev.tech/ws',
-  HOST_APIV1: 'https://www.scooterdev.tech/appback/api/v1',
+  // WS_SOCKET: 'wss://www.scooterdev.tech/ws',
+  // HOST_APIV1: 'https://www.scooterdev.tech/appback/api/v1',
   
-  // HOST_APIV1: 'https://www.scooter-app.team/appback/api/v1',
-  // WS_SOCKET: 'wss://www.scooter-app.team/ws',
+  HOST_APIV1: 'https://www.scooter-app.team/appback/api/v1',
+  WS_SOCKET: 'wss://www.scooter-app.team/ws',
   firebase: {
     apiKey: 'AIzaSyDcAruMxBUQlW9S672oSoe1dyr7l8WIxlU',
     authDomain: 'scooter-277719.firebaseapp.com',
