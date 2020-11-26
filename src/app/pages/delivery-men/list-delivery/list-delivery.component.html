@@ -76,7 +76,7 @@
 
             <!-- Table the vehicles  -->
             <div class="col-md-12" *ngIf="!loadingDelivery && deliverys.length > 0">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered table-responsive">
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>
@@ -88,6 +88,7 @@
                             <th scope="col">Color</th>
                             <th scope="col">Vehiculo</th>
                             <th scope="col">Reputación</th>
+                            <th scope="col">Ultima ubicación</th>
                             <th scope="col">Estatus</th>
                             <th scope="col">Acciones </th>
                         </tr>
@@ -103,6 +104,7 @@
                             <td> {{delivery.vehicle_color}} </td>
                             <td> {{delivery.vehicle_type}} </td>
                             <td> {{delivery.reputation}} </td>
+                            <td>{{delivery.delivery_status}} </td>
                             <td>{{delivery.delivery_status}} </td>
                             <td>
                                 <button *ngIf="params.status == 1" (click)="disabledDelivery(delivery.id)" class="btn btn-sm btn-danger mr-2">Bloquear</button>

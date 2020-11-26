@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.component';
 import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { CancelOrderDialogComponent } from './orders-in-process/cancel-order-dialog/cancel-order-dialog.component';
+import { ReasignOrderComponent } from './orders-in-process/reasign-order/reasign-order.component';
 
 
 
@@ -22,7 +24,9 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     NewOrdersComponent,
     AssignDeliveryDialogComponent,
     RejectOrderDialogComponent,
-    OrdersCancelledComponent
+    OrdersCancelledComponent,
+    CancelOrderDialogComponent,
+    ReasignOrderComponent
   ],
   imports: [
     CommonModule,

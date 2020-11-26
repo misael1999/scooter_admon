@@ -69,6 +69,7 @@
                         <tr>
                             <th>Servicio</th>
                             <th>Cliente</th>
+                            <th>Numero del cliente</th>
                             <th>Detalles</th>
                             <th>Servicio</th>
                             <th>Lugar de origen o compra</th>
@@ -83,17 +84,18 @@
                     <tbody>
                         <tr *ngFor="let order of orders">
                             <td> <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
-                                'badge-warning': order.service == 'Recolección' }">{{order.service}}</span>
+                                'badge-warning': order.service == 'Recolección' }">
+                                    {{order.service}} <span *ngIf="order.is_order_to_merchant">a comercios</span>
+                                </span>
                             </td>
-
                             <td>{{order.customer.name}}</td>
+                            <td>{{order.customer.phone_number}}</td>
                             <td *ngIf="order.service == 'Compras'">
                                 <div class="products-details">
                                     <span *ngFor="let detail of order.details">
-                                        - {{detail.product_name | splitWord: 20}}
+                                        -x{{detail.quantity || '1'}} {{detail.product_name}}
                                     </span>
                                 </div>
-
                             </td>
                             <td *ngIf="order.service == 'Recolección'">
                                 <span>{{order.indications}}</span>
@@ -109,8 +111,8 @@
                                     <p>{{order.from_address.full_address}}</p>
                                 </div>
                                 <div class="place" *ngIf="order.service == 'Compras' &&
-                                 order.is_order_to_merchant == true ">
-                                    <p>{{order.merchant.name}}</p>
+                                order.is_order_to_merchant == true ">
+                                    <span class="badge badge-success">{{order.merchant.merchant_name}}</span>
                                     <p>{{order.merchant.full_address}}</p>
                                 </div>
                             </td>
@@ -118,7 +120,7 @@
                                 {{order.to_address.full_address}}
                             </td>
                             <td>${{order.service_price | number : '1.2-2'}}</td>
-                            <td>{{order.distance}}</td>
+                            <td>{{order.distance | number}} KM</td>
                             <td>
                                 {{order.order_date | date:'medium'}}
                             </td>

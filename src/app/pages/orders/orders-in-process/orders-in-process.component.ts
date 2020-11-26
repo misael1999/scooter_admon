@@ -5,6 +5,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { CancelOrderDialogComponent } from './cancel-order-dialog/cancel-order-dialog.component';
+import { ReasignOrderComponent } from './reasign-order/reasign-order.component';
 
 @Component({
   selector: 'app-orders-in-process',
@@ -44,6 +46,39 @@ export class OrdersInProcessComponent implements OnInit {
        this.loadingOrders = false;
      });
  }
+
+ openDialogCancelOrder(orderId) {
+  const dialogref = this.dialog.open(CancelOrderDialogComponent, {
+    disableClose: true,
+    width: '40%',
+    minHeight: '300px',
+    minWidth: '300px',
+    data: { orderId }
+  });
+
+  dialogref.afterClosed().subscribe(data => {
+    if (data) {
+      this.getOrders();
+    }
+  });
+}
+
+openDialogReassignDelivery(order) {
+  console.log(order);
+  const dialogref = this.dialog.open(ReasignOrderComponent, {
+    disableClose: true,
+    width: '60%',
+    minHeight: '500px',
+    minWidth: '350px',
+    data: { orderId: order.id, typeService: order.service_id }
+  });
+
+  dialogref.afterClosed().subscribe(data => {
+    if (data) {
+      this.getOrders();
+    }
+  });
+}
 
  searchBy(value: string) {
    this.params.search = value;

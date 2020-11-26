@@ -1,0 +1,15 @@
+.div-list {
+    max-height: 350px !important;
+    min-height: 350px !important;
+    overflow-y: scroll;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    &:hover, &.selected {
+        background: rgba($color: #f5f5f5, $alpha: 0.8);
+    }
+}

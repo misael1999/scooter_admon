@@ -26,12 +26,24 @@ export class OrdersService {
     const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/assign_order/`;
     return this.http.put(url, data);
   }
+  reassignDeliveryToOrder(orderId, data) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/reassign_order/`;
+    return this.http.put(url, data);
+  }
 
   rejectOrder(orderId, data) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/reject_order/`;
     return this.http.put(url, data);
   }
+
+  cancelOrder(orderId, data) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/cancel_order/`;
+    return this.http.put(url, data);
+  }
+
   acceptOrderMerchant(orderId, data) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/accept_order_merchant/`;

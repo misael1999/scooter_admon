@@ -29,7 +29,7 @@
         <span>Teléfono: {{delivery.phone_number}}</span>
         <span style="width: 150px;" class="badge "
           [ngClass]="{'badge-success': delivery.delivery_status == 'Disponible',
-           'badge-danger': delivery.delivery_status == 'Ocupado', 'badge-warning': delivery.delivery_status == 'Fuera de servicio'}">{{delivery.delivery_status}}</span>
+           'badge-info': delivery.delivery_status == 'Ocupado', 'badge-warning': delivery.delivery_status == 'Fuera de servicio'}">{{delivery.delivery_status}}</span>
       </li>
     </ul>
 

@@ -148,8 +148,8 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
         this.showSwalMessage('Ingresa los horarios', 'info');
         return false;
       } else {
-        delete zone.from_hour;
-        delete zone.to_hour;
+        /* delete zone.from_hour;
+        delete zone.to_hour; */
         return true;
       }
     }
@@ -168,6 +168,9 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
       if (this.has_schedule && (zone.from_hour == null || zone.to_hour == null)) {
         this.showSwalMessage('Ingresa los horarios', 'info');
         return false;
+      } else {
+        delete zone.from_hour;
+        delete zone.to_hour;
       }
     }
 
