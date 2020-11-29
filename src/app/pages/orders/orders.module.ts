@@ -14,6 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { CancelOrderDialogComponent } from './orders-in-process/cancel-order-dialog/cancel-order-dialog.component';
 import { ReasignOrderComponent } from './orders-in-process/reasign-order/reasign-order.component';
+import { ConsumeTehComponent } from './consume-teh/consume-teh.component';
 
 
 
@@ -26,7 +27,8 @@ import { ReasignOrderComponent } from './orders-in-process/reasign-order/reasign
     RejectOrderDialogComponent,
     OrdersCancelledComponent,
     CancelOrderDialogComponent,
-    ReasignOrderComponent
+    ReasignOrderComponent,
+    ConsumeTehComponent
   ],
   imports: [
     CommonModule,

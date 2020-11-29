@@ -4,6 +4,7 @@ import { NewOrdersComponent } from './new-orders/new-orders.component';
 import { OrdersInProcessComponent } from './orders-in-process/orders-in-process.component';
 import { DeliveredOrdersComponent } from './delivered-orders/delivered-orders.component';
 import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.component';
+import { ConsumeTehComponent } from './consume-teh/consume-teh.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,9 @@ const routes: Routes = [
   },
   {
     path: 'cancelled', component: OrdersCancelledComponent,
+  },
+  {
+    path: 'consumeteh', component: ConsumeTehComponent,
   },
   { path: '', redirectTo: 'news', pathMatch: 'full' }
 

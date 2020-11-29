@@ -147,19 +147,18 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
       if (this.has_schedule && (zone.from_hour == null || zone.to_hour == null)) {
         this.showSwalMessage('Ingresa los horarios', 'info');
         return false;
-      } else {
-        /* delete zone.from_hour;
-        delete zone.to_hour; */
-        return true;
+      } else if (!this.has_schedule) {
+        delete zone.from_hour;
+        delete zone.to_hour;
       }
     }
-    if (this.typeZone == '2') {
-      delete zone.from_hour;
-      delete zone.to_hour;
-      delete zone.base_rate_price;
-      delete zone.has_schedule;
-      return true;
-    }
+    /*     if (this.typeZone == '2') {
+          delete zone.from_hour;
+          delete zone.to_hour;
+          delete zone.base_rate_price;
+          delete zone.has_schedule;
+          return true;
+        } */
     if (this.typeZone == '3') {
       if (zone.base_rate_price == null) {
         this.showSwalMessage('Ingresa la tarifa', 'info');
@@ -168,7 +167,7 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
       if (this.has_schedule && (zone.from_hour == null || zone.to_hour == null)) {
         this.showSwalMessage('Ingresa los horarios', 'info');
         return false;
-      } else {
+      } else if (!this.has_schedule) {
         delete zone.from_hour;
         delete zone.to_hour;
       }
@@ -245,7 +244,7 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
     if (xmlDoc.documentElement.nodeName == "kml") {
 
       for (const item of xmlDoc.getElementsByTagName('Placemark') as any) {
-        let placeMarkName = item.getElementsByTagName('name')[0].childNodes[0].nodeValue.trim()
+        // let placeMarkName = item.getElementsByTagName('name')[0].childNodes[0].nodeValue.trim()
         let polygons = item.getElementsByTagName('Polygon')
         let lineString = item.getElementsByTagName('LineString')
         let markers = item.getElementsByTagName('Point')
@@ -254,36 +253,38 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
         for (const polygon of polygons) {
           let coords = polygon.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
           let points = coords.split(" ")
-
           let googlePolygonsPaths = []
           for (const point of points) {
             let coord = point.split(",")
-            googlePolygonsPaths.push({ lat: +coord[1], lng: +coord[0] })
+            if (!this.isNumber(Number(coord))) {
+              googlePolygonsPaths.push({ lat: +coord[1], lng: +coord[0] })
+            }
+
           }
           googlePolygons.push(googlePolygonsPaths)
         }
         /** LINESTRING PARSE **/
-        for (const line of lineString) {
-          let coords = line.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
-          let points = coords.split(" ")
-
-          let googlePolygonsPaths = []
-          for (const point of points) {
-            let coord = point.split(",")
-            googlePolygonsPaths.push({ lat: +coord[1], lng: +coord[0] })
-          }
-          googlePolygons.push(googlePolygonsPaths)
-        }
+        /*      for (const line of lineString) {
+               let coords = line.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
+               let points = coords.split(" ")
+     
+               let googlePolygonsPaths = []
+               for (const point of points) {
+                 let coord = point.split(",")
+                 googlePolygonsPaths.push({ lat: +coord[1], lng: +coord[0] })
+               }
+               googlePolygons.push(googlePolygonsPaths)
+             } */
 
         /** MARKER PARSE **/
-        for (const marker of markers) {
-          var coords = marker.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
-          let coord = coords.split(",")
-          googleMarkers.push({ lat: +coord[1], lng: +coord[0] })
-        }
+        /*       for (const marker of markers) {
+                var coords = marker.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
+                let coord = coords.split(",")
+                googleMarkers.push({ lat: +coord[1], lng: +coord[0] })
+              } */
       }
     } else {
-      throw "error while parsing"
+      this.showSwalMessage('No es un archivo KML', 'warning');
     }
 
     if (googlePolygons.length == 0) {
@@ -292,6 +293,10 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
 
     return { markers: googleMarkers, polygons: googlePolygons, lines: googleLine }
 
+  }
+
+  isNumber(n) {
+    return !isNaN(n - 0);
   }
 
 }
