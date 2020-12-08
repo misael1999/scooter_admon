@@ -413,12 +413,15 @@
 				li {
 
 					&.active {
-						font-weight: bold;
-						@include side-nav-dark-item-active();
+						background-color: rgba($brand-warning, 0.15);
 
 						a {
-							color: white;
-							font-weight: bold;
+							color: #ffff;
+						}
+
+						&:after {
+							@include transform(scaleY(1));
+							opacity: 1;
 						}
 					}
 
@@ -431,6 +434,18 @@
 					}
 
 					&.dropdown {
+						&.active {
+							background-color: rgba($brand-warning, 0.15);
+	
+							a {
+								color: #ffff;
+							}
+	
+							&:after {
+								@include transform(scaleY(1));
+								opacity: 1;
+							}
+						}
 						&.open {
 							> a {
 								@include side-nav-dark-item-active()
@@ -455,14 +470,15 @@
 									}
 
 									&.active {
-										background-color: transparent;
-						
-										&:after {
-											border-color: transparent;
-										}
-						
+										background-color: rgba($brand-warning, 0.15);
+				
 										a {
-											color: $white;
+											color: #ffff;
+										}
+				
+										&:after {
+											@include transform(scaleY(1));
+											opacity: 1;
 										}
 									}
 								}

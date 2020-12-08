@@ -36,9 +36,28 @@
                     </li>
                 </ul>
             </li>
-
             <!-- ====  -->
-<!--             <li *ngIf="merchant.has_branches" routerLink="/branches" routerLinkActive="active"
+            <li routerLink="/delivery" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+
+                        <i class="anticon anticon-car"></i>
+                    </span>
+                    <span class="title">Repartidores</span>
+                </a>
+            </li>
+
+            <li routerLink="/traicing" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+
+                        <i class="anticon anticon-compass"></i>
+                    </span>
+                    <span class="title">Mapa de seguimiento</span>
+                </a>
+            </li>
+            <!-- ====  -->
+            <!--             <li *ngIf="merchant.has_branches" routerLink="/branches" routerLinkActive="active"
                 class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
@@ -48,7 +67,7 @@
                 </a>
             </li> -->
             <!-- ====  -->
-<!--             <li routerLink="/categories" routerLinkActive="active" class="nav-item dropdown">
+            <!--             <li routerLink="/categories" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
                         <i class="anticon anticon-tags"></i>
@@ -57,7 +76,7 @@
                 </a>
             </li> -->
             <!-- ====  -->
-<!--             <li routerLink="/products" routerLinkActive="active" class="nav-item dropdown">
+            <!--             <li routerLink="/products" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
 
@@ -68,7 +87,7 @@
             </li> -->
 
             <!-- ====  -->
-<!--             <li routerLink="/reviews" routerLinkActive="active" class="nav-item dropdown">
+            <!--             <li routerLink="/reviews" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
 
@@ -79,7 +98,7 @@
             </li> -->
 
             <!-- ====  -->
-<!--             <li routerLink="/statement" routerLinkActive="active" class="nav-item dropdown">
+            <!--             <li routerLink="/statement" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
 
@@ -89,36 +108,17 @@
                 </a>
             </li> -->
 
-            <!-- ====  -->
-<!--             <li routerLink="/profile" routerLinkActive="active" class="nav-item dropdown">
-                <a>
-                    <span class="icon-holder">
 
-                        <i class="anticon anticon-setting"></i>
-                    </span>
-                    <span class="title">Configuración</span>
-                </a>
-            </li> -->
 
             <!-- ENTREGADO POR LA TIENDA  -->
 
-<!--             <hr *ngIf="merchant.is_delivery_by_store">
- -->            <!-- <span style="font-size: 90%; margin-left: 15px;">Gestión de envíos</span> -->
-            <!-- ====  -->
-            <!-- <li *ngIf="merchant.is_delivery_by_store" routerLink="/delivery" routerLinkActive="active"
-                class="nav-item dropdown">
-                <a>
-                    <span class="icon-holder">
+            <!--             <hr *ngIf="merchant.is_delivery_by_store">
+ -->
+            <!-- <span style="font-size: 90%; margin-left: 15px;">Gestión de envíos</span> -->
 
-                        <i class="anticon anticon-car"></i>
-                    </span>
-                    <span class="title">Repartidores</span>
-                </a>
-            </li> -->
 
             <!-- ====  -->
-     <!--        <li *ngIf="merchant.is_delivery_by_store" routerLink="/zones" routerLinkActive="active"
-                class="nav-item dropdown">
+            <li routerLink="/zones" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
 
@@ -128,17 +128,47 @@
                     <span class="title">Zonas de entregas</span>
                 </a>
             </li>
+            <!-- ====  -->
+            <li routerLink="/profile" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
 
-            <li *ngIf="merchant.is_delivery_by_store" routerLink="/delivery-config" routerLinkActive="active"
+                        <i class="anticon anticon-setting"></i>
+                    </span>
+                    <span class="title">Configuración</span>
+                </a>
+            </li>
+            
+            <hr>
+            <li routerLink="/notifications" routerLinkActive="active"
                 class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
-                        <i class="anticon anticon-deployment-unit"></i>
+                        <i class="anticon anticon-bell"></i>
                     </span>
-                    <span class="title">Configurar entregas</span>
+                    <span class="title">Enviar Notificaciones</span>
                 </a>
             </li>
-            <hr> -->
+
+            <li routerLink="/merchants" routerLinkActive="active"
+                class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+                        <i class="anticon anticon-shopping"></i>
+                    </span>
+                    <span class="title">Comercios</span>
+                </a>
+            </li>
+
+            <li routerLink="/clients" routerLinkActive="active"
+                class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+                        <i class="anticon anticon-contacts"></i>
+                    </span>
+                    <span class="title">Usuarios registrados</span>
+                </a>
+            </li>
 
             <!-- TERMINA ENTREGADO POR LA TIENDA  -->
 

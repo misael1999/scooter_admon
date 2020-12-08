@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule)
   },
   {
-    path: 'client',
+    path: 'clients',
     canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
   },
