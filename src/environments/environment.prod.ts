@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  HOST_APIV1: 'https://www.scooter-app.team/appback/api/v1',
-  WS_SOCKET: 'wss://www.scooter-app.team/ws',
+  HOST_APIV1: 'https://api.lospedidos.site//api/v1',
+  WS_SOCKET: 'wss://api.lospedidos.site/ws',
   firebase: {
     apiKey: 'AIzaSyDcAruMxBUQlW9S672oSoe1dyr7l8WIxlU',
     authDomain: 'scooter-277719.firebaseapp.com',
