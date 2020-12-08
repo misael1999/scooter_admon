@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ScheduleModel } from 'src/app/models/schedule.model';
-import { AmazingTimePickerService } from 'amazing-time-picker';
 
 @Component({
   selector: 'app-schedule-promotion',
@@ -15,7 +14,7 @@ export class SchedulePromotionComponent implements OnInit {
   openingHour = '11:00:00';
   closedHour = '14:00:00';
 
-  constructor(private atp: AmazingTimePickerService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -25,25 +24,25 @@ export class SchedulePromotionComponent implements OnInit {
   }
 
   public openOpeningHourPicker() {
-    const amazingTimePicker = this.atp.open(
+   /*  const amazingTimePicker = this.atp.open(
       this.getConfigTimePicker(this.openingHour)
       );
     amazingTimePicker.afterClose()
       .subscribe(time => {
         this.openingHour = time;
         this.sendSchedule();
-      });
+      }); */
   }
 
   openClosedHourPicker() {
-    const amazingTimePicker = this.atp.open(
+   /*  const amazingTimePicker = this.atp.open(
       this.getConfigTimePicker(this.closedHour)
     );
     amazingTimePicker.afterClose()
       .subscribe(time => {
         this.closedHour = time;
         this.sendSchedule();
-      });
+      }); */
   }
 
   sendSchedule() {

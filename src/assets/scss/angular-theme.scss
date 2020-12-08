@@ -21,14 +21,16 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 
 .main-snackbar {
-  background: #2b6826;
+  background: #2db421;
   color: white !important;
 }
 
 .error-snackbar {
-  background: #e73e06;
+  background: #1092ce;
   color: white;
   text-align: center;
+  font-size: 120%;
+  font-weight: bold;
 }
 
 .custom-background {
@@ -40,4 +42,9 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   content: "";
   display: block;
   clear: both;
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0 !important;
+  margin: 0px 0px 5px 0px  !important;
 }

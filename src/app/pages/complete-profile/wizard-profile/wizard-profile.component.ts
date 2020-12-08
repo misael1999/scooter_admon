@@ -52,7 +52,6 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       text: 'Tarifas',
       icon: 'fas fa-dollar-sign',
       component: 'div-categories',
-      form: this.addressForm
     },
     {
       id: 3,

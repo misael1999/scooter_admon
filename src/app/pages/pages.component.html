@@ -1,15 +1,46 @@
-<ngx-loading-bar [color]="'orange'" [height]="'3px'" >
-  
-</ngx-loading-bar>
-
-<div id="wrapper">
-    <app-sidebar></app-sidebar>
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-            <app-header></app-header>
-            <router-outlet></router-outlet>
-        </div>
-
+<ngx-loading-bar [color]="'yellow'" [height]="'3px'" ></ngx-loading-bar>
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="page-container">
+    <!-- Content Wrapper START -->
+    <div class="main-content">
+        <router-outlet></router-outlet>
     </div>
+</div>
+
+<!-- Search Start-->
+<div class="modal modal-left fade search" id="search-drawer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-between align-items-center">
+                <h5 class="modal-title">Buscar</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body scrollable">
+                <div class="input-affix">
+                    <i class="prefix-icon anticon anticon-search"></i>
+                    <input type="text" class="form-control" placeholder="Buscar">
+                </div>
+                <!-- Content goes Here -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search End-->
+
+<!-- Quick View START -->
+<div class="modal modal-right fade quick-view" id="quick-view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-between align-items-center">
+                <h5 class="modal-title">Vista</h5>
+            </div>
+            <div class="modal-body scrollable">
+                <!-- Content goes Here -->
+            </div>
+        </div>
+    </div>            
+</div>
+<!-- Quick View END -->

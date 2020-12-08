@@ -1,212 +1,148 @@
-<ul class="navbar-nav bg-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+<!-- Side Nav START -->
+<div class="side-nav">
+    <div class="side-nav-inner ">
+        <ul class="side-nav-menu scrollable">
+            <li class="nav-item dropdown" [routerLink]="['/dashboard']" routerLinkActive="active">
+                <a>
+                    <span class="icon-holder">
+                        <i class="anticon anticon-home"></i>
+                    </span>
+                    <span class="title">Inicio</span>
+                </a>
+            </li>
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/dashboard"
-        routerLinkActive="active">
-        <div>
-        </div>
-        <!--         <p> {{ station.station_name |slice:0:1 |lowercase }} </p>
- -->
-        <div style="font-family: 'slant'; font-size: 150%;" class="sidebar-brand-text mx-3">SCOOTER</div>
-    </a>
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-shopping-cart"></i>
+                    </span>
+                    <span class="title">Pedidos</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li routerLink="/orders/news" routerLinkActive="active">
+                        <a>Nuevos</a>
+                    </li>
+                    <li routerLink="/orders/process" routerLinkActive="active">
+                        <a>En proceso</a>
+                    </li>
+                    <li routerLink="/orders/delivered" routerLinkActive="active">
+                        <a>Entregadas</a>
+                    </li>
+                    <li routerLink="/orders/cancelled" routerLinkActive="active">
+                        <a>Ignoradas</a>
+                    </li>
+                </ul>
+            </li>
 
+            <!-- ====  -->
+<!--             <li *ngIf="merchant.has_branches" routerLink="/branches" routerLinkActive="active"
+                class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+                        <i class="anticon anticon-apartment"></i>
+                    </span>
+                    <span class="title">Sucursales</span>
+                </a>
+            </li> -->
+            <!-- ====  -->
+<!--             <li routerLink="/categories" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+                        <i class="anticon anticon-tags"></i>
+                    </span>
+                    <span class="title">Categorías</span>
+                </a>
+            </li> -->
+            <!-- ====  -->
+<!--             <li routerLink="/products" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
 
-    <!-- Nav Item - Dashboard Collapso Menu -->
-    <li class="nav-item cursor" routerLink="/dashboard" routerLinkActive="active">
-        <a class="nav-link">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
-    <!-- Nav Item - Fin the Dashboard Collapso Menu -->
+                        <i class="anticon anticon-ordered-list"></i>
+                    </span>
+                    <span class="title">Productos</span>
+                </a>
+            </li> -->
 
+            <!-- ====  -->
+<!--             <li routerLink="/reviews" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
 
-    <!-- Nav Item - Statistics Collapso Menu -->
-    <!-- <li class="nav-item" routerLink="/statistics/orders" routerLinkActive="active">
-        <a class="nav-link">
-            <i class="fas fa-fw fa-chart-line"></i>
-            <span>Estadisticas </span></a>
-    </li> -->
-    <!-- Nav Item - Fin the Statistics Collapso Menu -->
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+                        <i class="anticon anticon-star"></i>
+                    </span>
+                    <span class="title">Reseñas</span>
+                </a>
+            </li> -->
 
+            <!-- ====  -->
+<!--             <li routerLink="/statement" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
 
+                        <i class="anticon anticon-credit-card"></i>
+                    </span>
+                    <span class="title">Resumén</span>
+                </a>
+            </li> -->
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Gestión
+            <!-- ====  -->
+<!--             <li routerLink="/profile" routerLinkActive="active" class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+
+                        <i class="anticon anticon-setting"></i>
+                    </span>
+                    <span class="title">Configuración</span>
+                </a>
+            </li> -->
+
+            <!-- ENTREGADO POR LA TIENDA  -->
+
+<!--             <hr *ngIf="merchant.is_delivery_by_store">
+ -->            <!-- <span style="font-size: 90%; margin-left: 15px;">Gestión de envíos</span> -->
+            <!-- ====  -->
+            <!-- <li *ngIf="merchant.is_delivery_by_store" routerLink="/delivery" routerLinkActive="active"
+                class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+
+                        <i class="anticon anticon-car"></i>
+                    </span>
+                    <span class="title">Repartidores</span>
+                </a>
+            </li> -->
+
+            <!-- ====  -->
+     <!--        <li *ngIf="merchant.is_delivery_by_store" routerLink="/zones" routerLinkActive="active"
+                class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+
+                        <i class="anticon anticon-environment"></i>
+
+                    </span>
+                    <span class="title">Zonas de entregas</span>
+                </a>
+            </li>
+
+            <li *ngIf="merchant.is_delivery_by_store" routerLink="/delivery-config" routerLinkActive="active"
+                class="nav-item dropdown">
+                <a>
+                    <span class="icon-holder">
+                        <i class="anticon anticon-deployment-unit"></i>
+                    </span>
+                    <span class="title">Configurar entregas</span>
+                </a>
+            </li>
+            <hr> -->
+
+            <!-- TERMINA ENTREGADO POR LA TIENDA  -->
+
+        </ul>
     </div>
-    <!--     <li class="nav-item" routerLink="/merchants" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-store"></i>
-            <span>Comercios</span>
-        </a>
-    </li> -->
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-            aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-clipboard-list"></i>
-            <span>Pedidos</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Pedidos:</h6>
-                <a class="collapse-item cursor" routerLink="/orders/news" routerLinkActive="active">Pedidos nuevos</a>
-                <a class="collapse-item cursor" routerLink="/orders/process" routerLinkActive="active">Pedidos en
-                    proceso</a>
-                <a class="collapse-item" routerLink="/orders/delivered" routerLinkActive="active">Pedidos entregados</a>
-                <a class="collapse-item" routerLink="/orders/cancelled" routerLinkActive="active">Pedidos rechazados</a>
-                <a class="collapse-item" routerLink="/orders/consumeteh" routerLinkActive="active">Pedidos consumeTeh</a>
-            </div>
-        </div>
-    </li>
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!--     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
-            aria-controls="collapseThree">
-            <i class="fas fa-fw fa-store"></i>
-            <span>Pedidos comercios</span>
-        </a>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Pedidos:</h6>
-                <a class="collapse-item cursor" routerLink="/merchant-orders/news" routerLinkActive="active">Pedidos nuevos</a>
-                <a class="collapse-item cursor" routerLink="/merchant-orders/process" routerLinkActive="active">Pedidos en
-                    proceso</a>
-                <a class="collapse-item" routerLink="/merchant-orders/delivered" routerLinkActive="active">Pedidos entregados</a>
-                <a class="collapse-item" routerLink="/merchant-orders/cancelled" routerLinkActive="active">Pedidos rechazados</a>
-            </div>
-        </div>
-    </li> -->
-
-
-    <!-- Nav Item - Vehicles Collapse Menu -->
-    <!--     <li class="nav-item" routerLink="/vehicles/active" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-motorcycle"></i>
-            <span>Vehiculos</span>
-        </a>
-    </li> -->
-    <!-- Nav Item - Fin the Vehicles Collapse Menu -->
-
-
-    <!-- Nav Item - Delivery Collapse Menu -->
-    <li class="nav-item" routerLink="/delivery/active" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-car"></i>
-            <span>Repartidores</span>
-        </a>
-    </li>
-    <!-- Nav Item - Fin the Delivery Collapse Menu -->
-
-
-    <!-- Nav Item - Clients Collapse Menu -->
-    <!--     <li class="nav-item" routerLink="/client" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Clientes</span>
-        </a>
-    </li> -->
-    <!-- Nav Item - Fin the Clients Collapse Menu  -->
-
-
-    <!-- Nav Item - Map the traicing Collapse Menu -->
-    <li class="nav-item" routerLink="/traicing" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-map"></i>
-            <span>Mapa de seguimiento</span>
-        </a>
-    </li>
-    <li class="nav-item" routerLink="/zones" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-map-pin"></i>
-            <span>Zonas</span>
-        </a>
-    </li>
-    <!-- 
-    <li class="nav-item" routerLink="/notifications" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-bell"></i>
-            <span>Notificaciones</span>
-        </a>
-    </li> -->
-
-    <!-- Fin Nav Item - Map the traicing Collapse Menu -->
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Informes
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- <li class="nav-item" routerLink="/reports" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-dollar-sign"></i>
-            <span>Reportes</span>
-        </a>
-
-    </li> -->
-    <!--     <li class="nav-item" routerLink="/reports" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-dollar-sign"></i>
-            <span>Avisos</span>
-        </a>
-
-    </li> -->
-
-    <li class="nav-item" routerLink="/profile" routerLinkActive="active">
-        <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Configuración</span>
-        </a>
-
-    </li>
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseQuestion" aria-expanded="true" aria-controls="collapseQuestion">
-            <i class="fas fa-fw fa-question"></i>
-            <span>Evaluaciones a clientes <small class="badge badge-pill badge-info">v2</small></span>
-        </a> -->
-    <!-- <div id="collapseQuestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Evaluaciones</h6>
-                <a class="collapse-item" href="register.html">Evaluaciones nuevas</a>
-                <a class="collapse-item" href="register.html">Evaluaciones anteriores</a>
-                <!--         <h6 class="collapse-header">FAQ</h6> -->
-    <!--         <a class="collapse-item" href="register.html">Agregar pre. frecuente</a>
-        <a class="collapse-item" href="register.html">Listado de FAQ</a> -->
-
-
-    <!-- </div>
-        </div> -->
-    <!-- </li> -->
-
-
-    <!-- Divider -->
-    <!-- <hr class="sidebar-divider d-none d-md-block"> -->
-    <!-- Heading -->
-    <!-- <div class="sidebar-heading">
-        Herramientas
-    </div> -->
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseNotice" aria-expanded="true" aria-controls="collapseNotice">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Atención al cliente <small class="badge badge-pill badge-info">v2</small> </span>
-        </a>
-       
-    </li> -->
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-</ul>
+</div>
+<!-- Side Nav END -->

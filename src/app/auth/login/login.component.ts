@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as commons_functions from 'src/app/utils/functions';
-import { AlertsService } from 'src/app/services/alerts.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts.service';
+import { AuthService } from 'src/app/services/auth.service';
+import * as commons_functions from 'src/app/utils/functions';
+import { ValidationForms } from 'src/app/utils/validations-forms';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends ValidationForms implements OnInit {
 
   loginForm: FormGroup;
   loadingLogin = false;
 
   constructor(private authService: AuthService, private alertService: AlertsService,
-              private fb: FormBuilder, private router: Router) { }
+              private fb: FormBuilder, private router: Router) { super(); }
 
   ngOnInit() {
     this.buildLoginForm();
@@ -57,25 +59,6 @@ export class LoginComponent implements OnInit {
       username: [null, commons_functions.globalValidEmail],
       password: [null, Validators.required]
     });
-  }
-
-
-  isFieldInvalid(form: FormGroup, field: string) {
-    return (
-      (!form.get(field).valid && form.get(field).touched)
-    );
-  }
-
-  isFieldValid(form: FormGroup, field: string) {
-    return (
-      (form.get(field).valid && form.get(field).touched)
-    );
-  }
-
-  isFieldHasError(form: FormGroup, field: string, error: string) {
-    return (
-      (form.get(field).hasError(error))
-    );
   }
 
 }

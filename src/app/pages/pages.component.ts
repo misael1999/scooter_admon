@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
-import { FirebaseMessagingService } from '../services/firebase-messaging.service';
-declare function init_sb_adminjs();
+declare function init_js_template();
 
 @Component({
   selector: 'app-pages',
@@ -9,13 +8,13 @@ declare function init_sb_adminjs();
 })
 export class PagesComponent implements OnInit, AfterContentInit {
 
-  constructor(private firebaeMessagingService: FirebaseMessagingService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    init_sb_adminjs();
-    this.firebaeMessagingService.requestPermission();
-    this.firebaeMessagingService.receiveMessage();
+    init_js_template();
+/*     this.firebaeMessagingService.requestPermission();
+    this.firebaeMessagingService.receiveMessage(); */
   }
 
   ngAfterContentInit() {
