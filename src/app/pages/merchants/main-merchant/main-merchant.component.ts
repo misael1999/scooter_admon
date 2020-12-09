@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MerchantsService } from 'src/app/services/merchants.service';
+import { MerchantsAddComponent } from '../merchants-add/merchants-add.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-main-merchant',
@@ -25,14 +27,26 @@ export class MainMerchantComponent implements OnInit {
   // Parametros para el paginado
   params = { limit: 25, offset: 0, search: '', ordering: 'created' };
 
-  constructor(private merchantsService: MerchantsService) { }
+  constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getMerchants();
   }
 
-  dialogAddMerchant() {
+  dialogAddMerchant(merchant = null) {
+    const dialogRef = this.dialog.open(MerchantsAddComponent, {
+      disableClose: true,
+      width: '50%',
+      minWidth: '1000px',
+      data: { merchant }
+    });
 
+    dialogRef.afterClosed()
+      .subscribe((data: any) => {
+        if (data) {
+          this.getMerchants();
+        }
+      });
   }
 
   getMerchants() {
@@ -42,6 +56,7 @@ export class MainMerchantComponent implements OnInit {
         this.loadingMerchants = false;
         this.merchants = data.results;
         this.length = data.count;
+        console.log(this.merchants);
       }, error => {
         this.loadingMerchants = false;
         alert('Ha ocurrido un error al obtener los comercios');

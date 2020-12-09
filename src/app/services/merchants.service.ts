@@ -16,7 +16,19 @@ export class MerchantsService {
 
   opeOrcloseMerchant(merchantId, isOpen) {
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/update_availability/`;
-    return this.http.put(url, {is_open: isOpen} );
+    return this.http.put(url, { is_open: isOpen });
   }
+
+  createMerchant(merchant: any) {
+    const url = `${environment.HOST_APIV1}/merchants/`;
+    return this.http.post(url, merchant);
+  }
+
+  // Other Methods
+  getCategories() {
+    const url = `${environment.HOST_APIV1}/commons/categories/`;
+    return this.http.get(url);
+  }
+
 
 }

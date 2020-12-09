@@ -7,7 +7,6 @@ import { MerchantsService } from 'src/app/services/merchants.service';
   styleUrls: ['./merchant-list.component.scss']
 })
 export class MerchantListComponent implements OnInit {
-
   @Input() merchants;
 
   constructor(private merchantsService: MerchantsService) { }
@@ -18,12 +17,11 @@ export class MerchantListComponent implements OnInit {
   openOrClose(isOpen, merchantId) {
     console.log(isOpen);
     console.log(merchantId);
-    this.merchantsService.opeOrcloseMerchant(merchantId, isOpen )
+    this.merchantsService.opeOrcloseMerchant(merchantId, isOpen)
       .subscribe((data) => {
-        
-    }, error => {
-      alert('Ha ocurrido un error al cerrar el comercio');
-    });
+      }, error => {
+        alert('Ha ocurrido un error al cerrar el comercio');
+      });
   }
 
 }

@@ -1,32 +1,28 @@
 <table class="table table-responsive table-bordered">
-  <thead>
-    <tr>
+    <thead>
+        <tr>
+            <th>Abierto</th>
+            <th style="width: 100%;">Nombre</th>
+            <th>Encargado</th>
+            <th>Categoría</th>
+            <th>Télefono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
 
-      <th scope="col">Abierto</th>
-      <th style="width: 100%;" scope="col">Nombre</th>
-      <th scope="col">Categoría</th>
-      <th scope="col">Télefono</th>
-      <!--         <th scope="col">Fecha de ingreso</th>
- -->
-      <th scope="col">Horarios</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let merchant of merchants">
-      <td>
-        <mat-slide-toggle
-          (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open"
-          [checked]="merchant.is_open"></mat-slide-toggle>
-      </td>
-      <td>{{merchant.merchant_name}}</td>
-      <td>{{merchant.category}}</td>
-      <td>{{merchant.phone_number}}</td>
-      <!--         <td>{{merchant.created | date:'medium'}}</td>
- -->
-      <td>
-        -----
-      </td>
+        <tr *ngFor="let merchant of merchants">
+            <td>
+                <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>
+            </td>
+            <td> {{merchant.merchant_name}} </td>
+            <td> {{merchant.contact_person}} </td>
+            <td> {{merchant.category}} </td>
+            <td> {{merchant.phone_number}} </td>
+            <td>
+                <button class="btn btn-sm btn-danger mr-2">Bloquear</button>
+            </td>
+        </tr>
 
-    </tr>
-  </tbody>
+    </tbody>
 </table>
