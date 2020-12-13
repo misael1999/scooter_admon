@@ -20,7 +20,7 @@
             <td> {{merchant.category}} </td>
             <td> {{merchant.phone_number}} </td>
             <td>
-                <button class="btn btn-sm btn-danger mr-2">Bloquear</button>
+                <button class="btn btn-sm btn-danger mr-2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button>
             </td>
         </tr>
 

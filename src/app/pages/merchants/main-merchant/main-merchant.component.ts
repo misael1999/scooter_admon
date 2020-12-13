@@ -25,7 +25,7 @@ export class MainMerchantComponent implements OnInit {
   statusFilter: boolean;
 
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', ordering: 'created' };
+  params = { limit: 25, offset: 0, search: '', ordering: 'created', information_is_complete: true };
 
   constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
 

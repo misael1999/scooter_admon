@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MerchantsService } from 'src/app/services/merchants.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-merchant-list',
@@ -13,6 +14,31 @@ export class MerchantListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  deleteMerchant(id, nombre) {
+    Swal.fire({
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a ${nombre}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Bloquear',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        this.merchantsService.deleteMerchant(id)
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Bloqueado',
+              type: 'success',
+              text: 'El comercio ha sido bloqueado',
+              timer: 2000
+            });
+          });
+      }
+    });
+  }
+
 
   openOrClose(isOpen, merchantId) {
     console.log(isOpen);

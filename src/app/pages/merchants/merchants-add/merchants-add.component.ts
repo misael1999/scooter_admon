@@ -80,10 +80,10 @@ export class MerchantsAddComponent extends ValidationForms implements OnInit {
         merchant_name: [null, Validators.required],
         contact_person: [null, Validators.required],
         phone_number: [null, Validators.required],
-        // is_delivery_by_store: [null],
-        categori_id: [null, Validators.required],
-        // subcategory_id: [null],
-        // type_menu: [null],
+        is_delivery_by_store: [false],
+        category_id: [null, Validators.required],
+        subcategory_id: [null],
+        type_menu: ['1'],
       }
     );
   }

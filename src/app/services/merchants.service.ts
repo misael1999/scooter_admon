@@ -24,6 +24,16 @@ export class MerchantsService {
     return this.http.post(url, merchant);
   }
 
+  deleteMerchant(merchantId) {
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/`;
+    return this.http.delete(url);
+  }
+
+  unlockMerchant(merchantId, data) {
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/unlock`;
+    return this.http.put(url, data);
+  }
+
   // Other Methods
   getCategories() {
     const url = `${environment.HOST_APIV1}/commons/categories/`;
