@@ -138,10 +138,37 @@
                     <span class="title">Configuración</span>
                 </a>
             </li>
-            
+
             <hr>
-            <li routerLink="/notifications" routerLinkActive="active"
-                class="nav-item dropdown">
+
+
+
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-shopping-cart"></i>
+                    </span>
+                    <span class="title">Ordenes Comercios</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li routerLink="/merchant-orders/news" routerLinkActive="active">
+                        <a>Nuevos</a>
+                    </li>
+                    <li routerLink="/merchant-orders/process" routerLinkActive="active">
+                        <a>En proceso</a>
+                    </li>
+                    <li routerLink="/merchant-orders/delivered" routerLinkActive="active">
+                        <a>Entregadas</a>
+                    </li>
+                    <li routerLink="/merchant-orders/cancelled" routerLinkActive="active">
+                        <a>Ignoradas</a>
+                    </li>
+                </ul>
+            </li>
+            <li routerLink="/notifications" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
                         <i class="anticon anticon-bell"></i>
@@ -150,8 +177,7 @@
                 </a>
             </li>
 
-            <li routerLink="/merchants" routerLinkActive="active"
-                class="nav-item dropdown">
+            <li routerLink="/merchants" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
                         <i class="anticon anticon-shopping"></i>
@@ -160,8 +186,7 @@
                 </a>
             </li>
 
-            <li routerLink="/clients" routerLinkActive="active"
-                class="nav-item dropdown">
+            <li routerLink="/clients" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
                         <i class="anticon anticon-contacts"></i>

@@ -37,6 +37,7 @@ export class ClientListComponent implements OnInit {
         this.loadingClient = false;
         this.length = data.count;
       }, error => {
+        console.log("error" + error);
         this.loadingClient = false;
       });
   }

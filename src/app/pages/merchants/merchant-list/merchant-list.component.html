@@ -5,6 +5,7 @@
             <th style="width: 100%;">Nombre</th>
             <th>Encargado</th>
             <th>Categoría</th>
+            <th>Correo</th>
             <th>Télefono</th>
             <th>Acciones</th>
         </tr>
@@ -18,6 +19,7 @@
             <td> {{merchant.merchant_name}} </td>
             <td> {{merchant.contact_person}} </td>
             <td> {{merchant.category}} </td>
+            <td> {{merchant.email}} </td>
             <td> {{merchant.phone_number}} </td>
             <td>
                 <button class="btn btn-sm btn-danger mr-2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button>

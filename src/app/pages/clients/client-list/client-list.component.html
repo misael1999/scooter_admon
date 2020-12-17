@@ -71,13 +71,13 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr class="">
-                            <th scope="col">Nombre </th>
-                            <th scope="col">Teléfono </th>
-                            <th scope="col">Pedidos realizados </th>
-                            <th scope="col">Pedidos cancelados </th>
-                            <th scope="col">Primer pedido</th>
-                            <th scope="col">Ultimo pedido</th>
-                            <th scope="col" class="text-center">Acciones</th>
+                            <th>Imagen</th>
+                            <th>Nombre </th>
+                            <th>Correo </th>
+                            <th>Registro </th>
+                            <th>Fecha de registro </th>
+                            <th>Primer pedido</th>
+                            <th class="text-center">Acciones</th>
 
                         </tr>
                     </thead>
@@ -85,12 +85,23 @@
 
 
                         <tr *ngFor="let client of clients ">
-                            <td> {{ client.customer.name }}</td>
-                            <td> {{client.customer.phone_number}} </td>
-                            <td> {{client.total_orders}} </td>
-                            <td> {{ client.total_orders_cancelled }} </td>
-                            <td> {{ client.first_order_date | date }} </td>
-                            <td> {{ client.last_order_date | date }} </td>
+                            <td>
+                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url" src="{{ client.picture_url }}" alt="category_img">
+                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url == null" src="assets/img/user.png" alt="category_img">
+                                <!-- <img class="img-category img-profile rounded-circle" *ngIf="product.picture === null" src="assets/img/Bolsa.png" alt="category_img"> -->
+
+
+                                <!-- <img src="{{client.picture_url}}" alt=""> -->
+
+                            </td>
+                            <td> {{ client.name }}</td>
+                            <td> {{ client.user.username }} </td>
+                            <td class="text-center">
+                                <img class="img-username img-profile" *ngIf="client.user.auth_facebook == true" src="assets/img/Facebook-logo.png" alt="category_img">
+                                <img class="img-username img-profile" *ngIf="client.user.auth_facebook != true" src="assets/img/correo.png" alt="category_img">
+                            </td>
+                            <td> {{ client.created | date:'medium' }} </td>
+                            <td> {{ client.reputation }} </td>
                             <td class="text-center">
                                 <button class="btn btn-mas" [routerLink]="['/client/info',client.id]">
                                     <i class="fas fa-eye"></i>
