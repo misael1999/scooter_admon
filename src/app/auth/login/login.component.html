@@ -7,7 +7,7 @@
                         <div class="card shadow-lg">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between m-b-30">
-                                    <img width="100px" class="img-fluid" alt="" src="assets/images/logo/logo2.png">
+                                    <img width="100px" class="img-fluid" alt="" src="assets/images/logo/Icono_pequeno.png">
                                     <h2 class="m-b-0">Central</h2>
                                 </div>
                                 <form [formGroup]="loginForm">
@@ -15,8 +15,7 @@
                                         <label class="font-weight-semibold" for="userName">Correo:</label>
                                         <div class="input-affix">
                                             <i class="prefix-icon anticon anticon-user"></i>
-                                            <input formControlName="username" type="text" class="form-control"
-                                             id="userName" placeholder="Username" [ngClass]="(isFieldInvalid(loginForm, 'username'))? 'is-invalid': 'valid'">
+                                            <input formControlName="username" type="text" class="form-control" id="userName" placeholder="Username" [ngClass]="(isFieldInvalid(loginForm, 'username'))? 'is-invalid': 'valid'">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -24,8 +23,7 @@
                                         <a class="float-right font-size-13 text-muted" href="">Olvidaste la contraseña?</a>
                                         <div class="input-affix m-b-10">
                                             <i class="prefix-icon anticon anticon-lock"></i>
-                                            <input formControlName="password" type="password" class="form-control"
-                                             id="password" placeholder="Password" [ngClass]="(isFieldInvalid(loginForm, 'password'))? 'is-invalid': 'valid'">
+                                            <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" [ngClass]="(isFieldInvalid(loginForm, 'password'))? 'is-invalid': 'valid'">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -34,7 +32,7 @@
                                                 Don't have an account? 
                                                 <a class="small" href=""> Signup</a>
                                             </span> -->
-                                            
+
                                             <button [disabled]="loadingLogin" (click)="login()" class="btn btn-primary">Iniciar sesión
                                                 
                                                 <div *ngIf="loadingLogin" class="spinner-border" role="status">

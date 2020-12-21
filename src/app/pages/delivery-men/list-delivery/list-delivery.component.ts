@@ -38,6 +38,7 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
       .subscribe((data: any) => {
         this.deliverys = data.results;
         this.length = data.count;
+        console.log(this.deliverys);
         this.loadingDelivery = false;
       });
   }

@@ -7,7 +7,6 @@ import { AngularMaterialModule } from '../shared/angular-material.module';
 
 @NgModule({
   declarations: [
-
   ],
   imports: [
     CommonModule,

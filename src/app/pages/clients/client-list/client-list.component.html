@@ -86,12 +86,10 @@
 
                         <tr *ngFor="let client of clients ">
                             <td>
-                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url" src="{{ client.picture_url }}" alt="category_img">
-                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url == null" src="assets/img/user.png" alt="category_img">
-                                <!-- <img class="img-category img-profile rounded-circle" *ngIf="product.picture === null" src="assets/img/Bolsa.png" alt="category_img"> -->
+                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url" src="{{ client.picture_url }}" alt="Avatar_Usuario">
+                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url == null" src="assets/img/user.png" alt="Avatar_Usuario">
 
 
-                                <!-- <img src="{{client.picture_url}}" alt=""> -->
 
                             </td>
                             <td> {{ client.name }}</td>

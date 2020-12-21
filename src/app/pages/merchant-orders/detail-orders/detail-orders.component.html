@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Detalles del Pedido </h1>
+<div mat-dialog-content>
+
+
+    <span *ngFor="let info of details">
+        -x{{info.quantity}} {{info.product_name}} <br>
+        <span *ngFor="let menu of info.menu_options"> {{ menu.menu_name }} <br>
+            
+            <span *ngFor="let item of menu.options"> {{ item.option_name }} </span>
+    </span> <br>
+
+
+    <br>
+    </span>
+
+
+</div>

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MerchantOrdersRoutingModule } from './merchant-orders-routing.module';
 import { OrdersInProcessComponent } from './orders-in-process/orders-in-process.component';
 import { NewOrdersComponent } from './new-orders/new-orders.component';
@@ -11,6 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RejectOrderMerchantComponent } from './new-orders/reject-order-merchant/reject-order-merchant.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CancelOrderMerchantComponent } from './orders-in-process/cancel-order-merchant/cancel-order-merchant.component';
+import { DetailOrdersComponent } from './detail-orders/detail-orders.component';
 
 
 @NgModule({
@@ -19,8 +19,9 @@ import { CancelOrderMerchantComponent } from './orders-in-process/cancel-order-m
     NewOrdersComponent,
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
+    DetailOrdersComponent,
     RejectOrderMerchantComponent,
-    CancelOrderMerchantComponent
+    CancelOrderMerchantComponent,
   ],
   imports: [
     CommonModule,
