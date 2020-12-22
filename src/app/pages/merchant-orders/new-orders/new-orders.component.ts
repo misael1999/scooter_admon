@@ -8,6 +8,7 @@ import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RejectOrderMerchantComponent } from './reject-order-merchant/reject-order-merchant.component';
+import { DetailOrdersComponent } from '../detail-orders/detail-orders.component';
 
 
 @Component({
@@ -60,6 +61,14 @@ export class NewOrdersComponent implements OnInit {
       });
   }
 
+
+  openDialogDetailProducts(details) {
+    this.dialog.open(DetailOrdersComponent, {
+      width: '500px',
+      data: { details }
+    });
+  }
+  
   searchBy(value: string) {
     this.params.search = value;
     /*     if (value === '') {

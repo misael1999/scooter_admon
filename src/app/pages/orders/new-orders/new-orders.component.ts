@@ -9,6 +9,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
 
 @Component({
   selector: 'app-new-orders',
@@ -41,6 +42,13 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     // this.connectToWebSocket();
   }
 
+
+  openDialogDetailProducts(details) {
+    this.dialog.open(OrdersDetailComponent, {
+      width: '500px',
+      data: { details }
+    });
+  }
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
     /*     this.webSocketService.close(); */

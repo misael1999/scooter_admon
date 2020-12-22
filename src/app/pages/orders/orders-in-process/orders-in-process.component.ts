@@ -7,6 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { CancelOrderDialogComponent } from './cancel-order-dialog/cancel-order-dialog.component';
 import { ReasignOrderComponent } from './reasign-order/reasign-order.component';
+import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
 
 @Component({
   selector: 'app-orders-in-process',
@@ -30,12 +31,19 @@ export class OrdersInProcessComponent implements OnInit {
     this.getOrders();
   }
 
+  openDialogDetailProducts(details) {
+    this.dialog.open(OrdersDetailComponent, {
+      width: '500px',
+      data: { details }
+    });
+  }
+
   getOrders() {
     this.loadingOrders = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
-        // console.log(this.orders);
+        console.log(this.orders);
         this.loadingOrders = false;
         this.length = data.count;
       }, error => {

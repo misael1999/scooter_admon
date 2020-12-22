@@ -7,7 +7,6 @@
 
 
     <div>
-
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
 
@@ -23,9 +22,7 @@
                 </div>
                 <!-- End Ordering orders -->
 
-                <div class="col-lg-6">
-                    <button (click)="getOrders()" class="btn btn-info">Recargar</button>
-                </div>
+                <div class="col-lg-6"></div>
 
                 <!-- Search by name -->
                 <div class="col-lg-3">
@@ -70,8 +67,6 @@
                 <table class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <!--                             <th>Código</th>
- -->
                             <th>Comercio</th>
                             <th>Télefono</th>
                             <th>Cliente</th>
@@ -87,8 +82,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <!--                             <td>{{order.qr_code}}</td>
- -->
                             <td>
                                 <span class="badge badge-info"> {{order.merchant.merchant_name}}</span></td>
                             <td>{{order.merchant.phone_number}}</td>
@@ -97,9 +90,7 @@
                             </td>
                             <td>
                                 <div class="products-details">
-                                    <span *ngFor="let detail of order.details">
-                                        -x{{detail.quantity}} {{detail.product_name}}
-                                    </span>
+                                    <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
                                 </div>
                             </td>
                             <td>
@@ -122,12 +113,11 @@
                     </tbody>
                 </table>
             </div>
-            <!-- TERMINA LA TABLA  -->
+            <!-- Component No data -->
             <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  >
             </app-no-found-data>
+            <!-- Component No data -->
+
         </div>
     </div>
-
-
-
 </div>

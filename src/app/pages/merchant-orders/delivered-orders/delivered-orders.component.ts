@@ -35,6 +35,7 @@ export class DeliveredOrdersComponent implements OnInit {
 
   openDialogDetailProducts(details) {
     this.dialog.open(DetailOrdersComponent, {
+      width: '500px',
       data: { details }
     });
   }

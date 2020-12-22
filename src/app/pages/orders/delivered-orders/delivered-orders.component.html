@@ -86,9 +86,7 @@
                             </td>
                             <td *ngIf="order.service == 'Compras'">
                                 <div class="products-details">
-                                    <span *ngFor="let detail of order.details">
-                                        - {{detail.product_name}}
-                                    </span>
+                                    <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
                                 </div>
 
                             </td>

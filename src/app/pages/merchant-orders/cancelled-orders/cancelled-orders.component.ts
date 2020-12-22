@@ -7,6 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DetailOrdersComponent } from '../detail-orders/detail-orders.component';
 
 @Component({
   selector: 'app-cancelled-orders',
@@ -25,14 +26,19 @@ export class CancelledOrdersComponent implements OnInit {
   params = { limit: 25, offset: 0, search: '', order_status: '7,8,17', ordering: '', is_order_to_merchant: true };
   orders: Array<any> = [];
   loadingOrders: boolean;
-  // liveData$: Subscription;
   loadingAcceptOrder: boolean;
-  // loadingRejectOrder: boolean;
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getOrders();
+  }
+
+  openDialogDetailProducts(details) {
+    this.dialog.open(DetailOrdersComponent, {
+      width: '500px',
+      data: { details }
+    });
   }
 
   getOrders() {
@@ -40,6 +46,7 @@ export class CancelledOrdersComponent implements OnInit {
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
+        console.log(this.orders);
         this.loadingOrders = false;
         this.length = data.count;
       }, error => {

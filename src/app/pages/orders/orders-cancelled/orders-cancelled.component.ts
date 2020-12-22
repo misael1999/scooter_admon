@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders.service';
 import { PageEvent } from '@angular/material/paginator';
+import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-orders-cancelled',
@@ -17,10 +19,18 @@ export class OrdersCancelledComponent implements OnInit {
   orders: Array<any> = [];
   loadingOrders: boolean;
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getOrders();
+  }
+
+
+  openDialogDetailProducts(details) {
+    this.dialog.open(OrdersDetailComponent, {
+      width: '500px',
+      data: { details }
+    });
   }
 
   getOrders() {

@@ -91,10 +91,13 @@
                             <td>{{order.customer.phone_number}}</td>
                             <td *ngIf="order.service == 'Compras'">
                                 <div class="products-details">
+                                    <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
+                                </div>
+                                <!-- <div class="products-details">
                                     <span *ngFor="let detail of order.details">
                                         -x{{detail.quantity || '1'}} {{detail.product_name}}
                                     </span>
-                                </div>
+                                </div> -->
                             </td>
                             <td *ngIf="order.service == 'Recolección'">
                                 <span>{{order.indications}}</span>

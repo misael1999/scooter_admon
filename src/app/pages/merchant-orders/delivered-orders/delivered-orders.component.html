@@ -94,9 +94,6 @@
                             <td>
                                 <div class="products-details">
                                     <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
-                                    <!-- <span *ngFor="let detail of order.details">
-                                        -x{{detail.quantity}} {{detail.product_name}}  <br>
-                                    </span> -->
                                 </div>
                             </td>
 
@@ -115,12 +112,11 @@
                     </tbody>
                 </table>
             </div>
+
             <!-- TERMINA LA TABLA  -->
             <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  >
             </app-no-found-data>
+
         </div>
     </div>
-
-
-
 </div>

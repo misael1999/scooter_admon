@@ -8,6 +8,7 @@ import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CancelOrderMerchantComponent } from './cancel-order-merchant/cancel-order-merchant.component';
+import { DetailOrdersComponent } from '../detail-orders/detail-orders.component';
 
 @Component({
   selector: 'app-orders-in-process',
@@ -42,6 +43,15 @@ export class OrdersInProcessComponent implements OnInit {
     // this.connectToWebSocket();
   }
 
+
+  openDialogDetailProducts(details) {
+    this.dialog.open(DetailOrdersComponent, {
+      width: '500px',
+      data: { details }
+    });
+  }
+
+  
   ngOnDestroy(): void {
     // this.webSocketService.closeConnection();
     /*     this.webSocketService.close(); */
@@ -61,9 +71,11 @@ export class OrdersInProcessComponent implements OnInit {
 
   searchBy(value: string) {
     this.params.search = value;
-    /*     if (value === '') {
-          return;
-        } */
+    this.getOrders();
+  }
+  
+  orderingOrders(value: string) {
+    this.params.ordering = value;
     this.getOrders();
   }
 
