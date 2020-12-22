@@ -13,11 +13,6 @@ import { DetailOrdersComponent } from '../detail-orders/detail-orders.component'
   styleUrls: ['./delivered-orders.component.scss']
 })
 export class DeliveredOrdersComponent implements OnInit {
-
-  // stationId = localStorage.getItem('station_id');
-  // token = localStorage.getItem('access_token');
-  // WS_SOCKET = `${environment.WS_SOCKET}/ws/orders/${this.stationId}/?token=${this.token}`;
-  // MatPaginator Inputs
   length = 100;
   pageSize = 25;
   pageSizeOptions: number[] = [25, 50, 75, 100];
@@ -65,7 +60,6 @@ export class DeliveredOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  // ======= PAGINADOR ========
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
       this.pageSize = 25;

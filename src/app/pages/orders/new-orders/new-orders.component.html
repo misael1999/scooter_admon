@@ -1,34 +1,36 @@
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Nuevos pedidos</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pedidos Nuevos</h1>
     </div>
     <!-- <mat-slide-toggle [checked]="true" class="my-3" [labelPosition]="'before'"><span style="font-weight: bold;">Asignar repartidor
         manualmente</span></mat-slide-toggle> -->
+
+
     <div>
-        <!-- FILTROS  -->
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
+
+                <!-- Ordering orders -->
                 <div class="col-lg-3">
-                    <select name="" id="" class="form-control select-form">
-                        <option value="">Ordenar por</option>
-                        <option value="">Fecha de pedido</option>
-                        <option value="">Servicio</option>
-                        <option value="">Precio del servicio</option>
+                    <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
+                        <option value="">Ordenar por:</option>
+                        <option value="distance">Distancia mas corta</option>
+                        <option value="-distance">Distancia mas larga </option>
+                        <option value="service_price">Precio mas bajo</option>
+                        <option value="-service_price">Precio mas alto </option>
                     </select>
                 </div>
+                <!-- End Ordering orders -->
+
                 <div class="col-lg-6">
                     <button (click)="getOrders()" class="btn btn-info">Recargar</button>
                 </div>
-                <!--        <div class="col-lg-1">
-                    <button mat-raised-button color="primary">Filtros</button>
-                </div> -->
+
+                <!-- Search by name -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text"
-                            class="form-control fm-size" placeholder="Buscar por cliente, dirección"
-                            aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="fas fa-search"></i>
@@ -36,19 +38,16 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- MAS FILTROS  -->
-            <div class="row">
-
+                <!-- End Search by name -->
             </div>
         </div>
-        <!-- TERMINA LOS FILTROS  -->
+
+
         <div class="row" class="content">
             <!-- PAGINADOR  -->
             <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize"
-                    [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                </mat-paginator>
+                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                    </mat-paginator>
             </div>
             <!-- TERMINA EL PAGINADOR  -->
 
@@ -128,12 +127,10 @@
                                 {{order.order_status.name}}
                             </td>
                             <td>
-                                <button (click)="openDialogAssignDelivery(order)" style="font-size: 90%;"
-                                    class="btn btn-success">Asignar</button>
+                                <button (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
                                 <br>
                                 <br>
-                                <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;"
-                                    class="btn btn-danger">Rechazar</button>
+                                <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
 
 
                             </td>

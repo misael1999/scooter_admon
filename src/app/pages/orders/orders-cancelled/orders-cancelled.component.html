@@ -2,27 +2,31 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pedidos cancelados o rechazados</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pedidos Cancelados o Rechazados</h1>
     </div>
 
     <div>
-        <!-- FILTROS  -->
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
+
+                <!-- Ordering orders -->
                 <div class="col-lg-3">
-                    <select name="" id="" class="form-control select-form">
-                        <option value="">Ordenar por</option>
-                        <option value="">Fecha de pedido</option>
-                        <option value="">Servicio</option>
-                        <option value="">Precio del servicio</option>
+                    <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
+                        <option value="">Ordenar por:</option>
+                        <option value="distance">Distancia mas corta</option>
+                        <option value="-distance">Distancia mas larga </option>
+                        <option value="service_price">Precio mas bajo</option>
+                        <option value="-service_price">Precio mas alto </option>
                     </select>
                 </div>
-                <div class="col-lg-6">
+                <!-- End Ordering orders -->
 
-                </div>
+                <div class="col-lg-6"></div>
+
+                <!-- Search by name -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por cliente, dirección" aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="fas fa-search"></i>
@@ -30,51 +34,44 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- MAS FILTROS  -->
-            <div class="row">
-
+                <!-- End Search by name -->
             </div>
         </div>
-        <!-- TERMINA LOS FILTROS  -->
+
+
         <div class="row" class="content">
-            <!-- PAGINADOR  -->
+            <!-- Paginator -->
             <div class="col-lg-12 d-flex justify-content-end">
                 <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
                     </mat-paginator>
             </div>
-            <!-- TERMINA EL PAGINADOR  -->
+            <!-- End Paginator -->
 
-            <!-- TABLA  -->
-            <!-- preloader  -->
+
+            <!-- Preloader -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
                 <div class="spinner-border text-primary my-5" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <!-- termina preloader  -->
+            <!-- End Preloader -->
+
+
             <div class="col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
                 <table class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <!--                             <th>Noº pedido</th>
- -->
                             <th>Servicio</th>
                             <th>Cliente</th>
                             <th>Repartidor</th>
                             <th style="min-width: 200px;">Pedido</th>
-                            <th>Precio del servicio</th>
                             <th>Razón</th>
+                            <th>Precio del servicio</th>
                             <th>Fecha del pedido </th>
-                            <th>Estatus </th>
-                            <!--                             <th>Acciones </th>
- -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <!--                             <td>{{order.id}}</td>
- -->
                             <td>
                                 <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
     'badge-warning': order.service == 'Recolección' }">{{order.service}}</span>
@@ -93,30 +90,20 @@
 
                             </td>
                             <td *ngIf="order.service == 'Recolección'">
-                                <span>{{order.indications}}</span>
+                                <span> {{ order.indications }} </span>
                             </td>
-                            <td>${{order.service_price | number : '1.2-2'}}</td>
-                            <td>{{order.reason_rejection}}</td>
-                            <td>
-                                {{order.order_date | date:'medium'}}
-                            </td>
-                            <td>
-                                {{order.order_status.name}}
-                            </td>
-                            <!-- <td>
-                                <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;"
-                                    class="btn btn-success">Más detalles</button>
-                            </td> -->
+                            <td> {{ order.reason_rejection }} </td>
+                            <td> $ {{ order.service_price | number : '1.2-2' }} </td>
+                            <td> {{ order.order_date | date:'medium' }} </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- TERMINA LA TABLA  -->
+
+            <!-- Component no data -->
             <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  [message]="'No hay pedidos que mostrar'">
             </app-no-found-data>
+            <!-- End Component no data -->
         </div>
     </div>
-
-
-
 </div>

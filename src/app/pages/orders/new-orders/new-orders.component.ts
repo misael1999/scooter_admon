@@ -98,6 +98,10 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       }
     });
   }
+  orderingOrders(value: string) {
+    this.params.ordering = value;
+    this.getOrders();
+  }
 
   // ======= PAGINADOR ========
   getPages(e): PageEvent {

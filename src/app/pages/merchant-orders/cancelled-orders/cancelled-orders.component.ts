@@ -14,14 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./cancelled-orders.component.scss']
 })
 export class CancelledOrdersComponent implements OnInit {
-
-  stationId = localStorage.getItem('station_id');
-  token = localStorage.getItem('access_token');
-  WS_SOCKET = `${environment.WS_SOCKET}/ws/orders/${this.stationId}/?token=${this.token}`;
   // MatPaginator Inputs
   length = 100;
   pageSize = 25;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [25, 50, 75, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
 
@@ -29,21 +25,14 @@ export class CancelledOrdersComponent implements OnInit {
   params = { limit: 25, offset: 0, search: '', order_status: '7,8,17', ordering: '', is_order_to_merchant: true };
   orders: Array<any> = [];
   loadingOrders: boolean;
-  liveData$: Subscription;
+  // liveData$: Subscription;
   loadingAcceptOrder: boolean;
-  loadingRejectOrder: boolean;
+  // loadingRejectOrder: boolean;
 
-  constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
-              private dialog: MatDialog) { }
+  constructor(private ordersService: OrdersService) { }
 
   ngOnInit(): void {
     this.getOrders();
-    // this.connectToWebSocket();
-  }
-
-  ngOnDestroy(): void {
-    // this.webSocketService.closeConnection();
-    /*     this.webSocketService.close(); */
   }
 
   getOrders() {
@@ -60,51 +49,14 @@ export class CancelledOrdersComponent implements OnInit {
 
   searchBy(value: string) {
     this.params.search = value;
-    /*     if (value === '') {
-          return;
-        } */
     this.getOrders();
   }
 
-  rejectOrderMerchant() {
-
+  orderingOrders(value: string) {
+    this.params.ordering = value;
+    this.getOrders();
   }
 
-/*   openDialogAssignDelivery(order) {
-    console.log(order);
-    const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
-      disableClose: true,
-      width: '60%',
-      minHeight: '500px',
-      minWidth: '350px',
-      data: { orderId: order.id, typeService: order.service_id}
-    });
-
-    dialogref.afterClosed().subscribe(data => {
-      if (data) {
-        this.getOrders();
-      }
-    });
-  } */
-
-/* 
-  openDialogRejectOrder(orderId) {
-    const dialogref = this.dialog.open(RejectOrderDialogComponent, {
-      disableClose: true,
-      width: '40%',
-      minHeight: '300px',
-      minWidth: '300px',
-      data: { orderId }
-    });
-
-    dialogref.afterClosed().subscribe(data => {
-      if (data) {
-        this.getOrders();
-      }
-    });
-  } */
-
-  // ======= PAGINADOR ========
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
       this.pageSize = 25;
@@ -114,18 +66,4 @@ export class CancelledOrdersComponent implements OnInit {
     this.params.offset = this.params.limit * e.pageIndex;
     this.getOrders();
   }
-
-/*   connectToWebSocket() {
-    this.webSocketService.connect(this.WS_SOCKET).pipe(
-      retryWhen((errors) => errors.pipe(delay(5000)))
-    ).subscribe((data: any) => {
-      if (data.data.type && data.data.type === 'NEW_ORDER') {
-        this.openSnackbarNewOrder('Nuevo pedido');
-      }
-      if (data.data.type && data.data.type === 'ACCEPT_ORDER') {
-        this.openSnackbarNewOrder('Pedido aceptado por el repartidor');
-      }
-    });
-  } */
-
 }

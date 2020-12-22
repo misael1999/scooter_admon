@@ -14,122 +14,123 @@ import { ReasignOrderComponent } from './reasign-order/reasign-order.component';
   styleUrls: ['./orders-in-process.component.scss']
 })
 export class OrdersInProcessComponent implements OnInit {
- // MatPaginator Inputs
- length = 100;
- pageSize = 25;
- pageSizeOptions: number[] = [5, 10, 25, 100];
- // MatPaginator Output
- pageEvent: PageEvent;
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 25;
+  pageSizeOptions: number[] = [25, 50, 75, 100];
+  pageEvent: PageEvent;
+  params = { limit: 25, offset: 0, search: '', ordering: '', in_process: true };
+  orders: Array<any> = [];
+  loadingOrders: boolean;
+  liveData$: Subscription;
 
- // Parametros para el paginado
- params = { limit: 25, offset: 0, search: '', in_process : true };
- orders: Array<any> = [];
- loadingOrders: boolean;
- liveData$: Subscription;
+  constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
 
- constructor(private ordersService: OrdersService,
-             private dialog: MatDialog, private webSocketService: WebSocketService) { }
+  ngOnInit(): void {
+    this.getOrders();
+  }
 
- ngOnInit(): void {
-   this.getOrders();
- }
+  getOrders() {
+    this.loadingOrders = true;
+    this.ordersService.getOrders(this.params)
+      .subscribe((data: any) => {
+        this.orders = data.results;
+        // console.log(this.orders);
+        this.loadingOrders = false;
+        this.length = data.count;
+      }, error => {
+        this.loadingOrders = false;
+      });
+  }
 
- getOrders() {
-   this.loadingOrders = true;
-   this.ordersService.getOrders(this.params)
-     .subscribe((data: any) => {
-       this.orders = data.results;
-       console.log(this.orders);
-       this.loadingOrders = false;
-       this.length = data.count;
-     }, error => {
-       this.loadingOrders = false;
+  openDialogCancelOrder(orderId) {
+    const dialogref = this.dialog.open(CancelOrderDialogComponent, {
+      disableClose: true,
+      width: '40%',
+      minHeight: '300px',
+      minWidth: '300px',
+      data: { orderId }
+    });
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.getOrders();
+      }
+    });
+  }
+
+  openDialogReassignDelivery(order) {
+    console.log(order);
+    const dialogref = this.dialog.open(ReasignOrderComponent, {
+      disableClose: true,
+      width: '60%',
+      minHeight: '500px',
+      minWidth: '350px',
+      data: { orderId: order.id, typeService: order.service_id }
+    });
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.getOrders();
+      }
+    });
+  }
+
+
+
+  openDialogAssignDelivery(orderId) {
+    /* const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
+      disableClose: true,
+      width: '60%',
+      minHeight: '500px',
+      minWidth: '350px',
+      data: {orderId}
+    });
+ 
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.getOrders();
+      }
+    }); */
+  }
+
+  openDialogRejectOrder(orderId) {
+    /*  const dialogref = this.dialog.open(RejectOrderDialogComponent, {
+       disableClose: true,
+       width: '40%',
+       minHeight: '300px',
+       minWidth: '300px',
+       data: {orderId}
      });
- }
+  
+     dialogref.afterClosed().subscribe(data => {
+       if (data) {
+         this.getOrders();
+       }
+     }); */
+  }
 
- openDialogCancelOrder(orderId) {
-  const dialogref = this.dialog.open(CancelOrderDialogComponent, {
-    disableClose: true,
-    width: '40%',
-    minHeight: '300px',
-    minWidth: '300px',
-    data: { orderId }
-  });
+  searchBy(value: string) {
+    this.params.search = value;
+    this.getOrders();
+  }
 
-  dialogref.afterClosed().subscribe(data => {
-    if (data) {
-      this.getOrders();
+
+  orderingOrders(value: string) {
+    this.params.ordering = value;
+    this.getOrders();
+  }
+
+
+  getPages(e): PageEvent {
+    if (this.orders.length === 0) {
+      this.pageSize = 25;
+      return;
     }
-  });
-}
-
-openDialogReassignDelivery(order) {
-  console.log(order);
-  const dialogref = this.dialog.open(ReasignOrderComponent, {
-    disableClose: true,
-    width: '60%',
-    minHeight: '500px',
-    minWidth: '350px',
-    data: { orderId: order.id, typeService: order.service_id }
-  });
-
-  dialogref.afterClosed().subscribe(data => {
-    if (data) {
-      this.getOrders();
-    }
-  });
-}
-
- searchBy(value: string) {
-   this.params.search = value;
-/*     if (value === '') {
-     return;
-   } */
-   this.getOrders();
- }
-
- openDialogAssignDelivery(orderId) {
-   /* const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
-     disableClose: true,
-     width: '60%',
-     minHeight: '500px',
-     minWidth: '350px',
-     data: {orderId}
-   });
-
-   dialogref.afterClosed().subscribe(data => {
-     if (data) {
-       this.getOrders();
-     }
-   }); */
- }
-
- openDialogRejectOrder(orderId) {
-  /*  const dialogref = this.dialog.open(RejectOrderDialogComponent, {
-     disableClose: true,
-     width: '40%',
-     minHeight: '300px',
-     minWidth: '300px',
-     data: {orderId}
-   });
-
-   dialogref.afterClosed().subscribe(data => {
-     if (data) {
-       this.getOrders();
-     }
-   }); */
- }
-
- // ======= PAGINADOR ========
- getPages(e): PageEvent {
-   if (this.orders.length === 0) {
-     this.pageSize = 25;
-     return;
-   }
-   this.params.limit = e.pageSize;
-   this.params.offset = this.params.limit * e.pageIndex;
-   this.getOrders();
- }
+    this.params.limit = e.pageSize;
+    this.params.offset = this.params.limit * e.pageIndex;
+    this.getOrders();
+  }
 
 
 }
