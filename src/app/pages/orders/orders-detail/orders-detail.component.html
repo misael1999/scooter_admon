@@ -5,23 +5,30 @@
 
 
         <div class="col-lg-12">
-            <span *ngFor="let info of details">
-                -x{{info.quantity}} {{info.product_name}} <br>
-                
+            <div class="col-lg-10">
+                <span *ngFor="let info of details">
+
+                    <span style="font-weight: bold;">-x{{ info.quantity }} {{ info.product_name }} --$ {{ info.product_price }}</span>
+                <br>
+
                 <div class="col-lg-1"></div>
                 <div class="col-lg-11">
-                    <span *ngFor="let menu of info.menu_options"> <span style="font-weight: bold;">{{ menu.menu_name }}</span>
+                    <span *ngFor="let menu of info.menu_options"> <span >{{ menu.menu_name }}</span>
 
-            <div class="col-lg-1"></div>
-            <div class="col-lg-11" *ngFor="let option of menu.options">
-                {{ option.quantity}} {{ option.option_name}}
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-11" *ngFor="let option of menu.options">
+                        -x{{ option.quantity}} {{ option.option_name}} --$ {{ option.price_option }} <br>
+                    </div>
+                    </span>
 
+                </div>
+                Total: {{ info.total_detail}}
+                </span>
 
             </div>
-            </span>
+            <div class=""></div>
+
 
         </div>
-        </span>
     </div>
-</div>
 </div>

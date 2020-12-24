@@ -16,17 +16,13 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
   length = 100;
   pageSize = 25;
   pageSizeOptions: number[] = [25, 50, 75, 100];
-
   params = { limit: 25, offset: 0, search: '', ordering: '', status: 1 };
   deliverys: Array<any> = [];
-
   loadingDelivery: boolean;
-
-
 
   constructor(private dialog: MatDialog, private deliveryService: DeliveryMenService) {
     super();
-   }
+  }
 
   ngOnInit(): void {
     this.getDeliveryMen();
@@ -37,6 +33,7 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
     this.deliveryService.getDeliverys(this.params)
       .subscribe((data: any) => {
         this.deliverys = data.results;
+        console.log(this.deliverys);
         this.length = data.count;
         console.log(this.deliverys);
         this.loadingDelivery = false;
@@ -73,6 +70,7 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
         this.showSwalMessage(error.errors.message, 'error');
       });
   }
+
   enableDelivery(deliveryManId) {
     this.deliveryService.unLockDeliveryMan(deliveryManId)
       .subscribe((data) => {
@@ -97,9 +95,8 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
     }
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
-    // this.getDelivery();
+    this.getDeliveryMen();
   }
-  // ==========================================
 
 
 

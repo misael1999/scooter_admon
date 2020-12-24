@@ -104,7 +104,11 @@
                             <td> {{delivery.vehicle_model}} </td>
                             <td> {{delivery.vehicle_year}} </td>
                             <td> {{delivery.vehicle_color}} </td>
-                            <td> {{delivery.vehicle_type}} </td>
+                            <td>
+
+                                <span *ngIf="delivery.vehicle_type == 1"> Motocicleta</span>
+
+                            </td>
                             <td> {{delivery.reputation}} </td>
                             <td>{{delivery.last_time_update_location | date:'medium' }} </td>
                             <td>{{delivery.delivery_status}} </td>

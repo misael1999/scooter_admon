@@ -18,7 +18,7 @@ export class ClientListComponent implements OnInit {
   pageEvent: PageEvent;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', ordering: '' };
+  params = { limit: 25, offset: 0, search: '', ordering: '' };
   loadingClient: boolean;
   clients: Array<any> = [];
 
@@ -33,11 +33,11 @@ export class ClientListComponent implements OnInit {
     this.clientService.getClients(this.params)
       .subscribe((data: any) => {
         this.clients = data.results;
-        console.log(this.clients);
+        // console.log(this.clients);
         this.loadingClient = false;
         this.length = data.count;
       }, error => {
-        console.log("error" + error);
+        // console.log("error" + error);
         this.loadingClient = false;
       });
   }
@@ -46,6 +46,7 @@ export class ClientListComponent implements OnInit {
     this.params.search = value;
     this.getClients();
   }
+
   ordenamiento(value: string) {
     this.params.ordering = value;
     this.getClients();
