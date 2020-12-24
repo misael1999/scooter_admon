@@ -14,6 +14,8 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
 })
 export class LoginComponent extends ValidationForms implements OnInit {
 
+  fecha = new Date().getFullYear();
+
   loginForm: FormGroup;
   loadingLogin = false;
 
@@ -22,6 +24,7 @@ export class LoginComponent extends ValidationForms implements OnInit {
 
   ngOnInit() {
     this.buildLoginForm();
+    this.fecha;
   }
 
   login() {
