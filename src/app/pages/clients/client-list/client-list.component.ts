@@ -33,7 +33,7 @@ export class ClientListComponent implements OnInit {
     this.clientService.getClients(this.params)
       .subscribe((data: any) => {
         this.clients = data.results;
-        // console.log(this.clients);
+        console.log(this.clients);
         this.loadingClient = false;
         this.length = data.count;
       }, error => {
@@ -62,6 +62,4 @@ export class ClientListComponent implements OnInit {
     this.params.offset = this.params.limit * e.pageIndex;
     this.getClients();
   }
-
-
 }

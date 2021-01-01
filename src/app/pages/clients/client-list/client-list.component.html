@@ -3,7 +3,6 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Lista de Clientes
-
         </h1>
     </div>
 
@@ -11,9 +10,9 @@
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
 
-                <!-- Ordering client register -->
+                <!-- Ordering clients register -->
                 <div class="col-lg-3">
-                    <select name="" id="" class="form-control select-form" (change)="ordenamiento($event.target.value)">
+                    <select class="form-control select-form" (change)="ordenamiento($event.target.value)">
                         <option>Ordenar por:</option>
                         <option value="-customer_name">Nombre</option>
                         <option value="-customer_reputation">Reputacion</option>
@@ -21,7 +20,7 @@
                         <option value="-total_orders_cancelled">Ordenes canceladas</option>
                     </select>
                 </div>
-                <!-- End Ordering client register -->
+                <!-- Ordering clients register -->
 
                 <div class="col-lg-6">
                 </div>
@@ -76,8 +75,7 @@
                             <th>Correo </th>
                             <th>Registro </th>
                             <th>Fecha de registro </th>
-                            <th>Usuario Seguro</th>
-
+                            <th>Total de Pedidos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,10 +96,7 @@
                                 <img class="img-username img-profile" *ngIf="client.user.auth_facebook != true" src="assets/img/correo.png" alt="category_img">
                             </td>
                             <td> {{ client.created | date:'medium' }} </td>
-                            <td>
-                                <span *ngIf="client.is_safe_user == true"> Si</span>
-                                <span *ngIf="client.is_safe_user != true"> no</span>
-                            </td>
+                            <td> {{ client.total_orders }} </td>
                         </tr>
                     </tbody>
                 </table>
