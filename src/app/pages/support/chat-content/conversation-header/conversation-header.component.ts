@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationHeaderComponent implements OnInit {
 
+  showOrderInfo: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
