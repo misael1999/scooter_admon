@@ -1,10 +1,10 @@
-    <div class="conversation">
+    <div class="conversation" *ngIf="support">
         <div class="conversation-wrapper">
-            <app-conversation-header></app-conversation-header>
+            <app-conversation-header [support]="support"></app-conversation-header>
             <div class="conversation-body">
-                <app-conversation-body></app-conversation-body>
+                <app-conversation-body [support]="support"></app-conversation-body>
             </div> 
-             <app-conversation-footer></app-conversation-footer>
+             <app-conversation-footer [support]="support"></app-conversation-footer>
             
         </div>
     </div>

@@ -7,7 +7,7 @@
             <img src="assets/images/avatars/thumb-1.jpg" alt="">
         </div>
         <div class="p-l-15">
-            <h6 class="m-b-0">Misael Gonzalez</h6>
+            <h6 class="m-b-0">{{support.customer}}</h6>
         </div>
     </div>
     <div class="dropdown dropdown-animated scale-left">
@@ -21,7 +21,7 @@
     </div>
 </div>
 <!-- INFORMACIÓN DEL PEDIDO  -->
-<div class="order-info">
+<div class="order-info" *ngIf="support.order">
     <div class="header-info" (click)="showOrderInfo = !showOrderInfo">
         <span>{{!showOrderInfo ? 'Mostrar' : 'Ocultar'}} información del pedido</span>
         <a (click)="showOrderInfo = true" *ngIf="!showOrderInfo" class="text-dark font-size-20" href="javascript:void(0);" data-toggle="dropdown">
@@ -38,18 +38,4 @@
         <span><span class="title">Costo de envio</span>: $25</span>
         <span><span class="title">Costo de compra</span>: $100</span>
     </div>
-    <!-- <div class="media align-items-center">
-        <div class="p-l-0">
-            <h6 class="m-b-0">Info del pedido</h6>
-        </div>
-    </div>
-    <div class="dropdown dropdown-animated scale-left">
-        <a class="text-dark font-size-20" href="javascript:void(0);" data-toggle="dropdown">
-            <i class="anticon anticon-setting"></i>
-        </a>
-        <div class="dropdown-menu">
-            <button class="dropdown-item" type="button">Marcar como terminado</button>
-            <button class="dropdown-item" type="button">Información del cliente</button>
-        </div>
-    </div> -->
 </div>

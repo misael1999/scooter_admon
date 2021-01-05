@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { delay } from 'rxjs/internal/operators/delay';
 import { retryWhen } from 'rxjs/internal/operators/retryWhen';
+import { SupportService } from 'src/app/services/support.service';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,11 +15,38 @@ export class MainSupportComponent implements OnInit {
   token = localStorage.getItem('access_token');
   WS_SOCKET = `${environment.WS_SOCKET}/ws/support/${this.stationId}/?token=${this.token}`;
 
-  constructor(private webSocketService: WebSocketService) { }
+  loadingSupports = false;
+  // Info
+  supports = [];
+  supportSelected;
+
+  constructor(private webSocketService: WebSocketService,
+              private supportService: SupportService) { }
 
   ngOnInit(): void {
     this.connectToWebSocket();
+    this.getSupports();
   }
+
+  getSupports() {
+    this.loadingSupports = true;
+    this.supportService.getSupports()
+      .subscribe((data: any) => {
+        this.loadingSupports = false;
+        this.supports = data.results;
+        console.log(this.supports);
+        
+
+    }, error => {
+      this.loadingSupports = false;
+      alert('Ha ocurrido un error al obtener los tickets de soporte');
+    });
+  }
+
+  supportSelectedEvent(support) {
+    this.supportSelected = support;
+  }
+
 
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
