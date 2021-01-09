@@ -1,0 +1,10 @@
+
+<!-- <mat-progress-bar *ngIf="!station" color="accent" class="my-3" mode="indeterminate"></mat-progress-bar> -->
+<div class="container-fluid p-h-0">
+    <div class="chat chat-app row">
+        <app-ticket-list [supports]="supports" [loading]="loadingSupports" (supportSelectedEvent)="supportSelectedEvent($event)"></app-ticket-list>
+        <div class="chat-content" *ngIf="supportSelected">
+            <app-chat-content [support]="supportSelected"></app-chat-content>
+        </div>
+    </div>
+</div>

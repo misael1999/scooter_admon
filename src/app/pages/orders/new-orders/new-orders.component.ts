@@ -48,7 +48,6 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       data: { order }
     });
   }
-
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
     /*     this.webSocketService.close(); */

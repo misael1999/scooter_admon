@@ -1,0 +1,10 @@
+.chat-list-item  {
+    &.active {
+        background: rgb(243, 145, 145) !important;
+        color: white !important;
+
+        p {
+            color: white !important;
+        }
+    }
+}

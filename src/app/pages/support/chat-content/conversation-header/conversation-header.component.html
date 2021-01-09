@@ -1,0 +1,41 @@
+<div class="conversation-header justify-content-between">
+    <div class="media align-items-center">
+        <a href="javascript:void(0);" class="chat-close m-r-20 d-md-none d-block text-dark font-size-18 m-t-5" >
+            <i class="anticon anticon-left-circle"></i>
+        </a>
+        <div class="avatar avatar-image">
+            <img src="assets/images/avatars/thumb-1.jpg" alt="">
+        </div>
+        <div class="p-l-15">
+            <h6 class="m-b-0">{{support.customer}}</h6>
+        </div>
+    </div>
+    <div class="dropdown dropdown-animated scale-left">
+        <a class="text-dark font-size-20" href="javascript:void(0);" data-toggle="dropdown">
+            <i class="anticon anticon-setting"></i>
+        </a>
+        <div class="dropdown-menu">
+            <button class="dropdown-item" type="button">Marcar como terminado</button>
+            <button class="dropdown-item" type="button">Información del cliente</button>
+        </div>
+    </div>
+</div>
+<!-- INFORMACIÓN DEL PEDIDO  -->
+<div class="order-info" *ngIf="support.order">
+    <div class="header-info" (click)="showOrderInfo = !showOrderInfo">
+        <span>{{!showOrderInfo ? 'Mostrar' : 'Ocultar'}} información del pedido</span>
+        <a (click)="showOrderInfo = true" *ngIf="!showOrderInfo" class="text-dark font-size-20" href="javascript:void(0);" data-toggle="dropdown">
+            <i class="anticon anticon-arrow-down"></i>
+        </a>
+        <a (click)="showOrderInfo = false" *ngIf="showOrderInfo" class="text-dark font-size-20" href="javascript:void(0);" data-toggle="dropdown">
+            <i class="anticon anticon-arrow-up"></i>
+        </a>
+    </div>
+    <div class="content-info" *ngIf="showOrderInfo">
+        <span><span class="title">SKU</span>: HTVSY</span>
+        <span><span class="title">Detalles</span>: <span style="color: red; cursor: pointer; font-weight: bold;">Ver detalles</span></span>
+        <span><span class="title">Comercio</span>: Cemitas la poblanita</span>
+        <span><span class="title">Costo de envio</span>: $25</span>
+        <span><span class="title">Costo de compra</span>: $100</span>
+    </div>
+</div>

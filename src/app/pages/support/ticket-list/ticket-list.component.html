@@ -1,0 +1,49 @@
+<div class="chat-list">
+    <div class="chat-user-tool">
+        <i class="anticon anticon-search search-icon p-r-10 font-size-20"></i>
+        <input placeholder="Buscar...">
+    </div>
+    <div class="chat-user-list">
+        <div class="d-flex justify-content-center my-1">
+            <div *ngIf="loading" class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <span *ngIf="!loading && supports.length == 0">No hay conversaciones que mostrar</span>
+        </div>
+        <a *ngFor="let support of supports" (click)="supportSelect(support)" class="chat-list-item p-h-25"
+         [ngClass]="supportSelected && support.id == supportSelected.id ? 'active': ''">
+            <div class="media align-items-center">
+                <div class="avatar avatar-image">
+                    <img src="assets/images/avatars/thumb-1.jpg" alt="">
+                </div>
+                <div class="p-l-15">
+                    <h5 class="m-b-0">{{support.customer}}</h5>
+                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                        Asunto: {{support.support_type}}
+                    </p>
+                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                        Estatus: <span class="badge" 
+                        [ngClass]="support.support_status_id == 1 ? 'badge-success': 'badge-danger'"
+                        >{{support.support_status}}</span>
+                    </p>
+                </div>
+            </div>
+        </a>
+        <!-- <a class="chat-list-item p-h-25" href="javascript:void(0);">
+            <div class="media align-items-center">
+                <div class="avatar avatar-image">
+                    <img src="assets/images/avatars/thumb-1.jpg" alt="">
+                </div>
+                <div class="p-l-15">
+                    <h5 class="m-b-0">Kim Neri</h5>
+                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                        Asunto: Problemas con el pedido entregado
+                    </p>
+                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                        Estatus: <span class="badge badge-danger">Cerrado</span>
+                    </p>
+                </div>
+            </div>
+        </a> -->
+    </div>   
+</div>

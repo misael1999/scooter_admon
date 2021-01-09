@@ -7,34 +7,34 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OrdersService {
 
-  constructor(private http: HttpClient) { }
+  stationId;
+
+  constructor(private http: HttpClient) { 
+     this.stationId = localStorage.getItem('station_id');
+
+  }
 
   getOrders(params = {}) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/`;
     return this.http.get(url, { params });
   }
 
   getNearestDeliveryMen(data, params = {}) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/nearest/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/delivery_men/nearest/`;
     return this.http.post(url, data, { params });
   }
 
   assignDeliveryToOrder(orderId, data) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/assign_order/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/assign_order/`;
     return this.http.put(url, data);
   }
   reassignDeliveryToOrder(orderId, data) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/reassign_order/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/reassign_order/`;
     return this.http.put(url, data);
   }
 
   rejectOrder(orderId, data) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/reject_order/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/reject_order/`;
     return this.http.put(url, data);
   }
 
@@ -45,14 +45,12 @@ export class OrdersService {
 
 
   cancelOrder(orderId, data) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/cancel_order/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/cancel_order/`;
     return this.http.put(url, data);
   }
 
   acceptOrderMerchant(orderId, data) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/accept_order_merchant/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/accept_order_merchant/`;
     return this.http.put(url, data);
   }
 
@@ -64,13 +62,11 @@ export class OrdersService {
 
 
   rejectOrderMerchant(orderId, data) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/reject_order_merchant/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/reject_order_merchant/`;
     return this.http.put(url, data);
   }
   cancelOrderMerchant(orderId, data) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/cancel_order_merchant/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/cancel_order_merchant/`;
     return this.http.put(url, data);
   }
 }
