@@ -63,7 +63,7 @@ const routes: Routes = [
   {
     path: 'notifications',
     canActivate: [AuthGuard, RefreshTokenGuard],
-    loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule)
+    // loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule)
   },
   {
     path: 'zones',

@@ -21,8 +21,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
-
-
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 
 const components = [
@@ -48,6 +48,9 @@ const components = [
   MatExpansionModule,
   MatTooltipModule,
   MatMenuModule,
+  MatButtonModule,
+  MatIconModule
+  
 ];
 
 @NgModule({

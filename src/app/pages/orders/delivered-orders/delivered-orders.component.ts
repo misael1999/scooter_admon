@@ -28,19 +28,32 @@ export class DeliveredOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  openDialogDetailProducts(details) {
+  openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '500px',
-      data: { details }
+      width: '90%',
+      data: { order }
     });
   }
+
+
+
+  openDirectionFromAddress(fromAddres) {
+    console.log(fromAddres);
+    window.open(`https://maps.google.com/?q=${fromAddres.coordinates[1]},${fromAddres.coordinates[0]}`, '_blank');
+  }
+
+  openDirection(addres) {
+    console.log(addres);
+    window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
+  }
+
 
   getOrders() {
     this.loadingOrders = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
-        // console.log(this.orders);
+        console.log(this.orders);
         this.loadingOrders = false;
         this.length = data.count;
       }, error => {

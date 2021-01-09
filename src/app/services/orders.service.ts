@@ -38,6 +38,12 @@ export class OrdersService {
     return this.http.put(url, data);
   }
 
+
+
+
+
+
+
   cancelOrder(orderId, data) {
     const stationId = localStorage.getItem('station_id');
     const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/cancel_order/`;
@@ -49,6 +55,13 @@ export class OrdersService {
     const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/accept_order_merchant/`;
     return this.http.put(url, data);
   }
+
+  endOrderMerchant(orderId, data) {
+    const stationId = localStorage.getItem('station_id');
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/orders/${orderId}/ready_order_merchant/`;
+    return this.http.put(url, data);
+  }
+
 
   rejectOrderMerchant(orderId, data) {
     const stationId = localStorage.getItem('station_id');

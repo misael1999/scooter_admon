@@ -73,6 +73,7 @@
                             <th>Imagen</th>
                             <th>Nombre </th>
                             <th>Correo </th>
+                            <th>Teléfono </th>
                             <th>Registro </th>
                             <th>Fecha de registro </th>
                             <th>Total de Pedidos</th>
@@ -91,6 +92,7 @@
                             </td>
                             <td> {{ client.name }}</td>
                             <td> {{ client.user.username }} </td>
+                            <td> {{ client.phone_number }} </td>
                             <td class="text-center">
                                 <img class="img-username img-profile" *ngIf="client.user.auth_facebook == true" src="assets/img/Facebook-logo.png" alt="category_img">
                                 <img class="img-username img-profile" *ngIf="client.user.auth_facebook != true" src="assets/img/correo.png" alt="category_img">

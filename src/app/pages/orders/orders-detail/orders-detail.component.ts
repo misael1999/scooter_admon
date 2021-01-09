@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders-detail',
@@ -7,13 +8,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./orders-detail.component.scss']
 })
 export class OrdersDetailComponent implements OnInit {
-  details: Array<any> = [];
+  order;
+  orderDetails;
 
   constructor(
     public dialogRef: MatDialogRef<OrdersDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.details = data.details;
-    console.log(this.details);
+    this.order = data.order;
+    this.orderDetails = data.order.details;
+    console.log(this.order);
+    console.log(this.orderDetails);
   }
 
   ngOnInit(): void {
