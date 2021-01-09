@@ -118,7 +118,7 @@
                             <td>
 
                                 <button [disabled]="loadingRejectOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger">Cancelar</button>
-                                <button [disabled]="loadingEndOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-secondary">Terminar</button>
+                                <button [disabled]="loadingEndOrder" (click)="endOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-secondary">Terminar</button>
                             </td>
                         </tr>
                     </tbody>

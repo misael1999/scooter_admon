@@ -31,10 +31,11 @@ export class OrdersInProcessComponent implements OnInit {
     this.getOrders();
   }
 
-  openDialogDetailProducts(details) {
+
+  openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '500px',
-      data: { details }
+      width: '90%',
+      data: { order }
     });
   }
 

@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Pedidos Entregados</h1>
     </div>
@@ -7,6 +6,7 @@
     <div>
         <div class="filters mb-3">
             <div class="row d-flex justify-content-end">
+
 
                 <!-- Ordering orders -->
                 <div class="col-lg-3">
@@ -22,10 +22,10 @@
 
                 <div class="col-lg-6"></div>
 
-                <!-- Search by name -->
+                <!-- Search orders by name -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre..." aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="fas fa-search"></i>
@@ -33,19 +33,21 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Search by name -->
+                <!-- End Search orders by name -->
             </div>
         </div>
 
 
 
         <div class="row" class="content">
+
             <!-- Paginator  -->
             <div class="col-lg-12 d-flex justify-content-end">
                 <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
                     </mat-paginator>
             </div>
             <!-- End Paginator -->
+
 
             <!-- Preloader  -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
@@ -57,65 +59,74 @@
 
 
 
-            <div class="col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
+            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12" *ngIf="!loadingOrders && orders.length > 0">
                 <table class="table table-bordered table-responsive">
                     <thead>
                         <tr>
                             <th>Servicio</th>
-                            <th>Fecha del pedido</th>
                             <th>Cliente</th>
                             <th>Repartidor</th>
                             <th>Pedido</th>
-                            <th>Lugar de Compra o Recolección</th>
-                            <th>Lugar de entrega</th>
-                            <th>Precio del Servicio</th>
-                            <th>Distancia</th>
+                            <th style="min-width: 200px;">Lugar de Compra o Recolección</th>
+                            <th style="min-width: 200px;">Lugar de entrega</th>
+                            <th>Fecha del Pedido</th>
                             <th>Fecha de Entrega</th>
+                            <th>Precio del servicio</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
                             <td>
-                                <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
-                                'badge-warning': order.service == 'Recolección' }">{{order.service}}</span></td>
-                            <td> {{ order.order_date | date:'medium' }} </td>
+                                <span *ngIf="order.is_order_to_merchant == false && order.service == 'Compras'" class="badge bg-secondary text-dark">Lo que sea</span>
+                                <span *ngIf="order.service == 'Recolección'" class="badge bg-warning text-dark">Recolección</span>
+                                <span *ngIf="order.is_order_to_merchant == true" class="badge bg-info text-dark">Compras</span>
+                            </td>
                             <td> {{ order.customer.name }} </td>
                             <td>
                                 <span *ngIf="order.delivery_man"> {{ order.delivery_man.name }} </span>
                                 <span *ngIf="!order.delivery_man"> Sin repartidor </span>
                             </td>
-                            <td *ngIf="order.service == 'Compras'">
-                                <div class="products-details">
-                                    <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
-                                </div>
-
-                            </td>
-                            <td *ngIf="order.service == 'Recolección'">
-                                <span>{{order.indications}}</span>
-                            </td>
                             <td>
-                                <div *ngIf="order.is_order_to_merchant == true"><span> {{ order.merchant.merchant_name }} </span></div>
-                                <div *ngIf="order.is_order_to_merchant == false"><span> {{ order.from_address.full_address }} </span></div>
-                                <div class="address" *ngIf="order.service != 'Compras'">
-                                    <p> {{ order.from_address.full_address }} </p>
-                                </div>
-                                <div class="place" *ngIf="order.service === 'Compras'">
-                                </div>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;">
+                                        <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                    </li>
+                                </ol>
                             </td>
-                            <td> {{ order.to_address.full_address }} </td>
-                            <td> $ {{ order.service_price | number : '1.2-2' }} </td>
-                            <td> {{ order.distance | number : '1.2-2' }} KM </td>
+
+
+                            <td>
+                                <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                        </ol>
+                                </span>
+
+                                <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                        </ol>
+                                </span>
+                            </td>
+
+
+                            <td> {{ order.to_address.full_address }} <br>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
+                                </ol>
+                            </td>
+
+                            <td> {{ order.order_date | date:'medium' }} </td>
                             <td> {{ order.date_delivered_order | date:'medium'}} </td>
+                            <td> $ {{ order.service_price }} </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
             <!-- Component no data -->
             <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  [message]="'No hay pedidos que mostrar'">
             </app-no-found-data>
             <!-- End Component no data -->
-
         </div>
     </div>
 </div>

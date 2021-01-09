@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorDialogComponent } from './alerts/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from './alerts/success-dialog/success-dialog.component';
 import { NoFoundDataComponent } from './no-found-data/no-found-data.component';
+import { AngularMaterialModule } from './angular-material.module';
 
 
 
@@ -17,7 +18,8 @@ import { NoFoundDataComponent } from './no-found-data/no-found-data.component';
   ],
   imports: [
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularMaterialModule
   ],
   entryComponents: [
     ConfirmSignupDialogComponent,

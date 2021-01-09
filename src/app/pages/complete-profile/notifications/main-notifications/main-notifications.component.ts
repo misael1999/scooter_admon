@@ -2,19 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { ValidationForms } from 'src/app/utils/validations-forms';
 
 @Component({
   selector: 'app-main-notifications',
   templateUrl: './main-notifications.component.html',
   styleUrls: ['./main-notifications.component.scss']
 })
-export class MainNotificationsComponent implements OnInit {
+export class MainNotificationsComponent extends ValidationForms implements OnInit {
 
   notificationForm: FormGroup;
   loadingSend;
 
   constructor(private fb: FormBuilder,
-     private notificationsService: NotificationsService, private snackBar: MatSnackBar) { }
+     private notificationsService: NotificationsService, private snackBar: MatSnackBar) { super() }
 
   ngOnInit(): void {
     this.buildForm();
@@ -28,11 +29,15 @@ export class MainNotificationsComponent implements OnInit {
     })
   }
 
-  sendNotifications() {
+  async sendNotifications() {
     if (this.notificationForm.invalid) {
       alert('Formulario incompleto');
       return;
     }
+    const confirmationAction = await this.showMessageConfirm("Enviar la notificación");
+
+    if (!confirmationAction.value) return;
+
     this.loadingSend = true;
     this.notificationsService.sendNotifications(this.notificationForm.value)
     .subscribe((data: any) => {
@@ -45,6 +50,7 @@ export class MainNotificationsComponent implements OnInit {
       this.loadingSend = false;
       alert('Ha ocurrido un error al mandar la notificación');
     });
+
   }
 
 }

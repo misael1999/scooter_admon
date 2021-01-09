@@ -42,14 +42,12 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     // this.connectToWebSocket();
   }
 
-
-  openDialogDetailProducts(details) {
+  openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '500px',
-      data: { details }
+      width: '90%',
+      data: { order }
     });
   }
-  
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
     /*     this.webSocketService.close(); */

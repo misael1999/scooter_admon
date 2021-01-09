@@ -26,12 +26,13 @@ export class OrdersCancelledComponent implements OnInit {
   }
 
 
-  openDialogDetailProducts(details) {
+  openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '500px',
-      data: { details }
+      width: '90%',
+      data: { order }
     });
   }
+  
 
   getOrders() {
     this.loadingOrders = true;

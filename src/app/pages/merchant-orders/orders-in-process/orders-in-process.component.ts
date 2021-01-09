@@ -99,19 +99,18 @@ export class OrdersInProcessComponent implements OnInit {
 
   endOrderMerchant(orderId) {
     this.loadingAcceptOrder = true;
-    this.ordersService.acceptOrderMerchant(orderId, {})
+    this.ordersService.endOrderMerchant(orderId, {})
       .subscribe((data: any) => {
         this.loadingAcceptOrder = false;
-        this.snackBar.open('Pedido Terminado', '', {
+        this.snackBar.open('Pedido terminado', '', {
           duration: 4000,
           panelClass: 'main-snackbar'
         });
         this.getOrders();
       }, error => {
         this.loadingAcceptOrder = false;
-        alert('Ha ocurrido un error al aceptar el pedido');
+        alert('Ha ocurrido un error al terminar el pedido');
       });
-
   }
 
   /*   openDialogAssignDelivery(order) {
@@ -131,22 +130,7 @@ export class OrdersInProcessComponent implements OnInit {
       });
     } */
 
-  /* 
-    openDialogRejectOrder(orderId) {
-      const dialogref = this.dialog.open(RejectOrderDialogComponent, {
-        disableClose: true,
-        width: '40%',
-        minHeight: '300px',
-        minWidth: '300px',
-        data: { orderId }
-      });
   
-      dialogref.afterClosed().subscribe(data => {
-        if (data) {
-          this.getOrders();
-        }
-      });
-    } */
 
   // ======= PAGINADOR ========
   getPages(e): PageEvent {
