@@ -4,6 +4,7 @@ import { retryWhen } from 'rxjs/internal/operators/retryWhen';
 import { SupportService } from 'src/app/services/support.service';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { environment } from 'src/environments/environment';
+import { SnotifyPosition, SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-main-support',
@@ -23,7 +24,8 @@ export class MainSupportComponent implements OnInit {
   newMessage = null;
 
   constructor(private webSocketService: WebSocketService,
-              private supportService: SupportService) { }
+              private supportService: SupportService,
+              private snotify: SnotifyService) { }
 
   ngOnInit(): void {
     this.connectToWebSocket();
@@ -35,10 +37,7 @@ export class MainSupportComponent implements OnInit {
     this.supportService.getSupports()
       .subscribe((data: any) => {
         this.loadingSupports = false;
-        this.supports = data.results;
-        console.log(this.supports);
-        
-
+        this.supports = data.results;        
     }, error => {
       this.loadingSupports = false;
       alert('Ha ocurrido un error al obtener los tickets de soporte');
@@ -52,26 +51,17 @@ export class MainSupportComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
-    /*     this.webSocketService.close(); */
   }
 
   connectToWebSocket() {
     this.webSocketService.connect(this.WS_SOCKET).pipe(
       retryWhen((errors) => errors.pipe(delay(5000)))
     ).subscribe((data: any) => {
-      console.log("SOCKET");
-      console.log(data);
-
-
       if (data.data.type && data.data.type === 'NEW_MESSAGE_SUPPORT') {
         this.playAudio();
         this.newMessage = data.data.message;
-        // this.getOrders();
+        this.showNewMessageNotification();
       }
-      //   // this.openSnackbarNewOrder('Nuevo pedido');
-      // if (data.data.type && data.data.type === 'ACCEPT_ORDER') {
-      //   // this.openSnackbarNewOrder('Pedido aceptado por el repartidor');
-      // }
     });
   }
 
@@ -80,6 +70,20 @@ export class MainSupportComponent implements OnInit {
     audio.src = "assets/sounds/message.mp3";
     audio.load();
     audio.play();
+  }
+
+  showNewMessageNotification() {
+    if ( !this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
+      const message = `Mensaje nuevo| ID:${this.newMessage.support}| Mensaje: ${this.newMessage.text}`;
+      this.snotify.info(message, {
+        timeout: 2000,
+        showProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        position: SnotifyPosition.centerTop
+      });        
+      return;
+    }
   }
 
 

@@ -21,6 +21,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 
 
+
 registerLocaleData(localeEs);
 
 @NgModule({
@@ -40,7 +41,7 @@ registerLocaleData(localeEs);
     HttpClientModule,
     LoadingBarRouterModule,
     LoadingBarModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     {
@@ -57,8 +58,8 @@ registerLocaleData(localeEs);
       provide: MatPaginatorIntl,
       useValue: getPaginatorTranslate()
     },
-    { provide: NZ_I18N, useValue: en_US },
-  ],
+    { provide: NZ_I18N, useValue: en_US }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

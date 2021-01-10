@@ -11,15 +11,15 @@ import { ConversationFooterComponent } from './chat-content/conversation-footer/
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DirectivesModule } from 'src/app/directives/directives.module';
-
+import { SnotifyModule, ToastDefaults, SnotifyService } from 'ng-snotify';
 
 @NgModule({
   declarations: [
     MainSupportComponent,
-    TicketListComponent, 
-    ChatContentComponent, 
-    ConversationHeaderComponent, 
-    ConversationBodyComponent, 
+    TicketListComponent,
+    ChatContentComponent,
+    ConversationHeaderComponent,
+    ConversationBodyComponent,
     ConversationFooterComponent
   ],
   imports: [
@@ -27,7 +27,12 @@ import { DirectivesModule } from 'src/app/directives/directives.module';
     SupportRoutingModule,
     FormsModule,
     InfiniteScrollModule,
-    DirectivesModule
+    DirectivesModule,
+    SnotifyModule
+  ],
+  providers: [
+    SnotifyService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
   ]
 })
 export class SupportModule { }
