@@ -9,6 +9,7 @@ export class ConversationHeaderComponent implements OnInit {
 
   showOrderInfo: boolean;
   @Input() support;
+  @Input() total;
 
   constructor() { }
 

@@ -36,6 +36,7 @@
     "moment": "^2.27.0",
     "ng-zorro-antd": "^10.0.2",
     "ng2-charts": "^2.4.2",
+    "ngx-infinite-scroll": "^10.0.0",
     "rxjs": "~6.5.4",
     "sweetalert2": "^8.13.1",
     "tslib": "^1.10.0",

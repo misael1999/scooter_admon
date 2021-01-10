@@ -4,7 +4,7 @@
     <div class="chat chat-app row">
         <app-ticket-list [supports]="supports" [loading]="loadingSupports" (supportSelectedEvent)="supportSelectedEvent($event)"></app-ticket-list>
         <div class="chat-content" *ngIf="supportSelected">
-            <app-chat-content [support]="supportSelected"></app-chat-content>
+            <app-chat-content [newMessageSocket]="newMessage" [support]="supportSelected"></app-chat-content>
         </div>
     </div>
 </div>

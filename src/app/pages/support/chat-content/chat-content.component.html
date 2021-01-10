@@ -1,10 +1,31 @@
-    <div class="conversation" *ngIf="support">
-        <div class="conversation-wrapper">
-            <app-conversation-header [support]="support"></app-conversation-header>
-            <div class="conversation-body">
-                <app-conversation-body [support]="support"></app-conversation-body>
-            </div> 
-             <app-conversation-footer [support]="support"></app-conversation-footer>
-            
+<div class="conversation" *ngIf="support">
+    <div class="conversation-wrapper">
+        <app-conversation-header [total]="count" [support]="support"></app-conversation-header>
+        <div appScroll infinite-scroll [scrollWindow]="false" [infiniteScrollUpDistance]="3"
+            [infiniteScrollThrottle]="0" (scrolledUp)="onUp()" class="conversation-body" #conversationBody>
+            <!-- Loader de nuevos mensajes  -->
+            <div *ngIf="loadingMore" class="more">
+                <a>Cargando ...</a>
+                <div class="spinner-grow text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!-- Termina loader de nuevos mensajes  -->
+            <div *ngIf="count && !loadingMessages && count == messages.length" class="no-more-messages more">
+                <a>No hay mas mensajes que cargar</a>
+            </div>
+            <!-- Loading de mensajes iniciales  -->
+            <div *ngIf="loadingMessages" class="spinner-grow text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <!-- Termina loading de mensajes iniciales  -->
+            <!-- BODY  -->
+            <app-conversation-body *ngIf="!loadingMessages && messages.length >0" [messages]="messages">
+            </app-conversation-body>
+
+            <!-- TERMINA BODY  -->
         </div>
+        <app-conversation-footer (newMessage)="newMessage($event)" [support]="support"></app-conversation-footer>
+
     </div>
+</div>

@@ -20,6 +20,8 @@ export class MainSupportComponent implements OnInit {
   supports = [];
   supportSelected;
 
+  newMessage = null;
+
   constructor(private webSocketService: WebSocketService,
               private supportService: SupportService) { }
 
@@ -63,6 +65,7 @@ export class MainSupportComponent implements OnInit {
 
       if (data.data.type && data.data.type === 'NEW_MESSAGE_SUPPORT') {
         this.playAudio();
+        this.newMessage = data.data.message;
         // this.getOrders();
       }
       //   // this.openSnackbarNewOrder('Nuevo pedido');

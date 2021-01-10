@@ -1,14 +1,11 @@
 <!-- <div class="msg justify-content-center">
                     <div class="font-weight-semibold font-size-12"> 7:57PM </div>
                 </div> -->
-<div *ngIf="loadingMessages" class="spinner-grow text-danger" role="status">
-    <span class="sr-only">Loading...</span>
-</div>
-<div class="messages-content" *ngIf="!loadingMessages">
+
     <div *ngFor="let message of messages" class="msg"
      [ngClass]="station.user.id == message.sender_by ? 'msg-sent': 'msg-recipient'">
         <div class="m-r-10">
-            <div class="avatar avatar-image">
+            <div *ngIf="station.user.id != message.sender_by" class="avatar avatar-image">
                 <img src="assets/images/avatars/thumb-1.jpg" alt="">
             </div>
         </div>
@@ -18,7 +15,6 @@
             </div>
         </div>
     </div>
-</div>
 <!--
                 <div class="msg msg-sent">
                     <div class="bubble">

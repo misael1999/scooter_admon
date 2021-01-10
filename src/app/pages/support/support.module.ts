@@ -8,13 +8,26 @@ import { ChatContentComponent } from './chat-content/chat-content.component';
 import { ConversationHeaderComponent } from './chat-content/conversation-header/conversation-header.component';
 import { ConversationBodyComponent } from './chat-content/conversation-body/conversation-body.component';
 import { ConversationFooterComponent } from './chat-content/conversation-footer/conversation-footer.component';
+import { FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { DirectivesModule } from 'src/app/directives/directives.module';
 
 
 @NgModule({
-  declarations: [MainSupportComponent, TicketListComponent, ChatContentComponent, ConversationHeaderComponent, ConversationBodyComponent, ConversationFooterComponent],
+  declarations: [
+    MainSupportComponent,
+    TicketListComponent, 
+    ChatContentComponent, 
+    ConversationHeaderComponent, 
+    ConversationBodyComponent, 
+    ConversationFooterComponent
+  ],
   imports: [
     CommonModule,
-    SupportRoutingModule
+    SupportRoutingModule,
+    FormsModule,
+    InfiniteScrollModule,
+    DirectivesModule
   ]
 })
 export class SupportModule { }

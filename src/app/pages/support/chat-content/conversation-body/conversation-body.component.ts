@@ -8,43 +8,21 @@ import { SupportService } from 'src/app/services/support.service';
 })
 export class ConversationBodyComponent implements OnInit, OnChanges {
 
-  messages = [];
-  loadingMessages;
-  @Input() support;
+  @Input() messages;
+  @Input() loadingMessages: boolean;
   station;
-  params = { limit: 15, offset: 0 }
-
-  constructor(private supportService: SupportService) { }
 
 
-  ngOnInit(): void {
+  constructor(private supportService: SupportService) {
     this.station = JSON.parse(localStorage.getItem('station'));
-    if (this.support) {
-      this.loadingMessages = true;
-      this.getMessagesSupport();
-    }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const supportUpdated = changes['support'];
-    if (supportUpdated.previousValue) {
-      this.loadingMessages = true;
-      this.getMessagesSupport();
-    }
+  ngOnInit() {
   }
 
-  getMessagesSupport() {
-    if (this.support) {
-      this.supportService.getMessages(this.support.id, this.params)
-        .subscribe((data: any) => {
-          this.messages = data.results;
-          console.log(this.messages);
-          this.loadingMessages = false;
-        }, error => {
-          alert('Error al obtener los mensajes');
-          this.loadingMessages = false;
-        });
-    }
+  ngOnChanges() {
+    
   }
+
 
 }
