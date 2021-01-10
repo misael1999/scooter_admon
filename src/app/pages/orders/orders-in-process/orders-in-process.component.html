@@ -24,7 +24,9 @@
                 <!-- Search by name -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text"
+                            class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username"
+                            aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="fas fa-search"></i>
@@ -42,8 +44,9 @@
 
             <!-- Paginator  -->
             <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                    </mat-paginator>
+                <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                </mat-paginator>
             </div>
             <!-- End Paginator -->
 
@@ -78,74 +81,81 @@
                     <tbody>
                         <tr *ngFor="let order of orders">
 
-                            <tr *ngFor="let order of orders">
-                                <td> <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
-                                    'badge-warning': order.service == 'Recolección' }">{{order.service}} 
-                                <span *ngIf="order.is_order_to_merchant">a comercios</span>
-                                    </span>
-                                </td>
-                                <td>{{order.customer.name}}</td>
-                                <td>{{order.customer.phone_number}}</td>
-                                <td>
-                                    <span *ngIf="order.delivery_man">{{order.delivery_man.name}}</span>
-                                    <span *ngIf="!order.delivery_man">Sin repartidor</span>
-                                </td>
-                                <td *ngIf="order.service == 'Compras'">
+                        <tr *ngFor="let order of orders">
+                            <td> <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
+                                    'badge-warning': order.service == 'Recolección' }">{{order.service}}
+                                    <span *ngIf="order.is_order_to_merchant">a comercios</span>
+                                </span>
+                            </td>
+                            <td>{{order.customer.name}}</td>
+                            <td>{{order.customer.phone_number}}</td>
+                            <td>
+                                <span *ngIf="order.delivery_man">{{order.delivery_man.name}}</span>
+                                <span *ngIf="!order.delivery_man">Sin repartidor</span>
+                            </td>
+                            <td *ngIf="order.service == 'Compras'">
 
-                                    <div class="products-details">
-                                        <button mat-button (click)="openDialogDetailProducts(order)" class="btn btn-secondary btn-sm">Ver más</button>
-                                    </div>
+                                <div class="products-details">
+                                    <button mat-button (click)="openDialogDetailProducts(order)"
+                                        class="btn btn-secondary btn-sm">Ver más</button>
+                                </div>
 
-                                    <!-- <div class="products-details">
+                                <!-- <div class="products-details">
                                         <span *ngFor="let detail of order.details">
                                         -x{{detail.quantity || '1'}} {{detail.product_name}}
                                     </span>
                                     </div> -->
-                                </td>
-                                <td *ngIf="order.service == 'Recolección'">
-                                    <span>{{order.indications}}</span>
-                                </td>
-                                <td>{{order.service}}</td>
-                                <td>
-                                    <div class="address" *ngIf="order.service != 'Compras'">
-                                        {{order.from_address.full_address}}
-                                    </div>
-                                    <div class="place" *ngIf="order.service == 'Compras' &&
+                            </td>
+                            <td *ngIf="order.service == 'Recolección'">
+                                <span>{{order.indications}}</span>
+                            </td>
+                            <td>{{order.service}}</td>
+                            <td>
+                                <div class="address" *ngIf="order.service != 'Compras'">
+                                    {{order.from_address.full_address}}
+                                </div>
+                                <div class="place" *ngIf="order.service == 'Compras' &&
                                      order.is_order_to_merchant == false ">
-                                        <p>{{order.from_address.alias}}</p>
-                                        <p>{{order.from_address.full_address}}</p>
-                                    </div>
-                                    <div class="place" *ngIf="order.service == 'Compras' &&
+                                    <p>{{order.from_address.alias}}</p>
+                                    <p>{{order.from_address.full_address}}</p>
+                                </div>
+                                <div class="place" *ngIf="order.service == 'Compras' &&
                                      order.is_order_to_merchant == true ">
-                                        <span class="badge badge-success">{{order.merchant.merchant_name}}</span>
-                                        <p>{{order.merchant.full_address}}</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{order.to_address.full_address}}
-                                </td>
-                                <td>${{order.service_price | number : '1.2-2'}}</td>
-                                <td>{{order.distance | number}} KM</td>
-                                <td>
-                                    {{order.order_date | date:'medium'}}
-                                </td>
-                                <td>
-                                    {{order.order_status.name}}
-                                </td>
-                                <td>
-                                    <button (click)="openDialogCancelOrder(order.id)" *ngIf="!order.is_order_to_merchant" class="btn btn-danger">
+                                    <span class="badge badge-success">{{order.merchant.merchant_name}}</span>
+                                    <p>{{order.merchant.full_address}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                {{order.to_address.full_address}}
+                            </td>
+                            <td>${{order.service_price | number : '1.2-2'}}</td>
+                            <td>{{order.distance | number}} KM</td>
+                            <td>
+                                {{order.order_date | date:'medium'}}
+                            </td>
+                            <td>
+                                {{order.order_status.name}}
+                            </td>
+                            <td>
+                                <button (click)="openDialogSendMessageOrder(order)" *ngIf="order.delivery_man"
+                                    class="btn btn-success mb-1">
+                                    <i class="anticon anticon-message"></i>
+                                </button>
+                                <button (click)="openDialogCancelOrder(order.id)" *ngIf="!order.is_order_to_merchant"
+                                    class="btn btn-danger">
                                     Cancelar
                                 </button>
-                                    <button (click)="openDialogReassignDelivery(order)" *ngIf="order.delivery_man" class="btn btn-info">
+                                <button (click)="openDialogReassignDelivery(order)" *ngIf="order.delivery_man"
+                                    class="btn btn-info">
                                     Reasignar
                                 </button>
-                                </td>
+                            </td>
 
 
-                                <!-- <td>
+                            <!-- <td>
                                 <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;" class="btn btn-success">Más detalles</button>
                             </td> -->
-                            </tr>
+                        </tr>
                     </tbody>
                 </table>
             </div>

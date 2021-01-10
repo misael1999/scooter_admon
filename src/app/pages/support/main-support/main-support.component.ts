@@ -19,6 +19,7 @@ export class MainSupportComponent implements OnInit {
   loadingSupports = false;
   // Info
   supports = [];
+  params = { limit: 10, offset:0, is_open: "true" }
   supportSelected;
 
   newMessage = null;
@@ -34,7 +35,7 @@ export class MainSupportComponent implements OnInit {
 
   getSupports() {
     this.loadingSupports = true;
-    this.supportService.getSupports()
+    this.supportService.getSupports(this.params)
       .subscribe((data: any) => {
         this.loadingSupports = false;
         this.supports = data.results;        
@@ -63,6 +64,11 @@ export class MainSupportComponent implements OnInit {
         this.showNewMessageNotification();
       }
     });
+  }
+
+  filter(isOpen) {
+    this.params.is_open = isOpen;
+    this.getSupports();
   }
 
   playAudio() {

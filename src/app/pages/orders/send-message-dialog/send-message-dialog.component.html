@@ -1,0 +1,38 @@
+<h1 mat-dialog-title class="d-flex justify-content-between">
+    Enviar mensaje
+    <button mat-dialog-close>
+      <i class="fas fs-close"></i>
+    </button>
+  
+  </h1>
+  <div mat-dialog-content>
+    <div class="row d-flex justify-content-center">
+        <form [formGroup]="supportForm">
+            <div class="form-group">
+                <label>Ingresa el mensaje *</label>
+                <textarea  formControlName="text" type="text" class="form-control-eco w-100"
+                [ngClass]="{'has-error error': isFieldInvalid(supportForm, 'text'),
+                  'has-success valid': isFieldValid(supportForm, 'text')}"></textarea>
+                  <!-- MESSAGES ERRORS  -->
+                  <div class="invalid-feedback-form" *ngIf="isFieldInvalid(supportForm, 'text')">
+                    <span *ngIf="hasFieldError(supportForm, 'text','required')">Este campo es
+                      requerido</span>
+                  </div>
+              </div>
+        </form>
+    </div>
+  </div>
+  <div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
+    <button [disabled]="loadingSave" (click)="sendMessage()"
+     class="btn btn-primary w-50">
+     Enviar mensaje
+     <div class="load" *ngIf="loadingSave">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="sr-only">Loading...</span>
+       </div>
+     <!-- <div class="load">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span class="sr-only">Loading...</span>
+     </div> -->
+    </button>
+  </div>

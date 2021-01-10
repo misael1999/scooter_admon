@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { SnotifyModule, ToastDefaults, SnotifyService } from 'ng-snotify';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SnotifyModule, ToastDefaults, SnotifyService } from 'ng-snotify';
   imports: [
     CommonModule,
     SupportRoutingModule,
+    MatDialogModule,
     FormsModule,
     InfiniteScrollModule,
     DirectivesModule,

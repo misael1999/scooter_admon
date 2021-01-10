@@ -8,6 +8,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { CancelOrderDialogComponent } from './cancel-order-dialog/cancel-order-dialog.component';
 import { ReasignOrderComponent } from './reasign-order/reasign-order.component';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
+import { SendMessageDialogComponent } from '../send-message-dialog/send-message-dialog.component';
 
 @Component({
   selector: 'app-orders-in-process',
@@ -86,37 +87,20 @@ export class OrdersInProcessComponent implements OnInit {
   }
 
 
-
-  openDialogAssignDelivery(orderId) {
-    /* const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
+  openDialogSendMessageOrder(order) {
+    const dialogref = this.dialog.open(SendMessageDialogComponent, {
       disableClose: true,
-      width: '60%',
-      minHeight: '500px',
+      width: '30%',
+      minHeight: '400px',
       minWidth: '350px',
-      data: {orderId}
+      data: { order: order }
     });
- 
+
     dialogref.afterClosed().subscribe(data => {
       if (data) {
         this.getOrders();
       }
-    }); */
-  }
-
-  openDialogRejectOrder(orderId) {
-    /*  const dialogref = this.dialog.open(RejectOrderDialogComponent, {
-       disableClose: true,
-       width: '40%',
-       minHeight: '300px',
-       minWidth: '300px',
-       data: {orderId}
-     });
-  
-     dialogref.afterClosed().subscribe(data => {
-       if (data) {
-         this.getOrders();
-       }
-     }); */
+    });
   }
 
   searchBy(value: string) {

@@ -16,6 +16,7 @@ import { CancelOrderDialogComponent } from './orders-in-process/cancel-order-dia
 import { ReasignOrderComponent } from './orders-in-process/reasign-order/reasign-order.component';
 import { ConsumeTehComponent } from './consume-teh/consume-teh.component';
 import { OrdersDetailComponent } from './orders-detail/orders-detail.component';
+import { SendMessageDialogComponent } from './send-message-dialog/send-message-dialog.component';
 
 
 
@@ -30,7 +31,8 @@ import { OrdersDetailComponent } from './orders-detail/orders-detail.component';
     CancelOrderDialogComponent,
     ReasignOrderComponent,
     ConsumeTehComponent,
-    OrdersDetailComponent
+    OrdersDetailComponent,
+    SendMessageDialogComponent
   ],
   imports: [
     CommonModule,

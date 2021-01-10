@@ -5,9 +5,13 @@
     align-items: center;
     background: #f2f2f2;
     padding: 5px 20px;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
 }
 
 .content-info {
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     padding: 5px 20px;
@@ -16,4 +20,8 @@
     span.title {
         font-weight: bold;
     }
+    position: absolute;
+    z-index: 10;
+    background: white;
+    width: 100%;
 }

@@ -2,6 +2,10 @@
     <div class="chat-user-tool">
         <i class="anticon anticon-search search-icon p-r-10 font-size-20"></i>
         <input placeholder="Buscar...">
+        <select (change)="filterSupport($event.target.value)" class="form-control form-control-sm" name="" id="">
+            <option selected value="true">Abiertos</option>
+            <option value="false">Cerrados</option>
+        </select>
     </div>
     <div class="chat-user-list">
         <div class="d-flex justify-content-center my-1">
@@ -19,12 +23,21 @@
                 <div class="p-l-15">
                     <h5 class="m-b-0">{{support.customer}}</h5>
                     <p class="msg-overflow m-b-0 text-muted font-size-13">
-                        Asunto: {{support.support_type}}
+                        Asunto: <span class="badge"
+                        [ngClass]="getSupportClass(support.support_type_id)"
+                        >{{support.support_type}}</span>
+                    </p>
+                    <p *ngIf="support.support_type_id == 3" class="msg-overflow m-b-0 text-muted font-size-13">
+                        Issue: {{support.issue}}
                     </p>
                     <p class="msg-overflow m-b-0 text-muted font-size-13">
-                        Estatus: <span class="badge" 
+                        Estatus: <span>{{support.support_status}}</span>
+                        <!-- <span class="badge" 
                         [ngClass]="support.support_status_id == 1 ? 'badge-success': 'badge-danger'"
-                        >{{support.support_status}}</span>
+                        >{{support.support_status}}</span> -->
+                    </p>
+                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                        Fecha: <span>{{support.created | date:'medium'}}</span>
                     </p>
                 </div>
             </div>

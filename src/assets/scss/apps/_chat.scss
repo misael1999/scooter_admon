@@ -212,6 +212,10 @@ $chat-list-width: 380px;
 				padding: 0px 25px;
 				height: $chat-header-height;
 				border-bottom: 1px solid $border-color;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-wrap: nowrap;
 
 				> input {
 					border: 0px;

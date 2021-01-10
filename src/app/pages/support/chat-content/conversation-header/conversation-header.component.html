@@ -8,7 +8,7 @@
         </div>
         <div class="p-l-15">
             <h6 class="m-b-0">{{support.customer}}</h6>
-            <span class="badge badge-success">Mensajes: {{total}}</span>
+            <span *ngIf="!loadingMessages" class="badge badge-warning">{{total}} mensajes</span>
         </div>
 
     </div>
@@ -34,10 +34,10 @@
         </a>
     </div>
     <div class="content-info" *ngIf="showOrderInfo">
-        <span><span class="title">SKU</span>: HTVSY</span>
-        <span><span class="title">Detalles</span>: <span style="color: red; cursor: pointer; font-weight: bold;">Ver detalles</span></span>
-        <span><span class="title">Comercio</span>: Cemitas la poblanita</span>
-        <span><span class="title">Costo de envio</span>: $25</span>
-        <span><span class="title">Costo de compra</span>: $100</span>
+        <span><span class="title">SKU</span>: {{support.order.qr_code}}</span>
+        <span><span class="title">Detalles</span>: <span (click)="openDialogDetailProducts(support.order)" style="color: red; cursor: pointer; font-weight: bold;">Ver detalles</span></span>
+        <span><span class="title">Comercio</span>: {{support.order.merchant}}</span>
+        <span><span class="title">Costo de envio</span>: ${{support.order.service_price}}</span>
+        <span><span class="title">Costo de compra</span>: ${{support.order.order_price}}</span>
     </div>
 </div>
