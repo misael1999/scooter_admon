@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ScrollDirective } from 'src/app/directives/scroll.directive';
 import { MessageSupportModel } from 'src/app/models/message_support.model';
 import { SupportService } from 'src/app/services/support.service';
@@ -13,6 +13,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
 
   @Input() support;
   @Input() newMessageSocket: MessageSupportModel;
+  closeOrderDetail = false;
   @ViewChild("conversationBody") conversationBody: ElementRef;
   @ViewChild(ScrollDirective) scrollDirective!: ScrollDirective;
   messages: MessageSupportModel[] = [];
@@ -110,6 +111,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
     // Paginar
     this.params.offset = this.params.offset + this.params.limit;
     // Get more messages
+    this.closeOrderDetail= true;
     this.getMoreMessages(this.params);
   }
 

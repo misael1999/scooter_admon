@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OrdersDetailComponent } from 'src/app/pages/orders/orders-detail/orders-detail.component';
 import { SupportService } from 'src/app/services/support.service';
@@ -9,12 +9,13 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
   templateUrl: './conversation-header.component.html',
   styleUrls: ['./conversation-header.component.scss']
 })
-export class ConversationHeaderComponent extends ValidationForms implements OnInit {
+export class ConversationHeaderComponent extends ValidationForms implements OnInit, OnChanges {
 
   showOrderInfo: boolean;
   @Input() support;
   @Input() total;
   @Input() loadingMessages;
+  @Input() closeOrderDetail = false;
 
   constructor(private dialog: MatDialog, private supportService: SupportService) { super(); }
 
@@ -26,6 +27,18 @@ export class ConversationHeaderComponent extends ValidationForms implements OnIn
       width: '90%',
       data: { orderId: order.id }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const closeOrderUpdated = changes['closeOrderDetail'];
+
+    if (closeOrderUpdated && closeOrderUpdated.previousValue) {
+      if (this.closeOrderDetail) {
+        this.showOrderInfo = false;
+      }
+      return;
+    }
+
   }
 
   async openOrCloseSupport(is_open) {

@@ -1,6 +1,6 @@
 <div class="conversation" *ngIf="support">
     <div class="conversation-wrapper">
-        <app-conversation-header [loadingMessages]="loadingMessages" [total]="count" [support]="support"></app-conversation-header>
+        <app-conversation-header [closeOrderDetail]="closeOrderDetail" [loadingMessages]="loadingMessages" [total]="count" [support]="support"></app-conversation-header>
         <div [ngClass]="support.order ? 'padding-40': ''" appScroll infinite-scroll [scrollWindow]="false" [infiniteScrollUpDistance]="3"
             [infiniteScrollThrottle]="0" (scrolledUp)="onUp()" class="conversation-body" #conversationBody>
             <!-- Loader de nuevos mensajes  -->
