@@ -17,7 +17,7 @@
             <i class="anticon anticon-setting"></i>
         </a>
         <div class="dropdown-menu">
-            <button class="dropdown-item" type="button">Marcar como terminado</button>
+            <button (click)="openOrCloseSupport(!support.is_open)" class="dropdown-item" type="button">Marcar como terminado</button>
             <button class="dropdown-item" type="button">Información del cliente</button>
         </div>
     </div>
@@ -39,5 +39,6 @@
         <span><span class="title">Comercio</span>: {{support.order.merchant}}</span>
         <span><span class="title">Costo de envio</span>: ${{support.order.service_price}}</span>
         <span><span class="title">Costo de compra</span>: ${{support.order.order_price}}</span>
+        <span><span class="title">Estatus</span>: {{support.order.order_status.name}}</span>
     </div>
 </div>

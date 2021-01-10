@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SupportService } from 'src/app/services/support.service';
+import { ValidationForms } from 'src/app/utils/validations-forms';
 
 @Component({
   selector: 'app-ticket-list',
   templateUrl: './ticket-list.component.html',
   styleUrls: ['./ticket-list.component.scss']
 })
-export class TicketListComponent implements OnInit {
+export class TicketListComponent extends ValidationForms implements OnInit {
 
   @Input() supports = [];
   @Input() loading: boolean;
@@ -14,7 +16,7 @@ export class TicketListComponent implements OnInit {
   @Output() filterSelected = new EventEmitter<any>();
 
 
-  constructor() { }
+  constructor() { super(); }
 
 
   ngOnInit(): void {
@@ -41,5 +43,6 @@ export class TicketListComponent implements OnInit {
         return 'badge-success'
     }
   }
+
 
 }

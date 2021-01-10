@@ -28,4 +28,9 @@ export class SupportService {
     return this.http.post(url, message);
   }
 
+  openOrCloseSupport(supportId, is_open) {
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/support/${supportId}/open_or_close/`;
+    return this.http.patch(url, { is_open });
+  }
+
 }

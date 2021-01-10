@@ -19,6 +19,11 @@ export class OrdersService {
     return this.http.get(url, { params });
   }
 
+  getOrderById(orderId) {
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/`;
+    return this.http.get(url);
+  }
+
   getNearestDeliveryMen(data, params = {}) {
     const url = `${environment.HOST_APIV1}/stations/${this.stationId}/delivery_men/nearest/`;
     return this.http.post(url, data, { params });
