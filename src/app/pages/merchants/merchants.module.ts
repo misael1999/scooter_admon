@@ -7,12 +7,14 @@ import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { MerchantsRoutingModule } from './merchants-routing.module';
 import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MerchantAddChipComponent } from './merchant-add-chip/merchant-add-chip.component';
 
 @NgModule({
   declarations: [
     MainMerchantComponent,
     MerchantListComponent,
-    MerchantsAddComponent
+    MerchantsAddComponent,
+    MerchantAddChipComponent
   ],
   imports: [
     CommonModule,

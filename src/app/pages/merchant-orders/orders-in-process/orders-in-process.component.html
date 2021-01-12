@@ -1,18 +1,14 @@
 <div class="container-fluid">
-
-    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Pedidos en Proceso de Comercios</h1>
     </div>
-    <!-- <mat-slide-toggle [checked]="true" class="my-3" [labelPosition]="'before'"><span style="font-weight: bold;">Asignar repartidor
-        manualmente</span></mat-slide-toggle> -->
-    <div>
 
-        <div class="filters mb-3">
-            <div class="row d-flex justify-content-end">
+    <div>
+        <div class="filters">
+            <div class="row">
 
                 <!-- Ordering orders -->
-                <div class="col-lg-3">
+                <div class="col-md-3">
                     <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
                         <option value="">Ordenar por:</option>
                         <option value="distance">Distancia mas corta</option>
@@ -23,10 +19,10 @@
                 </div>
                 <!-- End Ordering orders -->
 
-                <div class="col-lg-6"></div>
+                <div class="col-md-6"></div>
 
                 <!-- Search by name -->
-                <div class="col-lg-3">
+                <div class="col-md-3">
                     <div class="input-group mb-3">
                         <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
@@ -42,18 +38,17 @@
 
 
 
-
-        <div class="row" class="content">
-            <!-- PAGINADOR  -->
-            <div class="col-lg-12 d-flex justify-content-end">
+        <div class="content">
+            <!-- Paginator  -->
+            <div class="col-md-12 d-flex justify-content-end">
                 <mat-paginator [disabled]="loadingOrders || orders.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
                     </mat-paginator>
             </div>
-            <!-- TERMINA EL PAGINADOR  -->
+            <!-- End paginator -->
 
 
             <!-- Preloader  -->
-            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
+            <div class="col-md-12 d-flex justify-content-center" *ngIf="loadingOrders">
                 <div class="spinner-border text-primary my-5" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
@@ -69,67 +64,53 @@
                 <table class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <!--                             <th>Código</th>
- -->
                             <th>Comercio</th>
-                            <th>Télefono</th>
+                            <th>Télefono del Comercio</th>
                             <th>Cliente</th>
                             <th>Detalles</th>
-                            <th>Dirección</th>
-                            <th>Venta</th>
-                            <th>Envío</th>
+                            <th>Lugar de Entrega</th>
                             <th>Total</th>
-                            <th>Hora </th>
-                            <th>Hr limite </th>
+                            <th>Hora del pedido </th>
                             <th>Estatus </th>
                             <th>Acciones </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <!--                             <td>{{order.qr_code}}</td>
- -->
                             <td>
-                                <span class="badge badge-info"> {{order.merchant.merchant_name}}</span></td>
+                                <span class="badge badge-info"> {{order.merchant.merchant_name}}</span>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                </ol>
+                            </td>
                             <td>{{order.merchant.phone_number}}</td>
-                            <td>
-                                {{order.customer.name}}
+                            <td>{{order.customer.name}}</td>
+                            <td class="text-center">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;">
+                                        <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                    </li>
+                                </ol>
                             </td>
-                            <td>
-                                <div class="products-details">
-                                    <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
-                                </div>
-                            </td>
-                            <td>
-                                {{order.to_address.full_address}}
-                            </td>
-                            <td>${{order.service_price | number : '1.2-2'}}</td>
-                            <td>${{order.order_price | number : '1.2-2'}}</td>
-                            <td>${{order.total_order | number : '1.2-2'}}</td>
-                            <td>
-                                {{order.order_date | date:'mediumTime'}}
-                            </td>
-                            <td>
-                                {{order.maximum_response_time | date:'mediumTime'}}
-                            </td>
-                            <td>
-                                {{order.order_status.name}}
-                            </td>
-                            <td>
 
-                                <button [disabled]="loadingRejectOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger">Cancelar</button>
-                                <button [disabled]="loadingEndOrder" (click)="endOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-secondary">Terminar</button>
+                            <td> {{ order.to_address.full_address }} <br>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
+                                </ol>
+                            </td>
+                            <td>${{ order.total_order | number : '1.2-2' }} </td>
+                            <td>{{ order.order_date | date:'mediumTime'}}</td>
+                            <td> {{order.order_status.name}}</td>
+                            <td>
+                                <button [disabled]="loadingRejectOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger btn-sm">Cancelar</button>
+                                <button *ngIf="order.order_status.id == 15" (click)="endOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-secondary btn-sm">Terminar</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- TERMINA LA TABLA  -->
             <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  >
             </app-no-found-data>
         </div>
     </div>
-
-
-
 </div>

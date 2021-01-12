@@ -18,12 +18,7 @@
                         <option value="">Precio del servicio</option>
                     </select>
                 </div>
-                <div class="col-lg-6">
-
-                </div>
-                <!--        <div class="col-lg-1">
-                    <button mat-raised-button color="primary">Filtros</button>
-                </div> -->
+                <div class="col-lg-6"></div>
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por cliente, dirección" aria-label="Username" aria-describedby="basic-addon1">
@@ -35,10 +30,7 @@
                     </div>
                 </div>
             </div>
-            <!-- MAS FILTROS  -->
-            <div class="row">
 
-            </div>
         </div>
         <!-- TERMINA LOS FILTROS  -->
         <div class="row" class="content">
@@ -67,42 +59,46 @@
                 <table class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <!--                             <th>Código</th>
- -->
                             <th>Comercio</th>
-                            <th>Télefono</th>
+                            <th>Télefono del comercio</th>
                             <th>Cliente</th>
                             <th>Detalles</th>
-                            <th>Dirección</th>
+                            <th>Lugar de entrega</th>
                             <th>Venta</th>
                             <th>Envío</th>
                             <th>Total</th>
-                            <th>Hora </th>
-                            <th>Hr limite </th>
+                            <th>Hora del pedido </th>
+                            <th>Hr limite para aceptar </th>
                             <th>Estatus </th>
                             <th>Acciones </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <!--                             <td>{{order.qr_code}}</td>
- -->
                             <td>
-                                <span class="badge badge-info"> {{order.merchant.merchant_name}}</span></td>
+                                <span class="badge badge-info"> {{order.merchant.merchant_name}}</span>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                </ol>
+                            </td>
                             <td>{{order.merchant.phone_number}}</td>
                             <td>
                                 {{order.customer.name}}
                             </td>
-                            <td>
-                                <div class="products-details">
-                                    <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
-                                </div>
+                            <td class="text-center">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;">
+                                        <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                    </li>
+                                </ol>
                             </td>
-                            <td>
-                                {{order.to_address.full_address}}
+                            <td> {{ order.to_address.full_address }} <br>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
+                                </ol>
                             </td>
-                            <td>${{order.service_price | number : '1.2-2'}}</td>
                             <td>${{order.order_price | number : '1.2-2'}}</td>
+                            <td>${{order.service_price | number : '1.2-2'}}</td>
                             <td>${{order.total_order | number : '1.2-2'}}</td>
                             <td>
                                 {{order.order_date | date:'mediumTime'}}
@@ -118,20 +114,16 @@
                                     Aceptar
                                    
                                 </button>
-                                <br>
-                                <br>
+
+
                                 <button [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- TERMINA LA TABLA  -->
             <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  >
             </app-no-found-data>
         </div>
     </div>
-
-
-
 </div>

@@ -3,13 +3,11 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
-import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CancelOrderMerchantComponent } from './cancel-order-merchant/cancel-order-merchant.component';
-import { DetailOrdersComponent } from '../detail-orders/detail-orders.component';
-import { OrdersRoutingModule } from '../../orders/orders-routing.module';
+import { OrdersDetailComponent } from '../../orders/orders-detail/orders-detail.component';
 
 @Component({
   selector: 'app-orders-in-process',
@@ -35,7 +33,6 @@ export class OrdersInProcessComponent implements OnInit {
   liveData$: Subscription;
   loadingAcceptOrder: boolean;
   loadingRejectOrder: boolean;
-  loadingEndOrder: boolean;
 
   constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
     private dialog: MatDialog) { }
@@ -46,17 +43,20 @@ export class OrdersInProcessComponent implements OnInit {
   }
 
 
-  openDialogDetailProducts(details) {
-    this.dialog.open(DetailOrdersComponent, {
-      width: '500px',
-      data: { details }
+  openDialogDetailProducts(order = null) {
+    this.dialog.open(OrdersDetailComponent, {
+      width: '90%',
+      data: { order }
     });
+  }
+  
+  openDirection(addres) {
+    console.log(addres);
+    window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
 
   ngOnDestroy(): void {
-    // this.webSocketService.closeConnection();
-    /*     this.webSocketService.close(); */
   }
 
   getOrders() {
@@ -113,26 +113,6 @@ export class OrdersInProcessComponent implements OnInit {
       });
   }
 
-  /*   openDialogAssignDelivery(order) {
-      console.log(order);
-      const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
-        disableClose: true,
-        width: '60%',
-        minHeight: '500px',
-        minWidth: '350px',
-        data: { orderId: order.id, typeService: order.service_id}
-      });
-  
-      dialogref.afterClosed().subscribe(data => {
-        if (data) {
-          this.getOrders();
-        }
-      });
-    } */
-
-  
-
-  // ======= PAGINADOR ========
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
       this.pageSize = 25;

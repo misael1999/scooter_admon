@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { map } from 'rxjs/operators';
 import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
@@ -36,11 +35,10 @@ export class OrdersDetailComponent implements OnInit {
         this.order = data;
         this.orderDetails = data.details;
         this.loadingOrder = false;
-
       }, error => {
         this.loadingOrder = false;
         alert("Error al obtener detalles de la orden");
       });
-  } 
+  }
 
 }

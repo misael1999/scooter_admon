@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Detalles del Pedido </h2>
 <div *ngIf="loadingOrder" class="spinner-grow text-danger" role="status">
     <span class="sr-only">Loading...</span>
-  </div>
+</div>
 <div mat-dialog-content *ngIf="!loadingOrder && order">
     <div class="row">
         <div class="col-lg-12">
@@ -10,11 +10,12 @@
                     <tr>
                         <th scope="col">Servicio</th>
                         <th scope="col">Cliente</th>
+                        <th scope="col">Numero de cliente</th>
                         <th scope="col">Repartidor</th>
                         <th scope="col">Fecha del pedido</th>
                         <th scope="col">Fecha de entrega</th>
-                        <th scope="col">Lugar de compra</th>
-                        <th scope="col">Lugar de entrega</th>
+                        <th scope="col" *ngIf="order.service == 'Compras'">Lugar de compra</th>
+                        <th scope="col" *ngIf="order.service == 'Compras'">Lugar de entrega</th>
                         <th scope="col">Distancia</th>
                         <th scope="col">Costo de productos</th>
                         <th scope="col">Costo de Envio</th>
@@ -24,14 +25,12 @@
                 <tbody>
                     <tr>
                         <td>
-                            <span *ngIf="order.is_order_to_merchant == false && order.service == 'Compras'"
-                                class="badge bg-secondary text-dark">Lo que sea</span>
-                            <span *ngIf="order.service == 'Recolección'"
-                                class="badge bg-warning text-dark">Recolección</span>
-                            <span *ngIf="order.is_order_to_merchant == true"
-                                class="badge bg-info text-dark">Compras</span>
+                            <span *ngIf="order.is_order_to_merchant == false && order.service == 'Compras'" class="badge bg-secondary text-dark">Lo que sea</span>
+                            <span *ngIf="order.service == 'Recolección'" class="badge bg-warning text-dark">Recolección</span>
+                            <span *ngIf="order.is_order_to_merchant == true" class="badge bg-info text-dark">Compras</span>
                         </td>
                         <td> {{ order.customer.name }} </td>
+                        <td> {{ order.customer.phone_number }} </td>
                         <td>
                             <span *ngIf="order.delivery_man"> {{ order.delivery_man.name }} </span>
                             <span *ngIf="!order.delivery_man"> Sin repartidor </span>
@@ -39,12 +38,12 @@
 
                         <td> {{ order.order_date | date:'medium' }} </td>
                         <td> {{ order.date_delivered_order | date:'medium'}} </td>
-                        <td>
+                        <td *ngIf="order.service == 'Compras'">
                             <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }}</span>
                             <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }}
                             </span>
                         </td>
-                        <td> {{ order.to_address.full_address }}</td>
+                        <td *ngIf="order.service == 'Compras'"> {{ order.to_address.full_address }}</td>
                         <td> {{ order.distance | number }} KM</td>
 
                         <td> $ {{ order.order_price }} </td>
@@ -57,7 +56,7 @@
         </div>
 
         <div class="col-lg-12">
-            <table class="table table-hover table-bordered ">
+            <table class="table table-hover table-bordered" *ngIf="order.service == 'Compras'">
                 <thead>
                     <tr>
                         <th scope="col">Cantidad</th>
@@ -75,47 +74,46 @@
                             <span class="p-l-10" *ngFor="let menu of info.menu_options">
                                 <span> {{ menu.menu_name }} </span>
 
-                                <span>
+                            <span>
 
                                     <div class="p-l-20 border flex d-flex justify-content-between">
                                         <span>Cantidad</span>
-                                        <span>Opcion</span>
-                                        <span>Precio</span>
+                            <span>Opcion</span>
+                            <span>Precio</span>
 
-                                    </div>
-                                    <div class="p-l-20 flex d-flex justify-content-between"
-                                        *ngFor="let option of menu.options">
-                                        <span class="border"> {{option.quantity}} </span>
-                                        <span class="border"> {{ option.option_name}} </span>
-                                        <span class="border"> {{ option.price_option }} </span>
+        </div>
+        <div class="p-l-20 flex d-flex justify-content-between" *ngFor="let option of menu.options">
+            <span> {{option.quantity}} </span>
+            <span> {{ option.option_name}} </span>
+            <span> {{ option.price_option }} </span>
 
-                                    </div>
-                                </span>
-                            </span>
-                        </td>
-
-
-                        <td>$ {{ info.product_price }} </td>
-                        <td>$ {{ info.total_detail }} </td>
-                    </tr>
-                    <tr>
-                        <th colspan="2" class="border-0"></th>
-                        <th>Envío</th>
-                        <th>$ {{order.service_price}} </th>
-                    </tr>
-                    <tr>
-                        <th colspan="2" class="border-0"></th>
-                        <th>Total</th>
-                        <th>
-                            <span *ngIf="order.total_order">$ {{order.total_order}} </span>
-                            <!-- <span *sngIf="!order.total_order"> El total depende del costo de los productos comprados</span> -->
-
-                        </th>
-                    </tr>
-                </tbody>
+        </div>
+        </span>
+        </span>
+        </td>
 
 
-                <!-- <tbody *ngFor="let info of orderDetails">
+        <td>$ {{ info.product_price }} </td>
+        <td>$ {{ info.total_detail }} </td>
+        </tr>
+        <tr>
+            <th colspan="2" class="border-0"></th>
+            <th>Envío</th>
+            <th>$ {{order.service_price}} </th>
+        </tr>
+        <tr>
+            <th colspan="2" class="border-0"></th>
+            <th>Total</th>
+            <th>
+                <span *ngIf="order.total_order">$ {{order.total_order}} </span>
+                <!-- <span *sngIf="!order.total_order"> El total depende del costo de los productos comprados</span> -->
+
+            </th>
+        </tr>
+        </tbody>
+
+
+        <!-- <tbody *ngFor="let info of orderDetails">
                         <tr>
                             <th scope="row" class="d-flex align-items-start">{{ info.quantity }}</th>
                             <td> {{ info.product_name }}
@@ -143,8 +141,41 @@
                             <th scope="row" class="d-flex align-items-start">$ {{ info.product_price }} </th>
                             <th scope="row" class="d-flex align-items-start">$ {{ info.total_detail }} </th>
                     </tbody> -->
-            </table>
-        </div>
+        </table>
+
+
+
+        <table class="table table-hover table-bordered" *ngIf="order.service == 'Recolección'">
+            <thead>
+                <tr>
+                    <th scope="col">Se recoge</th>
+                    <th scope="col">Indicaciones</th>
+                    <th scope="col">Se Entrega</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        <span><small><strong>Alias</strong></small><br> {{ order.from_address.alias }} <br></span>
+                        <span *ngIf="order.from_address.exterior_number"><small><strong>Número Exterior</strong></small><br> {{order.from_address.exterior_number}} <br></span>
+                        <span *ngIf="order.from_address.inside_number"><small><strong>Número Interior</strong> </small><br> {{order.from_address.inside_number}} <br></span>
+                        <span><small><strong>Dirección</strong></small><br> {{ order.from_address.full_address }} </span>
+                    </td>
+                    <td> {{order.indications}} </td>
+                    <td>
+                        <span><small><strong>Alias</strong></small><br> {{order.to_address.alias}} <br></span>
+                        <span *ngIf="order.to_address.exterior_number"><small><strong>Número Exterior</strong></small><br> {{order.to_address.exterior_number}} <br></span>
+                        <span *ngIf="order.to_address.inside_number"><small>Número Interior</small> {{order.to_address.inside_number}} <br></span>
+                        <span><small><strong>Dirección</strong></small><br> {{order.to_address.full_address}} </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
     </div>
+</div>
 
 </div>

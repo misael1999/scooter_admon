@@ -52,6 +52,11 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     this.webSocketService.closeConnection();
     /*     this.webSocketService.close(); */
   }
+  openDirection(addres) {
+    console.log(addres);
+    window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
+  }
+
 
   getOrders() {
     this.loadingOrders = true;

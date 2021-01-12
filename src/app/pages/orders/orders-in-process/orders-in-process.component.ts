@@ -39,6 +39,11 @@ export class OrdersInProcessComponent implements OnInit {
       data: { order }
     });
   }
+  openDirection(addres) {
+    console.log(addres);
+    window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
+  }
+
 
   getOrders() {
     this.loadingOrders = true;

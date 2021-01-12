@@ -3,11 +3,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
-import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { DetailOrdersComponent } from '../detail-orders/detail-orders.component';
+import { OrdersDetailComponent } from '../../orders/orders-detail/orders-detail.component';
 
 @Component({
   selector: 'app-cancelled-orders',
@@ -34,11 +30,15 @@ export class CancelledOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  openDialogDetailProducts(details) {
-    this.dialog.open(DetailOrdersComponent, {
-      width: '500px',
-      data: { details }
+  openDialogDetailProducts(order = null) {
+    this.dialog.open(OrdersDetailComponent, {
+      width: '90%',
+      data: { order }
     });
+  }
+  openDirection(addres) {
+    console.log(addres);
+    window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
   getOrders() {

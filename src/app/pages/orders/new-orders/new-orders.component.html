@@ -70,78 +70,70 @@
                             <th>Cliente</th>
                             <th>Numero del cliente</th>
                             <th>Detalles</th>
-                            <th>Servicio</th>
                             <th>Lugar de origen o compra</th>
                             <th>Lugar de entrega</th>
                             <th>Precio del servicio</th>
                             <th>Distancia</th>
-                            <th>Fecha del pedido </th>
+                            <th>Hora del pedido </th>
+                            <th>Hr. limite para responder </th>
                             <th>Estatus </th>
                             <th>Acciones </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <td> <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
-                                'badge-warning': order.service == 'Recolección' }">
-                                    {{order.service}} <span *ngIf="order.is_order_to_merchant">a comercios</span>
-                                </span>
+                            <td>
+                                <span *ngIf="order.is_order_to_merchant == false && order.service == 'Compras'" class="badge bg-secondary text-dark">Lo que sea</span>
+                                <span *ngIf="order.service == 'Recolección'" class="badge bg-warning text-dark">Recolección</span>
+                                <span *ngIf="order.is_order_to_merchant == true" class="badge bg-info text-dark">Compras</span>
                             </td>
                             <td>{{order.customer.name}}</td>
                             <td>{{order.customer.phone_number}}</td>
-                            <td *ngIf="order.service == 'Compras'">
-                                <div class="products-details">
-                                    <button mat-button (click)="openDialogDetailProducts(order)" class="btn btn-secondary btn-sm">Ver más</button>
-                                </div>
-                                <!-- <div class="products-details">
-                                    <span *ngFor="let detail of order.details">
-                                        -x{{detail.quantity || '1'}} {{detail.product_name}}
-                                    </span>
-                                </div> -->
-                            </td>
-                            <td *ngIf="order.service == 'Recolección'">
-                                <span>{{order.indications}}</span>
-                            </td>
-                            <td>{{order.service}}</td>
                             <td>
-                                <div class="address" *ngIf="order.service != 'Compras'">
-                                    {{order.from_address.full_address}}
-                                </div>
-                                <div class="place" *ngIf="order.service == 'Compras' &&
-                                 order.is_order_to_merchant == false ">
-                                    <p>{{order.from_address.alias}}</p>
-                                    <p>{{order.from_address.full_address}}</p>
-                                </div>
-                                <div class="place" *ngIf="order.service == 'Compras' &&
-                                order.is_order_to_merchant == true ">
-                                    <span class="badge badge-success">{{order.merchant.merchant_name}}</span>
-                                    <p>{{order.merchant.full_address}}</p>
-                                </div>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;">
+                                        <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                    </li>
+                                </ol>
                             </td>
                             <td>
-                                {{order.to_address.full_address}}
+                                <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                        </ol>
+                                </span>
+
+                                <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                        </ol>
+                                </span>
                             </td>
-                            <td>${{order.service_price | number : '1.2-2'}}</td>
-                            <td>{{order.distance | number}} KM</td>
-                            <td>
-                                {{order.order_date | date:'medium'}}
+
+
+                            <td> {{ order.to_address.full_address }} <br>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
+                                </ol>
                             </td>
-                            <td>
-                                {{order.order_status.name}}
-                            </td>
+
+                            <td> ${{ order.service_price | number : '1.2-2'}} </td>
+                            <td> {{ order.distance | number}} KM </td>
+                            <td> {{ order.order_date | date:'medium'}} </td>
+                            <td> {{ order.maximum_response_time | date:'medium'}} </td>
+                            <td> {{order.order_status.name}}</td>
                             <td>
                                 <button (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
                                 <br>
                                 <br>
                                 <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
-
-
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- TERMINA LA TABLA  -->
+
+
             <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  >
             </app-no-found-data>
         </div>
