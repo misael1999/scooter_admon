@@ -83,11 +83,8 @@
                                     <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
                                 </ol>
                             </td>
-
                             <td>{{order.merchant.phone_number}}</td>
-                            <td>
-                                {{order.customer.name}}
-                            </td>
+                            <td>{{order.customer.name}}</td>
                             <td class="text-center">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item" style="color: #1890FF;">
@@ -102,17 +99,10 @@
                                 </ol>
                             </td>
                             <td>${{ order.total_order | number : '1.2-2' }} </td>
+                            <td>{{ order.order_date | date:'mediumTime'}}</td>
+                            <td> {{order.order_status.name}}</td>
                             <td>
-                                {{order.order_date | date:'mediumTime'}}
-                            </td>
-
-                            <td>
-                                {{order.order_status.name}}
-                            </td>
-                            <td>
-
                                 <button [disabled]="loadingRejectOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger btn-sm">Cancelar</button>
-                                <br>
                                 <button *ngIf="order.order_status.id == 15" (click)="endOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-secondary btn-sm">Terminar</button>
                             </td>
                         </tr>

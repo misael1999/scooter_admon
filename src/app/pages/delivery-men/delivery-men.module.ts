@@ -7,7 +7,6 @@ import { DeliveryRoutingModule } from './delivery-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
-import { ListDeliveryBlockComponent } from './list-delivery-block/list-delivery-block.component';
 import { CardInfoComponent } from './info-delivery/card-info/card-info.component';
 import { HistoryOrdersComponent } from './info-delivery/history-orders/history-orders.component';
 
@@ -18,7 +17,6 @@ import { HistoryOrdersComponent } from './info-delivery/history-orders/history-o
     AddDeliveryComponent,
     InfoDeliveryComponent,
     ListDeliveryComponent,
-    ListDeliveryBlockComponent,
     CardInfoComponent,
     HistoryOrdersComponent],
   imports: [

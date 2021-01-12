@@ -68,48 +68,49 @@
                     <thead>
                         <tr>
                             <th>Comercio</th>
-                            <th>Télefono</th>
+                            <th>Télefono del comercio</th>
                             <th>Cliente</th>
                             <th>Detalles</th>
-                            <th>Dirección</th>
-                            <th>Venta</th>
-                            <th>Envío</th>
-                            <th>Total</th>
-                            <th>Hora </th>
-                            <th>Hr limite </th>
+                            <th>Lugar de entrega</th>
+                            <th>Precio de envío</th>
+                            <th>Precio total</th>
+                            <th>Hora del pedido </th>
+                            <th>Hr limite para aceptar </th>
                             <th>Estatus </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
                             <td>
-                                <span class="badge badge-info"> {{order.merchant.merchant_name}}</span></td>
-                            <td>{{order.merchant.phone_number}}</td>
-                            <td>
-                                {{order.customer.name}}
-                            </td>
-                            <td class="text-center">
+                                <span class="badge badge-info"> {{order.merchant.merchant_name}}</span>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item" style="color: #1890FF;">
-                                        <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
-                                    </li>
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
                                 </ol>
-                            </td>
-                            <td>
-                                {{order.to_address.full_address}}
-                            </td>
-                            <td>${{order.service_price | number : '1.2-2'}}</td>
-                            <td>${{order.order_price | number : '1.2-2'}}</td>
-                            <td>${{order.total_order | number : '1.2-2'}}</td>
-                            <td>
-                                {{order.order_date | date:'mediumTime'}}
-                            </td>
-                            <td>
-                                {{order.maximum_response_time | date:'mediumTime'}}
-                            </td>
-                            <td>
-                                {{order.order_status.name}}
-                            </td>
+                                <td>{{order.merchant.phone_number}}</td>
+                                <td> {{order.customer.name}}</td>
+                                <td class="text-center">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item" style="color: #1890FF;">
+                                            <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                        </li>
+                                    </ol>
+                                </td>
+                                <td> {{ order.to_address.full_address }} <br>
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
+                                    </ol>
+                                </td>
+                                <td>${{order.service_price | number : '1.2-2'}}</td>
+                                <td>${{order.total_order | number : '1.2-2'}}</td>
+                                <td>
+                                    {{order.order_date | date:'mediumTime'}}
+                                </td>
+                                <td>
+                                    {{order.maximum_response_time | date:'mediumTime'}}
+                                </td>
+                                <td>
+                                    {{order.order_status.name}}
+                                </td>
 
                         </tr>
                     </tbody>

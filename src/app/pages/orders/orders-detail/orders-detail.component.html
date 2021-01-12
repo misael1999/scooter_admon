@@ -10,6 +10,7 @@
                     <tr>
                         <th scope="col">Servicio</th>
                         <th scope="col">Cliente</th>
+                        <th scope="col">Numero de cliente</th>
                         <th scope="col">Repartidor</th>
                         <th scope="col">Fecha del pedido</th>
                         <th scope="col">Fecha de entrega</th>
@@ -29,6 +30,7 @@
                             <span *ngIf="order.is_order_to_merchant == true" class="badge bg-info text-dark">Compras</span>
                         </td>
                         <td> {{ order.customer.name }} </td>
+                        <td> {{ order.customer.phone_number }} </td>
                         <td>
                             <span *ngIf="order.delivery_man"> {{ order.delivery_man.name }} </span>
                             <span *ngIf="!order.delivery_man"> Sin repartidor </span>

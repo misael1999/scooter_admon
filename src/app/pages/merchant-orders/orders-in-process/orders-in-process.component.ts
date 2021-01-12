@@ -3,7 +3,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CancelOrderMerchantComponent } from './cancel-order-merchant/cancel-order-merchant.component';
@@ -49,6 +49,7 @@ export class OrdersInProcessComponent implements OnInit {
       data: { order }
     });
   }
+  
   openDirection(addres) {
     console.log(addres);
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
@@ -56,8 +57,6 @@ export class OrdersInProcessComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    // this.webSocketService.closeConnection();
-    /*     this.webSocketService.close(); */
   }
 
   getOrders() {
@@ -114,26 +113,6 @@ export class OrdersInProcessComponent implements OnInit {
       });
   }
 
-  /*   openDialogAssignDelivery(order) {
-      console.log(order);
-      const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
-        disableClose: true,
-        width: '60%',
-        minHeight: '500px',
-        minWidth: '350px',
-        data: { orderId: order.id, typeService: order.service_id}
-      });
-  
-      dialogref.afterClosed().subscribe(data => {
-        if (data) {
-          this.getOrders();
-        }
-      });
-    } */
-
-  
-
-  // ======= PAGINADOR ========
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
       this.pageSize = 25;

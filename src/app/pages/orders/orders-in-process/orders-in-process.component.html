@@ -65,11 +65,12 @@
                             <th>Numero del cliente</th>
                             <th>Repartidor</th>
                             <th>Detalles</th>
-                            <th>Servicio</th>
                             <th>Lugar de origen o compra</th>
                             <th>Lugar de entrega</th>
                             <th>Precio del servicio</th>
                             <th>Distancia</th>
+
+
                             <th>Fecha del pedido </th>
                             <th>Estatus </th>
                             <th>Acciones </th>
@@ -92,19 +93,12 @@
                                     <span *ngIf="!order.delivery_man">Sin repartidor</span>
                                 </td>
                                 <td>
-
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item" style="color: #1890FF;">
                                             <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
                                         </li>
                                     </ol>
                                 </td>
-                                <td *ngIf="order.service == 'Recolección'">
-                                    <span>{{order.indications}}</span>
-                                </td>
-                                <td>{{order.service}}</td>
-
-
                                 <td>
                                     <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
                                             <ol class="breadcrumb">
@@ -118,21 +112,16 @@
                                             </ol>
                                     </span>
                                 </td>
-
-
                                 <td> {{ order.to_address.full_address }} <br>
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
                                     </ol>
                                 </td>
-                                <td>${{order.service_price | number : '1.2-2'}}</td>
-                                <td>{{order.distance | number}} KM</td>
-                                <td>
-                                    {{order.order_date | date:'medium'}}
-                                </td>
-                                <td>
-                                    {{order.order_status.name}}
-                                </td>
+                                <td> ${{order.service_price | number : '1.2-2'}} </td>
+                                <td> {{order.distance | number}} KM </td>
+
+                                <td> {{order.order_date | date:'medium'}} </td>
+                                <td> {{order.order_status.name}} </td>
                                 <td>
                                     <button (click)="openDialogSendMessageOrder(order)" *ngIf="order.delivery_man" class="btn btn-success mb-1">
                                     <i class="anticon anticon-message"></i>
