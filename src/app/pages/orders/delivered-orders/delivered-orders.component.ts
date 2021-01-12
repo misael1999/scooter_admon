@@ -37,10 +37,7 @@ export class DeliveredOrdersComponent implements OnInit {
 
 
 
-  openDirectionFromAddress(fromAddres) {
-    console.log(fromAddres);
-    window.open(`https://maps.google.com/?q=${fromAddres.coordinates[1]},${fromAddres.coordinates[0]}`, '_blank');
-  }
+ 
 
   openDirection(addres) {
     console.log(addres);

@@ -93,10 +93,12 @@
                             <td>
                                 {{order.customer.name}}
                             </td>
-                            <td>
-                                <div class="products-details">
-                                    <button mat-button (click)="openDialogDetailProducts(order.details)" class="btn btn-secondary btn-sm">Ver más</button>
-                                </div>
+                            <td class="text-center">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;">
+                                        <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                    </li>
+                                </ol>
                             </td>
                             <td>
                                 {{order.to_address.full_address}}

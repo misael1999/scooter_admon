@@ -66,7 +66,7 @@
                             <th>Servicio</th>
                             <th>Cliente</th>
                             <th>Repartidor</th>
-                            <th>Pedido</th>
+                            <th class="text-center">Detalles</th>
                             <th style="min-width: 200px;">Lugar de Compra o Recolección</th>
                             <th style="min-width: 200px;">Lugar de entrega</th>
                             <th>Fecha del Pedido</th>
@@ -86,7 +86,7 @@
                                 <span *ngIf="order.delivery_man"> {{ order.delivery_man.name }} </span>
                                 <span *ngIf="!order.delivery_man"> Sin repartidor </span>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item" style="color: #1890FF;">
                                         <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>

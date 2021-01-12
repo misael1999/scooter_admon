@@ -5,7 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
-import { DetailOrdersComponent } from '../detail-orders/detail-orders.component';
+import { OrdersDetailComponent } from '../../orders/orders-detail/orders-detail.component';
 
 @Component({
   selector: 'app-delivered-orders',
@@ -33,10 +33,11 @@ export class DeliveredOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  openDialogDetailProducts(details) {
-    this.dialog.open(DetailOrdersComponent, {
-      width: '500px',
-      data: { details }
+
+  openDialogDetailProducts(order = null) {
+    this.dialog.open(OrdersDetailComponent, {
+      width: '90%',
+      data: { order }
     });
   }
 

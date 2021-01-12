@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../services/guards/auth.guard';
 import { RefreshTokenGuard } from '../services/guards/refresh-token.guard';
+import { PromotionsRoutingModule } from './promotions/promotions-routing.module';
+import { PromotionsModule } from './promotions/promotions.module';
 
 
 const routes: Routes = [
@@ -64,6 +66,11 @@ const routes: Routes = [
     path: 'merchants',
     canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./merchants/merchants.module').then(m => m.MerchantsModule)
+  },
+  {
+    path: 'promotions',
+    canActivate: [AuthGuard, RefreshTokenGuard],
+    loadChildren: () => import('./promotions/promotions.module').then(m => m.PromotionsModule)
   },
   {
     path: 'notifications',

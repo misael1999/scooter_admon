@@ -8,7 +8,7 @@ import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RejectOrderMerchantComponent } from './reject-order-merchant/reject-order-merchant.component';
-import { DetailOrdersComponent } from '../detail-orders/detail-orders.component';
+import { OrdersDetailComponent } from '../../orders/orders-detail/orders-detail.component';
 
 
 @Component({
@@ -62,10 +62,10 @@ export class NewOrdersComponent implements OnInit {
   }
 
 
-  openDialogDetailProducts(details) {
-    this.dialog.open(DetailOrdersComponent, {
-      width: '500px',
-      data: { details }
+  openDialogDetailProducts(order = null) {
+    this.dialog.open(OrdersDetailComponent, {
+      width: '90%',
+      data: { order }
     });
   }
   

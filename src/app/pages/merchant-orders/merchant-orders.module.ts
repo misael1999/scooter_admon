@@ -10,8 +10,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RejectOrderMerchantComponent } from './new-orders/reject-order-merchant/reject-order-merchant.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CancelOrderMerchantComponent } from './orders-in-process/cancel-order-merchant/cancel-order-merchant.component';
-import { DetailOrdersComponent } from './detail-orders/detail-orders.component';
-
 
 @NgModule({
   declarations: [
@@ -19,7 +17,6 @@ import { DetailOrdersComponent } from './detail-orders/detail-orders.component';
     NewOrdersComponent,
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
-    DetailOrdersComponent,
     RejectOrderMerchantComponent,
     CancelOrderMerchantComponent,
   ],

@@ -73,19 +73,23 @@
                     <tbody>
                         <tr *ngFor="let order of orders">
                             <td>
-                                <span class="badge" [ngClass]="{'badge-info': order.service == 'Compras',
-    'badge-warning': order.service == 'Recolección' }">{{order.service}}</span>
+
+                                <span *ngIf="order.is_order_to_merchant == false && order.service == 'Compras'" class="badge bg-secondary text-dark">Lo que sea</span>
+                                <span *ngIf="order.service == 'Recolección'" class="badge bg-warning text-dark">Recolección</span>
+                                <span *ngIf="order.is_order_to_merchant == true" class="badge bg-info text-dark">Compras</span>
+
                             </td>
                             <td>{{order.customer.name}}</td>
                             <td>
                                 <span *ngIf="order.delivery_man">{{order.delivery_man.name}}</span>
                                 <span *ngIf="!order.delivery_man">Sin repartidor</span>
                             </td>
-                            <td *ngIf="order.service == 'Compras'">
-
-                                <div class="products-details">
-                                    <button mat-button (click)="openDialogDetailProducts(order)" class="btn btn-secondary btn-sm">Ver más</button>
-                                </div>
+                            <td>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;">
+                                        <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                    </li>
+                                </ol>
 
                             </td>
                             <td *ngIf="order.service == 'Recolección'">

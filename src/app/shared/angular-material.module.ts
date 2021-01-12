@@ -23,6 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 const components = [
@@ -49,7 +51,9 @@ const components = [
   MatTooltipModule,
   MatMenuModule,
   MatButtonModule,
-  MatIconModule
+  MatIconModule,
+  MatChipsModule,
+  MatAutocompleteModule
   
 ];
 
