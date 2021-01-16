@@ -82,6 +82,7 @@ export class MainMerchantComponent implements OnInit {
 
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
+    this.getMerchants();
   }
 
 }

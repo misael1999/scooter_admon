@@ -19,6 +19,7 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
   params = { limit: 25, offset: 0, search: '', ordering: '', status: 1 };
   deliverys: Array<any> = [];
   loadingDelivery: boolean;
+  pageEvent: PageEvent;
 
   constructor(private dialog: MatDialog, private deliveryService: DeliveryMenService) {
     super();
