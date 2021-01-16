@@ -22,9 +22,10 @@
             <td> {{merchant.email}} </td>
             <td> {{merchant.phone_number}} </td>
             <td>
-                <button class="btn btn-sm btn-info mr-2">Mensaje<i class="anticon anticon-message"></i></button>
-                <button class="btn btn-sm btn-success mr-2" routerLink="/merchants/chips/{{ merchant.id }}">Tags<i class="anticon anticon-message"></i></button>
-                <button class="btn btn-sm btn-danger mr-2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button>
+                <!-- <button class="btn btn-sm btn-success mr-2">Mensaje<i class="anticon anticon-message"></i></button> -->
+                <button routerLink="detail/{{merchant.id}}" class="btn btn-sm btn-secondary mr-2 mt-1"><i class="anticon anticon-eye"></i></button>
+                <!-- <button class="btn btn-sm btn-success mr-2" routerLink="/merchants/chips/{{ merchant.id }}">Tags<i class="anticon anticon-message"></i></button> -->
+                <!-- <button class="btn btn-sm btn-danger mr-2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button> -->
             </td>
         </tr>
 
