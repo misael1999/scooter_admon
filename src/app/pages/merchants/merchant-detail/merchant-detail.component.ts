@@ -33,7 +33,7 @@ export class MerchantDetailComponent extends ValidationForms implements OnInit {
         this.merchant = data;
       }, error => {
         this.loadingInfo = false;
-        this.showSwalMessage("Error al obtener información del comercio");
+        this.showSwalMessage("Error al obtener información del comercio", 'error');
       });
   }
 
