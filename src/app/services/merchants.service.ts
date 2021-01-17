@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { MerchantModel } from '../models/merchant.model';
 import { StationModel } from '../models/station.model';
 
 @Injectable({
@@ -9,6 +10,7 @@ import { StationModel } from '../models/station.model';
 export class MerchantsService {
 
   station: StationModel;
+  merchant: MerchantModel;
 
   constructor(private http: HttpClient) { 
     this.station = JSON.parse(localStorage.getItem("station"));

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { ValidationForms } from 'src/app/utils/validations-forms';
+import { MerchantModel } from '../../../models/merchant.model';
 
 @Component({
   selector: 'app-merchant-detail',
@@ -11,7 +12,7 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
 export class MerchantDetailComponent extends ValidationForms implements OnInit {
 
   merchantId;
-  merchant;
+  merchant: MerchantModel;
   loadingInfo;
 
   constructor(private activatedRoute: ActivatedRoute, private merchantsService: MerchantsService) {
@@ -31,6 +32,7 @@ export class MerchantDetailComponent extends ValidationForms implements OnInit {
       (data: any) => {
         this.loadingInfo = false;
         this.merchant = data;
+        console.log(this.merchant);
       }, error => {
         this.loadingInfo = false;
         this.showSwalMessage("Error al obtener información del comercio", 'error');

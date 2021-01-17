@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row d-flex justify-content-center p-t-15 p-b-15 border">
+        <div class="col-md-12 ">
+            <div class="form">
+                <form [formGroup]="settingForm">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <mat-checkbox [(ngModel)]="merchatSetting.has_rate_operating" [formControl]="merchatSetting.has_rate_operating">¿Tiene costo Operacional? *</mat-checkbox>
+
+                            <input [(ngModel)]="merchatSetting.has_rate_operating" formControlName="increment_price_operating" type="text" class="form-control">
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="btns">
+                <button [disabled]="loadingSaveInfo" (click)="saveGeneralInfo()" style="color: white;" class="btn btn-primary">
+                    <span *ngIf="!loadingSaveInfo">Guardar</span>
+                    <div *ngIf="loadingSaveInfo" class="spinner-border text-warning" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

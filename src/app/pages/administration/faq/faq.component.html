@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Preguntas Frecuentes</h1>
+        <div>
+            <button class="btn btn-primary btn-sm" (click)="addGroupFaq()">Agregar Grupo</button>
+            <span class="p-l-15"></span>
+            <button class="btn btn-secondary btn-sm" (click)="addFaq()">Agregar Pregunta</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Pregunta</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let faq of faqs">
+                    <td>{{faq.group}}</td>
+                    <td> {{faq.title}}</td>
+                    <td> {{faq.answer}} </td>
+                    <td> <button class="btn btn-info btn-sm" (click)="addFaq(faq)">Editar</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

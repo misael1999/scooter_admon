@@ -82,6 +82,11 @@ const routes: Routes = [
     canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule)
   },
+  {
+    path: 'administration',
+    canActivate: [AuthGuard, RefreshTokenGuard],
+    loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
+  },
 
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }

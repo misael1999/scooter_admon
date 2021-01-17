@@ -1,38 +1,37 @@
 <h1 mat-dialog-title class="d-flex justify-content-between">
     Reasignar orden a repartidor
     <button mat-dialog-close mat-flat-button color="primary">
-      <i class="ti ti-close"></i>
+      <i class="anticon anticon-close-circle"></i>
     </button>
-  
-  </h1>
-  <div mat-dialog-content>
+
+</h1>
+<div mat-dialog-content>
     <p>
-      Listado de repartidores mas cercanos
+        Listado de repartidores mas cercanos
     </p>
     <mat-button-toggle-group (change)="selectFilter($event.value)" class="mb-3" name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle [checked]="params.all" value="true">Todos</mat-button-toggle>
-      <mat-button-toggle [checked]="!params.all" value="false">Solo disponibles</mat-button-toggle>
+        <mat-button-toggle [checked]="params.all" value="true">Todos</mat-button-toggle>
+        <mat-button-toggle [checked]="!params.all" value="false">Solo disponibles</mat-button-toggle>
     </mat-button-toggle-group>
-  
+
     <div class="row d-flex justify-content-center">
-      <div class="spinner-border text-primary my-3" *ngIf="loading" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
+        <div class="spinner-border text-primary my-3" *ngIf="loading" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
-  
+
     <div class="div-list">
-      <ul class="list-group animate__animated animate__fadeIn" *ngIf="!loading && deliveryMen.length > 0">
-        <li [ngClass]="{'selected': selectedDelivery == delivery.id}" (click)="selectDelivery(delivery.id)" class="list-group-item item" *ngFor="let delivery of deliveryMen">
-          <div mat-card-avatar class="example-header-image"></div>
-          <span>
+        <ul class="list-group animate__animated animate__fadeIn" *ngIf="!loading && deliveryMen.length > 0">
+            <li [ngClass]="{'selected': selectedDelivery == delivery.id}" (click)="selectDelivery(delivery.id)" class="list-group-item item" *ngFor="let delivery of deliveryMen">
+                <div mat-card-avatar class="example-header-image"></div>
+                <span>
             Nombre: {{delivery.name}} {{delivery.last_name}}</span>
-          <span>Teléfono: {{delivery.phone_number}}</span>
-          <span style="width: 150px;" class="badge "
-            [ngClass]="{'badge-success': delivery.delivery_status == 'Disponible',
+                <span>Teléfono: {{delivery.phone_number}}</span>
+                <span style="width: 150px;" class="badge " [ngClass]="{'badge-success': delivery.delivery_status == 'Disponible',
              'badge-info': delivery.delivery_status == 'Ocupado', 'badge-warning': delivery.delivery_status == 'Fuera de servicio'}">{{delivery.delivery_status}}</span>
-        </li>
-      </ul>
-  
+            </li>
+        </ul>
+
     </div>
     <app-no-found-data *ngIf="!loading && deliveryMen.length == 0" [message]="'No se encontraron repartidores'">
     </app-no-found-data>
@@ -43,14 +42,13 @@
             <p>{{delivery.status.name}}</p>
           </mat-list-option>
         </mat-selection-list> -->
-  </div>
-  <div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
-    <button (click)="assignDeliveryToOrder()" [disabled]="!selectedDelivery || loadingSave"
-     class="btn btn-secondary w-50">
+</div>
+<div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
+    <button (click)="assignDeliveryToOrder()" [disabled]="!selectedDelivery || loadingSave" class="btn btn-secondary w-50">
      Aceptar
      <div class="load" *ngIf="loadingSave">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       <span class="sr-only">Loading...</span>
      </div>
     </button>
-  </div>
+</div>

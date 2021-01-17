@@ -25,7 +25,7 @@ export class MainMerchantComponent implements OnInit {
   statusFilter: boolean;
 
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', ordering: 'created', information_is_complete: true };
+  params = { limit: 25, offset: 0, search: '', ordering: 'created', status: 1, information_is_complete: true };
 
   constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
 
@@ -36,8 +36,7 @@ export class MainMerchantComponent implements OnInit {
   dialogAddMerchant(merchant = null) {
     const dialogRef = this.dialog.open(MerchantsAddComponent, {
       disableClose: true,
-      width: '50%',
-      minWidth: '1000px',
+      width: '90%',
       data: { merchant }
     });
 

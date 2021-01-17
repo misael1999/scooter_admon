@@ -1,7 +1,7 @@
 <h1 mat-dialog-title class="d-flex justify-content-between">
     Agregar Comercio
     <button mat-dialog-close mat-flat-button class="btn ">
-        <i class="ti ti-close"></i>
+        <i class="anticon anticon-close"></i>
     </button>
 </h1>
 
@@ -11,7 +11,7 @@
         <div class="col-md-12 ">
             <!-- Form Add Merchant -->
             <form [formGroup]="merchantForm" autocomplete="autocomplete_off_hack_xfr4!k">
-                <div class="form-row border p-2">
+                <div class="form-row p-2">
                     <div class="form-group col-md-4 ">
                         <label>Correo</label>
                         <input autocomplete="autocomplete_off_hack_xfr4!k" formControlName="username" type="text" class="form-control" placeholder="Correo" [ngClass]="(isFieldInvalid(merchantForm, 'username'))? 'is-invalid': 'valid'">

@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-md-flex align-items-center">
+                        <div class="text-center text-sm-left ">
+                            <div class="avatar avatar-image" style="width: 150px; height:150px">
+                                <img [src]="merchant.picture" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center text-sm-left m-v-15 p-l-30">
+                            <h2 class="m-b-5">{{merchant.merchant_name}} </h2>
+                            <p class="text-opacity font-size-13"> {{ merchant.contact_person }} </p>
+                            <p class="text-dark m-b-20"> {{merchant.description}} </p>
+                            <!-- <button class="btn btn-primary btn-tone">Contact</button> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="d-md-block d-none border-left col-1"></div>
+                        <div class="col">
+                            <ul class="list-unstyled m-t-10">
+                                <li class="row">
+                                    <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <i class="m-r-10 text-primary anticon anticon-mail"></i>
+                                        <span>Correo </span>
+                                    </p>
+                                    <p class="col font-weight-semibold"> {{merchant.email}} </p>
+                                </li>
+                                <li class="row">
+                                    <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
+                                        <i class="m-r-10 text-primary anticon anticon-phone"></i>
+                                        <span>Telefono </span>
+                                    </p>
+                                    <p class="col font-weight-semibold"> {{merchant.phone_number}}</p>
+                                </li>
+                                <li class="row">
+                                    <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
+                                        <i class="m-r-10 text-primary anticon anticon-compass"></i>
+                                        <span>Ubicacion </span>
+                                    </p>
+                                    <p class="col font-weight-semibold"> {{merchant.full_address}} </p>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

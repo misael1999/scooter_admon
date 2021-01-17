@@ -10,6 +10,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MerchantAddChipComponent } from './merchant-add-chip/merchant-add-chip.component';
 import { MerchantDetailComponent } from './merchant-detail/merchant-detail.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TabMerchantTagsComponent } from './merchant-detail/tabs/tab-merchant-tags/tab-merchant-tags.component';
+import { TabMerchantSettingComponent } from './merchant-detail/tabs/tab-merchant-setting/tab-merchant-setting.component';
+import { TabMerchantGeneralComponent } from './merchant-detail/tabs/tab-merchant-general/tab-merchant-general.component';
+import { TabMerchantSchedulesComponent } from './merchant-detail/tabs/tab-merchant-schedules/tab-merchant-schedules.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MerchantListComponent,
     MerchantsAddComponent,
     MerchantAddChipComponent,
-    MerchantDetailComponent
+    MerchantDetailComponent,
+    TabMerchantTagsComponent,
+    TabMerchantSettingComponent,
+    TabMerchantGeneralComponent,
+    TabMerchantSchedulesComponent
   ],
   imports: [
     CommonModule,
