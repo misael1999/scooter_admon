@@ -1,0 +1,71 @@
+<h3 mat-dialog-title class="d-flex justify-content-between">
+    {{tag ? 'Editar': 'Agregar'}} etiqueta
+    <button mat-dialog-close mat-flat-button class="btn btn-light">
+        <i class="anticon anticon-close"></i>
+    </button>
+</h3>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+
+            <form [formGroup]="tagForm">
+                <div class="form-row">
+
+                    <div class="col-md-6">
+                        <div class="form-group col-md-12">
+                            <label>Nombre del Grupo</label>
+                            <input formControlName="name" type="text " class="form-control" placeholder="Preguntas frecuentes..." [ngClass]="(isFieldInvalid(tagForm, 'name'))? 'is-invalid': 'valid'">
+                            <!-- Message Errors -->
+                            <div class="invalid-feedback">
+                                <span *ngIf="hasFieldError(tagForm, 'name','required')">Este campo es
+                            requerido</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label>Área</label>
+                            <select type="text" class="form-control" formControlName='area' placeholder="Tipo" [ngClass]="(isFieldInvalid(tagForm, 'area'))? 'is-invalid': 'valid'">
+
+                            <option value="1">Tehuacán</option>
+                            <option value="1">Orizaba</option>
+                            <option value="1">Cordodoba</option>
+
+                        </select>
+                            <div class="invalid-feedback">
+                                <span *ngIf="hasFieldError(tagForm, 'area','required')">Este campo es
+                                requerido</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Imagen</label>
+                            <div class="form-group">
+                                <input type="file" class="form-control form-control-file" placeholder="Elige una imagen" (change)="handlePickUpImage($event)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="images d-flex justify-content-center ">
+                            <img *ngIf="imageURL" height="200" class="img-fluid image-product" [src]="imageURL" alt="category_picture">
+                            <img *ngIf="!imageURL" class="img-fluid image-product" src="assets/images/common/no-image.png" alt="">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-light btn-sm m-r-20 " mat-dialog-close>Cancelar</button>
+                <button (click)="createTag()" type="submit" class="btn btn-primary btn-sm">
+                    Guardar
+                    <div *ngIf="loadingSave" class="spinner-border text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

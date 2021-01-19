@@ -10,9 +10,9 @@ import { StationModel } from '../models/station.model';
 export class MerchantsService {
 
   station: StationModel;
-  merchant: MerchantModel;
+  merchantId: any;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.station = JSON.parse(localStorage.getItem("station"));
   }
 
@@ -51,6 +51,7 @@ export class MerchantsService {
     const url = `${environment.HOST_APIV1}/commons/categories/`;
     return this.http.get(url);
   }
+
 
 
 }

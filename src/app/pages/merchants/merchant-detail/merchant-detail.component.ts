@@ -10,9 +10,8 @@ import { MerchantModel } from '../../../models/merchant.model';
   styleUrls: ['./merchant-detail.component.scss']
 })
 export class MerchantDetailComponent extends ValidationForms implements OnInit {
-
   merchantId;
-  merchant: MerchantModel;
+  merchant: any;
   loadingInfo;
 
   constructor(private activatedRoute: ActivatedRoute, private merchantsService: MerchantsService) {
@@ -32,6 +31,7 @@ export class MerchantDetailComponent extends ValidationForms implements OnInit {
       (data: any) => {
         this.loadingInfo = false;
         this.merchant = data;
+        this.merchantsService.merchantId = this.merchant;
         console.log(this.merchant);
       }, error => {
         this.loadingInfo = false;

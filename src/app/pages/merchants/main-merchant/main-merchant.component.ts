@@ -48,6 +48,20 @@ export class MainMerchantComponent implements OnInit {
       });
   }
 
+
+
+  showList(status) {
+
+    if (!this.params.information_is_complete) {
+      this.getMerchants();
+    }
+
+    this.params.status = status;
+    this.getMerchants();
+  }
+
+
+
   getMerchants() {
     this.loadingMerchants = true;
     this.merchantsService.getMerchants(this.params)

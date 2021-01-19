@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddFaqComponent } from './add-faq/add-faq.component';
 import { FaqService } from '../../../services/faq.service';
+import { AddGroupFaqComponent } from './add-group-faq/add-group-faq.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-faq',
@@ -20,19 +22,36 @@ export class FaqComponent implements OnInit {
   }
 
 
-  addFaq(faq = null) {
-    this.dialog.open(AddFaqComponent, {
-      disableClose: true,
-      width: '50%',
-      height: '50%',
-      data: {}
+  openDialogAddFaq(faq = null) {
+    const dialogRef = this.dialog.open(AddFaqComponent, {
+      minWidth: '60%',
+      minHeight: '400px',
+      data: { faq }
     });
+    dialogRef.afterClosed()
+      .subscribe((data: any) => {
+        if (data) {
+          this.getFaq();
+        }
+      });
+  }
+
+  openDialogAddGroup(group = null) {
+    const dialogRef = this.dialog.open(AddGroupFaqComponent, {
+      minWidth: '40%',
+      minHeight: '200px',
+      data: { group }
+    });
+    dialogRef.afterClosed()
+      .subscribe((data: any) => {
+        if (data) {
+          this.getFaq();
+        }
+      })
   }
 
 
-  addGroupFaq() {
 
-  }
 
   getFaq() {
     this.loadingFaq = true;
@@ -48,4 +67,30 @@ export class FaqComponent implements OnInit {
 
       });
   }
+
+
+  dialogDeleteFaq(faq) {
+    Swal.fire({
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a ${faq.title}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Bloquear',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        this.faqService.deleteFaq(faq.id)
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Bloqueado',
+              type: 'success',
+              text: 'La Pregunta ha sido bloqueado',
+              timer: 2000
+            });
+          });
+      }
+    });
+  }
+
 }

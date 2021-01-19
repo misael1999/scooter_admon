@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MerchantsService } from 'src/app/services/merchants.service';
-import { MerchantModel } from '../../../../../models/merchant.model';
 
 @Component({
   selector: 'app-tab-merchant-general',
@@ -11,7 +9,7 @@ export class TabMerchantGeneralComponent implements OnInit {
 
   @Input() merchant;
 
-  constructor(private merchantsService: MerchantsService) {
+  constructor() {
   }
 
   ngOnInit(): void {

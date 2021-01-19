@@ -25,7 +25,7 @@ import { TabMerchantSchedulesComponent } from './merchant-detail/tabs/tab-mercha
     TabMerchantTagsComponent,
     TabMerchantSettingComponent,
     TabMerchantGeneralComponent,
-    TabMerchantSchedulesComponent
+    TabMerchantSchedulesComponent,
   ],
   imports: [
     CommonModule,

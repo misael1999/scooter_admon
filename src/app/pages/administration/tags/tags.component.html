@@ -1,1 +1,88 @@
-<p>tags works!</p>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Etiquetas Generales</h1>
+        <button class="btn btn-primary btn-sm" (click)="openDialogAddTag()">Agregar</button>
+    </div>
+
+    <div>
+        <div class="filters">
+            <div class="row d-flex justify-content-end">
+
+                <!-- Ordering clients register -->
+                <div class="col-lg-3">
+                    <select class="form-control select-form" (change)="orderingBy($event.target.value)">
+                        <option>Ordenar por:</option>
+                        <option value=" ">Fecha de creacion</option>
+                        <option value="name">Nombre</option>
+                    </select>
+                </div>
+                <!-- Ordering clients register -->
+
+                <div class="col-lg-6">
+                </div>
+
+
+                <!-- Filter by search vehicles -->
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Filter by search vehicles -->
+            </div>
+        </div>
+        <!-- Fin filter  -->
+
+        <div class="row" class="content">
+
+
+            <!-- Preloader  -->
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadignTag">
+                <div class="spinner-border text-primary my-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!-- Fin Preloader  -->
+
+
+
+            <div class="col-md-12" *ngIf="!loadignTag && tags.length > 0 ">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Imagen </th>
+                            <th scope="col">Area</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col" class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tag of tags">
+                            <td class="text-center">
+                                <img class="img-tag img-profile rounded-circle" *ngIf="tag.picture" src="{{ tag.picture }}" alt="Avatar_Usuario">
+                                <img class="img-tag img-profile rounded-circle" *ngIf="tag.picture == null" src="assets/img/user.png" alt="Avatar_Usuario">
+                            </td>
+                            <td *ngIf="tag.area == '1'">Tehuacán</td>
+                            <td> {{tag.name}} </td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-success m-r-5" (click)="openDialogAddTag(tag)">Editar</button>
+                                <button class="btn btn-sm btn-primary m-l-15" (click)="deleteTag(tag)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <app-no-found-data *ngIf="!loadignTag && tags.length == 0"  [message]="'No hay etiquetas que mostrar'">
+            </app-no-found-data>
+
+        </div>
+    </div>
+</div>

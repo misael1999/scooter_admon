@@ -9,12 +9,12 @@ export class FaqService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getGroup(params = {}) {
+  getGroup() {
     const url = `${environment.HOST_APIV1}/commons/group/faq/`;
-    return this.httpClient.get(url, { params });
+    return this.httpClient.get(url);
   }
 
-  createGroup(group) {
+  createGroup(group: string) {
     const url = `${environment.HOST_APIV1}/commons/group/faq/`;
     return this.httpClient.post(url, group);
   }
@@ -24,12 +24,12 @@ export class FaqService {
     return this.httpClient.get(url, { params });
   }
 
-  createFaq(faq) {
+  createFaq(faq: any) {
     const url = `${environment.HOST_APIV1}/commons/faq/`;
     return this.httpClient.post(url, faq);
   }
 
-  editFaq(idFaq, faq) {
+  editFaq(idFaq:number, faq: any) {
     const url = `${environment.HOST_APIV1}/commons/faq/${idFaq}/`;
     return this.httpClient.patch(url, faq)
   }

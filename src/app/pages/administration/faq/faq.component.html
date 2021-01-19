@@ -1,31 +1,53 @@
 <div class="container-fluid">
+    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Preguntas Frecuentes</h1>
+        <h1 class="h3 mb-0 text-gray-800">Etiquetas Generales</h1>
         <div>
-            <button class="btn btn-primary btn-sm" (click)="addGroupFaq()">Agregar Grupo</button>
+            <button class="btn btn-primary btn-sm" (click)="openDialogAddGroup()">Agregar Grupo</button>
             <span class="p-l-15"></span>
-            <button class="btn btn-secondary btn-sm" (click)="addFaq()">Agregar Pregunta</button>
+            <button class="btn btn-secondary btn-sm" (click)="openDialogAddFaq()">Agregar Pregunta</button>
         </div>
     </div>
 
-    <div class="container">
-        <table class="table table-bordered table-responsive">
-            <thead>
-                <tr>
-                    <th scope="col">Grupo</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Pregunta</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let faq of faqs">
-                    <td>{{faq.group}}</td>
-                    <td> {{faq.title}}</td>
-                    <td> {{faq.answer}} </td>
-                    <td> <button class="btn btn-info btn-sm" (click)="addFaq(faq)">Editar</button> </td>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="p-t-40">
+        <div class="row" class="content">
+            <!-- Preloader  -->
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingFaq">
+                <div class="spinner-border text-primary my-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!-- Fin Preloader  -->
+
+
+
+            <div class="col-md-12" *ngIf="!loadingFaq && faqs.length > 0 ">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Grupo</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Pregunta</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let faq of faqs">
+                            <td> {{ faq.group }} </td>
+                            <td> {{ faq.title }} </td>
+                            <td> {{ faq.answer }} </td>
+                            <td>
+                                <button class="btn btn-info btn-sm" (click)="openDialogAddFaq(faq)">Editar</button>
+                                <button class="btn btn-primary btn-sm" (click)="dialogDeleteFaq(faq)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <app-no-found-data *ngIf="!loadingFaq && faqs.length == 0"  [message]="'No hay preguntas que mostrar'">
+            </app-no-found-data>
+        </div>
     </div>
 </div>

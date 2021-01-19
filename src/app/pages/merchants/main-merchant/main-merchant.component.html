@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -23,7 +23,18 @@
                 </div>
                 <!-- Fin Orderin in the tables for delivery -->
 
-                <div class="col-lg-6">
+                <!-- Show Delivery-Men status -->
+                <div class="col-md-3">
+                    <select (change)="showList($event.target.value)" class="form-control select-form">
+                        <option value="1">Ver por:</option>
+                        <option value="1">Disponibles</option>
+                        <option value="2">Bloqueados</option>
+                        <option value="">Informacion Incompleta</option>
+                    </select>
+                </div>
+                <!-- End Show Delivery-Men status -->
+
+                <div class="col-lg-3">
                 </div>
 
                 <!-- Filter by search vehicles -->

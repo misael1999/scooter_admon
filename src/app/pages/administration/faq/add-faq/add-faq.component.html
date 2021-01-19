@@ -1,64 +1,63 @@
 <h3 mat-dialog-title class="d-flex justify-content-between">
     {{faq ? 'Editar': 'Agregar'}} pregunta
-    <button mat-dialog-close>
+
+    <button mat-button mat-dialog-close class="btn btn-light">
         <i class="anticon anticon-close"></i>
-      </button>
+    </button>
 </h3>
 
 
-<div mat-dialog-content>
+<div class="container">
     <div class="row">
-        <div class="col-md-12 ">
-            <!-- Form Add vehícle -->
-            <form [formGroup]="addFaq">
+        <div class="col-md-12">
+
+            <form [formGroup]="faqForm">
                 <div class="form-row">
+
+
                     <div class="form-group col-md-12">
-                        <label>Grupo</label>
-                        <select class="form-control" formControlName='id' placeholder="Tipo" [ngClass]="(isFieldInvalid(addFaq, 'id'))? 'is-invalid': 'valid'">
-
-                            <option *ngFor="let group of groups" value="{{group.id}}"> {{group.name}} </option>
-
-                        </select>
+                        <label>Selecciona un Grupo</label>
+                        <select (change)="selectCategory($event.target.value)" formControlName="group" class="form-control select-form" [(ngModel)]="faq.gro" [ngClass]="(isFieldInvalid(faqForm, 'group'))? 'is-invalid': 'valid'">
+                           
+                                <option *ngFor="let group of groups" [value]="group.id" > {{group.name}} </option>
+                          </select>
+                        <!-- Message Errors   -->
                         <div class="invalid-feedback">
-                            <span *ngIf="hasFieldError(addFaq, 'id','required')">Este campo es
-                                requerido</span>
+                            <span *ngIf="hasFieldError(faqForm, 'group','required')">Este campo es requerido</span>
                         </div>
                     </div>
+
 
                     <div class="form-group col-md-12">
                         <label>Pregunta</label>
-                        <input formControlName="title" type="text " class="form-control" placeholder="Nombre" [ngClass]="(isFieldInvalid(addFaq, 'title'))? 'is-invalid': 'valid'">
-                        <!-- MESSAGES ERRORS  -->
+                        <input formControlName="title" type="text " class="form-control" placeholder="Nombre" [ngClass]="(isFieldInvalid(faqForm, 'title'))? 'is-invalid': 'valid'">
+                        <!-- Message Errors  -->
                         <div class="invalid-feedback">
-                            <span *ngIf="hasFieldError(addFaq, 'title','required')">Este campo es requerido</span>
+                            <span *ngIf="hasFieldError(faqForm, 'title','required')">Este campo es requerido</span>
                         </div>
                     </div>
-
-
 
                     <div class="form-group col-md-12">
                         <label>Respuesta</label>
-                        <textarea formControlName="answer" class="form-control" placeholder="Tengo un problema"></textarea>
-                        <!-- <input formControlName="last_name" type="text " class="form-control " placeholder="Apellidos" [ngClass]="(isFieldInvalid(addFaq, 'last_name'))? 'is-invalid': 'valid'"> -->
-                        <!-- MESSAGES ERRORS  -->
+                        <textarea rows="4" formControlName="answer" class="form-control" placeholder="Tengo un problema..." [ngClass]="(isFieldInvalid(faqForm, 'answer'))? 'is-invalid': 'valid'"></textarea>
+                        <!-- Message Errors  -->
                         <div class="invalid-feedback">
-                            <span *ngIf="hasFieldError(addFaq, 'answer','required')">Este campo es
-                                requerido</span>
+                            <span *ngIf="hasFieldError(faqForm, 'answer','required')">Este campo es requerido</span>
                         </div>
                     </div>
+
                 </div>
             </form>
 
 
-            <div mat-dialog-actions align="end">
-                <button [disabled]="loadingSave" (click)="createFaq()" type="submit" class="btn btn-primary fa-pull-right">
+            <div class="d-flex justify-content-end">
+                <button mat-button mat-dialog-close class="btn btn-light btn-sm m-r-20">Cancel</button>
+                <button [disabled]="loadingSave" (click)="createFaq()" type="submit" class="btn btn-primary btn-sm">
                     Guardar
                     <div *ngIf="loadingSave" class="spinner-border text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
-                      </div>
+                    </div>
                 </button>
-                <button class="btn btn-light right " mat-dialog-close color="primary">Cancelar</button>
-
             </div>
         </div>
     </div>
