@@ -81,9 +81,9 @@
 
                             <tr *ngFor="let order of orders">
                                 <td>
-                                    <span *ngIf="order.is_order_to_merchant == false && order.service == 'Compras'" class="badge bg-secondary text-dark">Lo que sea</span>
-                                    <span *ngIf="order.service == 'Recolección'" class="badge bg-warning text-dark">Recolección</span>
-                                    <span *ngIf="order.is_order_to_merchant == true" class="badge bg-info text-dark">Compras</span>
+                                    <span *ngIf="order.service_id == 3" class="badge bg-secondary text-dark">Lo que sea</span>
+                                    <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
+                                    <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
 
                                 </td>
                                 <td>{{order.customer.name}}</td>

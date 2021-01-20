@@ -39,7 +39,7 @@ export class OrdersCancelledComponent implements OnInit {
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
-        // console.log(this.orders);
+        console.log(this.orders);
         this.loadingOrders = false;
         this.length = data.count;
       }, error => {

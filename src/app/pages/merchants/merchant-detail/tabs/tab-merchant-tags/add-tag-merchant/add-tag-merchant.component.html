@@ -1,6 +1,58 @@
-<p>add-tag-merchant works!</p>
+<h3 mat-dialog-title class="d-flex justify-content-between">
+    Asignar Etiqueta
+    <button mat-dialog-close mat-flat-button class="btn btn-light">
+        <i class="anticon anticon-close"></i>
+    </button>
+</h3>
 
 
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni officia necessitatibus nihil ipsum. Exercitationem delectus quidem repellat culpa consequuntur reprehenderit saepe et qui neque pariatur, incidunt voluptatibus consequatur sint deserunt?
-</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="input-group mb-3">
+                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
+                    <span class="input-group-text" id="basic-addon1">
+                            <i class="fas fa-search"></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2">
+            <button class="btn btn-info btn-sm">Guardar</button>
+        </div>
+
+
+
+        <div class="col-lg-12">
+
+            <section class="example-section">
+                <span class="example-list-section">
+                    <ul>
+                        <li *ngFor="let tag of tagsGeneral">
+                            <mat-checkbox class="example-margin"> {{tag.name}} </mat-checkbox>
+                        </li>
+                    </ul>
+                </span>
+            </section>
+
+        </div>
+    </div>
+
+
+    <!-- Preloader -->
+    <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingTagGeneral">
+        <div class="spinner-border text-primary my-5" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- End Preloader -->
+
+
+
+    <!-- Conponent no Data -->
+    <app-no-found-data *ngIf="!tagsGeneral.length"  [message]="'No hay Etiquetas'">
+    </app-no-found-data>
+    <!-- End Conponent no Data -->
+</div>

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Detalles del Pedido </h2>
+<h2 mat-dialog-title>Detalles del Pedido <span class="text-primary">{{order.qr_code}}</span></h2>
 <div *ngIf="loadingOrder" class="spinner-grow text-danger" role="status">
     <span class="sr-only">Loading...</span>
 </div>
@@ -14,8 +14,8 @@
                         <th scope="col">Repartidor</th>
                         <th scope="col">Fecha del pedido</th>
                         <th scope="col">Fecha de entrega</th>
-                        <th scope="col" *ngIf="order.service == 'Compras'">Lugar de compra</th>
-                        <th scope="col" *ngIf="order.service == 'Compras'">Lugar de entrega</th>
+                        <th scope="col" *ngIf="order.service_id >= 1">Lugar de compra</th>
+                        <th scope="col" *ngIf="order.service_id >= 1">Lugar de entrega</th>
                         <th scope="col">Distancia</th>
                         <th scope="col">Costo de productos</th>
                         <th scope="col">Costo de Envio</th>
@@ -25,9 +25,9 @@
                 <tbody>
                     <tr>
                         <td>
-                            <span *ngIf="order.is_order_to_merchant == false && order.service == 'Compras'" class="badge bg-secondary text-dark">Lo que sea</span>
-                            <span *ngIf="order.service == 'Recolección'" class="badge bg-warning text-dark">Recolección</span>
-                            <span *ngIf="order.is_order_to_merchant == true" class="badge bg-info text-dark">Compras</span>
+                            <span *ngIf="order.service_id == 3" class="badge bg-secondary text-dark">Lo que sea</span>
+                            <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
+                            <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
                         </td>
                         <td> {{ order.customer.name }} </td>
                         <td> {{ order.customer.phone_number }} </td>
@@ -38,12 +38,13 @@
 
                         <td> {{ order.order_date | date:'medium' }} </td>
                         <td> {{ order.date_delivered_order | date:'medium'}} </td>
-                        <td *ngIf="order.service == 'Compras'">
-                            <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }}</span>
+                        <td *ngIf="order.service_id >= 1">
+                            <span *ngIf="order.is_order_to_merchant == true" class="badge badge-info"> {{order.merchant.merchant_name}}</span>
+
                             <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }}
                             </span>
                         </td>
-                        <td *ngIf="order.service == 'Compras'"> {{ order.to_address.full_address }}</td>
+                        <td *ngIf="order.service_id >= 1"> {{ order.to_address.full_address }}</td>
                         <td> {{ order.distance | number }} KM</td>
 
                         <td> $ {{ order.order_price }} </td>
@@ -55,8 +56,10 @@
             </table>
         </div>
 
+
+
         <div class="col-lg-12">
-            <table class="table table-hover table-bordered" *ngIf="order.service == 'Compras'">
+            <table class="table table-hover table-bordered" *ngIf="order.service_id >= 1">
                 <thead>
                     <tr>
                         <th scope="col">Cantidad</th>
@@ -112,40 +115,12 @@
         </tr>
         </tbody>
 
-
-        <!-- <tbody *ngFor="let info of orderDetails">
-                        <tr>
-                            <th scope="row" class="d-flex align-items-start">{{ info.quantity }}</th>
-                            <td> {{ info.product_name }}
-
-                                <span *ngFor="let menu of info.menu_options">{{ menu.menu_name }}
-
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Cantidad</th>
-                                                <th scope="col">Opcion</th>
-                                                <th scope="col">Precio</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let option of menu.options">
-                                                <td> -x{{ option.quantity}} </td>
-                                                <td>{{ option.option_name}}</td>
-                                                <td>{{ option.price_option }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </span>
-                            </td>
-                            <th scope="row" class="d-flex align-items-start">$ {{ info.product_price }} </th>
-                            <th scope="row" class="d-flex align-items-start">$ {{ info.total_detail }} </th>
-                    </tbody> -->
         </table>
 
 
 
-        <table class="table table-hover table-bordered" *ngIf="order.service == 'Recolección'">
+        <!-- Table for recoleccion -->
+        <table class="table table-hover table-bordered" *ngIf="order.service_id == 1">
             <thead>
                 <tr>
                     <th scope="col">Se recoge</th>
@@ -172,10 +147,5 @@
                 </tr>
             </tbody>
         </table>
-
-
-
     </div>
-</div>
-
 </div>

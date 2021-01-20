@@ -34,6 +34,7 @@ export class OrdersDetailComponent implements OnInit {
       .subscribe((data: any) => {
         this.order = data;
         this.orderDetails = data.details;
+        console.log(this.orderDetails);
         this.loadingOrder = false;
       }, error => {
         this.loadingOrder = false;
