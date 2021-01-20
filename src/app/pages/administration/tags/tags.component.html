@@ -1,16 +1,15 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Etiquetas Generales</h1>
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <h1 class="h3 mb-0 text-gray-800">Etiquetas Generales Zona Tehuacán</h1>
         <button class="btn btn-primary btn-sm" (click)="openDialogAddTag()">Agregar</button>
     </div>
 
     <div>
-        <div class="filters">
+        <div class="filters p-t-20">
             <div class="row d-flex justify-content-end">
 
-                <!-- Ordering clients register -->
                 <div class="col-lg-3">
                     <select class="form-control select-form" (change)="orderingBy($event.target.value)">
                         <option>Ordenar por:</option>
@@ -18,13 +17,11 @@
                         <option value="name">Nombre</option>
                     </select>
                 </div>
-                <!-- Ordering clients register -->
 
                 <div class="col-lg-6">
                 </div>
 
 
-                <!-- Filter by search vehicles -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
@@ -35,17 +32,16 @@
                         </div>
                     </div>
                 </div>
-                <!-- Fin Filter by search vehicles -->
             </div>
         </div>
-        <!-- Fin filter  -->
-
-        <div class="row" class="content">
 
 
+
+
+        <div class="row" class="content p-t-20">
             <!-- Preloader  -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadignTag">
-                <div class="spinner-border text-primary my-5" role="status">
+                <div class="spinner-border text-primary" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
@@ -80,7 +76,7 @@
                     </tbody>
                 </table>
             </div>
-            <app-no-found-data *ngIf="!loadignTag && tags.length == 0"  [message]="'No hay etiquetas que mostrar'">
+            <app-no-found-data *ngIf="!loadignTag && tags.length == 0"  [message]="'No hay Etiquetas que Mostrar'">
             </app-no-found-data>
 
         </div>

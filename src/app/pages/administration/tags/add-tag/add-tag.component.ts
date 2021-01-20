@@ -16,7 +16,6 @@ export class AddTagComponent extends ValidationForms implements OnInit {
   imageURL: string;
 
 
-
   constructor(private fb: FormBuilder, private tagsGeneralService: TagsGeneralService, private dialogRef: MatDialogRef<AddTagComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
@@ -45,10 +44,11 @@ export class AddTagComponent extends ValidationForms implements OnInit {
       this.addTag(tag);
     }
   }
+  
 
 
   addTag(tag) {
-    if(this.imageURL){
+    if (this.imageURL) {
       tag.picture = this.imageURL;
     }
     this.tagsGeneralService.createTag(tag)
@@ -61,11 +61,14 @@ export class AddTagComponent extends ValidationForms implements OnInit {
         this.loadingSave = false;
       });
   }
+
+
+  
   buildForm() {
     this.tagForm = this.fb.group(
       {
         name: [null, Validators.required],
-        area: [null],
+        area: [1],
         picture: [null],
       }
     );
@@ -73,7 +76,7 @@ export class AddTagComponent extends ValidationForms implements OnInit {
 
 
 
-  
+
   updateTag(tagId, tag) {
     this.tagsGeneralService.editTag(tagId, tag)
       .subscribe((data) => {
@@ -89,7 +92,6 @@ export class AddTagComponent extends ValidationForms implements OnInit {
     this.tagForm = this.fb.group(
       {
         name: [tag.name, Validators.required],
-        area: [tag.area],
         picture: [tag.picture],
       }
     );

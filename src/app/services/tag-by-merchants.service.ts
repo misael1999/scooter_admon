@@ -15,9 +15,9 @@ export class TagByMerchantsService {
   //   return this.httpClient.get(url, { params });
   // }
 
-  createTag(idMerchant: number, tag: any) {
+  createTag(idMerchant, tags) {
     const url = `${environment.HOST_APIV1}/merchants/${idMerchant}/tags/`;
-    return this.httpClient.post(url, tag);
+    return this.httpClient.post(url, tags)
   }
 
   // deleteTag(: number) {

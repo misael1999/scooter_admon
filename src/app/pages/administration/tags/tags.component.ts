@@ -69,7 +69,7 @@ export class TagsComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
-        this.tagsGeneralService.deleteTag(tag.name)
+        this.tagsGeneralService.deleteTag(tag.id)
           .subscribe(data => {
             Swal.fire({
               title: 'Bloqueado',
@@ -82,8 +82,5 @@ export class TagsComponent implements OnInit {
     });
   }
 
-
-
-
-
 }
+

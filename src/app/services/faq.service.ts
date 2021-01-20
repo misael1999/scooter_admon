@@ -19,12 +19,13 @@ export class FaqService {
     return this.httpClient.post(url, group);
   }
 
+  // Methods for FAQ
   getFaq(params = {}) {
     const url = `${environment.HOST_APIV1}/commons/faq/`;
     return this.httpClient.get(url, { params });
   }
 
-  createFaq(faq: any) {
+  createFaq(faq) {
     const url = `${environment.HOST_APIV1}/commons/faq/`;
     return this.httpClient.post(url, faq);
   }

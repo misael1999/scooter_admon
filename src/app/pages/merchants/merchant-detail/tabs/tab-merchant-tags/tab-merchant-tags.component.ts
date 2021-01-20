@@ -16,7 +16,7 @@ export class TabMerchantTagsComponent implements OnInit {
   constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.tagsMerchant = this.merchantsService.merchantId.tags;
+    this.tagsMerchant = this.merchantsService.merchantId;
     console.log('esta es la info', this.tagsMerchant);
   }
 

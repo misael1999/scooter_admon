@@ -13,7 +13,7 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
   faqForm: FormGroup;
   faq: any;
   loadingSave: boolean;
-  groups: any;
+  groups: Array<any> = [];
   groupSelected;
 
   constructor(private fb: FormBuilder, private faqService: FaqService, private dialogRef: MatDialogRef<AddFaqComponent>,
@@ -39,8 +39,9 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
       });
   }
 
-  selectCategory(categoryId) {
-    this.groupSelected = this.groups.find(group => group.group_id == categoryId);
+
+  selectGroup(grupId) {
+    this.groupSelected = this.groups.find(group => group.id == grupId)
   }
 
 
@@ -89,7 +90,7 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
         this.loadingSave = false;
         this.dialogRef.close(true);
       }, error => {
-        this.showSwalMessage(error.errors.message, 'error');
+        this.showSwalMessage('Opps.. Ubo un problema al actualizar')
         this.loadingSave = false;
       })
   }

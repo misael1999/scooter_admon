@@ -1,5 +1,5 @@
 <h3 mat-dialog-title class="d-flex justify-content-between">
-    {{tag ? 'Editar': 'Agregar'}} etiqueta
+    {{tag ? 'Editar': 'Agregar'}} Etiqueta
     <button mat-dialog-close mat-flat-button class="btn btn-light">
         <i class="anticon anticon-close"></i>
     </button>
@@ -15,8 +15,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group col-md-12">
-                            <label>Nombre del Grupo</label>
-                            <input formControlName="name" type="text " class="form-control" placeholder="Preguntas frecuentes..." [ngClass]="(isFieldInvalid(tagForm, 'name'))? 'is-invalid': 'valid'">
+                            <label>Etiqueta</label>
+                            <input formControlName="name" type="text " class="form-control" placeholder="Alitas..." [ngClass]="(isFieldInvalid(tagForm, 'name'))? 'is-invalid': 'valid'">
                             <!-- Message Errors -->
                             <div class="invalid-feedback">
                                 <span *ngIf="hasFieldError(tagForm, 'name','required')">Este campo es
@@ -26,18 +26,13 @@
 
                         <div class="form-group col-md-12">
                             <label>Área</label>
-                            <select type="text" class="form-control" formControlName='area' placeholder="Tipo" [ngClass]="(isFieldInvalid(tagForm, 'area'))? 'is-invalid': 'valid'">
-
+                            <select type="text" class="form-control">
                             <option value="1">Tehuacán</option>
                             <option value="1">Orizaba</option>
-                            <option value="1">Cordodoba</option>
-
+                            <option value="1">Cordoba</option>
                         </select>
-                            <div class="invalid-feedback">
-                                <span *ngIf="hasFieldError(tagForm, 'area','required')">Este campo es
-                                requerido</span>
-                            </div>
                         </div>
+
                         <div class="col-md-12">
                             <label>Imagen</label>
                             <div class="form-group">

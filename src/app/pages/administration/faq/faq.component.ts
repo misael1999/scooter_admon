@@ -51,8 +51,6 @@ export class FaqComponent implements OnInit {
   }
 
 
-
-
   getFaq() {
     this.loadingFaq = true;
     this.faqService.getFaq(this.params)
@@ -66,6 +64,10 @@ export class FaqComponent implements OnInit {
         console.log('error ');
 
       });
+  }
+  searchBy(value) {
+    this.params.search = value;
+    this.getFaq();
   }
 
 

@@ -26,6 +26,6 @@ export class TagsGeneralService {
 
   deleteTag(idTag: number) {
     const url = `${environment.HOST_APIV1}/tags/${idTag}/`;
-    return this.httpClient.delete(url);
+    return this.httpClient.delete(url)
   }
 }

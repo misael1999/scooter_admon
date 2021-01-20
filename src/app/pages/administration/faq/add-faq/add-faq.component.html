@@ -1,6 +1,5 @@
 <h3 mat-dialog-title class="d-flex justify-content-between">
-    {{faq ? 'Editar': 'Agregar'}} pregunta
-
+    {{faq ? 'Editar': 'Agregar'}} Pregunta Frecuente
     <button mat-button mat-dialog-close class="btn btn-light">
         <i class="anticon anticon-close"></i>
     </button>
@@ -13,11 +12,9 @@
 
             <form [formGroup]="faqForm">
                 <div class="form-row">
-
-
                     <div class="form-group col-md-12">
                         <label>Selecciona un Grupo</label>
-                        <select (change)="selectCategory($event.target.value)" formControlName="group" class="form-control select-form" [(ngModel)]="faq.gro" [ngClass]="(isFieldInvalid(faqForm, 'group'))? 'is-invalid': 'valid'">
+                        <select (change)="selectGroup($event.target.value)" formControlName="group" class="form-control select-form" [ngClass]="(isFieldInvalid(faqForm, 'group'))? 'is-invalid': 'valid'">
                            
                                 <option *ngFor="let group of groups" [value]="group.id" > {{group.name}} </option>
                           </select>
@@ -30,7 +27,7 @@
 
                     <div class="form-group col-md-12">
                         <label>Pregunta</label>
-                        <input formControlName="title" type="text " class="form-control" placeholder="Nombre" [ngClass]="(isFieldInvalid(faqForm, 'title'))? 'is-invalid': 'valid'">
+                        <input formControlName="title" type="text " class="form-control" placeholder="Cómo hago un pedido..." [ngClass]="(isFieldInvalid(faqForm, 'title'))? 'is-invalid': 'valid'">
                         <!-- Message Errors  -->
                         <div class="invalid-feedback">
                             <span *ngIf="hasFieldError(faqForm, 'title','required')">Este campo es requerido</span>
@@ -39,7 +36,7 @@
 
                     <div class="form-group col-md-12">
                         <label>Respuesta</label>
-                        <textarea rows="4" formControlName="answer" class="form-control" placeholder="Tengo un problema..." [ngClass]="(isFieldInvalid(faqForm, 'answer'))? 'is-invalid': 'valid'"></textarea>
+                        <textarea rows="4" formControlName="answer" class="form-control" placeholder="Descarga nuestra App en..." [ngClass]="(isFieldInvalid(faqForm, 'answer'))? 'is-invalid': 'valid'"></textarea>
                         <!-- Message Errors  -->
                         <div class="invalid-feedback">
                             <span *ngIf="hasFieldError(faqForm, 'answer','required')">Este campo es requerido</span>
@@ -51,7 +48,7 @@
 
 
             <div class="d-flex justify-content-end">
-                <button mat-button mat-dialog-close class="btn btn-light btn-sm m-r-20">Cancel</button>
+                <button mat-button mat-dialog-close class="btn btn-light btn-sm m-r-20">Cancelar</button>
                 <button [disabled]="loadingSave" (click)="createFaq()" type="submit" class="btn btn-primary btn-sm">
                     Guardar
                     <div *ngIf="loadingSave" class="spinner-border text-secondary" role="status">
