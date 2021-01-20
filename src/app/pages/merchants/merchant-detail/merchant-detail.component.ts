@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { ValidationForms } from 'src/app/utils/validations-forms';
-import { MerchantModel } from '../../../models/merchant.model';
 
 @Component({
   selector: 'app-merchant-detail',

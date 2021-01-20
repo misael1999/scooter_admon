@@ -14,6 +14,7 @@ export class AddTagMerchantComponent implements OnInit {
   tagsTheMerchants;
   params = { limit: 50, offset: 0, search: '', ordering: '' };
 
+  dataInterior = [];
 
   constructor(private tagsGeneralService: TagsGeneralService, private fb: FormBuilder, private dialogRef: MatDialogRef<AddTagMerchantComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -25,6 +26,23 @@ export class AddTagMerchantComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTagGeneral();
+  }
+
+
+
+  agregar(data: string) { // Agregamos el elemento
+    this.dataInterior.push(data);
+    console.log(this.dataInterior);
+  }
+
+  quitar(data) { // Filtramos el elemento para que quede fuera
+    this.dataInterior = this.dataInterior.filter(s => s !== data);
+    console.log(this.dataInterior);
+  }
+
+
+  guardar(){
+    this.tags
   }
 
 
@@ -49,8 +67,6 @@ export class AddTagMerchantComponent implements OnInit {
   }
 
 
-  saveTags() {
 
-  }
 
 }
