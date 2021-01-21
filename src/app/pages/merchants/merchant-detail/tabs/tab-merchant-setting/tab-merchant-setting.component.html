@@ -1,13 +1,13 @@
-<!-- <div class="container">
+<div class="container" *ngIf="merchant">
     <div class="row d-flex justify-content-center p-t-15 p-b-15 border">
         <div class="col-md-12 ">
             <div class="form">
                 <form [formGroup]="settingForm">
                     <div class="form-group">
                         <div class="form-group">
-                            <mat-checkbox [(ngModel)]="merchatSetting.has_rate_operating" [formControl]="merchatSetting.has_rate_operating">¿Tiene costo Operacional? *</mat-checkbox>
+                            <mat-checkbox [checked]="merchant.has_rate_operating" formControlName="has_rate_operating">¿Tiene costo Operacional? *</mat-checkbox>
 
-                            <input [(ngModel)]="merchatSetting.has_rate_operating" formControlName="increment_price_operating" type="text" class="form-control">
+                            <input formControlName="increment_price_operating" type="text" class="form-control">
 
                         </div>
 
@@ -27,4 +27,4 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>

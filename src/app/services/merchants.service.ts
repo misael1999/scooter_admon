@@ -26,6 +26,11 @@ export class MerchantsService {
     return this.http.get(url);
   }
 
+  updateMerchantStation(merchantId, data) {
+    const url = `${environment.HOST_APIV1}/stations/${this.station.id}/merchants/${merchantId}/`;
+    return this.http.patch(url, data);
+  }
+
   opeOrcloseMerchant(merchantId, isOpen) {
     const url = `${environment.HOST_APIV1}/stations/${this.station.id}/merchants/${merchantId}/update_availability/`;
     return this.http.put(url, { is_open: isOpen });
