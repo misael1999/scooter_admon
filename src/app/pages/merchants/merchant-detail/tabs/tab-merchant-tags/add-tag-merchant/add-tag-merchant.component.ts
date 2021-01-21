@@ -5,6 +5,13 @@ import { TagByMerchantsService } from 'src/app/services/tag-by-merchants.service
 import { TagsGeneralService } from '../../../../../../services/tags-general.service';
 import { ValidationForms } from '../../../../../../utils/validations-forms';
 
+export interface Tags {
+  tags: [],
+  delete_tags: []
+}
+
+
+
 @Component({
   selector: 'app-add-tag-merchant',
   templateUrl: './add-tag-merchant.component.html',
@@ -12,11 +19,14 @@ import { ValidationForms } from '../../../../../../utils/validations-forms';
 })
 export class AddTagMerchantComponent extends ValidationForms implements OnInit {
   loadingTagGeneral: boolean;
+  loadingSave: boolean;
   params = { limit: 50, offset: 0, search: '', ordering: '' };
   idMerchant;
   tagsGeneral: Array<any> = [];
-  tagsOwnMerchant: Array<any> = [];
   tagsTheMerchant: Array<any> = [];
+  tagsNew = [];
+  tagNnew2 = [];
+  tagNueva: Tags;
 
 
 
@@ -24,41 +34,57 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
 
-    this.tagsOwnMerchant = data.tags.tags;
-    console.log(this.tagsOwnMerchant);
-    // this.idMerchant = data.tags.id;
-    // console.log(this.idMerchant);
-    // this.tagsTheMerchant = this.tagsOwnMerchant.forEach(function (value:any, index,a))
-    // console.log(this.tagsTheMerchant);
-
+    this.tagsTheMerchant = data.tags.tags;
+    this.idMerchant = data.tags.id;
+    console.log(this.idMerchant);
+    console.log(this.tagsTheMerchant);
   }
 
   ngOnInit(): void {
     this.getTagGeneral();
   }
 
-  agregar(data) {
-    this.tagsTheMerchant.push(data);
-    console.log(this.tagsTheMerchant);
-    return this.tagsTheMerchant;
+  addTag(data) {
+    this.tagsNew.push(data)
+    console.log(this.tagsNew);
+    return this;
   }
 
-  quitar(data) {
-    this.tagsTheMerchant = this.tagsTheMerchant.filter(s => s !== data);
-    console.log(this.tagsTheMerchant);
-    return this.tagsTheMerchant;
+  deleteTag(data) {
+    this.tagsNew = this.tagsNew.filter(s => s !== data);
+    console.log(this.tagsNew);
+    return this.tagsNew;
   }
 
 
   guardar() {
-    this.tagByMerchantService.createTag(this.idMerchant, this.tagsTheMerchant)
+    console.log(this.tagsNew);
+    this.loadingSave = true;
+    // this.tagNueva.tags = this.tagsNew.forEach((this.tagNueva: any) =>{
+
+    // });
+
+
+    // this.merchantsTemp.forEach((merchant: any) => {
+    //   if (category.name == merchant.category) {
+    //     category.count++;
+    //   }
+    // });
+
+
+      console.log(this.tagNueva);
+
+    this.tagByMerchantService.createTags(this.idMerchant, this.tagNueva)
       .subscribe((data) => {
-        this.showSwalMessage('Agregado Correctamente')
+        this.loadingSave = false;
+        this.showSwalMessage('Etiquetas Agregadas Correctamente')
         this.dialogRef.close(true);
-      }), error => {
-        this.showSwalMessage(error.error.errors.errors.message);
-      }
+      }, error => {
+        this.showSwalMessage('Error al agregar');
+        this.loadingSave = false;
+      });
   }
+
 
 
 
@@ -74,7 +100,6 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
         console.log('eroroe');
       }
   }
-
   searchBy(value) {
     this.params.search = value;
     this.getTagGeneral();

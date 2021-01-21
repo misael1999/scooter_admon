@@ -25,11 +25,14 @@
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label>Área</label>
-                            <select type="text" class="form-control">
-                            <option value="1">Tehuacán</option>
-                            <option value="1">Orizaba</option>
-                            <option value="1">Cordoba</option>
+                            <label>Categoria</label>
+                            <select type="text" class="form-control" formControlName="category" [ngClass]="(isFieldInvalid(tagForm, 'category'))? 'is-invalid': 'valid'">
+                            <option *ngFor="let category of categories" [value]="category.id"> {{category.name}} </option>
+                            <!-- Message Errors -->
+                            <div class="invalid-feedback">
+                                <span *ngIf="hasFieldError(tagForm, 'category','required')">Este campo es
+                            requerido</span>
+                            </div>
                         </select>
                         </div>
 

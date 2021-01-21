@@ -28,4 +28,12 @@ export class TagsGeneralService {
     const url = `${environment.HOST_APIV1}/tags/${idTag}/`;
     return this.httpClient.delete(url)
   }
+
+
+
+  // Other Method
+  getCategories() {
+    const url = `${environment.HOST_APIV1}/commons/categories/`;
+    return this.httpClient.get(url);
+  }
 }

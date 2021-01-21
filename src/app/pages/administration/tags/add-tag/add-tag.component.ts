@@ -12,8 +12,11 @@ import { TagsGeneralService } from '../../../../services/tags-general.service';
 export class AddTagComponent extends ValidationForms implements OnInit {
   tagForm: FormGroup;
   tag: any;
+  categories: Array<any> = [];
   loadingSave: boolean;
+  loadingCategories: boolean;
   imageURL: string;
+
 
 
   constructor(private fb: FormBuilder, private tagsGeneralService: TagsGeneralService, private dialogRef: MatDialogRef<AddTagComponent>,
@@ -29,6 +32,7 @@ export class AddTagComponent extends ValidationForms implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCategories();
   }
 
   createTag() {
@@ -44,7 +48,21 @@ export class AddTagComponent extends ValidationForms implements OnInit {
       this.addTag(tag);
     }
   }
-  
+
+  getCategories() {
+    this.loadingCategories = true,
+      this.tagsGeneralService.getCategories()
+        .subscribe((data: any) => {
+          this.loadingCategories = false;
+          this.categories = data.results;
+
+          console.log(this.categories);
+        }), error => {
+          this.loadingCategories = false;
+          console.log('Error al consultar');
+        }
+  }
+
 
 
   addTag(tag) {
@@ -61,15 +79,13 @@ export class AddTagComponent extends ValidationForms implements OnInit {
         this.loadingSave = false;
       });
   }
-
-
-  
   buildForm() {
     this.tagForm = this.fb.group(
       {
         name: [null, Validators.required],
         area: [1],
         picture: [null],
+        category: [null, Validators.required],
       }
     );
   }
@@ -92,7 +108,9 @@ export class AddTagComponent extends ValidationForms implements OnInit {
     this.tagForm = this.fb.group(
       {
         name: [tag.name, Validators.required],
+        area: [tag.area],
         picture: [tag.picture],
+        category: [tag.category],
       }
     );
   }

@@ -12,7 +12,7 @@ import { AddTagComponent } from './add-tag/add-tag.component';
 export class TagsComponent implements OnInit {
   tags: any;
   loadignTag: boolean;
-  params = { limit: 25, offset: 0, search: '', ordering: '' };
+  params = { limit: 25, offset: 0, search: '', ordering: '', category: '' };
 
   constructor(private tagsGeneralService: TagsGeneralService, private dialog: MatDialog,) { }
 
@@ -55,6 +55,11 @@ export class TagsComponent implements OnInit {
 
   orderingBy(value: string) {
     this.params.ordering = value;
+    this.getTags();
+  }
+
+  viewBy (value) {
+    this.params.category = value;
     this.getTags();
   }
 
