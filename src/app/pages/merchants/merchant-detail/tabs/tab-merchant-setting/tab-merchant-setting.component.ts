@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidationForms } from 'src/app/utils/validations-forms';
 import { MerchantsService } from '../../../../../services/merchants.service';
 
 @Component({
@@ -7,14 +8,19 @@ import { MerchantsService } from '../../../../../services/merchants.service';
   templateUrl: './tab-merchant-setting.component.html',
   styleUrls: ['./tab-merchant-setting.component.scss']
 })
-export class TabMerchantSettingComponent implements OnInit {
+export class TabMerchantSettingComponent extends ValidationForms implements OnInit {
   settingForm: FormGroup;
   loadingSaveInfo=false;
+  merchant;
 
   @Input() merchatSetting;
-  constructor(private merchantService: MerchantsService, private fb: FormBuilder) { }
+  constructor(private merchantService: MerchantsService, private fb: FormBuilder) { super(); }
 
   ngOnInit(): void {
+    this.merchant = this.merchantService.merchantId;
+    console.log(this.merchantService.merchantId);
+    this.buildSettingForm();
+    
   }
 
 
@@ -29,6 +35,16 @@ export class TabMerchantSettingComponent implements OnInit {
 
     
     this.loadingSaveInfo = true;
+    console.log(info);
+    
+    this.merchantService.updateMerchantStation(this.merchant.id, info)
+      .subscribe((data: any) => {
+        this.showSwalMessage("Información actualizada correctamente");
+        this.loadingSaveInfo = false;
+        console.log(data);
+      }, error => {
+        this.showSwalMessage("Error en actualizar", 'error');
+      });
     
     // this.merchantService.opeO
 
@@ -48,7 +64,8 @@ export class TabMerchantSettingComponent implements OnInit {
 
   buildSettingForm() {
     this.settingForm = this.fb.group({
-      // increment_price_operating: [this.station.increment_price_operating, Validators.required],
+      increment_price_operating: [this.merchant.increment_price_operating, Validators.required],
+      has_rate_operating: [this.merchant.has_rate_operating, Validators.required],
     })
   }
 
