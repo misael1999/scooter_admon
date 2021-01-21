@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MerchantsService } from '../../../../../services/merchants.service';
 
 @Component({
   selector: 'app-tab-merchant-schedules',
@@ -7,11 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TabMerchantSchedulesComponent implements OnInit {
 
-  @Input() merchants;
+  merchant: Array<any> = [];
 
-  constructor() { }
+  constructor(private merchantsService: MerchantsService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.merchant = this.merchantsService.merchantId.tags;
+    console.log('esta es la info', this.merchant);
   }
 
 }

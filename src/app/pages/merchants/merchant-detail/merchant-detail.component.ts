@@ -10,7 +10,7 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
 })
 export class MerchantDetailComponent extends ValidationForms implements OnInit {
   merchantId;
-  merchant: any;
+  merchant;
   loadingInfo;
 
   constructor(private activatedRoute: ActivatedRoute, private merchantsService: MerchantsService) {

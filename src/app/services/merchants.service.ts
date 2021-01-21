@@ -32,7 +32,7 @@ export class MerchantsService {
   }
 
   createMerchant(merchant: any) {
-    const url = `${environment.HOST_APIV1}/merchants/`;
+    const url = `${environment.HOST_APIV1}/stations/${this.station.id}/merchants/`;
     return this.http.post(url, merchant);
   }
 

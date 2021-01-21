@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
     <div class="row d-flex justify-content-center p-t-30">
         <div class="col-md-6 ">
@@ -11,7 +11,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let schedule of merchants.schedules">
+                    <tr *ngFor="let schedule of merchant">
                         <th scope="row"> {{schedule.schedule}} </th>
                         <td>{{schedule.from_hour}}</td>
                         <td>{{schedule.to_hour}}</td>

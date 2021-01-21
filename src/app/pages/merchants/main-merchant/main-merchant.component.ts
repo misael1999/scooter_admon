@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { MerchantsAddComponent } from '../merchants-add/merchants-add.component';
 import { MatDialog } from '@angular/material/dialog';
+import { stat } from 'fs';
 
 @Component({
   selector: 'app-main-merchant',
@@ -50,16 +51,17 @@ export class MainMerchantComponent implements OnInit {
 
 
 
-  showList(status) {
-
-    if (!this.params.information_is_complete) {
-      this.getMerchants();
-    }
-
-    this.params.status = status;
+  showList(value) {
+    this.params.status = value;
     this.getMerchants();
+
   }
 
+
+  showinfoIsComplete(value) {
+    this.params.information_is_complete = value;
+    this.getMerchants();
+  }
 
 
   getMerchants() {
@@ -72,7 +74,7 @@ export class MainMerchantComponent implements OnInit {
         console.log(this.merchants);
       }, error => {
         this.loadingMerchants = false;
-        alert('Ha ocurrido un error al obtener los comercios');
+        // alert('Ha ocurrido un error al obtener los comercios');
       });
   }
 
