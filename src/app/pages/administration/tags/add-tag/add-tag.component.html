@@ -46,7 +46,7 @@
 
                     <div class="col-md-6">
                         <div class="images d-flex justify-content-center ">
-                            <img *ngIf="imageURL" height="200" class="img-fluid image-product" [src]="imageURL" alt="category_picture">
+                            <img *ngIf="imageURL" height="200" class="img-fluid image-product" formControlName="imageURL" [src]="imageURL" alt="img">
                             <img *ngIf="!imageURL" class="img-fluid image-product" src="assets/images/common/no-image.png" alt="">
                         </div>
                     </div>

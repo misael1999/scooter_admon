@@ -99,7 +99,7 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
       {
         title: [faq.title, Validators.required],
         answer: [faq.answer, Validators.required],
-        group: [faq.group, Validators.required],
+        group: [faq.group.group_id, Validators.required],
       }
     );
   }

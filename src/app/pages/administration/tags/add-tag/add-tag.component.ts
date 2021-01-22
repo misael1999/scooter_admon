@@ -40,7 +40,29 @@ export class AddTagComponent extends ValidationForms implements OnInit {
       this.tagForm.markAllAsTouched();
       return;
     }
+
     const tag = this.tagForm.value;
+
+    if (this.tag.id) {
+      tag.id = this.tag.id;
+      if (this.imageURL.includes('https')) {
+        delete tag.picture;
+      } else {
+        tag.picture = this.imageURL;
+      }
+    }
+
+    // if (this.id) {
+    //   product.id = this.id;
+    //   if (this.imageURL != null) {
+    //     if (this.imageURL.includes('https')) {
+    //       delete product.picture;
+    //     } else {
+    //       product.picture = this.imageURL;
+    //     }
+    //   }
+
+
     this.loadingSave = true;
     if (this.tag) {
       this.updateTag(this.tag.id, tag);
@@ -84,7 +106,6 @@ export class AddTagComponent extends ValidationForms implements OnInit {
       {
         name: [null, Validators.required],
         area: [1],
-        picture: [null],
         category: [null, Validators.required],
       }
     );
@@ -110,7 +131,6 @@ export class AddTagComponent extends ValidationForms implements OnInit {
       {
         name: [tag.name, Validators.required],
         area: [tag.area],
-        picture: [tag.picture],
         category: [tag.category_id],
       }
     );
@@ -126,5 +146,4 @@ export class AddTagComponent extends ValidationForms implements OnInit {
       this.imageURL = String(reader.result);
     }
   }
-
 }
