@@ -104,13 +104,14 @@ export class AddTagComponent extends ValidationForms implements OnInit {
         this.loadingSave = false;
       })
   }
+
   buildUpdateForm(tag) {
     this.tagForm = this.fb.group(
       {
         name: [tag.name, Validators.required],
         area: [tag.area],
         picture: [tag.picture],
-        category: [tag.category],
+        category: [tag.category_id],
       }
     );
   }

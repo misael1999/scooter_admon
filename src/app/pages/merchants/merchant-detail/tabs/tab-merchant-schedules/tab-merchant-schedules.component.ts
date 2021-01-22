@@ -8,13 +8,13 @@ import { MerchantsService } from '../../../../../services/merchants.service';
 })
 export class TabMerchantSchedulesComponent implements OnInit {
 
-  merchant: Array<any> = [];
+  schedules: Array<any> = [];
 
   constructor(private merchantsService: MerchantsService) { }
 
   ngOnInit(): void {    
-    this.merchant = this.merchantsService.merchantId.tags;
-    console.log('esta es la info', this.merchant);
+    this.schedules = this.merchantsService.merchantId.tags;
+    console.log('esta es la info', this.schedules);
   }
 
 }

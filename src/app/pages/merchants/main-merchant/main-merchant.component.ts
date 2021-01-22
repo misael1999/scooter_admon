@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { MerchantsAddComponent } from '../merchants-add/merchants-add.component';
 import { MatDialog } from '@angular/material/dialog';
-import { stat } from 'fs';
+// import { stat } from 'fs';
 
 @Component({
   selector: 'app-main-merchant',
