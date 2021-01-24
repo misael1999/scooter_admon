@@ -63,7 +63,6 @@
                                 <th>Razón</th>
                                 <th>Fecha del servicio</th>
                                 <th>Precio Total</th>
-                                <th class="text-center">Acciones </th>
 
                             </tr>
                         </thead>
@@ -73,6 +72,10 @@
                                     <span *ngIf="order.service_id == 3" class="badge bg-secondary text-dark">Lo que sea</span>
                                     <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
                                     <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
+                                    <br>
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDialogDetailProducts(order)">Detalles</a> </li>
+                                    </ol>
                                 </td>
                                 <td>
                                     <span *ngIf="order.is_order_to_merchant"> {{ order.merchant.merchant_name }} </span>
@@ -82,9 +85,7 @@
                                 <td> {{ order.reason_rejection }} </td>
                                 <td> {{ order.order_date | date:'medium' }} </td>
                                 <td> $ {{ order.total_order | number : '1.2-2' }} </td>
-                                <td class="text-center">
-                                    <a (click)="openDialogDetailProducts(order)" style="color: #1890FF;"> <i class="fas fa-info-circle fa-2x"></i> </a>
-                                </td>
+
                             </tr>
                         </tbody>
                     </table>

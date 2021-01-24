@@ -25,7 +25,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   // MatPaginator Inputs
   length = 100;
   pageSize = 15;
-  pageSizeOptions: number[] = [25, 50, 75, 100];
+  pageSizeOptions: number[] = [25, 50, 5, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
 
@@ -82,6 +82,21 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
+  accepOrderMerchant(orderId) {
+    this.loadingAcceptOrder = true;
+    this.ordersService.acceptOrderMerchant(orderId, {})
+      .subscribe((data: any) => {
+        this.loadingAcceptOrder = false;
+        this.snackBar.open('Pedido aceptado', '', {
+          duration: 4000,
+          panelClass: 'main-snackbar'
+        });
+        this.getOrders();
+      }, error => {
+        this.loadingAcceptOrder = false;
+        alert('Ha ocurrido un error al aceptar el pedido');
+      });
+  }
 
   getOrders() {
     this.loadingOrders = true;
@@ -90,6 +105,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
         this.orders = data.results;
         this.loadingOrders = false;
         this.length = data.count;
+        console.log(this.orders);
       }, error => {
         this.loadingOrders = false;
       });

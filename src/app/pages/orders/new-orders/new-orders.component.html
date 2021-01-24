@@ -119,12 +119,19 @@
                                 <td> {{ order.maximum_response_time | date:'medium'}} </td>
                                 <td> {{order.order_status.name}}</td>
                                 <td>
-                                    <button (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
+                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
                                     <br>
                                     <br>
-                                    <button (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
+                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
 
-                                    <button [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
+                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
+
+                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="accepOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-success">
+                                        Aceptar
+                                       
+                                    </button>
+
+
 
                                 </td>
                             </tr>

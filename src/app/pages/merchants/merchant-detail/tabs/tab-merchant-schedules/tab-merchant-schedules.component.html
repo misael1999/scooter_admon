@@ -1,19 +1,25 @@
 <div class="container-fluid">
-
-    <div class="row d-flex justify-content-center p-t-30">
-        <div class="col-md-6 ">
-
-
-            <mat-form-field *ngFor="let schedule of schedules">
-                <mat-label> {{ schedule.schedule}} </mat-label>
-                <mat-select>
-                    <mat-option [value]="schedule.is_open == true">Abierto</mat-option>
-                    <mat-option [value]="schedule.is_open != true">Cerrado</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-
-
+    <div class="row d-flex justify-content-center p-t-20">
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-border table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Dia</th>
+                            <th scope="col" class="text-center">Apertura</th>
+                            <th scope="col" class="text-center">Cierre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let schedule of schedules">
+                            <td>{{ schedule.schedule }}</td>
+                            <td class="text-center" *ngIf="schedule.is_open"> {{ schedule.from_hour}} </td>
+                            <td class="text-center" *ngIf="schedule.is_open"> {{ schedule.to_hour }} </td>
+                            <td class="text-center" colspan="2" *ngIf="!schedule.is_open">Cerrado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

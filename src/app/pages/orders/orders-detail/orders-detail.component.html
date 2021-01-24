@@ -103,6 +103,30 @@
                         <td> {{ info.quantity }} </td>
                         <td> {{ info.product_name }} <br>
 
+                            <!-- <span class="p-l-10" *ngFor="let menu of info.menu_options">
+                                <span> {{ menu.menu_name }} </span>
+
+
+                            <table class="table table-border table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col" class="text-center">Opcion</th>
+                                        <th scope="col" class="text-center">Precio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ngFor="let option of menu.options">
+                                        <td> {{option.quantity}} </td>
+                                        <td> {{ option.option_name}} </td>
+                                        <td> {{ schedule.to_hour }} </td>
+                                        <td>Cerrado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </span> -->
+
+
                             <span class="p-l-10" *ngFor="let menu of info.menu_options">
                                 <span> {{ menu.menu_name }} </span>
 
@@ -122,6 +146,8 @@
         </div>
         </span>
         </span>
+
+
         </td>
 
 

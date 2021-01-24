@@ -19,6 +19,7 @@ import { OrdersDetailComponent } from './orders-detail/orders-detail.component';
 import { SendMessageDialogComponent } from './send-message-dialog/send-message-dialog.component';
 import { RejectOrderMerchantComponent } from './new-orders/reject-order-merchant/reject-order-merchant.component';
 import { CancelOrderMerchantComponent } from './orders-in-process/cancel-order-merchant/cancel-order-merchant.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CancelOrderMerchantComponent } from './orders-in-process/cancel-order-m
     AngularMaterialModule,
     ReactiveFormsModule,
     SharedModule,
-    PipesModule
+    PipesModule,
+    FormsModule
   ],
   entryComponents: [
     AssignDeliveryDialogComponent,

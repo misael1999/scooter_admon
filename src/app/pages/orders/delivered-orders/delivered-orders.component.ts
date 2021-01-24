@@ -56,6 +56,10 @@ export class DeliveredOrdersComponent implements OnInit {
     this.params.search = value;
     this.getOrders();
   }
+  clearSearch() {
+    this.params.search = '';
+    this.getOrders();
+  }
 
   orderingOrders(value: string) {
     this.params.ordering = value;
