@@ -10,14 +10,12 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./delivered-orders.component.scss']
 })
 export class DeliveredOrdersComponent implements OnInit {
-
   // MatPaginator Inputs
   length = 100;
   pageSize = 25;
   pageSizeOptions: number[] = [25, 50, 75, 100];
   pageEvent: PageEvent;
 
-  // Parametros para el paginado
   params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '6' };
   orders: Array<any> = [];
   loadingOrders: boolean;
@@ -34,10 +32,6 @@ export class DeliveredOrdersComponent implements OnInit {
       data: { order }
     });
   }
-
-
-
- 
 
   openDirection(addres) {
     console.log(addres);
@@ -68,7 +62,6 @@ export class DeliveredOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  //Paginator
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
       this.pageSize = 15;

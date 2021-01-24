@@ -9,15 +9,18 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './orders-cancelled.component.html',
   styleUrls: ['./orders-cancelled.component.scss']
 })
-export class OrdersCancelledComponent implements OnInit {
+export class OrdersCancelledComponent implements OnInit {  
   // MatPaginator Inputs
   length = 100;
   pageSize = 25;
   pageSizeOptions: number[] = [25, 50, 75, 100];
   pageEvent: PageEvent;
+
   params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '7,8,17' };
   orders: Array<any> = [];
   loadingOrders: boolean;
+
+
 
   constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
 
@@ -32,7 +35,7 @@ export class OrdersCancelledComponent implements OnInit {
       data: { order }
     });
   }
-  
+
 
   getOrders() {
     this.loadingOrders = true;

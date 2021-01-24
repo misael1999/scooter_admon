@@ -2,22 +2,18 @@
 
     <div class="row d-flex justify-content-center p-t-30">
         <div class="col-md-6 ">
-            <table class="table ">
-                <thead>
-                    <tr>
-                        <th scope="col">Día</th>
-                        <th scope="col">Apertura</th>
-                        <th scope="col">Cierre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let schedule of schedules">
-                        <th scope="row"> {{schedule.schedule}} </th>
-                        <td>{{schedule.from_hour}}</td>
-                        <td>{{schedule.to_hour}}</td>
-                    </tr>
-                </tbody>
-            </table>
+
+
+            <mat-form-field *ngFor="let schedule of schedules">
+                <mat-label> {{ schedule.schedule}} </mat-label>
+                <mat-select>
+                    <mat-option [value]="schedule.is_open == true">Abierto</mat-option>
+                    <mat-option [value]="schedule.is_open != true">Cerrado</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+
         </div>
     </div>
 </div>

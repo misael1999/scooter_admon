@@ -17,7 +17,8 @@ import { ReasignOrderComponent } from './orders-in-process/reasign-order/reasign
 import { ConsumeTehComponent } from './consume-teh/consume-teh.component';
 import { OrdersDetailComponent } from './orders-detail/orders-detail.component';
 import { SendMessageDialogComponent } from './send-message-dialog/send-message-dialog.component';
-
+import { RejectOrderMerchantComponent } from './new-orders/reject-order-merchant/reject-order-merchant.component';
+import { CancelOrderMerchantComponent } from './orders-in-process/cancel-order-merchant/cancel-order-merchant.component';
 
 
 @NgModule({
@@ -32,7 +33,10 @@ import { SendMessageDialogComponent } from './send-message-dialog/send-message-d
     ReasignOrderComponent,
     ConsumeTehComponent,
     OrdersDetailComponent,
-    SendMessageDialogComponent
+    SendMessageDialogComponent,
+    RejectOrderMerchantComponent,
+    CancelOrderMerchantComponent
+
   ],
   imports: [
     CommonModule,

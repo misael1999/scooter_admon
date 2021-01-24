@@ -9,6 +9,8 @@ import { CancelOrderDialogComponent } from './cancel-order-dialog/cancel-order-d
 import { ReasignOrderComponent } from './reasign-order/reasign-order.component';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
 import { SendMessageDialogComponent } from '../send-message-dialog/send-message-dialog.component';
+import { CancelOrderMerchantComponent } from './cancel-order-merchant/cancel-order-merchant.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-orders-in-process',
@@ -21,12 +23,21 @@ export class OrdersInProcessComponent implements OnInit {
   pageSize = 25;
   pageSizeOptions: number[] = [25, 50, 75, 100];
   pageEvent: PageEvent;
-  params = { limit: 25, offset: 0, search: '', ordering: '', in_process: true };
+  // params = { limit: 25, offset: 0, search: '', ordering: '', in_process: true };
   orders: Array<any> = [];
   loadingOrders: boolean;
   liveData$: Subscription;
 
-  constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
+
+  // Parametros para el paginado
+  params = { limit: 25, offset: 0, search: '', order_status: '3,4,5,12,13,15,16', ordering: '', in_process: true };
+
+
+
+  loadingAcceptOrder: boolean;
+  loadingRejectOrder: boolean;
+
+  constructor(private ordersService: OrdersService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -56,6 +67,38 @@ export class OrdersInProcessComponent implements OnInit {
       }, error => {
         this.loadingOrders = false;
       });
+  }
+
+  endOrderMerchant(orderId) {
+    this.loadingAcceptOrder = true;
+    this.ordersService.endOrderMerchant(orderId, {})
+      .subscribe((data: any) => {
+        this.loadingAcceptOrder = false;
+        this.snackBar.open('Pedido terminado', '', {
+          duration: 4000,
+          panelClass: 'main-snackbar'
+        });
+        this.getOrders();
+      }, error => {
+        this.loadingAcceptOrder = false;
+        alert('Ha ocurrido un error al terminar el pedido');
+      });
+  }
+
+  rejectOrderMerchant(orderId) {
+    const dialogref = this.dialog.open(CancelOrderMerchantComponent, {
+      disableClose: true,
+      width: '40%',
+      minHeight: '300px',
+      minWidth: '300px',
+      data: { orderId }
+    });
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.getOrders();
+      }
+    });
   }
 
   openDialogCancelOrder(orderId) {

@@ -10,6 +10,7 @@ import { map, catchError, tap, retryWhen, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
+import { RejectOrderMerchantComponent } from './reject-order-merchant/reject-order-merchant.component';
 
 @Component({
   selector: 'app-new-orders',
@@ -24,15 +25,21 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   // MatPaginator Inputs
   length = 100;
   pageSize = 15;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [25, 50, 75, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
 
   // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status: '1,13', ordering: '' };
+  params = { limit: 15, offset: 0, search: '', order_status: '1,13,14', ordering: '' };
   orders: Array<any> = [];
   loadingOrders: boolean;
   liveData$: Subscription;
+
+
+
+
+  loadingAcceptOrder: boolean;
+  loadingRejectOrder: boolean;
 
   constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
     private dialog: MatDialog, private webSocketService: WebSocketService) { }
@@ -48,6 +55,24 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       data: { order }
     });
   }
+
+  rejectOrderMerchant(orderId) {
+    const dialogref = this.dialog.open(RejectOrderMerchantComponent, {
+      disableClose: true,
+      width: '40%',
+      minHeight: '300px',
+      minWidth: '300px',
+      data: { orderId }
+    });
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.getOrders();
+      }
+    });
+  }
+
+
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
     /*     this.webSocketService.close(); */

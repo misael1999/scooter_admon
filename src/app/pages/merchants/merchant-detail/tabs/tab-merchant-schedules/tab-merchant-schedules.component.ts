@@ -10,11 +10,12 @@ export class TabMerchantSchedulesComponent implements OnInit {
 
   schedules: Array<any> = [];
 
-  constructor(private merchantsService: MerchantsService) { }
+  constructor(private merchantsService: MerchantsService) {
+    this.schedules = this.merchantsService.merchantId.schedules;
+    console.log('Schedules by merchant', this.schedules);
+  }
 
-  ngOnInit(): void {    
-    this.schedules = this.merchantsService.merchantId.tags;
-    console.log('esta es la info', this.schedules);
+  ngOnInit(): void {
   }
 
 }
