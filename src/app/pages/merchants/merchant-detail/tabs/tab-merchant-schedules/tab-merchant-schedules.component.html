@@ -15,7 +15,7 @@
                             <td>{{ schedule.schedule }}</td>
                             <td class="text-center" *ngIf="schedule.is_open"> {{ schedule.from_hour}} </td>
                             <td class="text-center" *ngIf="schedule.is_open"> {{ schedule.to_hour }} </td>
-                            <td class="text-center" colspan="2" *ngIf="!schedule.is_open">Cerrado</td>
+                            <td class="text-center text-danger" colspan="2" *ngIf="!schedule.is_open">Cerrado</td>
                         </tr>
                     </tbody>
                 </table>

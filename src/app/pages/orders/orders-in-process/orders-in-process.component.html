@@ -111,7 +111,7 @@
                                     </td>
                                     <td> {{ order.to_address.full_address }} <br>
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
+                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa</a> </li>
                                         </ol>
                                     </td>
                                     <td> ${{order.service_price | number : '1.2-2'}} </td>
@@ -120,9 +120,9 @@
                                     <td> {{order.order_date | date:'medium'}} </td>
                                     <td> {{order.order_status.name}} </td>
                                     <td>
-                                        <button (click)="openDialogSendMessageOrder(order)" *ngIf="order.delivery_man" class="btn btn-success btn-sm">
+                                        <!-- <button (click)="openDialogSendMessageOrder(order)" *ngIf="order.delivery_man" class="btn btn-success btn-sm">
                                     <i class="anticon anticon-message"></i>
-                                </button>
+                                </button> -->
                                         <button (click)="openDialogCancelOrder(order.id)" *ngIf="!order.is_order_to_merchant" class="btn btn-danger btn-sm">
                                     Cancelar
                                 </button>
@@ -132,7 +132,7 @@
 
 
 
-                                        <button [disabled]="loadingRejectOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger btn-sm">Cancelar</button>
+                                        <button *ngIf="order.order_status.id == 15" [disabled]="loadingRejectOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger btn-sm">Cancelar</button>
                                         <button *ngIf="order.order_status.id == 15" (click)="endOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-secondary btn-sm">Terminar</button>
 
 

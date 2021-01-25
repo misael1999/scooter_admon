@@ -11,20 +11,20 @@
 
             <!-- Ordering orders -->
             <div class="col-lg-3">
-                <label>Mostrar</label>
                 <select (change)="showList($event.target.value)" class="form-control select-form">
-                                        <option value="1">Disponibles</option>
-                                        <option value="2">Bloqueados</option>
-                                    </select>
+                    <option value=" ">Ver por:</option>
+                        <option value="1">Disponibles</option>
+                        <option value="2">Bloqueados</option>
+                    </select>
             </div>
             <!-- End Show Delivery-Men status -->
 
 
             <!-- Ordering Delivery-Men -->
             <div class="col-lg-3">
-                <label>Ordenar por:</label>
 
                 <select class="form-control select-form">
+                    <option>Ordenar por:</option>
                                         <option value="-name">Nombre</option>
                                         <option value="-last_name">Apellidos</option>
                                         <option value="-reputation">Reputacion</option>
@@ -37,8 +37,7 @@
 
             <!-- Search Delivery-Men -->
             <div class="col-lg-3">
-                <label>Buscar:</label>
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <input #searchInput (keyup.enter)="search(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
                     <div class="input-group-prepend cursor">
                         <span class="input-group-text" id="basic-addon1">
