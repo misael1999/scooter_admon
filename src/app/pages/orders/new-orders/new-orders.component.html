@@ -88,7 +88,7 @@
                                 <td>
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item" style="color: #1890FF;">
-                                            <a (click)="openDialogDetailProducts(order)"> <i class="fas fa-info-circle fa-2x"></i> </a>
+                                            <a (click)="openDialogDetailProducts(order)"> </a>
                                         </li>
                                     </ol>
                                 </td>
@@ -101,7 +101,7 @@
 
                                     <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa  </a> </li>
                                         </ol>
                                 </span>
                                 </td>

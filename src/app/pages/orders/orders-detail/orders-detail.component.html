@@ -1,6 +1,14 @@
+<!-- Loading -->
+<div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrder">
+    <div class="spinner-border text-primary my-5" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+
 <h3 mat-dialog-title class="d-flex justify-content-between">
     <span>
-        Detalles del Pedido: <span class="text-primary">{{order.qr_code}} </span>
+        Detalles del Pedido: <span class="text-primary">{{order.qr_code}}</span>
     </span>
     <button mat-dialog-close mat-flat-button class="btn btn-light">
         <i class="anticon anticon-close"></i>
@@ -8,199 +16,178 @@
 </h3>
 
 
-
-
-<div *ngIf="loadingOrder" class="spinner-grow text-danger" role="status">
-    <span class="sr-only">Loading...</span>
-</div>
-
 <div mat-dialog-content *ngIf="!loadingOrder && order">
     <div class="row">
         <div class="col-lg-12">
-            <table class="table table-bordered">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Servicio</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Numero de cliente</th>
+                            <th scope="col">Repartidor</th>
+                            <th scope="col">Fecha del pedido</th>
+                            <th scope="col">Fecha de entrega</th>
+                            <th scope="col" *ngIf="order.service_id >= 1">Lugar de compra</th>
+                            <th scope="col" *ngIf="order.service_id >= 1">Lugar de entrega</th>
+                            <th scope="col">Distancia</th>
+                            <th scope="col">Costo de productos</th>
+                            <th scope="col">Costo de Envio</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span *ngIf="order.service_id == 3" class="badge bg-secondary text-dark">Lo que sea</span>
+                                <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
+                                <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
+                            </td>
+                            <td> {{ order.customer.name }} </td>
+                            <td> {{ order.customer.phone_number }} </td>
+                            <td>
+                                <span *ngIf="order.delivery_man"> {{ order.delivery_man.name }} </span>
+                                <span *ngIf="!order.delivery_man"> Sin repartidor </span>
+                            </td>
+
+                            <td> {{ order.order_date | date:'medium' }} </td>
+                            <td> {{ order.date_delivered_order | date:'medium'}} </td>
+                            <td *ngIf="order.service_id >= 1">
+
+
+                                <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa </a> </li>
+                                </ol>
+                        </span>
+
+                                <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa  </a> </li>
+                                </ol>
+                        </span>
+
+                            </td>
+
+
+                            <td> {{ order.to_address.full_address }} <br>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa </a> </li>
+                                </ol>
+                            </td>
+
+                            <td> {{ order.distance | number }} KM</td>
+
+                            <td> $ {{ order.order_price }} </td>
+                            <td> $ {{ order.service_price | number : '1.2-2' }} </td>
+                            <td> $ {{ order.total_order }} </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered table-sm" *ngIf="order.service_id >= 1">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Productos</th>
+                            <th scope="col">P. Unitario</th>
+                            <th scope="col" class="text-end">Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let info of orderDetails">
+                            <td> {{ info.quantity }} </td>
+                            <td> {{ info.product_name }}
+
+                                <div class="p-l-25 option" *ngFor="let menu of info.menu_options">
+                                    <span>{{ menu.menu_name }} </span>
+
+                                    <table class="table table-borderless table-sm p-l-20">
+                                        <thead>
+                                            <tr>
+                                                <td>Cantidad</td>
+                                                <td>Opcion</td>
+                                                <td *ngIf="menu.options.price_option > 0">Precio</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let option of menu.options">
+                                                <td> {{option.quantity}} </td>
+                                                <td>{{ option.option_name}} </td>
+                                                <td *ngIf="option.price_option > 0">{{ option.price_option }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+
+                            <td>$ {{ info.product_price }} </td>
+                            <td>$ {{ info.total_detail }} </td>
+
+
+
+                            <!-- Colums for totals -->
+                            <tr>
+                                <th colspan="2" class="border-0"></th>
+                                <th>Envío</th>
+                                <th>$ {{order.service_price}} </th>
+                            </tr>
+                            <tr>
+                                <th colspan="2" class="border-0"></th>
+                                <th>Total</th>
+                                <th *ngIf="order.total_order">$ {{order.total_order}} </th>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Table for recoleccion -->
+            <table class="table table-hover table-bordered" *ngIf="order.service_id == 1">
                 <thead>
                     <tr>
-                        <th scope="col">Servicio</th>
-                        <th scope="col">Cliente</th>
-                        <th scope="col">Numero de cliente</th>
-                        <th scope="col">Repartidor</th>
-                        <th scope="col">Fecha del pedido</th>
-                        <th scope="col">Fecha de entrega</th>
-                        <th scope="col" *ngIf="order.service_id >= 1">Lugar de compra</th>
-                        <th scope="col" *ngIf="order.service_id >= 1">Lugar de entrega</th>
-                        <th scope="col">Distancia</th>
-                        <th scope="col">Costo de productos</th>
-                        <th scope="col">Costo de Envio</th>
-                        <th scope="col">Total</th>
+                        <th scope="col">Se recoge</th>
+                        <th scope="col">Indicaciones</th>
+                        <th scope="col">Se Entrega</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
                         <td>
-                            <span *ngIf="order.service_id == 3" class="badge bg-secondary text-dark">Lo que sea</span>
-                            <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
-                            <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
+                            <span><small><strong>Alias</strong></small><br> {{ order.from_address.alias }} <br></span>
+                            <span *ngIf="order.from_address.exterior_number"><small><strong>Número Exterior</strong></small><br> {{order.from_address.exterior_number}} <br></span>
+                            <span *ngIf="order.from_address.inside_number"><small><strong>Número Interior</strong> </small><br> {{order.from_address.inside_number}} <br></span>
+                            <span><small><strong>Dirección</strong></small><br> {{ order.from_address.full_address }} </span>
                         </td>
-                        <td> {{ order.customer.name }} </td>
-                        <td> {{ order.customer.phone_number }} </td>
+                        <td> {{order.indications}} </td>
                         <td>
-                            <span *ngIf="order.delivery_man"> {{ order.delivery_man.name }} </span>
-                            <span *ngIf="!order.delivery_man"> Sin repartidor </span>
+                            <span><small><strong>Alias</strong></small><br> {{order.to_address.alias}} <br></span>
+                            <span *ngIf="order.to_address.exterior_number"><small><strong>Número Exterior</strong></small><br> {{order.to_address.exterior_number}} <br></span>
+                            <span *ngIf="order.to_address.inside_number"><small>Número Interior</small> {{order.to_address.inside_number}} <br></span>
+                            <span><small><strong>Dirección</strong></small><br> {{order.to_address.full_address}} </span>
                         </td>
-
-                        <td> {{ order.order_date | date:'medium' }} </td>
-                        <td> {{ order.date_delivered_order | date:'medium'}} </td>
-                        <td *ngIf="order.service_id >= 1">
-
-
-                            <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
-                                </ol>
-                        </span>
-
-                            <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
-                                </ol>
-                        </span>
-
-                        </td>
-
-
-                        <td> {{ order.to_address.full_address }} <br>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
-                            </ol>
-                        </td>
-
-                        <td> {{ order.distance | number }} KM</td>
-
-                        <td> $ {{ order.order_price }} </td>
-                        <td> $ {{ order.service_price | number : '1.2-2' }} </td>
-                        <td> $ {{ order.total_order }} </td>
-
                     </tr>
                 </tbody>
             </table>
         </div>
-
-
-
-        <div class="col-lg-12">
-            <table class="table table-hover table-bordered" *ngIf="order.service_id >= 1">
-                <thead>
-                    <tr>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Productos</th>
-                        <th scope="col">P. Unitario</th>
-                        <th scope="col" class="text-end">Total</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr *ngFor="let info of orderDetails">
-                        <td> {{ info.quantity }} </td>
-                        <td> {{ info.product_name }} <br>
-
-                            <!-- <span class="p-l-10" *ngFor="let menu of info.menu_options">
-                                <span> {{ menu.menu_name }} </span>
-
-
-                            <table class="table table-border table-hover table-sm">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col" class="text-center">Opcion</th>
-                                        <th scope="col" class="text-center">Precio</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ngFor="let option of menu.options">
-                                        <td> {{option.quantity}} </td>
-                                        <td> {{ option.option_name}} </td>
-                                        <td> {{ schedule.to_hour }} </td>
-                                        <td>Cerrado</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            </span> -->
-
-
-                            <span class="p-l-10" *ngFor="let menu of info.menu_options">
-                                <span> {{ menu.menu_name }} </span>
-
-                            <span>
-
-                                    <div class="p-l-20 border flex d-flex justify-content-between">
-                                        <span>Cantidad</span>
-                            <span>Opcion</span>
-                            <span>Precio</span>
-
-        </div>
-        <div class="p-l-20 flex d-flex justify-content-between" *ngFor="let option of menu.options">
-            <span> {{option.quantity}} </span>
-            <span> {{ option.option_name}} </span>
-            <span> {{ option.price_option }} </span>
-
-        </div>
-        </span>
-        </span>
-
-
-        </td>
-
-
-        <td>$ {{ info.product_price }} </td>
-        <td>$ {{ info.total_detail }} </td>
-        </tr>
-        <tr>
-            <th colspan="2" class="border-0"></th>
-            <th>Envío</th>
-            <th>$ {{order.service_price}} </th>
-        </tr>
-        <tr>
-            <th colspan="2" class="border-0"></th>
-            <th>Total</th>
-            <th>
-                <span *ngIf="order.total_order">$ {{order.total_order}} </span>
-                <!-- <span *sngIf="!order.total_order"> El total depende del costo de los productos comprados</span> -->
-
-            </th>
-        </tr>
-        </tbody>
-
-        </table>
-
-
-
-        <!-- Table for recoleccion -->
-        <table class="table table-hover table-bordered" *ngIf="order.service_id == 1">
-            <thead>
-                <tr>
-                    <th scope="col">Se recoge</th>
-                    <th scope="col">Indicaciones</th>
-                    <th scope="col">Se Entrega</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>
-                        <span><small><strong>Alias</strong></small><br> {{ order.from_address.alias }} <br></span>
-                        <span *ngIf="order.from_address.exterior_number"><small><strong>Número Exterior</strong></small><br> {{order.from_address.exterior_number}} <br></span>
-                        <span *ngIf="order.from_address.inside_number"><small><strong>Número Interior</strong> </small><br> {{order.from_address.inside_number}} <br></span>
-                        <span><small><strong>Dirección</strong></small><br> {{ order.from_address.full_address }} </span>
-                    </td>
-                    <td> {{order.indications}} </td>
-                    <td>
-                        <span><small><strong>Alias</strong></small><br> {{order.to_address.alias}} <br></span>
-                        <span *ngIf="order.to_address.exterior_number"><small><strong>Número Exterior</strong></small><br> {{order.to_address.exterior_number}} <br></span>
-                        <span *ngIf="order.to_address.inside_number"><small>Número Interior</small> {{order.to_address.inside_number}} <br></span>
-                        <span><small><strong>Dirección</strong></small><br> {{order.to_address.full_address}} </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-</div>

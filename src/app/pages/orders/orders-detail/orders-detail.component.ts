@@ -16,13 +16,15 @@ export class OrdersDetailComponent implements OnInit {
     private orderService: OrdersService,
     public dialogRef: MatDialogRef<OrdersDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+
     if (data.orderId) {
       this.getOrder(data.orderId);
     } else {
       this.order = data.order;
       this.orderDetails = data.order.details;
+      console.log(this.order);
+      console.log(this.orderDetails);
     }
-
   }
 
   ngOnInit(): void {
@@ -34,7 +36,10 @@ export class OrdersDetailComponent implements OnInit {
       .subscribe((data: any) => {
         this.order = data;
         this.orderDetails = data.details;
+        
+        console.log(this.order);
         console.log(this.orderDetails);
+        
         this.loadingOrder = false;
       }, error => {
         this.loadingOrder = false;
@@ -42,8 +47,8 @@ export class OrdersDetailComponent implements OnInit {
       });
   }
 
+
   openDirection(addres) {
-    console.log(addres);
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
