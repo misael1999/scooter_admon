@@ -61,11 +61,9 @@
                                 <th>Servicio</th>
                                 <th>Cliente</th>
                                 <th>Numero del cliente</th>
-                                <th>Repartidor</th>
                                 <th>Lugar de origen o compra</th>
                                 <th>Lugar de entrega</th>
                                 <th>Precio del servicio</th>
-                                <th>Distancia</th>
 
 
                                 <th>Fecha del pedido </th>
@@ -91,10 +89,6 @@
                                     </td>
                                     <td>{{order.customer.name}}</td>
                                     <td>{{order.customer.phone_number}}</td>
-                                    <td>
-                                        <span *ngIf="order.delivery_man">{{order.delivery_man.name}}</span>
-                                        <span *ngIf="!order.delivery_man">Sin repartidor</span>
-                                    </td>
 
                                     <td>
                                         <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
@@ -115,7 +109,6 @@
                                         </ol>
                                     </td>
                                     <td> ${{order.service_price | number : '1.2-2'}} </td>
-                                    <td> {{order.distance | number}} KM </td>
 
                                     <td> {{order.order_date | date:'medium'}} </td>
                                     <td> {{order.order_status.name}} </td>

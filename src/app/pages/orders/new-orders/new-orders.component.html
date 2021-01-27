@@ -64,11 +64,8 @@
                                 <th>Servicio</th>
                                 <th>Cliente</th>
                                 <th>Numero del cliente</th>
-                                <th>Detalles</th>
                                 <th>Lugar de origen o compra</th>
                                 <th>Lugar de entrega</th>
-                                <th>Precio del servicio</th>
-                                <th>Distancia</th>
                                 <th>Hora del pedido </th>
                                 <th>Hr. limite para responder </th>
                                 <th>Estatus </th>
@@ -82,20 +79,18 @@
                                     <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
                                     <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
 
+                                    <br>
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDialogDetailProducts(order)">Detalles</a> </li>
+                                    </ol>
                                 </td>
                                 <td>{{order.customer.name}}</td>
                                 <td>{{order.customer.phone_number}}</td>
-                                <td>
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item" style="color: #1890FF;">
-                                            <a (click)="openDialogDetailProducts(order)"> </a>
-                                        </li>
-                                    </ol>
-                                </td>
+
                                 <td>
                                     <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa <i class="fas fa-map-marked-alt"></i> </a> </li>
+                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa </a> </li>
                                         </ol>
                                 </span>
 
@@ -109,24 +104,25 @@
 
                                 <td> {{ order.to_address.full_address }} <br>
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa <i class="fas fa-map-marker-alt fa-lg"></i> </a> </li>
+                                        <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa </a> </li>
                                     </ol>
                                 </td>
 
-                                <td> ${{ order.service_price | number : '1.2-2'}} </td>
-                                <td> {{ order.distance | number}} KM </td>
                                 <td> {{ order.order_date | date:'medium'}} </td>
                                 <td> {{ order.maximum_response_time | date:'medium'}} </td>
                                 <td> {{order.order_status.name}}</td>
                                 <td>
+
+
+
                                     <button *ngIf="order.order_status.id == 13" (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
-                                    <br>
-                                    <br>
+
                                     <button *ngIf="order.order_status.id == 13" (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
 
-                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
+                                    <!-- Botones poara aceptar por comercio -->
+                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger btn-sm">Rechazar</button>
 
-                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="accepOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-success">
+                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="accepOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-success btn-sm">
                                         Aceptar
                                        
                                     </button>
