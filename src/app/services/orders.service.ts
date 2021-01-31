@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class OrdersService {
-
   stationId;
+  searchText;
 
   constructor(private http: HttpClient) { 
      this.stationId = localStorage.getItem('station_id');

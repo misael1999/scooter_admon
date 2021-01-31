@@ -13,7 +13,7 @@ export class TagsComponent implements OnInit {
   tags: any;
   loadignTag: boolean;
   params = { limit: 25, offset: 0, search: '', ordering: '', category: '' };
-
+  searchText;
   constructor(private tagsGeneralService: TagsGeneralService, private dialog: MatDialog,) { }
 
   ngOnInit(): void {
@@ -40,16 +40,22 @@ export class TagsComponent implements OnInit {
         .subscribe((data: any) => {
           this.loadignTag = false;
           this.tags = data.results;
-          console.log(this.tags);
         }), error => {
           this.loadignTag = false;
-          console.log('eror al obtener Tag');
         }
   }
 
 
-  searchBy(value) {
+  searchBy(value: string) {
     this.params.search = value;
+    this.tagsGeneralService.searchText = value;
+    this.getTags();
+  }
+
+  clearSearch() {
+    this.params.search = '';
+    this.tagsGeneralService.searchText = '';
+    this.searchText = "";
     this.getTags();
   }
 
@@ -58,7 +64,7 @@ export class TagsComponent implements OnInit {
     this.getTags();
   }
 
-  viewBy (value) {
+  viewBy(value) {
     this.params.category = value;
     this.getTags();
   }

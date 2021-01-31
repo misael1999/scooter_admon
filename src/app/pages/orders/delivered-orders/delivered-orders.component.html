@@ -5,46 +5,45 @@
         <h1 class="h3 mb-0 text-gray-800">Pedidos entregados</h1>
     </div>
 
-    <div class="row p-t-20">
-        <div class="col-lg-12 d-flex justify-content-between">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
 
-            <!-- Ordering orders -->
-            <div class="col-lg-3 col-sm-12">
-                <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
+            <div class="row">
+                <!-- Ordering -->
+                <div class="col-md-12 col-lg-3 col-sm-12 p-b-10">
+                    <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
                             <option value="">Ordenar por:</option>
                             <option value="distance">Distancia mas corta</option>
                             <option value="-distance">Distancia mas larga </option>
                             <option value="service_price">Precio mas bajo</option>
                             <option value="-service_price">Precio mas alto </option>
                         </select>
-            </div>
-            <!-- End ordering orders -->
+                </div>
+                <!-- End ordering -->
 
-            <div class="col-lg-6 col-sm-12"></div>
+                <div class="col-md-6 col-lg-6"></div>
 
-            <!-- Search by name in orders -->
-            <div class="col-lg-3 col-sm-12">
-                <div class="input-group">
-                    <input (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="params.search" #searchInput type="text" class="form-control" placeholder="Buscar Nombre">
+                <!-- Search by name -->
+                <div class="col-md-3 col-lg-3 col-sm-12">
 
-                    <!-- <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="params.search" class="form-control"   type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1"> -->
-                    <div class="input-group-append">
-                        <span *ngIf="!params.search" (click)="searchBy(searchInput.value)" class="input-group-text cursor" id="basic-addon2">
-                            <i class="fas fa-search"></i>
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                            <i class="fas fa-search "></i>
                         </span>
-                        <span *ngIf="params.search" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
                             <i class="fas fa-times-circle"></i>
                         </span>
+                        </div>
                     </div>
                 </div>
+                <!-- End search by name -->
             </div>
-            <!-- End search by name in orders -->
         </div>
 
 
-
-
-        <div class="col-lg-12 p-t-20">
+        <div class="col-lg-12 p-t-15">
 
 
             <!-- Preloader -->
@@ -56,17 +55,15 @@
             <!-- End Preloader -->
 
 
-            <div class="col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
+            <div class="col-md-12 col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Servicio</th>
                                 <th>Cliente</th>
-                                <th>Repartidor</th>
-                                <th style="min-width: 200px;">Lugar de Compra o Recolección</th>
+                                <th style="min-width: 200px;">Lugar de compra o recolección</th>
                                 <th style="min-width: 200px;">Lugar de entrega</th>
-                                <th>Fecha del Pedido</th>
                                 <th>Fecha de Entrega</th>
 
                             </tr>
@@ -84,10 +81,7 @@
 
                                 </td>
                                 <td> {{ order.customer.name }} </td>
-                                <td>
-                                    <span *ngIf="order.delivery_man"> {{ order.delivery_man.name }} </span>
-                                    <span *ngIf="!order.delivery_man"> Sin repartidor </span>
-                                </td>
+
 
 
 
@@ -111,10 +105,7 @@
                                         <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa</a> </li>
                                     </ol>
                                 </td>
-
-                                <td> {{ order.order_date | date:'medium' }} </td>
                                 <td> {{ order.date_delivered_order | date:'medium'}} </td>
-
                             </tr>
                         </tbody>
                     </table>

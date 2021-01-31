@@ -16,9 +16,11 @@ export class OrdersCancelledComponent implements OnInit {
   pageSizeOptions: number[] = [25, 50, 75, 100];
   pageEvent: PageEvent;
 
+
   params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '7,8,17' };
   orders: Array<any> = [];
   loadingOrders: boolean;
+  searchText
 
 
 
@@ -52,9 +54,16 @@ export class OrdersCancelledComponent implements OnInit {
 
   searchBy(value: string) {
     this.params.search = value;
+    this.ordersService.searchText = value;
     this.getOrders();
   }
 
+  clearSearch() {
+    this.params.search = '';
+    this.ordersService.searchText = '';
+    this.searchText = "";
+    this.getOrders();
+  }
   orderingOrders(value: string) {
     this.params.ordering = value;
     this.getOrders();

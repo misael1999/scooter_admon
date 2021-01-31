@@ -1,9 +1,9 @@
-<div class="container">
-
+<div class="container-fluid">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Notificaciones</h1>
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <h1 class="h3 text-gray-800 p-b-10">Notificaciones</h1>
     </div>
+
 
 
     <!-- Content Row -->
@@ -14,18 +14,18 @@
             <!-- Project Card Example -->
             <div class="card shadow mb-4">
                 <form [formGroup]="notificationForm">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Notificaciones para:</h6>
-                    <br>
-                    <select formControlName="type" class="form-control">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Notificaciones para:</h6>
+                        <br>
+                        <select formControlName="type" class="form-control">
                         <option value="1">Usuarios</option>
                         <option value="2">Repartidores</option>
                         <option value="3">Comercios</option>
                     </select>
-                    
-                </div>
-                <div class="card-body">
-                    <div class="card p-3" style="width: 100%;">
+
+                    </div>
+                    <div class="card-body">
+                        <div class="card p-3" style="width: 100%;">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mensaje a envíar</label>
                                 <input formControlName="title" type="text" class="form-control" placeholder="Ingresa un titulo">
@@ -45,7 +45,7 @@
             </div>
 
         </div>
-    
+
     </div>
 
 </div>

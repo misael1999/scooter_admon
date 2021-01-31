@@ -14,6 +14,7 @@ export class ClientListComponent implements OnInit {
   length = 100;
   pageSize = 25;
   pageSizeOptions: number[] = [25, 50, 75, 100];
+
   // MatPaginator Output
   pageEvent: PageEvent;
 
@@ -21,29 +22,38 @@ export class ClientListComponent implements OnInit {
   params = { limit: 25, offset: 0, search: '', ordering: '' };
   loadingClient: boolean;
   clients: Array<any> = [];
+  searchText;
 
-  constructor(private clientService: ClientsService, private dialog: MatDialog) { }
+  constructor(private clientsService: ClientsService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.searchText = this.clientsService.searchText;
     this.getClients();
   }
 
   getClients() {
     this.loadingClient = true;
-    this.clientService.getClients(this.params)
+    this.clientsService.getClients(this.params)
       .subscribe((data: any) => {
         this.clients = data.results;
-        console.log(this.clients);
-        this.loadingClient = false;
+        // console.log(this.clients);
         this.length = data.count;
+        this.loadingClient = false;
       }, error => {
-        // console.log("error" + error);
         this.loadingClient = false;
       });
   }
 
   searchBy(value: string) {
     this.params.search = value;
+    this.clientsService.searchText = value;
+    this.getClients();
+  }
+
+  clearSearch() {
+    this.params.search = '';
+    this.clientsService.searchText = '';
+    this.searchText = "";
     this.getClients();
   }
 

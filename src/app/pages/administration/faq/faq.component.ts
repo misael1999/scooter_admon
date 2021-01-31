@@ -14,6 +14,7 @@ export class FaqComponent implements OnInit {
   loadingFaq: boolean;
   params = { search: '' };
   faqs: Array<any> = []
+  searchText;
 
   constructor(private dialog: MatDialog, private faqService: FaqService) { }
 
@@ -57,24 +58,27 @@ export class FaqComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingFaq = false;
         this.faqs = data;
-        console.log(this.faqs);
-
       }, error => {
         this.loadingFaq = false;
-        console.log('error ');
-
       });
   }
-  searchBy(value) {
+  searchBy(value: string) {
     this.params.search = value;
+    this.faqService.searchText = value;
     this.getFaq();
   }
 
+  clearSearch() {
+    this.params.search = '';
+    this.faqService.searchText = '';
+    this.searchText = "";
+    this.getFaq();
+  }
 
   dialogDeleteFaq(faq) {
     Swal.fire({
       title: 'Bloquear',
-      text: `Esta seguro de bloquear a ${faq.title}`,
+      text: `Estas seguro de bloquear a ${faq.title}`,
       type: 'warning',
       showConfirmButton: true,
       confirmButtonText: 'Bloquear',

@@ -20,6 +20,7 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
   deliverys: Array<any> = [];
   loadingDelivery: boolean;
   pageEvent: PageEvent;
+  searchText;
 
   constructor(private dialog: MatDialog, private deliveryService: DeliveryMenService) {
     super();
@@ -34,18 +35,18 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
     this.deliveryService.getDeliverys(this.params)
       .subscribe((data: any) => {
         this.deliverys = data.results;
-        console.log(this.deliverys);
+        // console.log(this.deliverys);
         this.length = data.count;
-        console.log(this.deliverys);
         this.loadingDelivery = false;
       });
   }
 
   dialogAddDelivery(deliveryMan = null) {
     const dialogRef = this.dialog.open(AddDeliveryComponent, {
-      disableClose: true,
-      width: '60%',
-      minWidth: '500px',
+      minWidth: '80%',
+      maxWidth: '80%',
+      // minHeight: '40%',
+      // maxHeight: '40%',
       data: { deliveryMan }
     });
 
@@ -56,6 +57,7 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
         }
       });
   }
+
 
   showList(status) {
     this.params.status = status;
@@ -82,13 +84,20 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
       });
   }
 
-  search(value) {
+
+  searchBy(value: string) {
     this.params.search = value;
+    this.deliveryService.searchText = value;
     this.getDeliveryMen();
   }
 
+  clearSearch() {
+    this.params.search = '';
+    this.deliveryService.searchText = '';
+    this.searchText = "";
+    this.getDeliveryMen();
+  }
 
-  // Metodo paginator
   getPages(e): PageEvent {
     if (this.deliverys.length === 0) {
       this.pageSize = 25;

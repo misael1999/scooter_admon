@@ -1,9 +1,10 @@
-<h1 mat-dialog-title class="d-flex justify-content-between">
+<h3 mat-dialog-title class="d-flex justify-content-between">
     {{deliveryMan ? 'Editar': 'Agregar'}} repartidor
-    <button mat-dialog-close mat-flat-button class="btn ">
-        <i class="ti ti-close"></i>
+    <button mat-dialog-close mat-flat-button class="btn btn-light">
+        <i class="anticon anticon-close"></i>
     </button>
-</h1>
+</h3>
+
 
 
 <div mat-dialog-content>
@@ -106,21 +107,17 @@
                 </div>
 
             </form>
-            <!-- End form vehicle -->
 
 
-
-            <div mat-dialog-actions align="end">
-                <button [disabled]="loadingSave" (click)="createDelivery()" type="submit" class="btn btn-primary fa-pull-right">
+            <div class="d-flex justify-content-end p-t-15">
+                <button class="btn btn-light btn-sm m-r-20 " mat-dialog-close>Cancelar</button>
+                <button [disabled]="loadingSave" (click)="createDelivery()" type="submit" class="btn btn-primary btn-sm">
                     Guardar
                     <div *ngIf="loadingSave" class="spinner-border text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
                       </div>
                 </button>
-                <button class="btn btn-light right " mat-dialog-close mat-flat-button color="primary">Cancelar</button>
-
             </div>
-            <!-- Fin form add vehicle -->
         </div>
     </div>
 </div>

@@ -40,6 +40,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
 
   loadingAcceptOrder: boolean;
   loadingRejectOrder: boolean;
+  searchText;
 
   constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
     private dialog: MatDialog, private webSocketService: WebSocketService) { }
@@ -113,9 +114,14 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
 
   searchBy(value: string) {
     this.params.search = value;
-    /*     if (value === '') {
-          return;
-        } */
+    this.ordersService.searchText = value;
+    this.getOrders();
+  }
+
+  clearSearch() {
+    this.params.search = '';
+    this.ordersService.searchText = '';
+    this.searchText = "";
     this.getOrders();
   }
 

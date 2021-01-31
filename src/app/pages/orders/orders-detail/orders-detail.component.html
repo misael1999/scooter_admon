@@ -7,9 +7,8 @@
 
 
 <h3 mat-dialog-title class="d-flex justify-content-between">
-    <span>
-        Detalles del Pedido: <span class="text-primary">{{order.qr_code}}</span>
-    </span>
+    <span>Pedido: <span class="text-primary">{{order.qr_code}}</span></span>
+    <span>{{order.order_status.name}}</span>
     <button mat-dialog-close mat-flat-button class="btn btn-light">
         <i class="anticon anticon-close"></i>
     </button>

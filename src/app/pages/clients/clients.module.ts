@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { CardInfoComponent } from './info-client/card-info/card-info.component';
 import { HistoryOrdersComponent } from './info-client/history-orders/history-orders.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -22,7 +23,9 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     ClientsRoutingModule,
     AngularMaterialModule,
     SharedModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
 })
 export class ClientsModule { }

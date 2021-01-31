@@ -1,50 +1,61 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h1 class="h3 mb-0 text-gray-800">Preguntas Más Frecuentes</h1>
-        <div>
-            <button class="btn btn-primary btn-sm" (click)="openDialogAddGroup()">Agregar Grupo</button>
+        <h1 class="h3 mb-0 text-gray-800">Preguntas frecuentes</h1>
+        <div clas class="p-t-10">
+            <button class="btn btn-secondary btn-sm" (click)="openDialogAddGroup()">Agregar grupo</button>
             <span class="p-l-15"></span>
-            <button class="btn btn-secondary btn-sm" (click)="openDialogAddFaq()">Agregar Pregunta</button>
+            <button class="btn btn-primary btn-sm" (click)="openDialogAddFaq()">Agregar pregunta</button>
         </div>
     </div>
 
-    <div>
-        <div class="filters p-t-20">
-            <div class="row d-flex justify-content-end">
-                <div class="col-lg-3">
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
+
+            <div class="row">
+                <div class="col-md-9 col-lg-9"></div>
+                <!-- Search by -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
                     <div class="input-group">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
-                            <span class="input-group-text" id="basic-addon1">
-                                <i class="fas fa-search"></i>
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                                <i class="fas fa-search "></i>
+                            </span>
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                                <i class="fas fa-times-circle"></i>
                             </span>
                         </div>
                     </div>
                 </div>
+                <!-- End search by -->
             </div>
         </div>
 
 
 
-        <div class="p-t-20">
-            <div class="row" class="content">
-                <!-- Preloader  -->
-                <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingFaq">
-                    <div class="spinner-border text-primary my-5" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-                <!-- End Preloader  -->
 
-                <div class="col-md-12" *ngIf="!loadingFaq && faqs.length > 0 ">
-                    <table class="table table-bordered">
+
+        <div class="col-lg-12 p-t-15">
+            <!-- Preloader  -->
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingFaq">
+                <div class="spinner-border text-primary my-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!-- End Preloader  -->
+
+
+            <div class="col-md-12 col-lg-12" *ngIf="!loadingFaq && faqs.length > 0 ">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Título</th>
                                 <th scope="col">Pregunta</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col" class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,16 +63,20 @@
                                 <td> {{ faq.group }} </td>
                                 <td> {{ faq.title }} </td>
                                 <td> {{ faq.answer }} </td>
-                                <td>
-                                    <button class="btn btn-info btn-sm" (click)="openDialogAddFaq(faq)">Editar</button>
-                                    <button class="btn btn-primary btn-sm" (click)="dialogDeleteFaq(faq)">Eliminar</button>
+                                <td class="text-center">
+                                    <button class="btn btn-info btn-sm m-b-5" style="width: 90%;" (click)="openDialogAddFaq(faq)">Editar</button>
+                                    <button class="btn btn-primary btn-sm" style="width: 90%;" (click)="dialogDeleteFaq(faq)">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <app-no-found-data *ngIf="!loadingFaq && faqs.length == 0"  [message]="' Opss.. No hay Preguntas que Mostrar'">
-                </app-no-found-data>
             </div>
+
+            <!-- Componet no data -->
+            <app-no-found-data *ngIf="!loadingFaq && faqs.length == 0"  [message]="'No hay preguntas que mostrar'">
+            </app-no-found-data>
+            <!-- End coponent no data -->
         </div>
     </div>
+</div>

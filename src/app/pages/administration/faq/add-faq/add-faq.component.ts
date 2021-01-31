@@ -40,10 +40,6 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
   }
 
 
-  selectGroup(grupId) {
-    this.groupSelected = this.groups.find(group => group.id == grupId)
-  }
-
 
   createFaq() {
     if (this.faqForm.invalid) {
@@ -99,7 +95,7 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
       {
         title: [faq.title, Validators.required],
         answer: [faq.answer, Validators.required],
-        group: [faq.group.group_id, Validators.required],
+        group: [faq.group_id, Validators.required],
       }
     );
   }

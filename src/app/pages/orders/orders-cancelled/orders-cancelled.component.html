@@ -25,11 +25,14 @@
             <!-- Search by name in orders -->
             <div class="col-lg-3">
                 <div class="input-group">
-                    <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-                    <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fas fa-search"></i>
-                        </span>
+                    <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                    <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                        <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                        <i class="fas fa-search "></i>
+                    </span>
+                        <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                        <i class="fas fa-times-circle"></i>
+                    </span>
                     </div>
                 </div>
             </div>

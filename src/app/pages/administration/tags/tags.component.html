@@ -1,24 +1,29 @@
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h1 class="h3 mb-0 text-gray-800">Etiquetas Generales Zona Tehuacán</h1>
+        <h1 class="h3 text-gray-800 p-b-10">Etiquetas generales zona Tehuacán</h1>
         <button class="btn btn-primary btn-sm" (click)="openDialogAddTag()">Agregar</button>
     </div>
 
-    <div>
-        <div class="filters p-t-20">
-            <div class="row d-flex justify-content-end">
 
-                <div class="col-lg-3">
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
+            <div class="row">
+
+                <!-- Ordering -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
                     <select class="form-control select-form" (change)="orderingBy($event.target.value)">
                         <option>Ordenar por:</option>
                         <option value=" ">Fecha de creacion</option>
                         <option value="name">Nombre</option>
                     </select>
                 </div>
+                <!-- Ed ordering -->
 
-                <div class="col-lg-3">
+
+                <!-- Show view by -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
                     <select class="form-control select-form" (change)="viewBy($event.target.value)">
                         <option  value="">Ver por:</option>
                         <option value="1">Comida</option>
@@ -28,40 +33,48 @@
                         <option value="5">Regalos y Mas</option>
                     </select>
                 </div>
-
-                <div class="col-lg-3">
-                </div>
+                <!-- End show view by -->
 
 
-                <div class="col-lg-3">
-                    <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
-                            <span class="input-group-text" id="basic-addon1">
-                                <i class="fas fa-search"></i>
-                            </span>
+                <div class="col-lg-3"></div>
+
+
+                <!-- Search by -->
+                <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                                    <i class="fas fa-search "></i>
+                                </span>
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                                    <i class="fas fa-times-circle"></i>
+                                </span>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- End search by -->
         </div>
+    </div>
 
 
 
 
-        <div class="row" class="content p-t-20">
-            <!-- Preloader  -->
-            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadignTag">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+    <div class="col-lg-12 p-t-15">
+
+        <!-- Preloader  -->
+        <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadignTag">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
-            <!-- Fin Preloader  -->
+        </div>
+        <!-- End Preloader  -->
 
 
 
-            <div class="col-md-12" *ngIf="!loadignTag && tags.length > 0 ">
-
+        <div class="col-md-12" *ngIf="!loadignTag && tags.length > 0 ">
+            <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -69,7 +82,7 @@
                             <th scope="col">Area</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Categoría</th>
-                            <th scope="col" class="text-center">Acciones</th>
+                            <th scope="col" class="text-center" style="width: 50px;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,16 +95,20 @@
                             <td> {{tag.name}} </td>
                             <td> {{tag.category}} </td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-success m-r-5" (click)="openDialogAddTag(tag)">Editar</button>
-                                <button class="btn btn-sm btn-primary m-l-15" (click)="deleteTag(tag)">Eliminar</button>
+                                <button class="btn btn-sm btn-info m-b-5" style="width: 90%;" (click)="openDialogAddTag(tag)">Editar</button>
+                                <button class="btn btn-sm btn-primary p-l-5" style="width: 90%;" (click)="deleteTag(tag)">Eliminar</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <app-no-found-data *ngIf="!loadignTag && tags.length == 0"  [message]="'No hay Etiquetas que Mostrar'">
-            </app-no-found-data>
-
         </div>
+
+
+        <!-- Component no data -->
+        <app-no-found-data *ngIf="!loadignTag && tags.length == 0"  [message]="'No hay etiquetas que mostrar'">
+        </app-no-found-data>
+        <!-- End component no data -->
+
     </div>
 </div>

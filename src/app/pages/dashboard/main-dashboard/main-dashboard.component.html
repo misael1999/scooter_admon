@@ -83,7 +83,7 @@
                         <h5>Calificacion General</h5>
                     </div>
                     <div class="d-flex align-items-center m-t-20">
-                        <h1 class="m-b-0 m-r-10 font-weight-normal">4.5</h1>
+                        <h1 class="m-b-0 m-r-10 font-weight-normal">4.9</h1>
                         <div class="star-rating m-t-15">
                             <input type="radio" id="star1-5" name="rating-1" value="5" checked disabled/><label for="star1-5" title="5 star"></label>
                             <input type="radio" id="star1-4" name="rating-1" value="4" disabled/><label for="star1-4" title="4 star"></label>
@@ -94,7 +94,9 @@
                     </div>
                     <p><span class="text-success font-weight-bold">+1.5</span> Puntos del mes</p>
                     <div class="m-t-30" style="height: 150px">
-                        <canvas class="chart" id="rating-chart"></canvas>
+
+
+
                     </div>
                 </div>
             </div>
@@ -104,19 +106,11 @@
                 <div class="card-body">
                     <div class="d-md-flex justify-content-between align-items-center">
                         <h5>Ventas Totales</h5>
-                        <div class="d-flex">
-                            <div class="m-r-10">
-                                <span class="badge badge-secondary badge-dot m-r-10"></span>
-                                <span class="text-gray font-weight-semibold font-size-13">Ingresos</span>
-                            </div>
-                            <div class="m-r-10">
-                                <span class="badge badge-purple badge-dot m-r-10"></span>
-                                <span class="text-gray font-weight-semibold font-size-13">Margen</span>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="m-t-50" style="height: 225px">
-                        <canvas class="chart" id="sales-chart"></canvas>
+                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+
                     </div>
                 </div>
             </div>

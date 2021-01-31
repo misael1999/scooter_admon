@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { MerchantsAddComponent } from '../merchants-add/merchants-add.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 // import { stat } from 'fs';
 
 @Component({
@@ -86,6 +87,31 @@ export class MainMerchantComponent implements OnInit {
     this.params.ordering = value;
     this.getMerchants();
   }
+
+  deleteMerchant(id, nombre) {
+    Swal.fire({
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a ${nombre}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Bloquear',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        this.merchantsService.deleteMerchant(id)
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Bloqueado',
+              type: 'success',
+              text: 'El comercio ha sido bloqueado',
+              timer: 2000
+            });
+          });
+      }
+    });
+  }
+
 
   // Metodo paginator
   getPages(e): PageEvent {

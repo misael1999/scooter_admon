@@ -1,17 +1,16 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Lista de Clientes
-        </h1>
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <h1 class="h3 text-gray-800">Registros</h1>
     </div>
 
-    <div>
-        <div class="filters mb-3">
-            <div class="row d-flex justify-content-end">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
 
-                <!-- Ordering clients register -->
-                <div class="col-lg-3">
+            <div class="row">
+                <!-- Ordering clients  -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
                     <select class="form-control select-form" (change)="ordenamiento($event.target.value)">
                         <option>Ordenar por:</option>
                         <option value="-customer_name">Nombre</option>
@@ -20,96 +19,88 @@
                         <option value="-total_orders_cancelled">Ordenes canceladas</option>
                     </select>
                 </div>
-                <!-- Ordering clients register -->
+                <!-- Ordering clients  -->
 
-                <div class="col-lg-6">
-                </div>
+                <div class="col-md-6 col-lg-6"></div>
 
 
-                <!-- Filter by search vehicles -->
-                <div class="col-lg-3">
-                    <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
-                            <span class="input-group-text" id="basic-addon1">
-                                <i class="fas fa-search"></i>
-                            </span>
+                <!-- Search client -->
+                <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                            <i class="fas fa-search "></i>
+                        </span>
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                            <i class="fas fa-times-circle"></i>
+                        </span>
                         </div>
                     </div>
                 </div>
-                <!-- Fin Filter by search vehicles -->
-
-
+                <!-- Search client -->
             </div>
         </div>
-        <!-- Fin filter  -->
-
-        <div class="row" class="content">
-
-            <!-- PAGINADOR  -->
-            <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator [disabled]="loadingClient || clients.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                    </mat-paginator>
-            </div>
-            <!-- TERMINA EL PAGINADOR  -->
 
 
-
+        <div class="col-md-12 col-lg-12 p-15">
             <!-- Preloader  -->
-            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingClient">
-                <div class="spinner-border text-primary my-5" role="status">
-                    <span class="sr-only">Loading...</span>
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingClient ">
+                <div class="spinner-border text-primary" role="status ">
+                    <span class="sr-only ">Loading...</span>
                 </div>
             </div>
-            <!-- Fin Preloader  -->
+            <!-- End Preloader  -->
 
 
 
             <div class="col-md-12" *ngIf="!loadingClient && clients.length > 0 ">
-
-                <table class="table table-bordered">
-                    <thead>
-                        <tr class="">
-                            <th>Imagen</th>
-                            <th>Nombre </th>
-                            <th>Correo </th>
-                            <th>Teléfono </th>
-                            <th>Registro </th>
-                            <th>Fecha de registro </th>
-                            <th>Total de Pedidos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-                        <tr *ngFor="let client of clients ">
-                            <td>
-                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url" src="{{ client.picture_url }}" alt="Avatar_Usuario">
-                                <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url == null" src="assets/img/user.png" alt="Avatar_Usuario">
-
-
-
-                            </td>
-                            <td> {{ client.name }}</td>
-                            <td> {{ client.user.username }} </td>
-                            <td> {{ client.phone_number }} </td>
-                            <td class="text-center">
-                                <img class="img-username img-profile" *ngIf="client.user.auth_facebook == true" src="assets/img/Facebook-logo.png" alt="category_img">
-                                <img class="img-username img-profile" *ngIf="client.user.auth_facebook != true" src="assets/img/correo.png" alt="category_img">
-                            </td>
-                            <td> {{ client.created | date:'medium' }} </td>
-                            <td> {{ client.total_orders }} </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Registrado</th>
+                                <th>Fecha de registro </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of clients ">
+                                <td>
+                                    <img class="img-category img-profile rounded-circle" *ngIf="client.picture_url" src="{{ client.picture_url }}" alt="avatar_usuario">
+                                    <img class="img-category img-profile rounded-circle" *ngIf="!client.picture_url" src="assets/img/user.png" alt="avatar_usuario">
+                                </td>
+                                <td> {{ client.name }}</td>
+                                <td> {{ client.user.username }} </td>
+                                <td>
+                                    <span *ngIf="!client.phone_number"><small>No agregado</small></span>
+                                    <span *ngIf="client.phone_number"> {{ client.phone_number }} </span>
+                                </td>
+                                <td class="text-center">
+                                    <span *ngIf="!client.user.auth_facebook" style="color: #E34133;"><i class="fas fa-envelope-open"></i></span>
+                                    <span *ngIf="client.user.auth_facebook" style="color: #0775E8;"><i class="fab fa-facebook-square"></i></span>
+                                </td>
+                                <td> {{ client.created | date:'medium' }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- Fin table the vehicles  -->
+            <!-- Paginator  -->
+            <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingClient && clients.length > 0 ">
+                <mat-paginator  [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                    </mat-paginator>
+            </div>
+            <!-- En paginator -->
+
+
+            <!-- Component no data -->
             <app-no-found-data *ngIf="!loadingClient && clients.length == 0"  [message]="'No hay clientes que mostrar'">
             </app-no-found-data>
-
         </div>
     </div>
-
-
 </div>

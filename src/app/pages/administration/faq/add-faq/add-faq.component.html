@@ -1,5 +1,5 @@
 <h3 mat-dialog-title class="d-flex justify-content-between">
-    {{faq ? 'Editar': 'Agregar'}} Pregunta Frecuente
+    {{faq ? 'Editar': 'Agregar'}} pregunta frecuente
     <button mat-button mat-dialog-close class="btn btn-light">
         <i class="anticon anticon-close"></i>
     </button>
@@ -13,10 +13,20 @@
             <form [formGroup]="faqForm">
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label>Selecciona un Grupo</label>
-                        <select (change)="selectGroup($event.target.value)" formControlName="group" class="form-control select-form" [ngClass]="(isFieldInvalid(faqForm, 'group'))? 'is-invalid': 'valid'">
-                           
+                        <label>Grupo</label>
+
+
+                        <!-- <option value="">Selecciona una categoría</option>
+                                                <ng-container *ngIf="categories">
+                                                    <option *ngFor="let category of categories" [value]="category.id">
+                                                        {{category.name}}</option>
+                                                </ng-container> -->
+
+                        <select formControlName="group" class="form-control select-form" [ngClass]="(isFieldInvalid(faqForm, 'group'))? 'is-invalid': 'valid'">
+                            <option value="" selected>Selecciona una categoría</option>
+                            <ng-container *ngIf="groups">
                                 <option *ngFor="let group of groups" [value]="group.id" > {{group.name}} </option>
+                            </ng-container>
                           </select>
                         <!-- Message Errors   -->
                         <div class="invalid-feedback">
@@ -27,7 +37,7 @@
 
                     <div class="form-group col-md-12">
                         <label>Pregunta</label>
-                        <input formControlName="title" type="text " class="form-control" placeholder="Cómo hago un pedido..." [ngClass]="(isFieldInvalid(faqForm, 'title'))? 'is-invalid': 'valid'">
+                        <input formControlName="title" type="text " class="form-control" placeholder="Pregunta" [ngClass]="(isFieldInvalid(faqForm, 'title'))? 'is-invalid': 'valid'">
                         <!-- Message Errors  -->
                         <div class="invalid-feedback">
                             <span *ngIf="hasFieldError(faqForm, 'title','required')">Este campo es requerido</span>
@@ -36,7 +46,7 @@
 
                     <div class="form-group col-md-12">
                         <label>Respuesta</label>
-                        <textarea rows="4" formControlName="answer" class="form-control" placeholder="Descarga nuestra App en..." [ngClass]="(isFieldInvalid(faqForm, 'answer'))? 'is-invalid': 'valid'"></textarea>
+                        <textarea rows="4" formControlName="answer" class="form-control" placeholder="Respuesta" [ngClass]="(isFieldInvalid(faqForm, 'answer'))? 'is-invalid': 'valid'"></textarea>
                         <!-- Message Errors  -->
                         <div class="invalid-feedback">
                             <span *ngIf="hasFieldError(faqForm, 'answer','required')">Este campo es requerido</span>

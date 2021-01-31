@@ -2,6 +2,7 @@
 <div class="side-nav">
     <div class="side-nav-inner ">
         <ul class="side-nav-menu scrollable">
+
             <li class="nav-item dropdown" [routerLink]="['/dashboard']" routerLinkActive="active">
                 <a>
                     <span class="icon-holder">
@@ -36,26 +37,30 @@
                     </li>
                 </ul>
             </li>
-            <!-- ====  -->
+
+
+
             <li routerLink="/delivery" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
-
                         <i class="anticon anticon-car"></i>
                     </span>
                     <span class="title">Repartidores</span>
                 </a>
             </li>
 
+
+
             <li routerLink="/traicing" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
-
                         <i class="anticon anticon-compass"></i>
                     </span>
                     <span class="title">Mapa de seguimiento</span>
                 </a>
             </li>
+
+
             <!-- ====  -->
             <!--             <li *ngIf="merchant.has_branches" routerLink="/branches" routerLinkActive="active"
                 class="nav-item dropdown">
@@ -118,17 +123,19 @@
 
 
             <!-- ====  -->
+
+
             <li routerLink="/zones" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
-
                         <i class="anticon anticon-environment"></i>
-
                     </span>
                     <span class="title">Zonas de entregas</span>
                 </a>
             </li>
-            <!-- ====  -->
+
+
+
             <li routerLink="/support" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
@@ -137,11 +144,12 @@
                     <span class="title">Soporte</span>
                 </a>
             </li>
-            <!-- ====  -->
+
+
+
             <li routerLink="/profile" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
-
                         <i class="anticon anticon-setting"></i>
                     </span>
                     <span class="title">Configuración</span>
@@ -149,52 +157,7 @@
             </li>
 
             <hr>
-            <!-- <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="anticon anticon-shopping-cart"></i>
-                    </span>
-                    <span class="title">Ordenes Comercios</span>
-                    <span class="arrow">
-                        <i class="arrow-icon"></i>
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li routerLink="/merchant-orders/news" routerLinkActive="active">
-                        <a>Nuevos</a>
-                    </li>
-                    <li routerLink="/merchant-orders/process" routerLinkActive="active">
-                        <a>En proceso</a>
-                    </li>
-                    <li routerLink="/merchant-orders/delivered" routerLinkActive="active">
-                        <a>Entregadas</a>
-                    </li>
-                    <li routerLink="/merchant-orders/cancelled" routerLinkActive="active">
-                        <a>Ignoradas</a>
-                    </li>
-                </ul>
-            </li> -->
 
-
-            <!-- ====  -->
-            <li routerLink="/promotions" routerLinkActive="active" class="nav-item dropdown">
-                <a>
-                    <span class="icon-holder">
-                        <i class="anticon anticon-tag"></i>
-                    </span>
-                    <span class="title">Promociones</span>
-                </a>
-            </li>
-
-            <!--   -->
-            <li routerLink="/notifications" routerLinkActive="active" class="nav-item dropdown">
-                <a>
-                    <span class="icon-holder">
-                        <i class="anticon anticon-bell"></i>
-                    </span>
-                    <span class="title">Enviar Notificaciones</span>
-                </a>
-            </li>
 
             <li routerLink="/merchants" routerLinkActive="active" class="nav-item dropdown">
                 <a>
@@ -205,6 +168,8 @@
                 </a>
             </li>
 
+
+
             <li routerLink="/clients" routerLinkActive="active" class="nav-item dropdown">
                 <a>
                     <span class="icon-holder">
@@ -214,7 +179,8 @@
                 </a>
             </li>
 
-            <!-- TERMINA ENTREGADO POR LA TIENDA  -->
+
+
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -231,6 +197,9 @@
                     </li>
                     <li routerLink="/administration/faq" routerLinkActive="active">
                         <a>FAQ</a>
+                    </li>
+                    <li routerLink="/notifications" routerLinkActive="active">
+                        <a>Enviar Notificaciones</a>
                     </li>
                 </ul>
             </li>

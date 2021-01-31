@@ -19,6 +19,7 @@ export class DeliveredOrdersComponent implements OnInit {
   params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '6' };
   orders: Array<any> = [];
   loadingOrders: boolean;
+  searchText;
 
   constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
 
@@ -54,10 +55,14 @@ export class DeliveredOrdersComponent implements OnInit {
 
   searchBy(value: string) {
     this.params.search = value;
+    this.ordersService.searchText = value;
     this.getOrders();
   }
+
   clearSearch() {
     this.params.search = '';
+    this.ordersService.searchText = '';
+    this.searchText = "";
     this.getOrders();
   }
 

@@ -2,57 +2,61 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h1 class="h3 mb-0 text-gray-800">Repartidores</h1>
+        <h1 class="h3 p-0 m-0 text-gray-800 p-b-10">Repartidores</h1>
         <button class="btn btn-primary btn-sm" (click)="dialogAddDelivery()">Agregar</button>
     </div>
 
-    <div class="row p-t-20">
-        <div class="col-lg-12 d-flex justify-content-between">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
 
-            <!-- Ordering orders -->
-            <div class="col-lg-3">
-                <select (change)="showList($event.target.value)" class="form-control select-form">
+            <div class="row">
+                <!-- Ordering -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
+                    <select class="form-control select-form">
+                        <option>Ordenar por:</option>
+                        <option value="-name">Nombre</option>
+                        <option value="-last_name">Apellidos</option>
+                        <option value="-reputation">Reputacion</option>
+                    </select>
+                </div>
+                <!-- End ordering -->
+
+
+                <!-- Show view by -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
+                    <select (change)="showList($event.target.value)" class="form-control select-form">
                     <option value=" ">Ver por:</option>
                         <option value="1">Disponibles</option>
                         <option value="2">Bloqueados</option>
                     </select>
-            </div>
-            <!-- End Show Delivery-Men status -->
+                </div>
+                <!-- End show view by -->
+
+                <div class="col-lg-3"></div>
 
 
-            <!-- Ordering Delivery-Men -->
-            <div class="col-lg-3">
-
-                <select class="form-control select-form">
-                    <option>Ordenar por:</option>
-                                        <option value="-name">Nombre</option>
-                                        <option value="-last_name">Apellidos</option>
-                                        <option value="-reputation">Reputacion</option>
-                                    </select>
-            </div>
-            <!-- End Delivery-Men -->
-
-
-            <div class="col-lg-3"></div>
-
-            <!-- Search Delivery-Men -->
-            <div class="col-lg-3">
-                <div class="input-group">
-                    <input #searchInput (keyup.enter)="search(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-                    <div class="input-group-prepend cursor">
-                        <span class="input-group-text" id="basic-addon1">
-                                                <i class="fas fa-search"></i>
-                                            </span>
+                <!-- Search by -->
+                <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                        <i class="fas fa-search "></i>
+                    </span>
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                        <i class="fas fa-times-circle"></i>
+                    </span>
+                        </div>
                     </div>
                 </div>
+                <!-- End search by -->
             </div>
         </div>
 
 
 
 
-        <div class="col-lg-12 p-t-20">
-
+        <div class="col-lg-12 p-t-15">
 
             <!-- Preloader  -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingDelivery">
@@ -60,20 +64,18 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <!-- Fin Preloader  -->
+            <!-- End Preloader  -->
 
 
             <div class="col-lg-12" *ngIf="!loadingDelivery && deliverys.length > 0">
                 <div class="table-responsive">
-
                     <table class="table table-bordered table-hover">
-
                         <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Apellidos </th>
-                                <th scope="col">Teléfono </th>
-                                <th scope="col">Placas </th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Placas</th>
                                 <th scope="col">Modelo </th>
                                 <th scope="col">Vehiculo</th>
                                 <th scope="col">Reputación</th>
@@ -82,6 +84,7 @@
                                 <th scope="col">Acciones </th>
                             </tr>
                         </thead>
+
                         <tbody>
                             <tr *ngFor="let delivery of deliverys ">
                                 <td> {{delivery.name}} </td>
@@ -90,39 +93,34 @@
                                 <td> {{delivery.vehicle_plate}}</td>
                                 <td> {{delivery.vehicle_model}} </td>
                                 <td>
-
                                     <span *ngIf="delivery.vehicle_type == 1"> Motocicleta</span>
-
                                 </td>
                                 <td> {{delivery.reputation}} </td>
                                 <td>{{delivery.last_time_update_location | date:'medium' }} </td>
                                 <td>{{delivery.delivery_status}} </td>
-                                <td>
-                                    <button *ngIf="params.status == 1" (click)="disabledDelivery(delivery.id)" class="btn btn-sm btn-danger mr-2">Bloquear</button>
-                                    <button *ngIf="params.status == 2" (click)="enableDelivery(delivery.id)" class="btn btn-sm btn-info mr-2">Desbloquear</button>
-                                    <button *ngIf="params.status == 1" (click)="dialogAddDelivery(delivery)" class="btn btn-sm btn-info">Editar</button>
-                                    <!-- <button *ngIf="params.status == 1" routerLink="/delivery/info/{{ delivery.id }}"
-                                    class="btn btn-sm btn-info">Reporte</button> -->
+                                <td class="text-center">
+                                    <button *ngIf="params.status == 1" (click)="disabledDelivery(delivery.id)" class="btn btn-primary btn-sm m-b-5" style="width: 90%;">Bloquear</button>
+                                    <button *ngIf="params.status == 2" (click)="enableDelivery(delivery.id)" class="btn btn-info btn-sm" style="width: 90%;">Desbloquear</button>
+                                    <button *ngIf="params.status == 1" (click)="dialogAddDelivery(delivery)" class="btn btn-info btn-sm m-b-5" style="width: 90%;">Editar</button>
                                 </td>
-
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
 
-            <div class="row" class="content">
-                <!-- PAGINADOR  -->
-                <div class="col-lg-12 d-flex justify-content-end">
-                    <mat-paginator [disabled]="loadingDelivery || deliverys.length==0" (page)="pageEvent = getPages($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
-                        </mat-paginator>
-                </div>
-                <!-- TERMINA EL PAGINADOR  -->
-
-                <!-- No data  -->
-                <app-no-found-data *ngIf="!loadingDelivery && deliverys.length == 0" [message]="'No se encontraron repartidores disponibles'"></app-no-found-data>
-
+            <!-- Paginator  -->
+            <div class="col-lg-12 d-flex justify-content-end">
+                <mat-paginator *ngIf="!loadingDelivery && deliverys.length > 0" (page)="pageEvent = getPages($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+                    </mat-paginator>
             </div>
+            <!-- End paginator  -->
+
+
+            <!-- Component no data -->
+            <app-no-found-data *ngIf="!loadingDelivery && deliverys.length == 0" [message]="'No se encontraron repartidores disponibles'"></app-no-found-data>
+            <!-- End component no data -->
         </div>
     </div>
 </div>

@@ -52,8 +52,8 @@ export class MainDashboardComponent implements OnInit {
   // public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [9, 10, 15, 4, 7, 12], label: 'Usuarios Perdidos ' },
-    { data: [60, 140, 230, 320, 400, 595], label: 'Usuarios Activos' }
+    { data: [9, 10, 15, 4, 7, 12], label: 'Canceladas ' },
+    { data: [60, 140, 230, 320, 400, 595], label: 'Entregadas' }
   ];
 
   constructor() { }

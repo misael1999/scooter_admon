@@ -6,8 +6,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class FaqService {
-  constructor(private httpClient: HttpClient) {
-  }
+  searchText;
+
+  constructor(private httpClient: HttpClient) { }
 
   getGroup() {
     const url = `${environment.HOST_APIV1}/commons/group/faq/`;
@@ -30,7 +31,7 @@ export class FaqService {
     return this.httpClient.post(url, faq);
   }
 
-  editFaq(idFaq:number, faq: any) {
+  editFaq(idFaq: number, faq: any) {
     const url = `${environment.HOST_APIV1}/commons/faq/${idFaq}/`;
     return this.httpClient.patch(url, faq)
   }

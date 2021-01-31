@@ -46,7 +46,8 @@ export class OrdersInProcessComponent implements OnInit {
 
   openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '90%',
+      minWidth: '90%',
+      minHeight: '75%',
       data: { order }
     });
   }
