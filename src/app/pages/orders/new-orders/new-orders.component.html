@@ -5,49 +5,52 @@
         <h1 class="h3 mb-0 text-gray-800">Pedidos nuevos</h1>
     </div>
 
-    <div class="row p-t-20">
-        <div class="col-lg-12 d-flex justify-content-between">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
+            <div class="row">
 
-            <!-- Ordering orders -->
-            <div class="col-lg-3">
-                <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
-                                        <option value="">Ordenar por:</option>
-                                        <option value="distance">Distancia mas corta</option>
-                                        <option value="-distance">Distancia mas larga </option>
-                                        <option value="service_price">Precio mas bajo</option>
-                                        <option value="-service_price">Precio mas alto </option>
-                                    </select>
-            </div>
-
-
-            <!-- End ordering orders -->
-            <div class="col-lg-6">
-                <button (click)="getOrders()" class="btn btn-info">Recargar</button>
-            </div>
+                <!-- Ordering -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
+                    <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
+                        <option value="">Ordenar por:</option>
+                        <option value="distance">Distancia mas corta</option>
+                        <option value="-distance">Distancia mas larga </option>
+                        <option value="service_price">Precio mas bajo</option>
+                        <option value="-service_price">Precio mas alto </option>
+                </select>
+                </div>
+                <!-- End ordering -->
 
 
-            <!-- Search by name in orders -->
-            <div class="col-md-3 col-lg-3 col-sm-12">
-                <div class="input-group">
-                    <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
-                    <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
-                        <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                <!-- Reload data -->
+                <div class="col-md-6 col-lg-6 p-b-10">
+                    <button (click)="getOrders()" class="btn btn-info btn-sm">Recargar</button>
+                </div>
+                <!-- End reload data -->
+
+
+                <!-- Search by -->
+                <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
                         <i class="fas fa-search "></i>
                     </span>
-                        <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
                         <i class="fas fa-times-circle"></i>
                     </span>
+                        </div>
                     </div>
                 </div>
+                <!-- End search by  -->
             </div>
-            <!-- End search by name in orders -->
         </div>
 
 
 
 
-        <div class="col-lg-12 p-t-20">
-
+        <div class="col-md-12 col-lg-12 p-t-15">
 
             <!-- Preloader -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
@@ -58,9 +61,8 @@
             <!-- End Preloader -->
 
 
-            <div class="col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
+            <div class="col-md-12 col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
                 <div class="table-responsive">
-
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -72,7 +74,7 @@
                                 <th>Hora del pedido </th>
                                 <th>Hr. limite para responder </th>
                                 <th>Estatus </th>
-                                <th>Acciones </th>
+                                <th class="text-center">Acciones </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,21 +116,23 @@
                                 <td> {{ order.order_date | date:'medium'}} </td>
                                 <td> {{ order.maximum_response_time | date:'medium'}} </td>
                                 <td> {{order.order_status.name}}</td>
-                                <td>
+                                <td class="text-center">
 
 
 
-                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogAssignDelivery(order)" style="font-size: 90%;" class="btn btn-success">Asignar</button>
+                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogAssignDelivery(order)" style="width: 90%;" class="btn btn-success btn-sm m-b-5">Asignar</button>
 
-                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogRejectOrder(order.id)" style="font-size: 90%;" class="btn btn-danger">Rechazar</button>
+                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogRejectOrder(order.id)" style="width: 90%;" class="btn btn-danger btn-sm">Rechazar</button>
+
 
                                     <!-- Botones poara aceptar por comercio -->
-                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-danger btn-sm">Rechazar</button>
 
-                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="accepOrderMerchant(order.id)" style="font-size: 90%;" class="btn btn-success btn-sm">
+                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="accepOrderMerchant(order.id)" style="width: 90%;" class="btn btn-success btn-sm m-b-5">
                                         Aceptar
                                        
                                     </button>
+                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="width: 90%;" class="btn btn-danger btn-sm">Rechazar</button>
+
 
 
 
@@ -155,7 +159,5 @@
             </app-no-found-data>
             <!-- End Component no data -->
         </div>
-
     </div>
-
 </div>

@@ -2,48 +2,54 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h1 class="h3 mb-0 text-gray-800">Pedidos cancelados o rechazados</h1>
+        <h1 class="h3 text-gray-800">Pedidos cancelados o rechazados</h1>
     </div>
 
-    <div class="row p-t-20">
-        <div class="col-lg-12 d-flex justify-content-between">
 
-            <!-- Ordering orders -->
-            <div class="col-lg-3">
-                <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
+            <div class="row">
+
+
+                <!-- Ordering -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
+                    <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
                         <option value="">Ordenar por:</option>
                         <option value="distance">Distancia mas corta</option>
                         <option value="-distance">Distancia mas larga </option>
                         <option value="service_price">Precio mas bajo</option>
                         <option value="-service_price">Precio mas alto </option>
-                    </select>
-            </div>
-            <!-- End ordering orders -->
+                </select>
+                </div>
+                <!-- End ordering -->
 
-            <div class="col-lg-6"></div>
 
-            <!-- Search by name in orders -->
-            <div class="col-lg-3">
-                <div class="input-group">
-                    <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
-                    <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
-                        <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                <div class="col-md-6 col-lg-6"></div>
+
+
+                <!-- Search by -->
+                <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
                         <i class="fas fa-search "></i>
                     </span>
-                        <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
                         <i class="fas fa-times-circle"></i>
                     </span>
+                        </div>
                     </div>
                 </div>
+                <!-- End search by -->
             </div>
-            <!-- End search by name in orders -->
         </div>
 
 
 
 
-        <div class="col-lg-12 p-t-20">
-
+        <div class="col-md-12 col-lg-12 p-t-15">
 
             <!-- Preloader -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
@@ -54,9 +60,9 @@
             <!-- End Preloader -->
 
 
-            <div class="col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
-                <div class="table-responsive">
 
+            <div class="col-md-12 col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
+                <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -66,9 +72,9 @@
                                 <th>Razón</th>
                                 <th>Fecha del servicio</th>
                                 <th>Precio Total</th>
-
                             </tr>
                         </thead>
+
                         <tbody>
                             <tr *ngFor="let order of orders">
                                 <td>
@@ -88,12 +94,10 @@
                                 <td> {{ order.reason_rejection }} </td>
                                 <td> {{ order.order_date | date:'medium' }} </td>
                                 <td> $ {{ order.total_order | number : '1.2-2' }} </td>
-
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
 
 

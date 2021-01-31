@@ -15,6 +15,7 @@ export class MainMerchantComponent implements OnInit {
 
   loadingMerchants: boolean;
   merchants: Array<any> = [];
+  searchText;
 
   // MatPaginator Inputs
   length = 100;
@@ -72,17 +73,25 @@ export class MainMerchantComponent implements OnInit {
         this.loadingMerchants = false;
         this.merchants = data.results;
         this.length = data.count;
-        console.log(this.merchants);
       }, error => {
         this.loadingMerchants = false;
-        // alert('Ha ocurrido un error al obtener los comercios');
       });
   }
 
   searchBy(value: string) {
     this.params.search = value;
+    this.merchantsService.searchText = value;
     this.getMerchants();
   }
+
+  clearSearch() {
+    this.params.search = '';
+    this.merchantsService.searchText = '';
+    this.searchText = "";
+    this.getMerchants();
+  }
+
+
   ordenamiento(value: string) {
     this.params.ordering = value;
     this.getMerchants();

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MerchantsAddComponent } from './merchants-add/merchants-add.component';
 import { MainMerchantComponent } from './main-merchant/main-merchant.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
@@ -33,6 +33,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MerchantsRoutingModule,
     AngularMaterialModule,
     SharedModule,
+    FormsModule,
     MatCheckboxModule,
     MatProgressBarModule
   ]

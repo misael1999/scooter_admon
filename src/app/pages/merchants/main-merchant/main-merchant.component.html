@@ -1,19 +1,19 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Listado de comercios</h1>
-        <button (click)="dialogAddMerchant()" class="btn btn-secondary btn-sm">Agregar</button>
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <h1 class="h3 text-gray-800 p-t-10">Listado de comercios</h1>
+        <button (click)="dialogAddMerchant()" class="btn btn-primary btn-sm">Agregar</button>
     </div>
 
-    <div>
-        <!-- Filter  -->
-        <div class="filters mb-3">
-            <div class="row d-flex justify-content-end">
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
+            <div class="row">
 
 
-                <!-- Orderin in the tables for delivery -->
-                <div class="col-lg-3">
+                <!-- Ordering -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
                     <select class="form-control select-form" (change)="ordenamiento($event.target.value)">
                         <option value="">Ordenar por:</option>
                         <option value="-name">Fecha de ingreso</option>
@@ -21,54 +21,53 @@
                         <option value="-reputation">Reputacion</option>
                     </select>
                 </div>
-                <!-- Fin Orderin in the tables for delivery -->
+                <!-- End ordering -->
 
-                <!-- Show Delivery-Men status -->
-                <div class="col-md-3">
+
+                <!-- Show view status -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
                     <select (change)="showList($event.target.value)" class="form-control select-form">
                         <option value=" ">Ver por:</option>
                         <option value="1">Disponibles</option>
                         <option value="2">Bloqueados</option>
                     </select>
                 </div>
-                <!-- End Show Delivery-Men status -->
+                <!-- End show view status -->
 
-                <!-- Show Delivery-Men status -->
-                <div class="col-md-3">
+
+                <!-- Show view information complete -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
                     <select (change)="showinfoIsComplete($event.target.value)" class="form-control select-form">
                         <option value=" ">Ver por:</option>
                         <option value="true">informacion Completa</option>
                         <option value="false">Informacion Incompleta</option>
                     </select>
                 </div>
-                <!-- End Show Delivery-Men status -->
+                <!-- End show view information complete -->
 
 
 
-
-                <!-- Filter by search vehicles -->
-                <div class="col-lg-3">
-                    <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-                        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
-                            <span class="input-group-text" id="basic-addon1">
-                                <i class="fas fa-search"></i>
-                            </span>
+                <!-- Search by -->
+                <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                            <i class="fas fa-search "></i>
+                        </span>
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                            <i class="fas fa-times-circle"></i>
+                        </span>
                         </div>
                     </div>
                 </div>
-                <!-- Fin Filter by search vehicles -->
+                <!-- End search by -->
             </div>
         </div>
-        <!-- Fin filter  -->
 
-        <div class="row" class="content">
-            <!-- PAGINADOR  -->
-            <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator [disabled]="loadingMerchants || merchants.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                    </mat-paginator>
-            </div>
-            <!-- TERMINA EL PAGINADOR  -->
+
+
+        <div class="col-md-12 col-lg-12 p-15">
 
             <!-- Preloader  -->
             <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingMerchants">
@@ -76,13 +75,28 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <!-- Fin Preloader  -->
-            <!-- Table the vehicles  -->
-            <app-merchant-list *ngIf="!loadingMerchants && merchants.length > 0" [merchants]="merchants"></app-merchant-list>
-            <!-- Fin table the vehicles  -->
+            <!-- End Preloader  -->
+
+
+            <!-- Component list merchants -->
+            <div class="col-md-12 col-lg-12">
+                <app-merchant-list *ngIf="!loadingMerchants && merchants.length > 0" [merchants]="merchants"></app-merchant-list>
+            </div>
+            <!-- End component list merchants -->
+
+
+            <!-- Paginator  -->
+            <div class="col-lg-12 d-flex justify-content-end">
+                <mat-paginator *ngIf="!loadingMerchants && merchants.length > 0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                    </mat-paginator>
+            </div>
+            <!-- End paginator -->
+
+
+            <!-- Component no data -->
             <app-no-found-data *ngIf="!loadingMerchants && merchants.length == 0"  [message]="'No hay comercios que mostrar'">
             </app-no-found-data>
-
+            <!-- End component no data -->
         </div>
     </div>
 </div>

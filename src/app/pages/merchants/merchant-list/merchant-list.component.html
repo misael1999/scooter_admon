@@ -1,33 +1,34 @@
-<table class="table table-responsive table-bordered">
-    <thead>
-        <tr>
-            <th>Abierto</th>
-            <th style="width: 100%;">Nombre</th>
-            <th>Encargado</th>
-            <th>Categoría</th>
-            <th>Correo</th>
-            <th>Télefono</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Abierto</th>
+                <th style="width: 100%;">Nombre</th>
+                <th>Encargado</th>
+                <th>Categoría</th>
+                <th>Correo</th>
+                <th>Télefono</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
 
-        <tr *ngFor="let merchant of merchants">
-            <td>
-                <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>
-            </td>
-            <td> {{merchant.merchant_name}} </td>
-            <td> {{merchant.contact_person}} </td>
-            <td> {{merchant.category}} </td>
-            <td> {{merchant.email}} </td>
-            <td> {{merchant.phone_number}} </td>
-            <td>
-                <!-- <button class="btn btn-sm btn-success mr-2">Mensaje<i class="anticon anticon-message"></i></button> -->
-                <button routerLink="detail/{{merchant.id}}" class="btn btn-sm btn-secondary mr-2 mt-1"><i class="anticon anticon-eye"></i></button>
-                <!-- <button class="btn btn-sm btn-success mr-2" routerLink="/merchants/chips/{{ merchant.id }}">Tags<i class="anticon anticon-message"></i></button> -->
-                <!-- <button class="btn btn-sm btn-danger mr-2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button> -->
-            </td>
-        </tr>
-
-    </tbody>
-</table>
+        <tbody>
+            <tr *ngFor="let merchant of merchants">
+                <td>
+                    <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>
+                </td>
+                <td> {{merchant.merchant_name}} </td>
+                <td> {{merchant.contact_person}} </td>
+                <td> {{merchant.category}} </td>
+                <td> {{merchant.email}} </td>
+                <td> {{merchant.phone_number}} </td>
+                <td class="text-center">
+                    <!-- <button class="btn btn-sm btn-success mr-2">Mensaje<i class="anticon anticon-message"></i></button> -->
+                    <button routerLink="detail/{{merchant.id}}" class="btn btn-sm btn-info mr-2 mt-1"><i class="anticon anticon-eye"></i></button>
+                    <!-- <button class="btn btn-sm btn-success mr-2" routerLink="/merchants/chips/{{ merchant.id }}">Tags<i class="anticon anticon-message"></i></button> -->
+                    <!-- <button class="btn btn-sm btn-danger mr-2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

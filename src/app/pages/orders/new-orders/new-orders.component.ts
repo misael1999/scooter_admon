@@ -106,7 +106,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
         this.orders = data.results;
         this.loadingOrders = false;
         this.length = data.count;
-        console.log(this.orders);
+        // console.log(this.orders);
       }, error => {
         this.loadingOrders = false;
       });

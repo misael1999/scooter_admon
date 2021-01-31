@@ -11,6 +11,7 @@ export class MerchantsService {
 
   station: StationModel;
   merchantId: any;
+  searchText;
 
   constructor(private http: HttpClient) {
     this.station = JSON.parse(localStorage.getItem("station"));
