@@ -30,7 +30,7 @@ export class OrdersInProcessComponent implements OnInit {
 
 
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', order_status: '3,4,5,12,13,15,16', ordering: '', in_process: true };
+  params = { limit: 25, offset: 0, search: '', order_status: '3,4,5,12,9,13,15,16', ordering: '', in_process: true };
 
   searchText;
 
@@ -62,7 +62,7 @@ export class OrdersInProcessComponent implements OnInit {
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
-        // console.log(this.orders);
+        console.log(this.orders);
         this.loadingOrders = false;
         this.length = data.count;
       }, error => {

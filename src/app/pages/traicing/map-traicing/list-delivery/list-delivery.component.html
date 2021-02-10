@@ -1,22 +1,51 @@
 <div>
-    <div>
-        <!-- Search for delivery -->
-        <div class="input-group mb-3">
-            <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
-            <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
-                <span class="input-group-text" id="basic-addon1">
+
+    <!-- Search delivery -->
+    <div class="input-group search mb-3">
+        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+        <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
+            <span class="input-group-text" id="basic-addon1">
                     <i class="fas fa-search"></i>
                 </span>
-            </div>
         </div>
-        <!-- End Search for delivery -->
+    </div>
+    <!-- End search delivery -->
 
-        <!-- List the delivery -->
 
-        <mat-list class="list" role="list">
 
+
+    <!-- List delivery -->
+    <div>
+        <div>
+            <ul class="list-group" *ngFor="let delivery of deliverys">
+                <li class="list-group-item" (click)="navigationToLocation(delivery)">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar avatar-image">
+                            <img *ngIf="delivery.picture" class="avatar" [src]="delivery.picture" alt="avatar">
+                            <div *ngIf="!delivery.picture" class="avatar avatar-text bg-success">
+                                <span>{{ delivery.name | slice:0:1 }}{{delivery.last_name | slice:0:1 }}</span>
+                            </div>
+                        </div>
+                        <div class="m-l-10">
+                            <span class="name">{{ delivery.name| titlecase }} </span> <br>
+                            <span>{{ delivery.phone_number}}</span> <br>
+                            <span><span class="badge" [ngClass]="{'badge-danger': delivery.delivery_status == 'Fuera de servicio',
+                                'badge-success': delivery.delivery_status == 'Disponible', 'badge-info': delivery.delivery_status == 'Ocupado' }">{{ delivery.delivery_status}}</span></span>
+                        </div>
+                    </div>
+                </li>
+                <span class="border-bottom"></span>
+            </ul>
+        </div>
+    </div>
+    <!-- End the delivery -->
+
+</div>
+
+
+<!-- <mat-list class="list" role="list">
             <mat-list-item (click)="navigationToLocation(delivery)" style="margin-bottom: 30px !important;" *ngFor="let delivery of deliverys" class="item grid grid--contact">
-                <img *ngIf="delivery.picture == null" class="avatar" src="assets/images/common/user.jpg" alt="avatar">
+                <img *ngIf="delivery.picture == null" class="avatar" src="assets/img/bolsa.svg" alt="avatar">
                 <img *ngIf="delivery.picture != null" class="avatar" [src]="delivery.picture" alt="avatar">
                 <div class="flex">
                     <span> {{ delivery.name| titlecase }} </span>
@@ -27,9 +56,6 @@
                 </div>
             </mat-list-item>
 
-        </mat-list>
+        </mat-list> -->
 
-        <!-- End list the delivery -->
-
-    </div>
-</div>
+<!-- End list the delivery -->

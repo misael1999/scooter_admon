@@ -1,19 +1,19 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Mapa de seguimiento</h1>
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <h1 class="h3 text-gray-800">Mapa de seguimiento</h1>
     </div>
 
 
-    <div class="row">
+    <div class="row p-t-20">
 
-        <div class="col-md-3 content-list">
+        <div class="col-md-3 col-lg-3 col-sm-12 listDelivery">
             <app-list-delivery (markers)="getMarkers($event)" (location)="navigationToLocation($event)"></app-list-delivery>
         </div>
 
 
-        <div class="col-md-9">
+        <div class="col-md-9 col-lg-9 col-sm-12 mapTraicing">
             <app-map-location [markerList]='markerList' [coordinates]="coordinates" *ngIf="markerList"></app-map-location>
         </div>
 

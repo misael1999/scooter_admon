@@ -1,4 +1,12 @@
-.content-list {
-    max-height: calc(100vh - 180px);
-    overflow-y: scroll;
+.mapTraicing {
+    max-height: calc(100vh - 175px);
+    min-height: calc(100vh - 175px);
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.listDelivery {
+    max-height: calc(100vh - 175px);
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
 }

@@ -10,6 +10,7 @@ import { TraicingRoutingModule } from './traicing-routing.module';
 import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { MapLocationComponent } from './map-traicing/map-location/map-location.component';
 import { AgmCoreModule } from '@agm/core';
+import { NgZorroModule } from '../../shared/ng-zorro.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { AgmCoreModule } from '@agm/core';
     CommonModule,
     TraicingRoutingModule,
     AngularMaterialModule,
+    NgZorroModule,
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en

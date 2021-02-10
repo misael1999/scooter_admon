@@ -32,7 +32,7 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
 
   getStation() {
     this.station = JSON.parse(localStorage.getItem('station'));
-    console.log(this.station);
+    // console.log(this.station);
     if (this.station.promotions_zones_activated !== null) {
       this.promotions_zones_activated = this.station.promotions_zones_activated;
       this.restricted_zones_activated = this.station.restricted_zones_activated;

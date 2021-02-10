@@ -1,3 +1,19 @@
-agm-map {
-    height: calc(100vh - 180px);
+.map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 100%;
+}
+
+.map-frame {
+    border: 1px solid #c3c3c3;
+    height: 100%;
+}
+
+#map {
+    height: 100%;
 }

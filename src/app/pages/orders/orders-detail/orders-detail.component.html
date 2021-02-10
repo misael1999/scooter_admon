@@ -17,7 +17,7 @@
 
 <div mat-dialog-content *ngIf="!loadingOrder && order">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="table-responsive">
                 <table class="table table-bordered table-sm">
                     <thead>
@@ -36,6 +36,7 @@
                             <th scope="col">Total</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr>
                             <td>
@@ -66,10 +67,7 @@
                                     <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa  </a> </li>
                                 </ol>
                         </span>
-
                             </td>
-
-
                             <td> {{ order.to_address.full_address }} <br>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa </a> </li>
@@ -90,27 +88,27 @@
 
 
 
-        <div class="col-lg-12">
+        <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="table-responsive">
-                <table class="table table-hover table-bordered table-sm" *ngIf="order.service_id >= 1">
+                <table class="table table-bordered table-sm" *ngIf="order.service_id >= 1">
                     <thead>
                         <tr>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Productos</th>
-                            <th scope="col">P. Unitario</th>
-                            <th scope="col" class="text-end">Total</th>
+                            <th style="width: 100px;" class="text-center">Cantidad</th>
+                            <th>Productos</th>
+                            <th class="text-center">P. Unitario</th>
+                            <th class="text-center">Total</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <tr *ngFor="let info of orderDetails">
-                            <td> {{ info.quantity }} </td>
+                            <th class="text-center" style="font-size: 15px;"> {{ info.quantity }} </th>
                             <td> {{ info.product_name }}
 
                                 <div class="p-l-25 option" *ngFor="let menu of info.menu_options">
                                     <span>{{ menu.menu_name }} </span>
 
-                                    <table class="table table-borderless table-sm p-l-20">
+                                    <table class="table table-border table-sm p-l-20">
                                         <thead>
                                             <tr>
                                                 <td>Cantidad</td>
@@ -129,8 +127,8 @@
                                 </div>
                             </td>
 
-                            <td>$ {{ info.product_price }} </td>
-                            <td>$ {{ info.total_detail }} </td>
+                            <td class="text-center menu">$ {{ info.product_price }} </td>
+                            <td class="text-center menu">$ {{ info.total_detail }} </td>
 
 
 

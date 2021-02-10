@@ -1,27 +1,25 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { DeliveryMenService } from '../../../../services/delivery-men.service';
 import { timer, Observable, interval, Subscription } from 'rxjs';
-
+import * as L from 'leaflet';
 @Component({
   selector: 'app-list-delivery',
   templateUrl: './list-delivery.component.html',
   styleUrls: ['./list-delivery.component.scss']
 })
 export class ListDeliveryComponent implements OnInit, OnDestroy {
-
-
   deliverys: Array<any> = [];
-  @Output() markers = new EventEmitter<any>();
-  @Output() location = new EventEmitter<any>();
-
   params = { search: '', status: 1 };
-
+  // Pasa los marcadores de los deliverys
+  @Output() markers = new EventEmitter<any>();
+  // Pasa la ubicacion de un delivery
+  @Output() location = new EventEmitter<any>();
   private intervalDelivery: Observable<number> = interval(90000);
   private subscription: Subscription;
 
 
-
   constructor(private deliveryService: DeliveryMenService) { }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -30,30 +28,22 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
     this.getDelivery();
     this.subscription = this.intervalDelivery.subscribe((data: any) => {
       this.getDelivery();
-      // console.log('Tiempo');
     });
   }
 
 
   getDelivery() {
-    // this.loadingDelivery = true;
-    this.deliveryService.getDeliverys( this.params )
+    this.deliveryService.getDeliverys(this.params)
       .subscribe((data: any) => {
-        // this.deliverys = data.results;
         this.getCoordinates(data.results);
-        // this.loadingDelivery = false;
-        // this.length = data.count;
-        console.log('Los repartidores registrados son ', data.results);
       }, error => {
-        // this.loadingDelivery = false;
+        alert('Error al consultar repartidores')
       });
-
   }
 
   getCoordinates(deliveryMen: Array<any>) {
     const markerList = [];
     const delivery_men = [];
-
     for (const delivery of deliveryMen) {
       if (delivery.location) {
         const marker = {
@@ -66,10 +56,11 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
         delivery_men.push(delivery);
       }
     }
-
     this.markers.emit(markerList);
+    console.log(this.markers);
     this.deliverys = delivery_men;
   }
+
 
 
   navigationToLocation(delivery) {
@@ -79,8 +70,10 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
         lng: delivery.location.coordinates[0]
       };
       this.location.emit(coordinates);
+      console.log(this.location);
     }
   }
+
 
   searchBy(value: string) {
     this.params.search = value;
