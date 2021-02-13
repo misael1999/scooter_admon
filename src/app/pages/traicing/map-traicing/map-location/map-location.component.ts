@@ -1,7 +1,7 @@
 import { AfterViewInit } from '@angular/core';
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import * as L from 'leaflet';
-import { icon, Marker } from 'leaflet';
+import { Marker } from 'leaflet';
 
 // just an interface for type safety.
 export interface Marker {
@@ -34,10 +34,6 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   lat = 18.462859841665864;
   lng = -97.39279966871719;
 
-  myIcon = L.divIcon({
-    iconSize: new L.Point(0, 0),
-    html: '<div id="div1" class="fas "></div>'
-  });
 
   constructor() {
   }
@@ -57,24 +53,29 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   makeCapitalMarkers(map: L.map): void {
     for (const m of this.markerList) {
       console.log(this.markerList);
-      const lat = m.lat;
-      const lon = m.lng;
-      console.log(lon, lat);
-      // const marker = L.marker([lon, lat]).addTo(map);
-      const marker = L.marker([lon, lat], { icon: this.myIcon }).addTo(map).bindPopup("fa-map-marker-alt");
-      console.log(marker);
+      var lat = m.lat;
+      var lon = m.lng;
+      var popuText = m.name;
+      console.log(lon, lat, popuText);
+      var markerList = new L.LatLng(lat, lon);
+      // market.bindPopup(popuText).openPopup();
+      var market = new L.Marker(markerList);
+      map.addLayer(market);
+
     }
   }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // if (this.coordinates) {
-    //   this.lat = this.coordinates.lat;
-    //   this.lng = this.coordinates.lng;
-    //   console.log(this.lat, this.lng);
-    //   this.zoom = 17;
-    // }
-    // const marker = L.marker([lon, lat]).addTo(map);
+
+
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.coordinates) {
+      this.lat = this.coordinates.lat;
+      this.lng = this.coordinates.lng;
+      this.makeCapitalMarkers(this.map);
+      this.map.setView([this.lat, this.lng], 16)
+    }
   }
 
 

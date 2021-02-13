@@ -30,7 +30,7 @@ export class OrdersInProcessComponent implements OnInit {
 
 
   // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '',  ordering: '', in_process: true };
+  params = { limit: 25, offset: 0, search: '', ordering: '', in_process: true };
 
   searchText;
 

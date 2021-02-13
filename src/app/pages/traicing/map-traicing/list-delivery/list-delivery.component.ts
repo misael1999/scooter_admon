@@ -14,7 +14,7 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
   @Output() markers = new EventEmitter<any>();
   // Pasa la ubicacion de un delivery
   @Output() location = new EventEmitter<any>();
-  private intervalDelivery: Observable<number> = interval(90000);
+  private intervalDelivery: Observable<number> = interval(4000);
   private subscription: Subscription;
 
 
@@ -57,7 +57,7 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
       }
     }
     this.markers.emit(markerList);
-    console.log(this.markers);
+    // console.log(this.markers);
     this.deliverys = delivery_men;
   }
 
@@ -70,7 +70,7 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
         lng: delivery.location.coordinates[0]
       };
       this.location.emit(coordinates);
-      console.log(this.location);
+      // console.log(this.location);
     }
   }
 
