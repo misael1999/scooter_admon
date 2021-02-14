@@ -1,0 +1,109 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <h1 class="h3 text-gray-800">Registro de Promociones</h1>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 p-t-15">
+            <div class="row">
+
+                <!-- Ordering -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
+                    <select class="form-control select-form" (change)="orderBy($event.target.value)">
+                        <option>Ordenar por:</option>
+                        <option value="expiration_date">Fecha de Expiración</option>
+                        <option value="created_at">Fecha de Creación</option>
+                        <option value="customer__total_orders">Número de ordenes</option>
+                        <option value="used_at">Fecha de Uso</option>
+                    </select>
+                </div>
+                <!-- End ordering  -->
+
+                <!-- Filter  -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
+                    <select class="form-control select-form" (change)="filterBy($event.target.value)">
+                        <option>Filtrar por:</option>
+                        <option value="true">Usados</option>
+                        <option value="false">Sin usar</option>
+                    </select>
+                </div>
+                <!-- End filter  -->
+
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10"></div>
+
+
+                <!-- Search by -->
+                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
+                    <div class="input-group">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
+                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
+                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
+                            <i class="fas fa-search "></i>
+                        </span>
+                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
+                            <i class="fas fa-times-circle"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End search by -->
+            </div>
+        </div>
+
+
+        <div class="col-md-12 col-lg-12 p-15">
+            <!-- Preloader  -->
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingPromotions">
+                <div class="spinner-border text-primary" role="status ">
+                    <span class="sr-only ">Loading...</span>
+                </div>
+            </div>
+            <!-- End Preloader  -->
+
+            <div class="col-md-12" *ngIf="!loadingPromotions && promotions.length > 0 ">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Estado</th>
+                                <th>Nombre del usuario</th>
+                                <th>Promoción</th>
+                                <th> Fecha de Creación </th>
+                                <th> Fecha de Expiración </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let promotion of promotions">
+                                <td class="text-center">
+                                    <span *ngIf="promotion.used" class="badge badge-success">Usado</span>
+                                    <span *ngIf="!promotion.used" class="badge badge-secondary">Sin uso</span>
+                                </td>
+                                <td> {{promotion.customer.name}} </td>
+                                <td>
+                                    Envío gratis
+                                </td>
+                                <td> {{promotion.created_at | date:'medium'}} </td>
+                                <td> {{promotion.expiration_date | date:'medium' }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Paginator  -->
+            <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingPromotions && promotions.length > 0 ">
+                <mat-paginator  [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                    </mat-paginator>
+            </div>
+            <!-- En paginator -->
+
+            <!-- Component no data -->
+            <app-no-found-data *ngIf="!loadingPromotions && promotions.length == 0"  [message]="'No hay registros que mostrar'">
+            </app-no-found-data>
+            <!-- End component no data -->
+        </div>
+    </div>
+</div>
