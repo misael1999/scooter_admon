@@ -84,6 +84,7 @@
                                 <td> {{promotion.customer.name}} </td>
                                 <td>
                                     Envío gratis
+                                    <span *ngIf="promotion.history != null">(Código referido)</span>
                                 </td>
                                 <td> {{promotion.created_at | date:'medium'}} </td>
                                 <td> {{promotion.expiration_date | date:'medium' }} </td>
