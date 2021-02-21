@@ -8,7 +8,6 @@ import { MapLocationComponent } from './map-traicing/map-location/map-location.c
 import { AgmCoreModule } from '@agm/core';
 import { NgZorroModule } from '../../shared/ng-zorro.module';
 
-
 @NgModule({
   declarations: [
     MapTraicingComponent,

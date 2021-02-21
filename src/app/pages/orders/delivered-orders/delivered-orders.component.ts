@@ -29,7 +29,8 @@ export class DeliveredOrdersComponent implements OnInit {
 
   openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '90%',
+      height: '78%',
+      width: '70%',
       data: { order }
     });
   }
@@ -45,7 +46,7 @@ export class DeliveredOrdersComponent implements OnInit {
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
-        // console.log(this.orders);
+        console.log(this.orders);
         this.loadingOrders = false;
         this.length = data.count;
       }, error => {

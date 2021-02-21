@@ -104,6 +104,7 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
     this.zonesService.getZones()
       .subscribe((data: any) => {
         this.zones = data.results;
+        console.log(this.zones);
       }, error => {
         alert(error.errors.message);
       });

@@ -68,7 +68,7 @@ export class RefreshTokenGuard implements CanActivate {
   expired(expirationDate: number) {
 
     const now = new Date().getTime() / 1000;
-    console.log('ENTRO');
+    // console.log('ENTRO');
 
     if (expirationDate < now) {
       return true;

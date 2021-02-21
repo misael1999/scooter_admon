@@ -52,7 +52,8 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
 
   openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '90%',
+      height: '78%',
+      width: '70%',
       data: { order }
     });
   }

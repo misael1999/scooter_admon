@@ -18,8 +18,8 @@ export class CompleteProfileGuard implements CanActivate {
 
       const station = JSON.parse(localStorage.getItem('station'));
       const information_is_complete = localStorage.getItem('information_is_complete');
-      console.log('INFORMACIÓN COMPLETADA');
-      console.log(information_is_complete);
+      // console.log('INFORMACIÓN COMPLETADA');
+      // console.log(information_is_complete);
       if (station) {
         if (information_is_complete == 'false') {
             this.router.navigate(['/complete-profile/']);
