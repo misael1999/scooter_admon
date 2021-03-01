@@ -24,6 +24,17 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() coordinates;
   zones: Array<any> = [];
 
+  myIcon = L.icon({
+    iconUrl: 'my-icon.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+  });
+
+
   // google maps zoom level
   //  currentMarker: Marker = {
   //    lat: 18.462859841665864,
@@ -38,19 +49,6 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   lat = 18.462859841665864;
   lng = -97.39279966871719;
 
-  // polygonPoints = [
-  //   [18.46487549225484, -97.39538524016072],
-  //   [18.46357553293412, -97.39618628331289],
-  //   [18.46163096332963, -97.39558290090773],
-  //   [18.46070646705935, -97.39471660178855],
-  //   [18.46029851724682, -97.39250273493836],
-  //   [18.46042674789116, -97.39050539857001],
-  //   [18.46149487815105, -97.3896366608307],
-  //   [18.46471899268761, -97.39118998597411],
-  //   [18.46471899268761, -97.39118998597411],
-  //   [18.46531275485555, -97.39458159674882],
-  //   [18.46487549225484, -97.39538524016072],
-  // ];
 
 
   constructor(private zonesService: ZonesService) {
@@ -60,11 +58,11 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   ngAfterViewInit(): void {
     this.initMap();
     this.makeCapitalMarkers(this.map);
-    this.makeCapitalPoly(this.map);
-    this.getArea();
+    this.makeCapitalZone(this.map);
   }
 
   ngOnInit(): void {
+    this.getArea();
     // var mymap = L.map('mapid').setView([51.505, -0.09], 13);
     // var mymap = L.map('mapid').setView([51.505, -0.09], 13);
     // console.log(this.markerList);
@@ -72,23 +70,33 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
 
   makeCapitalMarkers(map: L.map): void {
     for (const m of this.markerList) {
-      console.log(this.markerList);
+      // console.log(this.markerList);
       var lat = m.lat;
       var lon = m.lng;
       var popuText = m.name;
-      console.log(lon, lat, popuText);
+      // console.log(lon, lat, popuText);
       var markerList = new L.LatLng(lat, lon);
       var market = new L.Marker(markerList);
       map.addLayer(market);
     }
   }
-  makeCapitalPoly(map: L.map): void {
+
+  // var polygon = L.polygon([
+//     [51.509, -0.08],
+//     [51.503, -0.06],
+//     [51.51, -0.047]
+// ]).addTo(mymap);
+
+  
+
+  makeCapitalZone(map: L.map): void {
     for (const m of this.paths) {
-      console.log(this.paths);
       var lat = m.lat;
       var lon = m.lng;
+      console.log(lon, lat);
       var markerList = new L.LatLng(lat, lon);
-      var poly = L.polygon(markerList).addTo(map);
+      var market = new L.poligon([markerList])
+      map.addTo(map);
     }
   }
 
@@ -96,6 +104,9 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
 
 
 
+
+
+  // METHODS FOR CLICK
   ngOnChanges(_changes: SimpleChanges): void {
     if (this.coordinates) {
       this.lat = this.coordinates.lat;
@@ -116,32 +127,26 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
-    var poly = L.polygon(this.paths).addTo(this.map);
     tiles.addTo(this.map);
-
   }
 
 
-  // ZONAS POLY
+  // ZONAS POLY GENERAL
   getArea() {
     this.zonesService.getAreaByStation()
       .subscribe((data: any) => {
         this.area = data;
-        console.log(this.area);
         this.setPolygon(data.poly.coordinates);
       }, error => {
-        console.log('Erro');
       });
   }
   setPolygon(coordinates) {
-    // console.log(this.coordinates);
     for (const points of coordinates) {
       for (const coordinate of points) {
-        // console.log(coordinates);
         this.paths.push({ lat: coordinate[1], lng: coordinate[0] });
-        console.log(this.paths);
       }
     }
+    return this.paths;
   }
 
 

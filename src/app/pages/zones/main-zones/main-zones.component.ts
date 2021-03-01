@@ -94,6 +94,7 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
       .subscribe((data: any) => {
         this.loadingArea = false;
         this.setPolygon(data.poly.coordinates);
+
       }, error => {
         this.loadingArea = false;
         this.showSwalMessage(error.errors.message, 'error');
@@ -104,7 +105,7 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
     this.zonesService.getZones()
       .subscribe((data: any) => {
         this.zones = data.results;
-        console.log(this.zones);
+        // console.log(this.zones);
       }, error => {
         alert(error.errors.message);
       });
@@ -132,6 +133,7 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
         this.paths.push({ lat: coordinate[1], lng: coordinate[0] });
       }
     }
+    console.log(this.paths);
   }
 
   /*   setPolygonesByZones(zones) {
