@@ -25,13 +25,10 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   zones: Array<any> = [];
 
   myIcon = L.icon({
-    iconUrl: 'my-icon.png',
+    iconUrl: 'assets/img/collection.svg',
     iconSize: [38, 95],
     iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-    shadowUrl: 'my-icon-shadow.png',
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
+    popupAnchor: [-3, -76]
   });
 
 
@@ -49,6 +46,11 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   lat = 18.462859841665864;
   lng = -97.39279966871719;
 
+  polygonPoints = [
+    [37.786617, -122.404654],
+    [37.797843, -122.407057],
+    [37.798962, -122.398260],
+    [37.794299, -122.395234]];
 
 
   constructor(private zonesService: ZonesService) {
@@ -74,29 +76,20 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
       var lat = m.lat;
       var lon = m.lng;
       var popuText = m.name;
-      // console.log(lon, lat, popuText);
       var markerList = new L.LatLng(lat, lon);
-      var market = new L.Marker(markerList);
+      var market = new L.Marker(markerList, { icon: this.myIcon }).bindPopup(popuText);
       map.addLayer(market);
     }
   }
 
-  // var polygon = L.polygon([
-//     [51.509, -0.08],
-//     [51.503, -0.06],
-//     [51.51, -0.047]
-// ]).addTo(mymap);
-
-  
 
   makeCapitalZone(map: L.map): void {
     for (const m of this.paths) {
       var lat = m.lat;
       var lon = m.lng;
       console.log(lon, lat);
-      var markerList = new L.LatLng(lat, lon);
-      var market = new L.poligon([markerList])
-      map.addTo(map);
+      var zona = new L.polygon(lat, lon).addTo(map);
+
     }
   }
 
@@ -112,7 +105,7 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
       this.lat = this.coordinates.lat;
       this.lng = this.coordinates.lng;
       this.makeCapitalMarkers(this.map);
-      this.map.setView([this.lat, this.lng], 16)
+      this.map.setView([this.lat, this.lng], 17)
     }
   }
 
