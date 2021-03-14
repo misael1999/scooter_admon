@@ -28,6 +28,12 @@ export class SupportService {
     return this.http.post(url, message);
   }
 
+  openConversationWithClient(stationId, body) {
+    console.log(stationId);
+    const url = `${environment.HOST_APIV1}/stations/${stationId}/support/`;
+    return this.http.post(url, body);
+  }
+
   openOrCloseSupport(supportId, is_open) {
     const url = `${environment.HOST_APIV1}/stations/${this.stationId}/support/${supportId}/open_or_close/`;
     return this.http.patch(url, { is_open });

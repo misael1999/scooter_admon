@@ -120,10 +120,14 @@
 
 
 
-                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogAssignDelivery(order)" style="width: 90%;" class="btn btn-success btn-sm m-b-5">Asignar</button>
+                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogAssignDelivery(order)" style="width: 90%;" class="btn btn-success btn-sm mb-1">Asignar</button>
 
                                     <button *ngIf="order.order_status.id == 13" (click)="openDialogRejectOrder(order.id)" style="width: 90%;" class="btn btn-danger btn-sm">Rechazar</button>
 
+                                    <button (click)="openDialogSendMessageOrder(order)" style="width: 90%;" class="btn btn-success btn-sm mt-1">
+                                        
+                                        Mensaje
+                                    </button>
 
                                     <!-- Botones poara aceptar por comercio -->
 

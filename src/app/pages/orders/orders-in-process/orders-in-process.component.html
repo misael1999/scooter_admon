@@ -115,11 +115,11 @@
                                     <td> {{order.order_date | date:'medium'}} </td>
                                     <td> {{order.order_status.name}} </td>
                                     <td class=text-center>
-                                        <!-- <button (click)="openDialogSendMessageOrder(order)" *ngIf="order.delivery_man" class="btn btn-success btn-sm">
-                                    <i class="anticon anticon-message"></i>
-                                </button> -->
+                                        <button (click)="openDialogSendMessageOrder(order)" style="width: 90%;" class="btn btn-success btn-sm mb-1">
+                                            Mensaje
+                                            </button>
 
-                                        <button (click)="openDialogReassignDelivery(order)" *ngIf="order.delivery_man" style="width: 90%;" class="btn btn-info btn-sm m-b-5">
+                                        <button (click)="openDialogReassignDelivery(order)" *ngIf="order.delivery_man" style="width: 90%;" class="btn btn-info btn-sm mb-1">
                                     Reasignar
                                 </button>
 
@@ -131,6 +131,7 @@
 
 
                                         <button *ngIf="order.order_status.id == 15" (click)="endOrderMerchant(order.id)" style="width: 90%;" class="btn btn-secondary btn-sm m-b-5">Terminar</button>
+                                        <!-- <button (click)="openDialogSendMessage(order)" style="width: 90%;" class="btn btn-secondary btn-sm m-b-5">Mensaje</button> -->
 
                                         <button *ngIf="order.order_status.id == 15" [disabled]="loadingRejectOrder" (click)="rejectOrderMerchant(order.id)" style="width: 90%;" class="btn btn-danger btn-sm">Cancelar</button>
 
@@ -138,9 +139,6 @@
                                     </td>
 
 
-                                    <!-- <td>
-                                <button (click)="openDialogAssignDelivery(order.id)" style="font-size: 90%;" class="btn btn-success">Más detalles</button>
-                            </td> -->
                                 </tr>
                         </tbody>
                     </table>

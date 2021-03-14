@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
 import { RejectOrderMerchantComponent } from './reject-order-merchant/reject-order-merchant.component';
+import { SendMessageDialogComponent } from '../send-message-dialog/send-message-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-orders',
@@ -43,7 +45,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   searchText;
 
   constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
-    private dialog: MatDialog, private webSocketService: WebSocketService) { }
+    private dialog: MatDialog, private webSocketService: WebSocketService, private router: Router) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -58,6 +60,28 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  openDialogSendMessageOrder(order) {
+
+    if (order.supports.length > 0) {
+      this.router.navigateByUrl('/support');
+      return
+    }
+
+    const dialogref = this.dialog.open(SendMessageDialogComponent, {
+      disableClose: true,
+      width: '30%',
+      // minHeight: '400px',
+      // minWidth: '350px',
+      data: { order: order }
+    });
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.getOrders();
+      }
+    });
+  }
   rejectOrderMerchant(orderId) {
     const dialogref = this.dialog.open(RejectOrderMerchantComponent, {
       disableClose: true,

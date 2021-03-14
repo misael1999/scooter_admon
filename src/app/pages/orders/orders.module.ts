@@ -37,7 +37,6 @@ import { FormsModule } from '@angular/forms';
     SendMessageDialogComponent,
     RejectOrderMerchantComponent,
     CancelOrderMerchantComponent
-
   ],
   imports: [
     CommonModule,

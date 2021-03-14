@@ -11,6 +11,7 @@ import { OrdersDetailComponent } from '../orders-detail/orders-detail.component'
 import { SendMessageDialogComponent } from '../send-message-dialog/send-message-dialog.component';
 import { CancelOrderMerchantComponent } from './cancel-order-merchant/cancel-order-merchant.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders-in-process',
@@ -37,7 +38,7 @@ export class OrdersInProcessComponent implements OnInit {
   loadingAcceptOrder: boolean;
   loadingRejectOrder: boolean;
 
-  constructor(private ordersService: OrdersService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private ordersService: OrdersService, private dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -51,6 +52,9 @@ export class OrdersInProcessComponent implements OnInit {
       data: { order }
     });
   }
+
+ 
+
   openDirection(addres) {
     console.log(addres);
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
@@ -137,11 +141,13 @@ export class OrdersInProcessComponent implements OnInit {
 
 
   openDialogSendMessageOrder(order) {
+    if (order.supports.length > 0) {
+      this.router.navigateByUrl('/support');
+      return
+    }
     const dialogref = this.dialog.open(SendMessageDialogComponent, {
       disableClose: true,
       width: '30%',
-      minHeight: '400px',
-      minWidth: '350px',
       data: { order: order }
     });
 
