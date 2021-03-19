@@ -10,15 +10,21 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./delivered-orders.component.scss']
 })
 export class DeliveredOrdersComponent implements OnInit {
-  // MatPaginator Inputs
-  length = 100;
+  // MATPAGINATOR INPUTS
+  length = 0;
   pageSize = 25;
+  pageIndex = 0;
   pageSizeOptions: number[] = [25, 50, 75, 100];
+
+
+  // MATPAGINATOR  OUTPUT 
   pageEvent: PageEvent;
 
-  params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '6' };
+
+  // PARAMETROS
+  params = { limit: 25, offset: 1, page: 1, search: '', ordering: '',order_status: '6' };
   orders: Array<any> = [];
-  loadingOrders: boolean;
+  loadingdata: boolean;
   searchText;
 
   constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
@@ -42,15 +48,16 @@ export class DeliveredOrdersComponent implements OnInit {
 
 
   getOrders() {
-    this.loadingOrders = true;
+    this.loadingdata = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
+        this.loadingdata = false;
         this.orders = data.results;
-        console.log(this.orders);
-        this.loadingOrders = false;
         this.length = data.count;
+        this.pageIndex = this.params.page - 1;
+        this.pageSize = this.params.limit;
       }, error => {
-        this.loadingOrders = false;
+        this.loadingdata = false;
       });
   }
 
@@ -72,13 +79,18 @@ export class DeliveredOrdersComponent implements OnInit {
     this.getOrders();
   }
 
+  // METHOD PAGINATOR
+
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
-      this.pageSize = 15;
+      this.pageSize = 25;
+      this.pageIndex = 0;
       return;
     }
+    this.pageIndex = e.pageIndex;
     this.params.limit = e.pageSize;
-    this.params.offset = this.params.limit * e.pageIndex;
+    this.params.page = e.pageIndex + 1;
+    this.params.offset = this.params.limit * e.pageIndex + 1;
     this.getOrders();
   }
 }

@@ -17,7 +17,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ClientListComponent,
     InfoClientComponent,
     CardInfoComponent,
-    HistoryOrdersComponent],
+    HistoryOrdersComponent
+  ],
   imports: [
     CommonModule,
     ClientsRoutingModule,

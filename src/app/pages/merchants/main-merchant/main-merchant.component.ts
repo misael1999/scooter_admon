@@ -12,23 +12,24 @@ import Swal from 'sweetalert2';
   styleUrls: ['./main-merchant.component.scss']
 })
 export class MainMerchantComponent implements OnInit {
-
-  loadingMerchants: boolean;
-  merchants: Array<any> = [];
-  searchText;
-
-  // MatPaginator Inputs
-  length = 100;
+  // MATPAGINATOR INPUTS
+  length = 0;
   pageSize = 25;
+  pageIndex = 0;
   pageSizeOptions: number[] = [25, 50, 75, 100];
 
-  // MatPaginator Output
+
+  // MATPAGINATOR  OUTPUT 
   pageEvent: PageEvent;
 
+
+  // PARAMETROS
+  params = { limit: 25, offset: 1, page: 1, search: '', ordering: '', status: 1, information_is_complete: true };
+  loadingdata: boolean;
+  merchants: Array<any> = [];
+  searchText;
   statusFilter: boolean;
 
-  // Parametros para el paginado
-  params = { limit: 25, offset: 0, search: '', ordering: 'created', status: 1, information_is_complete: true };
 
   constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
 
@@ -67,14 +68,16 @@ export class MainMerchantComponent implements OnInit {
 
 
   getMerchants() {
-    this.loadingMerchants = true;
+    this.loadingdata = true;
     this.merchantsService.getMerchants(this.params)
       .subscribe((data: any) => {
-        this.loadingMerchants = false;
+        this.loadingdata = false;
         this.merchants = data.results;
         this.length = data.count;
+        this.pageIndex = this.params.page - 1;
+        this.pageSize = this.params.limit;
       }, error => {
-        this.loadingMerchants = false;
+        this.loadingdata = false;
       });
   }
 
@@ -97,41 +100,20 @@ export class MainMerchantComponent implements OnInit {
     this.getMerchants();
   }
 
-  deleteMerchant(id, nombre) {
-    Swal.fire({
-      title: 'Bloquear',
-      text: `Esta seguro de bloquear a ${nombre}`,
-      type: 'warning',
-      showConfirmButton: true,
-      confirmButtonText: 'Bloquear',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-    }).then(resp => {
-      if (resp.value) {
-        this.merchantsService.deleteMerchant(id)
-          .subscribe(data => {
-            Swal.fire({
-              title: 'Bloqueado',
-              type: 'success',
-              text: 'El comercio ha sido bloqueado',
-              timer: 2000
-            });
-          });
-      }
-    });
-  }
+  
 
 
-  // Metodo paginator
+  // METHOD PAGINATOR
   getPages(e): PageEvent {
-
     if (this.merchants.length === 0) {
       this.pageSize = 25;
+      this.pageIndex = 0;
       return;
     }
-
+    this.pageIndex = e.pageIndex;
     this.params.limit = e.pageSize;
-    this.params.offset = this.params.limit * e.pageIndex;
+    this.params.page = e.pageIndex + 1;
+    this.params.offset = this.params.limit * e.pageIndex + 1;
     this.getMerchants();
   }
 

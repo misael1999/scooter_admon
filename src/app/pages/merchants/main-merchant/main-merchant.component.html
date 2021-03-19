@@ -70,7 +70,7 @@
         <div class="col-md-12 col-lg-12 p-15">
 
             <!-- Preloader  -->
-            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingMerchants">
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingdata">
                 <div class="spinner-border text-primary my-5" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
@@ -80,21 +80,22 @@
 
             <!-- Component list merchants -->
             <div class="col-md-12 col-lg-12">
-                <app-merchant-list *ngIf="!loadingMerchants && merchants.length > 0" [merchants]="merchants"></app-merchant-list>
+                <app-merchant-list *ngIf="!loadingdata && merchants.length > 0" [merchants]="merchants"></app-merchant-list>
             </div>
             <!-- End component list merchants -->
 
 
             <!-- Paginator  -->
             <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator *ngIf="!loadingMerchants && merchants.length > 0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+
+                <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
                     </mat-paginator>
             </div>
             <!-- End paginator -->
 
 
             <!-- Component no data -->
-            <app-no-found-data *ngIf="!loadingMerchants && merchants.length == 0"  [message]="'No hay comercios que mostrar'">
+            <app-no-found-data *ngIf="!loadingdata && merchants.length == 0"  [message]="'No hay comercios que mostrar'">
             </app-no-found-data>
             <!-- End component no data -->
         </div>

@@ -17,4 +17,4 @@ const routes: Routes = [
     ]
 })
 
-export class ClientsRoutingModule {}
+export class ClientsRoutingModule { }

@@ -47,7 +47,7 @@
 
 
             <!-- Preloader -->
-            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingdata">
                 <div class="spinner-border text-primary my-5" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
@@ -55,7 +55,7 @@
             <!-- End Preloader -->
 
 
-            <div class="col-md-12 col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
+            <div class="col-md-12 col-lg-12" *ngIf="!loadingdata && orders.length > 0">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -113,15 +113,16 @@
             </div>
 
             <!-- Paginator -->
-            <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingOrders && orders.length > 0">
-                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                </mat-paginator>
+            <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingdata && orders.length > 0">
+
+                <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                    </mat-paginator>
             </div>
             <!-- End Paginator -->
 
 
             <!-- Component no data -->
-            <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  [message]="'No hay pedidos que mostrar'">
+            <app-no-found-data *ngIf="!loadingdata && orders.length == 0"  [message]="'No hay pedidos que mostrar'">
             </app-no-found-data>
             <!-- End Component no data -->
         </div>

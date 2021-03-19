@@ -1,8 +1,7 @@
 <div class="container-fluid">
-
-    <!-- Page Heading -->
+    <!-- PAGE HEADING -->
     <div class="d-sm-flex align-items-center justify-content-between">
-        <h1 class="h3 text-gray-800">Registros</h1>
+        <h1 class="h3 text-gray-800">Usuarios registrados</h1>
     </div>
 
 
@@ -49,7 +48,7 @@
 
         <div class="col-md-12 col-lg-12 p-15">
             <!-- Preloader  -->
-            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingClient">
+            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingdata">
                 <div class="spinner-border text-primary" role="status ">
                     <span class="sr-only ">Loading...</span>
                 </div>
@@ -58,7 +57,7 @@
 
 
 
-            <div class="col-md-12" *ngIf="!loadingClient && clients.length > 0 ">
+            <div class="col-md-12" *ngIf="!loadingdata && clients.length > 0 ">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -97,15 +96,18 @@
             </div>
 
             <!-- Paginator  -->
-            <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingClient && clients.length > 0 ">
-                <mat-paginator  [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+            <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingdata && clients.length > 0 ">
+                <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
                     </mat-paginator>
+
+
+
             </div>
             <!-- En paginator -->
 
 
             <!-- Component no data -->
-            <app-no-found-data *ngIf="!loadingClient && clients.length == 0"  [message]="'No hay registros que mostrar'">
+            <app-no-found-data *ngIf="!loadingdata && clients.length == 0"  [message]="'No hay registros que mostrar'">
             </app-no-found-data>
             <!-- End component no data -->
         </div>
