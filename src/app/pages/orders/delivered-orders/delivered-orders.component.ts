@@ -22,7 +22,7 @@ export class DeliveredOrdersComponent implements OnInit {
 
 
   // PARAMETROS
-  params = { limit: 25, offset: 1, page: 1, search: '', ordering: '',order_status: '6' };
+  params = { limit: 25, offset: 0, page: 1, search: '', ordering: '',order_status: '6' };
   orders: Array<any> = [];
   loadingdata: boolean;
   searchText;

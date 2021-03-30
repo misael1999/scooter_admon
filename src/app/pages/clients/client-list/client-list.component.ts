@@ -20,7 +20,7 @@ export class ClientListComponent implements OnInit {
 
 
   // PARAMETROS
-  params = { limit: 25, offset: 1, page: 1, search: '', ordering: '' };
+  params = { limit: 25, offset: 0, page: 1, search: '', ordering: '' };
   loadingdata: boolean;
   clients: Array<any> = [];
   searchText;
