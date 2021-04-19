@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700');
-
-html, html a, body {
-   -webkit-font-smoothing: antialiased;
+html,
+html a,
+body {
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-   font-family: $font-family-base;
-   font-size: 14px;
-   background-color: $body-bg;
-   color: $gray;
-   line-height: 1.5;
-   overflow-x: hidden;
+    font-family: $font-family-base;
+    font-size: 14px;
+    background-color: $body-bg;
+    color: $gray;
+    line-height: 1.5;
+    overflow-x: hidden;
 }
 
 h1,
@@ -19,15 +20,14 @@ h3,
 h4,
 h5,
 h6 {
-	color: $gray-dark;
-	font-weight: normal;
-	line-height: 1.5;
-	font-weight: $font-weight-semibold;
-	
-	small {
-		font-weight: $font-weight-light;
-		color: lighten($gray-dark,5%);
-	}
+    color: $gray-dark;
+    font-weight: normal;
+    line-height: 1.5;
+    font-weight: $font-weight-semibold;
+    small {
+        font-weight: $font-weight-light;
+        color: lighten($gray-dark, 5%);
+    }
 }
 
 h1,
@@ -36,7 +36,7 @@ h1,
 }
 
 h2,
-.h2{
+.h2 {
     font-size: 24px;
 }
 
@@ -61,144 +61,133 @@ h6,
 }
 
 p {
-	color: $gray-light;
-	line-height: 1.8;
-	margin-bottom: 10px;
+    color: $gray-light;
+    line-height: 1.8;
+    margin-bottom: 10px;
 }
 
 ul {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 a {
-	color: $brand-primary;
-	
-	&:hover,
-	&:focus {
-		text-decoration: none;
-		color: darken($brand-primary,10%);
-	}
-
-	&:focus {
-		outline: none;
-	}
-
-	&.text-gray {
-
-		&:hover,
-		&:focus {
-			color: $gray-dark !important;
-		}
-
-		&.active {
-			color: $brand-primary !important;
-		}
-	}
-
-	&.text-dark {
-		&:hover,
-		&:focus {
-			color: $brand-primary !important;
-		}
-
-		&.active {
-			color: $brand-primary !important;
-		}
-	}
-
-	&.text-muted {
-		&:hover,
-		&:focus {
-			color: $gray-dark !important;
-		}
-
-		&.active {
-			color: $brand-primary !important;
-		}
-	}
-
-	&.hover-opacity {
-		&:hover {
-			opacity: 0.8;
-		}
-	}
+    color: $brand-primary;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: darken($brand-primary, 10%);
+    }
+    &:focus {
+        outline: none;
+    }
+    &.text-gray {
+        &:hover,
+        &:focus {
+            color: $gray-dark !important;
+        }
+        &.active {
+            color: $brand-primary !important;
+        }
+    }
+    &.text-dark {
+        &:hover,
+        &:focus {
+            color: $brand-primary !important;
+        }
+        &.active {
+            color: $brand-primary !important;
+        }
+    }
+    &.text-muted {
+        &:hover,
+        &:focus {
+            color: $gray-dark !important;
+        }
+        &.active {
+            color: $brand-primary !important;
+        }
+    }
+    &.hover-opacity {
+        &:hover {
+            opacity: 0.8;
+        }
+    }
 }
 
 .display-1,
 .display-2,
 .display-3,
 .display-4 {
-	color: $gray-dark;
+    color: $gray-dark;
 }
 
 :focus {
-	outline: none;
+    outline: none;
 }
 
 hr {
-	border-top: 1px solid $border-color;
-	margin-top: 24px;
+    border-top: 1px solid $border-color;
+    margin-top: 24px;
     margin-bottom: 24px;
 }
 
 .font-primary {
-	font-family: $font-family-base;
+    font-family: $font-family-base;
 }
 
 .text-link {
-	
-	&:hover,
-	&:focus {
-		text-decoration: underline;
-	}
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
 }
 
 .text-opacity {
-	opacity: 0.85;
+    opacity: 0.85;
 }
 
 .text-white {
-	color: $white !important;
+    color: $white !important;
 }
 
 .text-dark {
-	color: $gray-dark !important;
+    color: $gray-dark !important;
 }
 
 .text-gray {
-	color: $gray-light !important;
+    color: $gray-light !important;
 }
 
 // Loop for contextual text-color 
 @each $type in $contextual-loop {
-	.#{nth($type, 3)} {
-		color: #{nth($type, 1)} !important;
-	}
-}	
+    .#{nth($type, 3)} {
+        color: #{nth($type, 1)} !important;
+    }
+}
 
 .bg-white {
-	background-color: $white !important;
+    background-color: $white !important;
 }
 
 .bg-dark {
-	background-color: $gray-dark !important;
+    background-color: $gray-dark !important;
 }
 
 .bg-gray {
-	background-color: $gray !important;
+    background-color: $gray !important;
 }
 
 // Loop for contextual background color 
 @each $type in $contextual-loop {
-	.#{nth($type, 4)} {
-		background-color: #{nth($type, 1)} !important;
-	}
-}	
+    .#{nth($type, 4)} {
+        background-color: #{nth($type, 1)} !important;
+    }
+}
 
 .img-fit-cover {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .bg {
@@ -208,84 +197,84 @@ hr {
 }
 
 .container-fluid {
-
-	&.container-fixed-lg {
-		max-width: 1700px;
-	}
-
-	&.container-fixed-md {
-		max-width: 1400px;
-	}
-
-	&.container-fixed-sm {
-		max-width: 1280px;
-	}
+    &.container-fixed-lg {
+        max-width: 1700px;
+    }
+    &.container-fixed-md {
+        max-width: 1400px;
+    }
+    &.container-fixed-sm {
+        max-width: 1280px;
+    }
 }
 
 button,
 input,
 textarea {
-	outline: none;
+    outline: none;
 }
 
 blockquote {
     border-left: 3px solid $gray-dark;
-	padding-left: 30px;
-	position: relative;
-	font-family: serif;
+    padding-left: 30px;
+    position: relative;
+    font-family: serif;
     font-style: italic;
 }
 
 .blockquote-footer {
-	color: $gray-dark;
+    color: $gray-dark;
 }
 
 dt {
-	color: $gray-dark;
-	font-weight: 500;
+    color: $gray-dark;
+    font-weight: 500;
 }
 
 dd {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
-	
+
 .fade {
-	&.in {
-		opacity: 1;
-	}
-}	
+    &.in {
+        opacity: 1;
+    }
+}
 
 .collapse {
-	&.in {
-		display: block;
-	}
+    &.in {
+        display: block;
+    }
 }
 
 iframe {
-	border: 0;
-
-	@include screen-mobile {
-		min-height: 175px !important;
-		height: auto;
-	}
+    border: 0;
+    @include screen-mobile {
+        min-height: 175px !important;
+        height: auto;
+    }
 }
 
 .close {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 @include print {
-	body {
-		font-size: 10px;
-	}	
-
-	.mrg-top-30,
-	.mrg-top-20 {
-		margin-top: 15px !important;
-	}
-
-	.print-invisible {
-		display: none;
-	}
+    body {
+        font-size: 10px;
+    }
+    .mrg-top-30,
+    .mrg-top-20 {
+        margin-top: 15px !important;
+    }
+    .print-invisible {
+        display: none;
+    }
 }
 
+.btn-close-modal {
+    margin: -1rem !important;
+    padding-bottom: 1rem !important;
+    cursor: pointer;
+    font-size: 22px;
+}

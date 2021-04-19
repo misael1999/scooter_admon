@@ -24,7 +24,7 @@ export class MainMerchantComponent implements OnInit {
 
 
   // PARAMETROS
-  params = { limit: 25, offset: 1, page: 1, search: '', ordering: '', status: 1, information_is_complete: true };
+  params = { limit: 25, offset: 0, page: 1, search: '', ordering: '', status: 1, information_is_complete: true };
   loadingdata: boolean;
   merchants: Array<any> = [];
   searchText;
