@@ -1,0 +1,51 @@
+<nz-drawer [nzClosable]="false" [nzVisible]="visible" [nzWidth]="400" nzPlacement="right" nzTitle="Basic Drawer" (nzOnClose)="close()">
+    <!-- <ng-container *nzDrawerContent> -->
+        <div class="chat-list">
+            <div class="chat-user-tool">
+                <!-- <i class="anticon anticon-search search-icon p-r-10 font-size-20"></i>
+                <input placeholder="Buscar..."> -->
+                <select  class="form-control form-control-sm" name="" id="">
+                    <option selected value="true">Abiertos</option>
+                    <option value="false">Cerrados</option>
+                </select>
+            </div>
+            <div class="chat-user-list">
+                <div class="d-flex justify-content-center my-1">
+                    <div *ngIf="loadingSupports" class="spinner-grow" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <span *ngIf="!loadingSupports && supports.length == 0">No hay conversaciones que mostrar</span>
+                </div>
+                <a *ngFor="let support of supports" (click)="supportSelect(support)" class="chat-list-item p-h-25"
+                 [ngClass]="supportSelected && support.id == supportSelected.id ? 'active': ''">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-image">
+                            <img src="assets/images/avatars/thumb-1.jpg" alt="">
+                        </div>
+                        <div class="p-l-15">
+                            <h5 class="m-b-0">{{support.customer}}</h5>
+                            <p class="msg-overflow m-b-0 text-muted font-size-13">
+                                Asunto: <span class="badge"
+                                [ngClass]="getSupportClass(support.support_type_id)"
+                                >{{support.support_type}}</span>
+                            </p>
+                            <p *ngIf="support.support_type_id == 3" class="msg-overflow m-b-0 text-muted font-size-13">
+                                Issue: {{support.issue}}
+                            </p>
+                            <p class="msg-overflow m-b-0 text-muted font-size-13">
+                                Estatus: <span>{{support.support_status}}</span>
+                                <!-- <span class="badge" 
+                                [ngClass]="support.support_status_id == 1 ? 'badge-success': 'badge-danger'"
+                                >{{support.support_status}}</span> -->
+                            </p>
+                            <p class="msg-overflow m-b-0 text-muted font-size-13">
+                                Fecha: <span>{{support.created | date:'medium'}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="mt-1 mb-1">
+                </a>
+            </div>   
+        </div>
+    <!-- </ng-container> -->
+  </nz-drawer>

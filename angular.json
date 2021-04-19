@@ -38,7 +38,8 @@
                             "./node_modules/font-awesome/scss/font-awesome.scss",
                             "./node_modules/leaflet/dist/leaflet.css",
                             "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-                            "src/assets/scss/angular-theme.scss"
+                            "src/assets/scss/angular-theme.scss",
+                            "src/assets/css/animate.css"
                         ],
                         "scripts": [
                             "src/assets/js/vendors.min.js",

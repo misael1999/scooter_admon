@@ -19,11 +19,9 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-
-
+import { SupportChatModule } from './pages/support-chat/support-chat.module';
 
 registerLocaleData(localeEs);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +40,7 @@ registerLocaleData(localeEs);
     LoadingBarRouterModule,
     LoadingBarModule,
     SharedModule,
+    SupportChatModule,
   ],
   providers: [
     {

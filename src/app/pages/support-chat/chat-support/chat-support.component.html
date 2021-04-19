@@ -1,0 +1,52 @@
+<div *ngIf="!isMinimized && isClose" (click)="openChatSupport()" class="mine messages">
+    <div class="message last">
+        <img class="mr-2" src="assets/icons/system_icon_mensajes.svg" alt="">
+        <span class="mx-2">Chat</span>
+    </div>
+</div>
+<div *ngIf="!isClose" class="chat__support__page animated slideInUp" [ngClass]="{'minimized': isMinimized}"> 
+    <div class="header__chat">
+        <div (click)="isMinimized = false" class="w-100 cursor">
+            <img height="40" width="100" src="assets/images/logo/logo_pedidos.svg" alt="Logo">
+        </div>
+        <div class="icons">
+            
+
+            <i *ngIf="!isMinimized"  (click)="changeVisible()" class="far fa-address-book"></i>
+            <i *ngIf="!isMinimized" (click)="isMinimized = true" class="fas fa-minus"></i>
+            <i (click)="isClose = true; isMinimized = false" class="fas fa-close"></i>
+        </div>
+    </div>
+    <div class="chat__body" #conversationBody>
+        <div *ngIf="!messages" class="animated slideInRight text-center">
+            Aún no hay mensajes que mostrar
+            <br> 
+            Selecciona <u (click)="changeVisible()">Aquí</u>
+        </div>
+        <div *ngFor="let message of messages"  class="bubble__wrapper  animated slideInRight" [ngClass]="station.id != message.sender_by? 'msg__sent': 'msg__receive' ">
+           <!--  <span class="name" *ngIf="message.sender_by === station.id ">
+                {{station.station_name}}
+            </span>
+            <span class="name" *ngIf="message.sender_by === station.id ">
+                {{station.station_name}}
+            </span> -->
+           <!--  <span class="name" *ngIf="message.sender_by_id != station.id ">
+                {{station.station_name}}
+            </span> -->
+            <div class="bubble">
+                    <span class="d-flex">{{message.text}}</span>
+                    <span class="time">{{message.CreatedAt | date:'shortTime'}}</span>
+            </div>
+        </div>
+        
+    </div>
+    <div class="chat__footer">
+        <textarea maxlength="500" [(ngModel)]="messageText"   #inputMessage  (keyup.enter)="sendMessage(inputMessage.value)" placeholder="Escribe un mensaje" class="input__chat form-control form-control-sm"></textarea>
+        <button [disabled]="!messageText || messageText.trim() == ''" (click)="sendMessage(inputMessage.value)" class="btn btn-sm btn-default">
+            <i class="fa fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+<app-tickets-list [visible]="visible" (is_closed)="changeVisible()" (supportSelectedEvent)="supportSelect($event)" ></app-tickets-list>
+

@@ -9,9 +9,6 @@ import { AddGroupFaqComponent } from './faq/add-group-faq/add-group-faq.componen
 import { AddTagComponent } from './tags/add-tag/add-tag.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from '../../shared/shared.module';
-
-
-
 @NgModule({
   declarations: [
     FaqComponent,
