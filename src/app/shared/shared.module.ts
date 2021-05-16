@@ -6,6 +6,7 @@ import { ErrorDialogComponent } from './alerts/error-dialog/error-dialog.compone
 import { SuccessDialogComponent } from './alerts/success-dialog/success-dialog.component';
 import { NoFoundDataComponent } from './no-found-data/no-found-data.component';
 import { AngularMaterialModule } from './angular-material.module';
+import { LoadingDataComponent } from './loading-data/loading-data.component';
 
 
 
@@ -14,7 +15,8 @@ import { AngularMaterialModule } from './angular-material.module';
     ConfirmSignupDialogComponent,
     ErrorDialogComponent,
     SuccessDialogComponent,
-    NoFoundDataComponent
+    NoFoundDataComponent,
+    LoadingDataComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { AngularMaterialModule } from './angular-material.module';
   exports: [
     ConfirmSignupDialogComponent,
     ErrorDialogComponent,
+    LoadingDataComponent,
     SuccessDialogComponent,
     NoFoundDataComponent
   ]

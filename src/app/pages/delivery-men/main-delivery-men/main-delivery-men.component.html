@@ -1,0 +1,74 @@
+<div class="container">
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-start">
+        <h2>Repartidores</h2>
+        <button class="btn btn-primary" (click)="openDialogAddDelivery()">Agregar</button>
+    </div>
+
+
+    <div class="row p-t-20">
+        <!-- Order by -->
+        <div class="col-md-2 p-b-10">
+            <label class="font-weight-bold">Ordenar por</label>
+            <select (change)="orderBy($event.target.value)" [(ngModel)]="params.ordering" class="form-control select-form">
+                <option value="name">Nombre A - Z</option>
+                <option value="-name">Nombre Z - A</option>
+                <option value="-last_name">Apellidos</option>
+                <option value="-reputation">Reputacion</option>
+            </select>
+        </div>
+
+        <!-- Show view by -->
+        <div class="col-md-2 p-b-10">
+            <label class="font-weight-bold">Ver por</label>
+            <select (change)="showList($event.target.value)" [(ngModel)]="params.status" class="form-control select-form">
+                <option value="1">Disponibles</option>
+                <option value="2">Bloqueados</option>
+            </select>
+        </div>
+
+        <div class="col-md-5"></div>
+
+        <!-- Search by -->
+        <div class="col-md-3 p-b-10">
+            <label class="font-weight-bold">Buscar por</label>
+            <div class="input-group">
+                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control">
+                <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
+                    <span *ngIf="!params.search" class="input-group-text">
+                        <i class="anticon anticon-search"></i>
+                    </span>
+                    <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text">
+                        <i class="anticon anticon-close"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row p-t-10">
+        <!-- Shared components -->
+        <div class="col-md-12 d-flex justify-content-center">
+            <app-loading-data *ngIf="loadingData"></app-loading-data>
+            <app-no-found-data *ngIf="!loadingData && deliveryMens.length == 0"></app-no-found-data>
+        </div>
+
+        <!-- Paginator -->
+        <div class="col-md-12 d-flex justify-content-end" *ngIf="!loadingData && deliveryMens.length > 0">
+            <mat-paginator (page)="pageEvent = getPages($event)" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions">
+            </mat-paginator>
+        </div>
+
+        <!-- Lst delivery mens -->
+        <div class="col-md-12" *ngIf="!loadingData && deliveryMens.length > 0">
+            <app-list-delivery [deliveryMens]="deliveryMens" [params]="params"></app-list-delivery>
+        </div>
+
+        <!-- Paginator -->
+        <div class="col-md-12 d-flex justify-content-end" *ngIf="!loadingData && deliveryMens.length > 0">
+            <mat-paginator (page)="pageEvent = getPages($event)" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

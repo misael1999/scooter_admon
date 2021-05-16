@@ -9,6 +9,7 @@ import { AngularMaterialModule } from '../../shared/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { CardInfoComponent } from './info-delivery/card-info/card-info.component';
 import { HistoryOrdersComponent } from './info-delivery/history-orders/history-orders.component';
+import { MainDeliveryMenComponent } from './main-delivery-men/main-delivery-men.component';
 
 
 
@@ -18,7 +19,8 @@ import { HistoryOrdersComponent } from './info-delivery/history-orders/history-o
     InfoDeliveryComponent,
     ListDeliveryComponent,
     CardInfoComponent,
-    HistoryOrdersComponent],
+    HistoryOrdersComponent,
+    MainDeliveryMenComponent],
   imports: [
     CommonModule,
     DeliveryRoutingModule,

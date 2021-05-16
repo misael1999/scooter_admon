@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 })
 export class DeliveryMenService {
   searchText;
+  params;
 
   constructor(private httpClient: HttpClient) { }
 

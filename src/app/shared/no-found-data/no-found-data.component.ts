@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NoFoundDataComponent implements OnInit {
 
-  @Input() message = 'No hay datos que mostrar';
+  @Input() message = 'No hay datos que mostrar.';
 
   constructor() { }
 
