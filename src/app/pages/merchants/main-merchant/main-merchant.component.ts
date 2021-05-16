@@ -3,8 +3,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { MerchantsAddComponent } from '../merchants-add/merchants-add.component';
 import { MatDialog } from '@angular/material/dialog';
-import Swal from 'sweetalert2';
-// import { stat } from 'fs';
 
 @Component({
   selector: 'app-main-merchant',
@@ -12,24 +10,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./main-merchant.component.scss']
 })
 export class MainMerchantComponent implements OnInit {
-  // MATPAGINATOR INPUTS
   length = 0;
   pageSize = 25;
   pageIndex = 0;
-  pageSizeOptions: number[] = [25, 50, 75, 100];
-
-
-  // MATPAGINATOR  OUTPUT 
   pageEvent: PageEvent;
-
-
+  pageSizeOptions: number[] = [25, 50, 75, 100];
   // PARAMETROS
   params = { limit: 25, offset: 0, page: 1, search: '', ordering: '', status: 1, information_is_complete: true };
-  loadingdata: boolean;
+  loadingData: boolean;
   merchants: Array<any> = [];
   searchText;
   statusFilter: boolean;
-
 
   constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
 
@@ -68,16 +59,16 @@ export class MainMerchantComponent implements OnInit {
 
 
   getMerchants() {
-    this.loadingdata = true;
+    this.loadingData = true;
     this.merchantsService.getMerchants(this.params)
       .subscribe((data: any) => {
-        this.loadingdata = false;
+        this.loadingData = false;
         this.merchants = data.results;
         this.length = data.count;
         this.pageIndex = this.params.page - 1;
         this.pageSize = this.params.limit;
       }, error => {
-        this.loadingdata = false;
+        this.loadingData = false;
       });
   }
 
@@ -99,10 +90,6 @@ export class MainMerchantComponent implements OnInit {
     this.params.ordering = value;
     this.getMerchants();
   }
-
-  
-
-
   // METHOD PAGINATOR
   getPages(e): PageEvent {
     if (this.merchants.length === 0) {
@@ -110,10 +97,10 @@ export class MainMerchantComponent implements OnInit {
       this.pageIndex = 0;
       return;
     }
+    this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.params.limit = e.pageSize;
-    this.params.page = e.pageIndex + 1;
-    this.params.offset = this.params.limit * e.pageIndex + 1;
+    this.params.limit = e.pageSize
+    this.params.offset = this.params.limit * e.pageIndex;
     this.getMerchants();
   }
 
