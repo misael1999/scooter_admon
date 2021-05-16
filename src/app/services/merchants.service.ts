@@ -52,12 +52,14 @@ export class MerchantsService {
     return this.http.put(url, data);
   }
 
+  getSummaryMerchant(merchantId, queryparams = {}) {
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/statistics/summary/`;
+    return this.http.get(url, {params: queryparams});
+  }
+
   // Other Methods
   getCategories() {
     const url = `${environment.HOST_APIV1}/commons/categories/`;
     return this.http.get(url);
   }
-
-
-
 }

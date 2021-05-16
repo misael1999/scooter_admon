@@ -15,6 +15,10 @@ import { TabMerchantGeneralComponent } from './merchant-detail/tabs/tab-merchant
 import { TabMerchantSchedulesComponent } from './merchant-detail/tabs/tab-merchant-schedules/tab-merchant-schedules.component';
 import { AddTagMerchantComponent } from './merchant-detail/tabs/tab-merchant-tags/add-tag-merchant/add-tag-merchant.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TabMerchantSummaryComponent } from './merchant-detail/tabs/tab-merchant-summary/tab-merchant-summary.component';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+
 @NgModule({
   declarations: [
     MainMerchantComponent,
@@ -25,7 +29,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     TabMerchantSettingComponent,
     TabMerchantGeneralComponent,
     TabMerchantSchedulesComponent,
-    AddTagMerchantComponent
+    AddTagMerchantComponent,
+    TabMerchantSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +40,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SharedModule,
     FormsModule,
     MatCheckboxModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NzEmptyModule,
+    NzDatePickerModule
   ]
 })
 export class MerchantsModule { }

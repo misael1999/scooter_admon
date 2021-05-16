@@ -1,0 +1,123 @@
+<div class="container">
+    <mat-progress-bar class="my-4" *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Resumen {{month}} {{year}}</h1>
+
+    </div>
+    <span>Selecciona un mes</span><br>
+    <nz-date-picker style="width: 200px;" [(ngModel)]="date" [nzPlaceHolder]="'Selecciona el mes'" nzMode="month"
+        (ngModelChange)="changeDate($event)"></nz-date-picker>
+
+    <div class="my-4"></div>
+
+    <div class="data" *ngIf="!loadingData &&  dataSummary?.orders.length > 0">
+        <!-- <app-info [dataSummary]="dataSummary"></app-info>
+
+        <app-table-info [dataSummary]="dataSummary"></app-table-info> -->
+""
+        <!-- RESUMEN  -->
+        <div class="row">
+            <!-- DIV INFO  -->
+            <div class="col-md-4 col-info">
+                <div class="info">
+                    <span class="title">
+                        Número de ventas
+                    </span>
+
+                    <span class="data">
+                        {{dataSummary.total_orders}}
+                    </span>
+                </div>
+
+            </div>
+            <!-- DIV INFO  -->
+            <div class="col-md-4 col-info">
+                <div class="info info-2">
+                    <span class="title">
+                        Ganancias
+                    </span>
+
+                    <span class="data">
+                        ${{dataSummary.profits}}
+                    </span>
+                </div>
+
+            </div>
+            <!-- DIV INFO  -->
+            <div class="col-md-4 col-info">
+                <div class="info info-3">
+                    <span class="title">
+                        Comisión a pagar
+                    </span>
+
+                    <span class="data">
+                        ${{dataSummary.total_commissions}}
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <table class="table table-light table-bordered my-5">
+            <thead>
+              <tr>
+                <th scope="col">Clave</th>
+                <th scope="col">Fecha de entrega</th>
+                <th scope="col">Total venta</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of dataSummary.orders">
+                <th scope="row">{{order.qr_code}}</th>
+                <td>{{order.date_delivered_order | date:'medium'}}</td>
+                <td>${{order.order_price}}</td>
+                <td>
+                    <span class="link-details" (click)="openDialogDetailProducts(order)">Más detalles</span>
+                </td>
+              </tr>
+        
+              <!-- EXTRAS  -->
+              <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>
+                    Total de venta:
+                </td>
+                <td>
+                    <span class="link-details">${{dataSummary.total_sales}}</span>
+                </td>
+              </tr>
+              <!-- COMISIONES  -->
+              <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>
+                    Comisiones:
+                </td>
+                <td>
+                    <span class="link-details">-${{dataSummary.total_commissions}}</span>
+                </td>
+              </tr>
+              <!-- TOTAL  -->
+              <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>
+                    Ganancias:
+                </td>
+                <td>
+                    <span class="link-details">${{dataSummary.profits}}</span>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<div class="container" *ngIf="!loadingData && dataSummary?.orders.length == 0">
+    <nz-empty></nz-empty>
+</div>
