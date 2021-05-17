@@ -171,7 +171,12 @@ export class ChatSupportComponent implements OnInit {
 
     this.supportService.sendMessageSupport(this.supportSelected.id,{text})
     .subscribe((data: any) => {
-      this.messages.push(newMessageModel);
+      this.messages.push(data);
+      //console.log('Esta', data);
+      //console.log('Los mensajes',this.messages);
+      
+
+      
         // this.messages.push(data);
         // this.showSwalMessage("Mensaje enviado", 'success')
     }, error => {

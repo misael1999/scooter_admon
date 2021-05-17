@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="mb-4">
+        <nz-steps [nzCurrent]="current" nzSize="small">
+            <nz-step nzTitle="Elige tu comercio" (click)="removeMerchant()"></nz-step>
+            <nz-step nzTitle="Describe tu promoción"></nz-step>
+            <nz-step nzTitle="Finaliza"></nz-step>
+          </nz-steps>
+    </div>
+    <app-merchants-list *ngIf="!merchant" (merchantSelectedEvent)="selectMerchant($event)"></app-merchants-list>
+    <app-promotion-form *ngIf="merchant"></app-promotion-form>
+</div>

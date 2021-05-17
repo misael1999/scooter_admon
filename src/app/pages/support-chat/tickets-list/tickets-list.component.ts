@@ -30,7 +30,6 @@ export class TicketsListComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    console.log('Cambio el valor de visable', this.visible);
     this.visible? this.getSupports() : null;
   }
 
@@ -44,7 +43,7 @@ export class TicketsListComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingSupports = false;
         this.supports = data.results;   
-        console.log('Supports', this.supports);
+      //  console.log('Supports', this.supports);
              
     }, error => {
       this.loadingSupports = false;

@@ -1,0 +1,104 @@
+<div class="row d-flex justify-content-center">
+    <div class=" col-sm-12 col-md-8 p-t-10">
+        <div class="content p-5">
+
+            <form>
+                <div class="card p-lg-5">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <h3 class="text-center">Detalles de la promoción</h3>
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput1" class="form-label">Nombre de la promoción:</label>
+                            <input type="email" class="form-control" placeholder="NACHOSMX">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput1" class="form-label d-block">Tipo de descuento:</label>
+                            <mat-radio-group aria-label="Select an option" (change)="selectOption($event)">
+                                <div class="d-flex justify-content-around">
+                                    <mat-radio-button value="1">Cantidad fija a descontar</mat-radio-button>
+                                    <mat-radio-button value="2">Porcentaje a descontar</mat-radio-button>
+                                    <mat-radio-button value="3">Envio gratis</mat-radio-button>
+                                </div>
+                            </mat-radio-group>
+                        </div>
+
+                        <div class="mb-4 justify-content-center" *ngIf="typeDiscount">
+                            <div *ngIf="typeDiscount == 1">
+                                <label for="exampleFormControlInput1" class="form-label d-block">Elige el monto a descontar:</label>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Importe de descuento</mat-label>
+                                    <mat-select>
+                                      <mat-option value="1">
+                                        10.00 MXN
+                                      </mat-option>
+                                      <mat-option value="2">
+                                        20.00 MXN
+                                      </mat-option>
+                                      <mat-option value="2">
+                                        30.00 MXN
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div *ngIf="typeDiscount == 2">
+                                <label for="exampleFormControlInput1" class="form-label d-block">Elige el porcentaje a descontar:</label>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Porcentaje de descuento</mat-label>
+                                    <mat-select>
+                                      <mat-option value="1">
+                                        30%
+                                      </mat-option>
+                                      <mat-option value="2">
+                                        50%
+                                      </mat-option>
+                                      <mat-option value="3">
+                                        80%
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                           <!--  <div *ngIf="typeDiscount == 3" class="text-center">
+                                <small>La central deberá cubrir de manera parcial el costo de los envíos realizados en el comercio de: "Cemotas"</small>
+                                <mat-checkbox class="example-margin" [(ngModel)]="checked">Entendido</mat-checkbox>
+                                
+                            </div> -->
+                            
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput1" class="form-label d-block">Vigencia de la promoción:</label>
+                            
+                            <div class="d-flex justify-content-between">
+                                <mat-form-field color="accent" appearance="fill">
+                                    <mat-label>Fecha de inicio</mat-label>
+                                    <input matInput [matDatepicker]="picker1">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                                
+                                <mat-form-field color="accent" appearance="fill">
+                                    <mat-label>Fecha de termino</mat-label>
+                                    <input matInput [matDatepicker]="picker2">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                Guardar
+                                <!--  <div class="spinner-border text-white" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div> -->
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+           
+        </div>
+    </div>
+</div>
