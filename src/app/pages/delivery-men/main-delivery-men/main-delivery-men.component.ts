@@ -16,7 +16,7 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
   pageSize = 25;
   pageEvent: PageEvent;
   pageSizeOptions: number[] = [25, 50, 75, 100];
-  params = { limit: 25, offset: 0, search: '', ordering: 'name', status: 1 };
+  params = { limit: 25, offset: 0, search: '', ordering: '', status: 1 };
   deliveryMens: Array<any> = [];
   loadingData: boolean;
   searchText;

@@ -9,8 +9,8 @@
     <div class="row p-t-20">
         <!-- Order by -->
         <div class="col-md-2 p-b-10">
-            <label class="font-weight-bold">Ordenar por</label>
             <select (change)="orderBy($event.target.value)" [(ngModel)]="params.ordering" class="form-control select-form">
+               <option value="">Ordenar por</option>
                 <option value="name">Nombre A - Z</option>
                 <option value="-name">Nombre Z - A</option>
                 <option value="-last_name">Apellidos</option>
@@ -20,8 +20,8 @@
 
         <!-- Show view by -->
         <div class="col-md-2 p-b-10">
-            <label class="font-weight-bold">Ver por</label>
             <select (change)="showList($event.target.value)" [(ngModel)]="params.status" class="form-control select-form">
+                <option value="">Ver por</option>
                 <option value="1">Disponibles</option>
                 <option value="2">Bloqueados</option>
             </select>
@@ -31,9 +31,8 @@
 
         <!-- Search by -->
         <div class="col-md-3 p-b-10">
-            <label class="font-weight-bold">Buscar por</label>
             <div class="input-group">
-                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control">
+                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control" placeholder="Buscar por">
                 <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                     <span *ngIf="!params.search" class="input-group-text">
                         <i class="anticon anticon-search"></i>
