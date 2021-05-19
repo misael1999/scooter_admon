@@ -10,7 +10,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     PagesRoutingModule,
     AngularMaterialModule,
     NzDrawerModule
-    
+
   ]
 })
 export class PagesModule { }

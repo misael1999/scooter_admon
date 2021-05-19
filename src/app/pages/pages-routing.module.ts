@@ -23,11 +23,6 @@ const routes: Routes = [
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
   },
   {
-    path: 'merchant-orders',
-    canActivate: [AuthGuard, RefreshTokenGuard],
-    loadChildren: () => import('./merchant-orders/merchant-orders.module').then(m => m.MerchantOrdersModule)
-  },
-  {
     path: 'vehicles',
     canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule)
