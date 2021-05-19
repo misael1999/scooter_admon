@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientsService } from '../../../services/clients.service';
+import { ClientsService } from 'src/app/services/clients.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -12,19 +12,13 @@ export class MainClientsComponent implements OnInit {
   length = 0;
   pageSize = 25;
   pageIndex = 0;
-  pageSizeOptions: number[] = [25, 50, 75, 100];
-
-
-  // MATPAGINATOR  OUTPUT 
   pageEvent: PageEvent;
-
-
+  pageSizeOptions: number[] = [25, 50, 75, 100];
   // PARAMETROS
   params = { limit: 25, offset: 0, page: 1, search: '', ordering: '' };
   loadingData: boolean;
   clients: Array<any> = [];
   searchText;
-
 
   constructor(private clientsService: ClientsService) { }
 
@@ -41,10 +35,7 @@ export class MainClientsComponent implements OnInit {
         this.clients = data.results;
         this.length = data.count;
         this.clientsService.params = this.params;
-        this.pageIndex = this.params.page - 1;
-        this.pageSize = this.params.limit;
         this.pageIndex = (this.params.offset / this.params.limit);
-
       }, error => {
         this.loadingData = false;
       });
@@ -65,8 +56,7 @@ export class MainClientsComponent implements OnInit {
     this.getClients();
   }
 
-
-  ordenamiento(value: string) {
+  orderBy(value: string) {
     this.params.ordering = value;
     this.getClients();
   }

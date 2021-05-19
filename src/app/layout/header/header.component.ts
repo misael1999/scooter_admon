@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     this.station = JSON.parse(localStorage.getItem('station'));
-    console.log(this.station);
+    // console.log(this.station);
 
 
 

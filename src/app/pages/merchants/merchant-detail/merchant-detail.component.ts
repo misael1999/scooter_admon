@@ -12,20 +12,21 @@ import Swal from 'sweetalert2';
 export class MerchantDetailComponent extends ValidationForms implements OnInit {
   merchantId;
   merchant;
-  loadingInfo;
+  loadingData: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private merchantsService: MerchantsService) {
     super();
-    this.activatedRoute.params.subscribe((params) => {
+    activatedRoute.params.subscribe((params) => {
       this.merchantId = params['id'];
-      this.getMerchant(this.merchantId);
+      this.getMerchant(params['id']);
     });
+    this.merchantsService.merchantId = this.merchantId;
   }
 
   ngOnInit(): void {
   }
 
-  
+
   deleteMerchant() {
     Swal.fire({
       title: 'Bloquear',
@@ -52,17 +53,14 @@ export class MerchantDetailComponent extends ValidationForms implements OnInit {
 
 
   getMerchant(merchantId) {
-    this.loadingInfo = true;
-    this.merchantsService.getMerchantById(merchantId).subscribe(
-      (data: any) => {
-        this.loadingInfo = false;
+    this.loadingData = true;
+    this.merchantsService.getMerchantById(merchantId)
+      .subscribe((data: any) => {
+        this.loadingData = false;
         this.merchant = data;
-        this.merchantsService.merchantId = this.merchant;
-        console.log(this.merchant);
+        this.merchantsService.merchant = this.merchant;
       }, error => {
-        this.loadingInfo = false;
-        this.showSwalMessage("Error al obtener información del comercio", 'error');
+        this.loadingData = false;
       });
   }
-
 }

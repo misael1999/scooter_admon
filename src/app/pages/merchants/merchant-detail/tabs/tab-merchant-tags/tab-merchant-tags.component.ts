@@ -11,13 +11,14 @@ import { AddTagMerchantComponent } from './add-tag-merchant/add-tag-merchant.com
   styleUrls: ['./tab-merchant-tags.component.scss']
 })
 export class TabMerchantTagsComponent implements OnInit {
-  tagsMerchant: any;
+  merchantTags;
 
-  constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
+  constructor(private merchantsService: MerchantsService, private dialog: MatDialog) {
+    this.merchantTags = this.merchantsService.merchant.tags;
+    console.log('esta es la info', this.merchantTags);
+  }
 
   ngOnInit(): void {
-    this.tagsMerchant = this.merchantsService.merchantId.tags;
-    console.log('esta es la info', this.tagsMerchant);
   }
 
 
@@ -32,7 +33,7 @@ export class TabMerchantTagsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe((data: any) => {
         if (data) {
-          this.tagsMerchant;
+          this.merchantTags;
         }
       });
   }

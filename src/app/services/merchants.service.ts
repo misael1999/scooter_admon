@@ -8,10 +8,11 @@ import { StationModel } from '../models/station.model';
   providedIn: 'root'
 })
 export class MerchantsService {
-
   station: StationModel;
-  merchantId: any;
+  merchantId;
+  merchant;
   searchText;
+  params;
 
   constructor(private http: HttpClient) {
     this.station = JSON.parse(localStorage.getItem("station"));
@@ -54,7 +55,7 @@ export class MerchantsService {
 
   getSummaryMerchant(merchantId, queryparams = {}) {
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/statistics/summary/`;
-    return this.http.get(url, {params: queryparams});
+    return this.http.get(url, { params: queryparams });
   }
 
   // Other Methods

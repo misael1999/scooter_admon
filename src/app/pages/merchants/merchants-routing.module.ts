@@ -4,17 +4,26 @@ import { MainMerchantComponent } from './main-merchant/main-merchant.component';
 import { MerchantDetailComponent } from './merchant-detail/merchant-detail.component';
 import { TabMerchantGeneralComponent } from './merchant-detail/tabs/tab-merchant-general/tab-merchant-general.component';
 import { TabMerchantSummaryComponent } from './merchant-detail/tabs/tab-merchant-summary/tab-merchant-summary.component';
+import { TabMerchantSettingComponent } from './merchant-detail/tabs/tab-merchant-setting/tab-merchant-setting.component';
 
 
 const routes: Routes = [
   { path: '', component: MainMerchantComponent },
   {
-    path: ':id/detail', component: MerchantDetailComponent, children: [
+    path: 'detail/:id', component: MerchantDetailComponent, children: [
       {
         path: 'general', component: TabMerchantGeneralComponent
       },
       {
-        path: 'services', component: TabMerchantSummaryComponent
+        path: 'settings', component: TabMerchantSettingComponent
+      },
+      {
+        path: 'summary', component: TabMerchantSummaryComponent
+      },
+      {
+        path: 'promotions',
+        loadChildren: () => import('./merchant-detail/tabs/tab-promotions/tab-promotions.module').then(m => m.TabPromotionsModule)
+
       },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]

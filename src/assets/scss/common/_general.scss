@@ -190,6 +190,19 @@ hr {
     object-fit: cover;
 }
 
+// Cambiar colores de estrellas y valores
+.not__qualification {
+    color: gray;
+    font-size: 17px;
+    padding: 0px 4px;
+}
+
+.start__decoration {
+    padding: 0px 4px;
+    color: #FFC107;
+    font-size: 17px;
+}
+
 .cursor {
     cursor: pointer;
 }

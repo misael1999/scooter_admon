@@ -18,7 +18,7 @@
                     <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>
                 </td>
                 <td> {{ merchant.phone_number }} </td>
-                <td> <u class="cursor font-weight-semibold" routerLink="{{merchant.id}}/detail"> {{ merchant.merchant_name }} </u> </td>
+                <td> <u class="cursor font-weight-semibold" routerLink="detail/{{merchant.id}}"> {{ merchant.merchant_name }} </u> </td>
                 <td> {{ merchant.email }} </td>
                 <td> {{ merchant.contact_person }} </td>
                 <td> {{ merchant.category }} </td>

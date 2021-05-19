@@ -1,21 +1,34 @@
-<app-loading-data *ngIf="loadingInfo"> </app-loading-data>
 <div class="container">
     <div>
-        <h2 class="m-0">Detalles del comercio </h2>
+        <h2 class="m-0">Detalle del comercio </h2>
         <nav class="breadcrumb breadcrumb-dash">
             <a routerLink="/merchants" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Comercios</a>
-            <span class="breadcrumb-item active">Detalle</span>
+            <span class="breadcrumb-item active">Detalle del comercio </span>
         </nav>
     </div>
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <app-loading-data *ngIf="loadingData"> </app-loading-data>
+        </div>
+    </div>
 
-    <div class="row p-t-20">
+    <div class="row p-t-20" *ngIf="merchant">
         <div class="col-md-12">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="general" routerLinkActive="active">Perfil</a>
+                    <a class="nav-link" routerLink="general" routerLinkActive="active" data-toggle="tab" role="tab" aria-selected="true">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="services" routerLinkActive="active">Resumen</a>
+                    <a class="nav-link" routerLink="settings" routerLinkActive="active" data-toggle="tab" role="tab" aria-selected="false">Configuración</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" routerLink="tags" routerLinkActive="active" data-toggle="tab" role="tab" aria-selected="false">Etiquetas</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="summary" routerLinkActive="active" data-toggle="tab" role="tab" aria-selected="false">Resumen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="promotions" routerLinkActive="active" data-toggle="tab" role="tab" aria-selected="false">Promociones</a>
                 </li>
             </ul>
             <div class="tab-content m-t-15" id="myTabContent">

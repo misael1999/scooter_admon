@@ -65,8 +65,8 @@ export class MainMerchantComponent implements OnInit {
         this.loadingData = false;
         this.merchants = data.results;
         this.length = data.count;
-        this.pageIndex = this.params.page - 1;
-        this.pageSize = this.params.limit;
+        this.merchantsService.params = this.params;
+        this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {
         this.loadingData = false;
       });

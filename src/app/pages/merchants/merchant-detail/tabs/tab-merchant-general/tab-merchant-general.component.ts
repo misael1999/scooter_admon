@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MerchantsService } from 'src/app/services/merchants.service';
 
 @Component({
@@ -10,13 +10,11 @@ export class TabMerchantGeneralComponent implements OnInit {
   merchant;
 
   constructor(private merchantsService: MerchantsService) {
-    this.merchant = this.merchantsService.merchantId;
-    console.log('Detalles del comercio', this.merchant);
-
   }
 
   ngOnInit(): void {
+    this.merchant = this.merchantsService.merchant;
+    console.log('Data profile', this.merchant);
   }
-
 }
 

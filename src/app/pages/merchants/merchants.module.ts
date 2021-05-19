@@ -12,7 +12,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TabMerchantTagsComponent } from './merchant-detail/tabs/tab-merchant-tags/tab-merchant-tags.component';
 import { TabMerchantSettingComponent } from './merchant-detail/tabs/tab-merchant-setting/tab-merchant-setting.component';
 import { TabMerchantGeneralComponent } from './merchant-detail/tabs/tab-merchant-general/tab-merchant-general.component';
-import { TabMerchantSchedulesComponent } from './merchant-detail/tabs/tab-merchant-schedules/tab-merchant-schedules.component';
 import { AddTagMerchantComponent } from './merchant-detail/tabs/tab-merchant-tags/add-tag-merchant/add-tag-merchant.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TabMerchantSummaryComponent } from './merchant-detail/tabs/tab-merchant-summary/tab-merchant-summary.component';
@@ -28,9 +27,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     TabMerchantTagsComponent,
     TabMerchantSettingComponent,
     TabMerchantGeneralComponent,
-    TabMerchantSchedulesComponent,
     AddTagMerchantComponent,
-    TabMerchantSummaryComponent
+    TabMerchantSummaryComponent,
   ],
   imports: [
     CommonModule,
