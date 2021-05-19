@@ -9,15 +9,15 @@ import { CardInfoComponent } from './info-client/card-info/card-info.component';
 import { HistoryOrdersComponent } from './info-client/history-orders/history-orders.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-
+import { MainClientsComponent } from './main-clients/main-clients.component';
 
 @NgModule({
   declarations: [
     ClientListComponent,
     InfoClientComponent,
     CardInfoComponent,
-    HistoryOrdersComponent
+    HistoryOrdersComponent,
+    MainClientsComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
-<div class="container-fluid">
+<div class="container">
     <div class="card">
         <div class="card-body">
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="d-md-flex align-items-center">
                         <div class="text-center text-sm-left ">
                             <div class="avatar avatar-image" style="width: 150px; height:150px">
@@ -10,15 +10,14 @@
                             </div>
                         </div>
                         <div class="text-center text-sm-left m-v-15 p-l-30">
-                            <h2 class="m-b-5">{{merchant.merchant_name}} </h2>
-                            <p class="text-opacity font-size-13"> {{ merchant.contact_person }} </p>
-                            <p class="text-dark m-b-20"> {{merchant.description}} </p>
-                            <p class="text-dark m-b-20"> {{merchant.description}} </p>
-                            <!-- <button class="btn btn-primary btn-tone">Contact</button> -->
+                            <h2 class="m-b-5"> {{merchant.merchant_name}} </h2>
+                            <p class="text-opacity font-size-13">@Marshallnich</p>
+                            <p class="text-dark m-b-20">Frontend Developer, UI/UX Designer</p>
+                            <button class="btn btn-primary btn-tone">Contact</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="row">
                         <div class="d-md-block d-none border-left col-1"></div>
                         <div class="col">
@@ -28,29 +27,76 @@
                                         <i class="m-r-10 text-primary anticon anticon-mail"></i>
                                         <span>Correo </span>
                                     </p>
-                                    <p class="col font-weight-semibold"> {{merchant.email}} </p>
+                                    <p class="col font-weight-semibold"> {{ merchant.email }} </p>
                                 </li>
                                 <li class="row">
                                     <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
                                         <i class="m-r-10 text-primary anticon anticon-phone"></i>
-                                        <span>Telefono </span>
+                                        <span>Teléfono</span>
                                     </p>
-                                    <p class="col font-weight-semibold"> {{merchant.phone_number}}</p>
+                                    <p class="col font-weight-semibold"> {{ merchant.phone_number }} </p>
                                 </li>
                                 <li class="row">
                                     <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
                                         <i class="m-r-10 text-primary anticon anticon-compass"></i>
-                                        <span>Ubicacion </span>
+                                        <span>Ubicación</span>
                                     </p>
-                                    <p class="col font-weight-semibold"> {{merchant.full_address}} </p>
+                                    <p class="col font-weight-semibold"> {{ merchant.full_address }} </p>
                                 </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Descripción </h5>
+                    <p> {{ merchant.description }} </p>
+                    <hr>
+                    <h5>Etiquetas </h5>
+                    <h5 class="m-t-20">
+                        <span class="badge badge-pill badge-default font-weight-normal m-r-10 m-b-10" *ngFor="let tag of merchant.tags"> {{ tag.tag_name }} </span>
+                    </h5>
+                    <hr>
 
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Horario</h5>
+
+                    <div class="table-responsive">
+                        <table class="table table-border table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Dia</th>
+                                    <th scope="col" class="text-center">Apertura</th>
+                                    <th scope="col" class="text-center">Cierre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let schedule of merchant.schedules">
+                                    <td>{{ schedule.schedule }}</td>
+                                    <td class="text-center" *ngIf="schedule.is_open"> {{ schedule.from_hour}} </td>
+                                    <td class="text-center" *ngIf="schedule.is_open"> {{ schedule.to_hour }} </td>
+                                    <td class="text-center text-danger" colspan="2" *ngIf="!schedule.is_open">Cerrado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

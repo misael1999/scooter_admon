@@ -7,9 +7,9 @@
 
     <div class="row p-t-20">
         <!-- Order by -->
-        <div class="col-md-3">
-            <select class="form-control select-form" (change)="ordenamiento($event.target.value)">
-                <option value="">Ordenar por:</option>
+        <div class="col-md-2 p-b-10">
+            <select class="form-control select-form" [(ngModel)]="params.ordering" (change)="ordenamiento($event.target.value)">
+                <option value="">Ordenar por</option>
                 <option value="-name">Fecha de ingreso</option>
                 <option value="-last_name">Nombre</option>
                 <option value="-reputation">Reputacion</option>
@@ -17,9 +17,9 @@
         </div>
 
         <!-- View by status -->
-        <div class="col-md-3">
-            <select (change)="showList($event.target.value)" class="form-control select-form">
-                <option value=" ">Ver por:</option>
+        <div class="col-md-2 p-b-10">
+            <select (change)="showList($event.target.value)" [(ngModel)]="params.status" class="form-control select-form">
+                <option value="">Ver por</option>
                 <option value="1">Disponibles</option>
                 <option value="2">Bloqueados</option>
             </select>
@@ -27,20 +27,21 @@
 
 
         <!-- Show view information complete -->
-        <div class="col-md-3">
-            <select (change)="showinfoIsComplete($event.target.value)" class="form-control select-form">
-                <option value=" ">Ver por:</option>
-                <option value="true">informacion Completa</option>
-                <option value="false">Informacion Incompleta</option>
+        <div class="col-md-3 p-b-10">
+            <select (change)="showinfoIsComplete($event.target.value)" [(ngModel)]="params.information_is_complete" class="form-control select-form">
+                <option value="">Mostrar por</option>
+                <option value="true">Información completa</option>
+                <option value="false">Información incompleta</option>
             </select>
         </div>
 
+        <div class="col-md-2"></div>
 
 
         <!-- Search by -->
-        <div class="col-md-3">
+        <div class="col-md-3 p-b-10">
             <div class="input-group">
-                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control">
+                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control" placeholder="Buscar por">
                 <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                     <span *ngIf="!params.search" class="input-group-text">
                         <i class="anticon anticon-search"></i>
@@ -66,8 +67,8 @@
             </mat-paginator>
         </div>
 
-        <div class="col-md-12">
-            <app-merchant-list *ngIf="!loadingData && merchants.length > 0" [merchants]="merchants"></app-merchant-list>
+        <div class="col-md-12" *ngIf="!loadingData && merchants.length > 0">
+            <app-merchant-list [merchants]="merchants" [params]="params"></app-merchant-list>
         </div>
 
         <div class="col-md-12 d-flex justify-content-end" *ngIf="!loadingData && merchants.length > 0">

@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class MerchantListComponent implements OnInit {
   @Input() merchants;
+  @Input() params;
 
   constructor(private merchantsService: MerchantsService) { }
 

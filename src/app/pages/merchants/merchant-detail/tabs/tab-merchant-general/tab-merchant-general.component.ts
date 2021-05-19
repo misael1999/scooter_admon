@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MerchantsService } from '../../../../../services/merchants.service';
+import { MerchantsService } from 'src/app/services/merchants.service';
 
 @Component({
   selector: 'app-tab-merchant-general',
@@ -7,12 +7,11 @@ import { MerchantsService } from '../../../../../services/merchants.service';
   styleUrls: ['./tab-merchant-general.component.scss']
 })
 export class TabMerchantGeneralComponent implements OnInit {
-
   merchant;
 
   constructor(private merchantsService: MerchantsService) {
     this.merchant = this.merchantsService.merchantId;
-    console.log('Datos del comercip', this.merchant);
+    console.log('Detalles del comercio', this.merchant);
 
   }
 

@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ClientsService {
   searchText;
+  params;
 
   constructor(private http: HttpClient) { }
 
