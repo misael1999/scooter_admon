@@ -8,9 +8,10 @@ import { HttpClient } from '@angular/common/http';
 export class OrdersService {
   stationId;
   searchText;
+  params;
 
-  constructor(private http: HttpClient) { 
-     this.stationId = localStorage.getItem('station_id');
+  constructor(private http: HttpClient) {
+    this.stationId = localStorage.getItem('station_id');
 
   }
 
@@ -42,13 +43,6 @@ export class OrdersService {
     const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/reject_order/`;
     return this.http.put(url, data);
   }
-
-
-
-
-
-
-
   cancelOrder(orderId, data) {
     const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/cancel_order/`;
     return this.http.put(url, data);

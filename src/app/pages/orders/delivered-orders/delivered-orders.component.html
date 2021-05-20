@@ -71,9 +71,9 @@
                         <tbody>
                             <tr *ngFor="let order of orders">
                                 <td>
-                                    <span *ngIf="order.service_id == 3" class="badge bg-secondary text-dark">Lo que sea</span>
-                                    <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
-                                    <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
+                                    <span *ngIf="order.service_id == 3" class="badge badge-pill bg-secondary text-dark">Lo que sea</span>
+                                    <span *ngIf="order.service_id == 2" class="badge badge-pill bg-warning text-dark">{{order.service}}</span>
+                                    <span *ngIf="order.service_id == 1" class="badge badge-pill bg-info text-dark">{{order.service}}</span>
                                     <br>
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDialogDetailProducts(order)">Detalles</a> </li>
@@ -115,8 +115,8 @@
             <!-- Paginator -->
             <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingdata && orders.length > 0">
 
-                <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                    </mat-paginator>
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
+                </mat-paginator>
             </div>
             <!-- End Paginator -->
 

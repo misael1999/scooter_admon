@@ -63,4 +63,15 @@ export class MerchantsService {
     const url = `${environment.HOST_APIV1}/commons/categories/`;
     return this.http.get(url);
   }
+  getProductsByMerchant(merchantId, params = {}) {
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/products/`;
+    return this.http.get(url, { params });
+  }
+
+  // Get review by merchant
+  getReviews(merchantId) {
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/ratings/`;
+    return this.http.get(url);
+  }
+
 }

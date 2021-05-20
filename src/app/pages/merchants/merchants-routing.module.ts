@@ -5,6 +5,8 @@ import { MerchantDetailComponent } from './merchant-detail/merchant-detail.compo
 import { TabMerchantGeneralComponent } from './merchant-detail/tabs/tab-merchant-general/tab-merchant-general.component';
 import { TabMerchantSummaryComponent } from './merchant-detail/tabs/tab-merchant-summary/tab-merchant-summary.component';
 import { TabMerchantSettingComponent } from './merchant-detail/tabs/tab-merchant-setting/tab-merchant-setting.component';
+import { TabProductsComponent } from './merchant-detail/tabs/tab-products/tab-products.component';
+import { TabReviewsComponent } from './merchant-detail/tabs/tab-reviews/tab-reviews.component';
 
 
 const routes: Routes = [
@@ -19,6 +21,12 @@ const routes: Routes = [
       },
       {
         path: 'summary', component: TabMerchantSummaryComponent
+      },
+      {
+        path: 'products', component: TabProductsComponent
+      },
+      {
+        path: 'reviews', component: TabReviewsComponent
       },
       {
         path: 'promotions',

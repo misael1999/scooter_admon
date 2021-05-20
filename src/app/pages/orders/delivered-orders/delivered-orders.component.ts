@@ -22,7 +22,7 @@ export class DeliveredOrdersComponent implements OnInit {
 
 
   // PARAMETROS
-  params = { limit: 25, offset: 0, page: 1, search: '', ordering: '',order_status: '6' };
+  params = { limit: 25, offset: 0, page: 1, search: '', ordering: '', order_status: '6' };
   orders: Array<any> = [];
   loadingdata: boolean;
   searchText;
@@ -54,12 +54,16 @@ export class DeliveredOrdersComponent implements OnInit {
         this.loadingdata = false;
         this.orders = data.results;
         this.length = data.count;
-        this.pageIndex = this.params.page - 1;
-        this.pageSize = this.params.limit;
+        this.ordersService.params = this.params;
+        this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {
         this.loadingdata = false;
       });
   }
+
+
+
+
 
   searchBy(value: string) {
     this.params.search = value;
@@ -87,10 +91,10 @@ export class DeliveredOrdersComponent implements OnInit {
       this.pageIndex = 0;
       return;
     }
+    this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.params.limit = e.pageSize;
-    this.params.page = e.pageIndex + 1;
-    this.params.offset = this.params.limit * e.pageIndex + 1;
+    this.params.limit = e.pageSize
+    this.params.offset = this.params.limit * e.pageIndex;
     this.getOrders();
   }
 }

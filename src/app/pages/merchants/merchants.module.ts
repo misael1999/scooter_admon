@@ -17,6 +17,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TabMerchantSummaryComponent } from './merchant-detail/tabs/tab-merchant-summary/tab-merchant-summary.component';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { TabProductsComponent } from './merchant-detail/tabs/tab-products/tab-products.component';
+import { ListProductsComponent } from './merchant-detail/tabs/tab-products/list-products/list-products.component';
+import { TabReviewsComponent } from './merchant-detail/tabs/tab-reviews/tab-reviews.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     TabMerchantGeneralComponent,
     AddTagMerchantComponent,
     TabMerchantSummaryComponent,
+    TabProductsComponent,
+    ListProductsComponent,
+    TabReviewsComponent,
   ],
   imports: [
     CommonModule,
