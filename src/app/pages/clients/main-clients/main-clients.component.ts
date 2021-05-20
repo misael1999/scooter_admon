@@ -14,7 +14,6 @@ export class MainClientsComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent;
   pageSizeOptions: number[] = [25, 50, 75, 100];
-  // PARAMETROS
   params = { limit: 25, offset: 0, page: 1, search: '', ordering: '' };
   loadingData: boolean;
   clients: Array<any> = [];
@@ -25,7 +24,6 @@ export class MainClientsComponent implements OnInit {
   ngOnInit(): void {
     this.getClients();
   }
-
 
   getClients() {
     this.loadingData = true;
@@ -41,13 +39,11 @@ export class MainClientsComponent implements OnInit {
       });
   }
 
-
   searchBy(value: string) {
     this.params.search = value;
     this.clientsService.searchText = value;
     this.getClients();
   }
-
 
   clearSearch() {
     this.params.search = '';

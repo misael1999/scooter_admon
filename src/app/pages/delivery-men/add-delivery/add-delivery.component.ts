@@ -11,7 +11,7 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
 })
 export class AddDeliveryComponent extends ValidationForms implements OnInit {
   deliveryForm: FormGroup;
-  deliveryMan: any;
+  deliveryMan;
   loadingSave: boolean;
 
   constructor(private fb: FormBuilder,
@@ -28,8 +28,7 @@ export class AddDeliveryComponent extends ValidationForms implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   createDelivery() {
     if (this.deliveryForm.invalid) {

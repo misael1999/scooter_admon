@@ -1,12 +1,7 @@
 import { FormGroup } from "@angular/forms";
-import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal, { SweetAlertResult, SweetAlertType } from 'sweetalert2';
 
-
-
 export class ValidationForms {
-
-
     constructor() { }
 
     isFieldInvalid(group: FormGroup, field: string): boolean {
@@ -25,25 +20,27 @@ export class ValidationForms {
         return (group.get(field).hasError(error));
     }
 
-
     showSwalMessage(message, type: SweetAlertType = 'success') {
         Swal.fire({
             title: message,
             type: type,
-            timer: 3000
-          });
+            timer: 3000,
+            confirmButtonColor: '#02D3EF',
+            confirmButtonText: 'Aceptar',
+        });
     }
 
     showMessageConfirm(message: string): Promise<SweetAlertResult> {
         return Swal.fire({
-          title: '¿Estas seguro?',
-          text: message,
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si'
+            title: '¿Estás seguro?',
+            text: message,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#02D3EF',
+            cancelButtonColor: '#E2584C',
+            cancelButtonText: "Cancelar",
+            confirmButtonText: 'Aceptar',
+            reverseButtons: true
         });
-      }
-
+    }
 }

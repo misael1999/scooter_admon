@@ -9,7 +9,7 @@
     <div class="row p-t-20">
         <!-- Order by -->
         <div class="col-md-2 p-b-10">
-            <select (change)="orderBy($event.target.value)" [(ngModel)]="params.ordering" class="form-control select-form">
+            <select (change)="orderBy($event.target.value)" [(ngModel)]="params.ordering" class="form-control select-form cursor">
                <option value="">Ordenar por</option>
                 <option value="name">Nombre A - Z</option>
                 <option value="-name">Nombre Z - A</option>
@@ -20,8 +20,8 @@
 
         <!-- Show view by -->
         <div class="col-md-2 p-b-10">
-            <select (change)="showList($event.target.value)" [(ngModel)]="params.status" class="form-control select-form">
-                <option value="">Ver por</option>
+            <select (change)="showList($event.target.value)" [(ngModel)]="params.status" class="form-control select-form cursor">
+                <option value="">Mostrar por</option>
                 <option value="1">Disponibles</option>
                 <option value="2">Bloqueados</option>
             </select>
@@ -32,7 +32,7 @@
         <!-- Search by -->
         <div class="col-md-3 p-b-10">
             <div class="input-group">
-                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control" placeholder="Buscar por">
+                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control" placeholder="Buscar">
                 <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                     <span *ngIf="!params.search" class="input-group-text">
                         <i class="anticon anticon-search"></i>
@@ -61,7 +61,7 @@
 
         <!-- Lst delivery mens -->
         <div class="col-md-12" *ngIf="!loadingData && deliveryMens.length > 0">
-            <app-list-delivery [deliveryMens]="deliveryMens" [params]="params"></app-list-delivery>
+            <app-list-delivery [deliveryMens]="deliveryMens" [params]="params" (reloadDeliveryMens)="getDeliveryMens()"></app-list-delivery>
         </div>
 
         <!-- Paginator -->

@@ -35,7 +35,6 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
       .subscribe((data: any) => {
         this.loadingData = false;
         this.deliveryMens = data.results;
-        console.log(this.deliveryMens);
         this.length = data.count;
         this.deliveryService.params = this.params;
         this.pageSize = this.params.limit;
@@ -46,6 +45,7 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
   }
 
   openDialogAddDelivery(deliveryMan = null) {
+    console.log(deliveryMan, 'Data add');
     const dialogRef = this.dialog.open(AddDeliveryComponent, {
       width: '850px',
       data: { deliveryMan }
@@ -64,13 +64,11 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
 
   showList(status) {
     this.params.status = status;
-    this.deliveryService.params = this.params;
     this.getDeliveryMens();
   }
 
   searchBy(value) {
     this.params.search = value;
-    this.deliveryService.params = this.params;
     this.deliveryService.searchText = value;
     this.getDeliveryMens();
   }
@@ -78,7 +76,6 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
   clearSearch() {
     this.params.search = '';
     this.deliveryService.searchText = '';
-    this.deliveryService.params = this.params;
     this.searchText = "";
     this.getDeliveryMens();
   }

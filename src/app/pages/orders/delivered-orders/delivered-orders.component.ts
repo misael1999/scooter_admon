@@ -10,21 +10,14 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./delivered-orders.component.scss']
 })
 export class DeliveredOrdersComponent implements OnInit {
-  // MATPAGINATOR INPUTS
   length = 0;
   pageSize = 25;
   pageIndex = 0;
   pageSizeOptions: number[] = [25, 50, 75, 100];
-
-
-  // MATPAGINATOR  OUTPUT 
   pageEvent: PageEvent;
-
-
-  // PARAMETROS
   params = { limit: 25, offset: 0, page: 1, search: '', ordering: '', order_status: '6' };
   orders: Array<any> = [];
-  loadingdata: boolean;
+  loadingData: boolean;
   searchText;
 
   constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
@@ -33,7 +26,7 @@ export class DeliveredOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  openDialogDetailProducts(order = null) {
+  openDialogDetailProducts(order) {
     this.dialog.open(OrdersDetailComponent, {
       height: '78%',
       width: '70%',
@@ -42,28 +35,24 @@ export class DeliveredOrdersComponent implements OnInit {
   }
 
   openDirection(addres) {
-    console.log(addres);
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
-
   getOrders() {
-    this.loadingdata = true;
+    this.loadingData = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
-        this.loadingdata = false;
+        this.loadingData = false;
         this.orders = data.results;
+        console.log(this.orders);
         this.length = data.count;
         this.ordersService.params = this.params;
+        this.pageSize = this.params.limit;
         this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {
-        this.loadingdata = false;
+        this.loadingData = false;
       });
   }
-
-
-
-
 
   searchBy(value: string) {
     this.params.search = value;
@@ -78,12 +67,10 @@ export class DeliveredOrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  orderingOrders(value: string) {
+  orderBy(value: string) {
     this.params.ordering = value;
     this.getOrders();
   }
-
-  // METHOD PAGINATOR
 
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
@@ -93,7 +80,7 @@ export class DeliveredOrdersComponent implements OnInit {
     }
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.params.limit = e.pageSize
+    this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
     this.getOrders();
   }

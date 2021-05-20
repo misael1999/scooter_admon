@@ -1,16 +1,19 @@
-<mat-progress-bar *ngIf="!infoCustomer" mode="indeterminate"></mat-progress-bar>
-<div class="container-fluid" *ngIf="infoCustomer">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Informacion de:
-            <span class="text-info"> {{infoCustomer.customer.name}} </span>
-        </h1>
+<div class="container">
+    <div>
+        <h2 class="m-0">Usuarios</h2>
+        <nav class="breadcrumb breadcrumb-dash">
+            <a routerLink="/merchants" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Usuarios</a>
+            <span class="breadcrumb-item active">Detalle del usuario</span>
+        </nav>
     </div>
-    <!-- End Page Heading -->
+    <div class="row m-t-20">
+        <div class="col-md-12 d-flex justify-content-center">
+            <app-loading-data *ngIf="loadingData"> </app-loading-data>
+        </div>
+    </div>
 
 
-    <h5>Filtros:</h5>
+
 
     <div class="row">
         <!-- Data Picker from date -->
@@ -37,6 +40,6 @@
     </div>
 
 
-    <app-card-info [customer]="infoCustomer"></app-card-info>
-    <app-history-orders [customer]="infoCustomer"></app-history-orders>
+    <app-card-info *ngIf="dataCustomer" [customer]="dataCustomer"></app-card-info>
+    <app-history-orders *ngIf="dataCustomer" [customer]="dataCustomer"></app-history-orders>
 </div>

@@ -9,20 +9,16 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './orders-cancelled.component.html',
   styleUrls: ['./orders-cancelled.component.scss']
 })
-export class OrdersCancelledComponent implements OnInit {  
-  // MatPaginator Inputs
+export class OrdersCancelledComponent implements OnInit {
   length = 100;
   pageSize = 25;
+  pageIndex = 0;
   pageSizeOptions: number[] = [25, 50, 75, 100];
   pageEvent: PageEvent;
-
-
   params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '7,8,17' };
   orders: Array<any> = [];
   loadingOrders: boolean;
   searchText
-
-
 
   constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
 
@@ -30,8 +26,7 @@ export class OrdersCancelledComponent implements OnInit {
     this.getOrders();
   }
 
-
-  openDialogDetailProducts(order = null) {
+  openDialogDetailProducts(order) {
     this.dialog.open(OrdersDetailComponent, {
       height: '78%',
       width: '70%',
@@ -43,10 +38,13 @@ export class OrdersCancelledComponent implements OnInit {
     this.loadingOrders = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
-        this.orders = data.results;
-        // console.log(this.orders);
         this.loadingOrders = false;
+        this.orders = data.results;
+        console.log(this.orders);
         this.length = data.count;
+        this.ordersService.params = this.params;
+        this.pageSize = this.params.limit;
+        this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {
         this.loadingOrders = false;
       });
@@ -64,7 +62,8 @@ export class OrdersCancelledComponent implements OnInit {
     this.searchText = "";
     this.getOrders();
   }
-  orderingOrders(value: string) {
+
+  orderBy(value: string) {
     this.params.ordering = value;
     this.getOrders();
   }
@@ -72,8 +71,11 @@ export class OrdersCancelledComponent implements OnInit {
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
       this.pageSize = 25;
+      this.pageIndex = 0;
       return;
     }
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
     this.getOrders();

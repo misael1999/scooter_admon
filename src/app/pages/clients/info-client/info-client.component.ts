@@ -1,8 +1,7 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ClientsService } from 'src/app/services/clients.service';
 import * as moment from 'moment';
-import { ClientsService } from '../../../services/clients.service';
 
 @Component({
   selector: 'app-info-client',
@@ -10,19 +9,21 @@ import { ClientsService } from '../../../services/clients.service';
   styleUrls: ['./info-client.component.scss']
 })
 export class InfoClientComponent implements OnInit {
+  loadingData: boolean;
   idCustomer: number;
-  infoCustomer;
+  dataCustomer;
   from_date;
   to_date;
-  params: {};
+  params: { from_date: '2020-01-01', to_date: '2021-08-20' };
 
 
   constructor(private clientService: ClientsService, private activatedRouted: ActivatedRoute, private router: Router) {
     this.idCustomer = this.activatedRouted.snapshot.params.id;
+    console.log('ID', this.idCustomer);
   }
 
   ngOnInit(): void {
-    this.getCustomerId();
+    this.getCustomerId(this.params)
   }
 
   selectFromDate(fromDate) {
@@ -31,9 +32,9 @@ export class InfoClientComponent implements OnInit {
 
     console.log(fromDate);
 
-    this.from_date = moment(fromDate).format('YYYY-MM-DD');
-    if (this.from_date && this.to_date ) {
-      this.getCustomerId({from_date: this.from_date, to_date: this.to_date });
+    this.from_date = moment(fromDate).format('2020-01-01');
+    if (this.from_date && this.to_date) {
+      this.getCustomerId({ from_date: this.from_date, to_date: this.to_date });
 
     }
     // console.log(from_date);
@@ -41,28 +42,26 @@ export class InfoClientComponent implements OnInit {
 
   selectTodate(toDate) {
     const momentDate = new Date(toDate);
-    this.to_date = moment(toDate).format('YYYY-MM-DD');
-    if (this.from_date && this.to_date ) {
-      this.getCustomerId({from_date: this.from_date, to_date: this.to_date });
+    this.to_date = moment(toDate).format('2021-08-20');
+    if (this.from_date && this.to_date) {
+      this.getCustomerId({ from_date: this.from_date, to_date: this.to_date });
 
     }
     // console.log(to_date);
   }
 
 
-  getCustomerId(params = {} ) {
-    console.log(params);
-    this.clientService.getClientId(this.idCustomer, params)
+  getCustomerId(params = {}) {
+    console.log('Date ', params);
+    this.loadingData = true;
+    this.clientService.getCustomerByDate(this.idCustomer, params)
       .subscribe((data: any) => {
-        this.infoCustomer = data;
-        console.log(this.infoCustomer);
+        this.loadingData = false;
+        this.dataCustomer = data;
+        console.log(this.dataCustomer);
       }, error => {
-        if (error.errors.code === 'not_found') {
-          this.router.navigate(['not_found']);
-          return;
-        }
-        console.log(error.errors.code);
+        console.log(error);
+        this.loadingData = false;
       });
   }
-
 }
