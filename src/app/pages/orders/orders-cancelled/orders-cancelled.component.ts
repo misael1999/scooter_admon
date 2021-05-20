@@ -17,7 +17,7 @@ export class OrdersCancelledComponent implements OnInit {
   pageEvent: PageEvent;
   params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '7,8,17' };
   orders: Array<any> = [];
-  loadingOrders: boolean;
+  loadingData: boolean;
   searchText
 
   constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
@@ -35,18 +35,17 @@ export class OrdersCancelledComponent implements OnInit {
   }
 
   getOrders() {
-    this.loadingOrders = true;
+    this.loadingData = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
-        this.loadingOrders = false;
+        this.loadingData = false;
         this.orders = data.results;
-        console.log(this.orders);
         this.length = data.count;
         this.ordersService.params = this.params;
         this.pageSize = this.params.limit;
         this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {
-        this.loadingOrders = false;
+        this.loadingData = false;
       });
   }
 

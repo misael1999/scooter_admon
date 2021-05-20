@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders.service';
-import { WebSocketService } from 'src/app/services/web-socket.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { CancelOrderDialogComponent } from './cancel-order-dialog/cancel-order-dialog.component';
 import { ReasignOrderComponent } from './reasign-order/reasign-order.component';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
@@ -19,22 +17,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders-in-process.component.scss']
 })
 export class OrdersInProcessComponent implements OnInit {
-  // MatPaginator Inputs
   length = 100;
+  pageIndex = 0;
   pageSize = 25;
-  pageSizeOptions: number[] = [25, 50, 75, 100];
   pageEvent: PageEvent;
-  // params = { limit: 25, offset: 0, search: '', ordering: '', in_process: true };
+  pageSizeOptions: number[] = [25, 50, 75, 100];
   orders: Array<any> = [];
-  loadingOrders: boolean;
+  loadingData: boolean;
   liveData$: Subscription;
-
-
-  // Parametros para el paginado
   params = { limit: 25, offset: 0, search: '', ordering: '', in_process: true };
-
   searchText;
-
   loadingAcceptOrder: boolean;
   loadingRejectOrder: boolean;
 
@@ -44,7 +36,6 @@ export class OrdersInProcessComponent implements OnInit {
     this.getOrders();
   }
 
-
   openDialogDetailProducts(order = null) {
     this.dialog.open(OrdersDetailComponent, {
       height: '78%',
@@ -53,24 +44,23 @@ export class OrdersInProcessComponent implements OnInit {
     });
   }
 
- 
-
   openDirection(addres) {
     console.log(addres);
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
-
   getOrders() {
-    this.loadingOrders = true;
+    this.loadingData = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
+        this.loadingData = false;
         this.orders = data.results;
-        console.log(this.orders);
-        this.loadingOrders = false;
         this.length = data.count;
+        this.ordersService.params = this.params;
+        this.pageSize = this.params.limit;
+        this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {
-        this.loadingOrders = false;
+        this.loadingData = false;
       });
   }
 
@@ -171,22 +161,22 @@ export class OrdersInProcessComponent implements OnInit {
     this.getOrders();
   }
 
-  orderingOrders(value: string) {
+  orderBy(value: string) {
     this.params.ordering = value;
     this.getOrders();
   }
 
-
   getPages(e): PageEvent {
     if (this.orders.length === 0) {
       this.pageSize = 25;
+      this.pageIndex = 0;
       return;
     }
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
     this.getOrders();
   }
-
-
 }
 
