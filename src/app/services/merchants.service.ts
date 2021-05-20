@@ -15,7 +15,7 @@ export class MerchantsService {
   params;
 
   constructor(private http: HttpClient) {
-    this.station = JSON.parse(localStorage.getItem("station"));
+    this.station = JSON.parse(localStorage.getItem('station'));
   }
 
   getMerchants(params = {}) {

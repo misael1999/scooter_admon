@@ -20,9 +20,9 @@ export class RejectOrderDialogComponent implements OnInit {
   loadingSave: boolean;
 
   constructor(public dialogRef: MatDialogRef<RejectOrderDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private orderService: OrdersService, private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder) {
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private orderService: OrdersService, private snackBar: MatSnackBar,
+              private formBuilder: FormBuilder) {
     this.orderId = data.orderId;
   }
 

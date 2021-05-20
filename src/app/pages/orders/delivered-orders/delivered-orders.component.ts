@@ -62,7 +62,7 @@ export class DeliveredOrdersComponent implements OnInit {
   clearSearch() {
     this.params.search = '';
     this.ordersService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getOrders();
   }
 

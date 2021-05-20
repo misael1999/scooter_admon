@@ -17,8 +17,8 @@ export class MerchantDetailComponent extends ValidationForms implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private merchantsService: MerchantsService) {
     super();
     activatedRoute.params.subscribe((params) => {
-      this.merchantId = params['id'];
-      this.getMerchant(params['id']);
+      this.merchantId = params.id;
+      this.getMerchant(params.id);
     });
     this.merchantsService.merchantId = this.merchantId;
   }

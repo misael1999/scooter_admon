@@ -20,7 +20,7 @@ export class LoginComponent extends ValidationForms implements OnInit {
   loadingLogin = false;
 
   constructor(private authService: AuthService, private alertService: AlertsService,
-    private fb: FormBuilder, private router: Router) { super(); }
+              private fb: FormBuilder, private router: Router) { super(); }
 
   ngOnInit() {
     this.buildLoginForm();

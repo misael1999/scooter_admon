@@ -20,9 +20,9 @@ export class AddVehiclesComponent implements OnInit {
   vehicle: any;
 
   constructor(private vehicleService: VehiclesService,
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<AddVehiclesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+              private fb: FormBuilder,
+              public dialogRef: MatDialogRef<AddVehiclesComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
     this.vehicle = data.vehicle;
     if (this.vehicle) {

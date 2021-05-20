@@ -22,7 +22,7 @@ export class TabProductsComponent implements OnInit {
   constructor(private merchantsService: MerchantsService) { }
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getProducts();
   }
 
   getProducts() {
@@ -51,7 +51,7 @@ export class TabProductsComponent implements OnInit {
     }
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.params.limit = e.pageSize
+    this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
     this.getProducts();
   }

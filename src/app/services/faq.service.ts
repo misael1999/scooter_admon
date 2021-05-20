@@ -33,7 +33,7 @@ export class FaqService {
 
   editFaq(idFaq: number, faq: any) {
     const url = `${environment.HOST_APIV1}/commons/faq/${idFaq}/`;
-    return this.httpClient.patch(url, faq)
+    return this.httpClient.patch(url, faq);
   }
 
   deleteFaq(idFaq: number) {

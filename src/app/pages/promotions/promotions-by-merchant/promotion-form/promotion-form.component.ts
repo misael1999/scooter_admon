@@ -16,7 +16,7 @@ export class PromotionFormComponent implements OnInit {
   }
 
 
-  selectOption({value}){
+  selectOption({value}) {
     this.typeDiscount = value;
   }
 

@@ -23,7 +23,7 @@ export class InfoClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCustomerId(this.params)
+    this.getCustomerId(this.params);
   }
 
   selectFromDate(fromDate) {

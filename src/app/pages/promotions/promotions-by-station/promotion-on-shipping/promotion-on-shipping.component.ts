@@ -33,10 +33,10 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
   selectedClients: Array<any> = [];
 
   constructor(private clientsService: ClientsService,
-    private promotionsService: PromotionsService,
-    private dialog: MatDialog,
-    private fb: FormBuilder,
-    private router: Router) {
+              private promotionsService: PromotionsService,
+              private dialog: MatDialog,
+              private fb: FormBuilder,
+              private router: Router) {
     super();
   }
 
@@ -49,7 +49,7 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
   buildForm() {
     this.daysForm = this.fb.group({
       quantity_days_validity: ['', Validators.required],
-    })
+    });
   }
 
 
@@ -68,17 +68,17 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
       return;
     }
 
-    let quantity_days_validity = this.daysForm.value.quantity_days_validity;
+    const quantity_days_validity = this.daysForm.value.quantity_days_validity;
 
-    let ids = [];
+    const ids = [];
     this.selectedClients.forEach((client) => {
-      ids.push(client.id)
-    })
+      ids.push(client.id);
+    });
 
-    let params = {
+    const params = {
       customer_ids: ids,
-      quantity_days_validity: quantity_days_validity
-    }
+      quantity_days_validity
+    };
 
     this.promotionsService.createPromotion(params)
       .subscribe((data: any) => {
@@ -119,20 +119,20 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
           console.log('Entro');
 
         }
-      })
+      });
     });
   }
 
   selectClient(client, event) {
-    //=== ADD FIRTS CLIENT TO LIST ===//
+    // === ADD FIRTS CLIENT TO LIST ===//
     if (this.selectedClients.length == 0) {
       this.selectedClients.push(client);
     } else {
-      //=====VERIFY EVENT===//
+      // =====VERIFY EVENT===//
       if (event) {
         this.selectedClients.push(client);
       } else {
-        let index = this.selectedClients.indexOf(client);
+        const index = this.selectedClients.indexOf(client);
         this.selectedClients.splice(index, 1);
         console.log('Es falso index', index);
       }
@@ -148,7 +148,7 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
   clearSearch() {
     this.params.search = '';
     this.clientsService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getClients();
   }
 

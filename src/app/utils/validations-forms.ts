@@ -1,4 +1,4 @@
-import { FormGroup } from "@angular/forms";
+import { FormGroup } from '@angular/forms';
 import Swal, { SweetAlertResult, SweetAlertType } from 'sweetalert2';
 
 export class ValidationForms {
@@ -23,7 +23,7 @@ export class ValidationForms {
     showSwalMessage(message, type: SweetAlertType = 'success') {
         Swal.fire({
             title: message,
-            type: type,
+            type,
             timer: 3000,
             confirmButtonColor: '#02D3EF',
             confirmButtonText: 'Aceptar',
@@ -38,7 +38,7 @@ export class ValidationForms {
             showCancelButton: true,
             confirmButtonColor: '#02D3EF',
             cancelButtonColor: '#E2584C',
-            cancelButtonText: "Cancelar",
+            cancelButtonText: 'Cancelar',
             confirmButtonText: 'Aceptar',
             reverseButtons: true
         });

@@ -24,7 +24,7 @@ export class MainDashboardComponent implements OnInit {
       },
     }
   };
-  public pieChartLabels: Label[] = [['Pedidos Cancelados'], ['Pedidos Completados',], 'Pedidos Ignorados'];
+  public pieChartLabels: Label[] = [['Pedidos Cancelados'], ['Pedidos Completados', ], 'Pedidos Ignorados'];
   public pieChartData: number[] = [97, 146, 27];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;

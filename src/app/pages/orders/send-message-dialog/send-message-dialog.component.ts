@@ -17,10 +17,10 @@ export class SendMessageDialogComponent extends ValidationForms implements OnIni
   idOrder: number;
 
   constructor(private fb: FormBuilder,
-    private supportService: SupportService,
-    private router: Router,
-    public dialogRef: MatDialogRef<SendMessageDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {
+              private supportService: SupportService,
+              private router: Router,
+              public dialogRef: MatDialogRef<SendMessageDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data) {
     super();
     console.log(data.order);
     this.idStation = data.order.station_object.id;
@@ -55,17 +55,17 @@ export class SendMessageDialogComponent extends ValidationForms implements OnIni
       // delivery_man: '',
       station: 1,
       order: this.idOrder
-    }
+    };
     console.log(data);
     this.supportService.openConversationWithClient(this.idStation, data)
       .subscribe((resp: any) => {
-        this.showSwalMessage("Mensaje enviado", 'success');
+        this.showSwalMessage('Mensaje enviado', 'success');
         this.dialogRef.close(true);
         this.router.navigateByUrl('/support');
       }, error => {
         this.showSwalMessage('Error', 'error');
 
-      })
+      });
   }
 
 

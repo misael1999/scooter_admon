@@ -81,7 +81,7 @@ export class MainMerchantComponent implements OnInit {
   clearSearch() {
     this.params.search = '';
     this.merchantsService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getMerchants();
   }
 
@@ -99,7 +99,7 @@ export class MainMerchantComponent implements OnInit {
     }
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.params.limit = e.pageSize
+    this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
     this.getMerchants();
   }

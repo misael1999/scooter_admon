@@ -27,7 +27,7 @@ export class TabPromotionComponent implements OnInit {
     this.schedule = {
       from_hour_free_order: this.station.from_hour_free_order || '11:00:00',
       to_hour_free_order: this.station.to_hour_free_order || '14:00:00'
-    }
+    };
   }
 
   async changeSlideAllow(e) {
@@ -37,7 +37,7 @@ export class TabPromotionComponent implements OnInit {
       const resp = await this.showMessageConfirm('pedidos gratuitos');
       if (resp.dismiss) {
         this.free_orders_activated = !this.free_orders_activated;
-        return; 
+        return;
       }
     }
     this.isChangeConfig = true;
@@ -89,7 +89,7 @@ export class TabPromotionComponent implements OnInit {
   showMessageConfirm(message: string): Promise<SweetAlertResult> {
     return Swal.fire({
       title: '¿Estas seguro?',
-      text: "Desactivaras " + message,
+      text: 'Desactivaras ' + message,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

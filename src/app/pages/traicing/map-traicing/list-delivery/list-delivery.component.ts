@@ -37,7 +37,7 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
       .subscribe((data: any) => {
         this.getCoordinates(data.results);
       }, error => {
-        alert('Error al consultar repartidores')
+        alert('Error al consultar repartidores');
       });
   }
 

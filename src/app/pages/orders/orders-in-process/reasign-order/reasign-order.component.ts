@@ -27,8 +27,8 @@ export class ReasignOrderComponent implements OnInit {
   };
 
   constructor(public dialogRef: MatDialogRef<ReasignOrderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private orderService: OrdersService, private snackBar: MatSnackBar) {
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private orderService: OrdersService, private snackBar: MatSnackBar) {
 
     this.orderId = data.orderId;
     this.typeService = data.typeService;

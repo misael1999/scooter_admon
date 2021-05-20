@@ -45,7 +45,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   searchText;
 
   constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
-    private dialog: MatDialog, private webSocketService: WebSocketService, private router: Router) { }
+              private dialog: MatDialog, private webSocketService: WebSocketService, private router: Router) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -65,7 +65,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
 
     if (order.supports.length > 0) {
       this.router.navigateByUrl('/support');
-      return
+      return;
     }
 
     const dialogref = this.dialog.open(SendMessageDialogComponent, {
@@ -73,7 +73,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       width: '30%',
       // minHeight: '400px',
       // minWidth: '350px',
-      data: { order: order }
+      data: { order }
     });
 
     dialogref.afterClosed().subscribe(data => {
@@ -146,7 +146,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   clearSearch() {
     this.params.search = '';
     this.ordersService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getOrders();
   }
 
@@ -232,8 +232,8 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   }
 
   playAudio() {
-    let audio = new Audio();
-    audio.src = "assets/sounds/ringtone_merchant.mp3";
+    const audio = new Audio();
+    audio.src = 'assets/sounds/ringtone_merchant.mp3';
     audio.load();
     audio.play();
   }

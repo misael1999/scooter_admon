@@ -21,8 +21,8 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
   ngOnInit(): void { }
 
   async disabledDelivery(deliveryManId) {
-    const confirmation = await this.showMessageConfirm("De bloquear al repartidor");
-    if (!confirmation.value) return;
+    const confirmation = await this.showMessageConfirm('De bloquear al repartidor');
+    if (!confirmation.value) { return; }
 
     this.deliveryService.deleteDelivery(deliveryManId)
       .subscribe((data) => {
@@ -34,8 +34,8 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
   }
 
   async enableDelivery(deliveryManId) {
-    const confirmation = await this.showMessageConfirm("De desbloquear al repartidor");
-    if (!confirmation.value) return;
+    const confirmation = await this.showMessageConfirm('De desbloquear al repartidor');
+    if (!confirmation.value) { return; }
 
     this.deliveryService.unLockDeliveryMan(deliveryManId)
       .subscribe((data) => {

@@ -23,7 +23,7 @@ export class TabGeneralComponent implements OnInit {
   changeImage = false;
 
   constructor(private profileService: ProfileService,
-    private fb: FormBuilder, private snackBar: MatSnackBar) { }
+              private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.station = this.profileService.station;
@@ -70,7 +70,7 @@ export class TabGeneralComponent implements OnInit {
     this.generalInfoForm = this.fb.group({
       phone_number: [this.station.phone_number, Validators.required],
       contact_person: [this.station.contact_person, Validators.required],
-    })
+    });
   }
 
   saveGeneralInfo() {
@@ -85,9 +85,9 @@ export class TabGeneralComponent implements OnInit {
     if (this.binaryString != null) {
       info.picture = this.binaryString;
     }
-    
+
     this.loadingSaveInfo = true;
-    
+
     this.profileService.updateStation({general: info})
     .subscribe((data: any) => {
       this.showMessageSuccess('Información actualizada correctamente');

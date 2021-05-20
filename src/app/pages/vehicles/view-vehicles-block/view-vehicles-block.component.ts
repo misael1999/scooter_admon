@@ -27,7 +27,7 @@ export class ViewVehiclesBlockComponent implements OnInit {
   vehicles: Array<any> = [];
 
   constructor(private vehiculeService: VehiclesService,
-     private dialog: MatDialog, private snackBar: MatSnackBar) { }
+              private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getVehicles();
@@ -59,7 +59,7 @@ export class ViewVehiclesBlockComponent implements OnInit {
       if (resp.value) {
         this.vehiculeService.unLockVehicle(vehicle.id)
           .subscribe(data => {
-            this.showMessageSuccess("Vehiculo activado");
+            this.showMessageSuccess('Vehiculo activado');
             this.getVehicles();
           }, error => {
             this.showMessageError(error.errors.message);

@@ -76,7 +76,7 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
   clearSearch() {
     this.params.search = '';
     this.deliveryService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getDeliveryMens();
   }
 

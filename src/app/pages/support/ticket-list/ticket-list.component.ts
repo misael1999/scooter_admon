@@ -22,7 +22,7 @@ export class TicketListComponent extends ValidationForms implements OnInit {
   ngOnInit(): void {
   }
 
-  supportSelect(support) { 
+  supportSelect(support) {
     this.supportSelected = support;
     this.supportSelectedEvent.emit(support);
   }
@@ -32,15 +32,15 @@ export class TicketListComponent extends ValidationForms implements OnInit {
   }
 
   getSupportClass(supportTypeId) {
-    switch(supportTypeId) {
+    switch (supportTypeId) {
       case 1:
-        return 'badge-secondary'
+        return 'badge-secondary';
       case 2:
-        return 'badge-warning'
+        return 'badge-warning';
       case 3:
-        return 'badge-info'
+        return 'badge-info';
       default:
-        return 'badge-success'
+        return 'badge-success';
     }
   }
 

@@ -18,7 +18,7 @@ export class OrdersCancelledComponent implements OnInit {
   params = { limit: 25, offset: 0, search: '', ordering: '', order_status: '7,8,17' };
   orders: Array<any> = [];
   loadingData: boolean;
-  searchText
+  searchText;
 
   constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
 
@@ -58,7 +58,7 @@ export class OrdersCancelledComponent implements OnInit {
   clearSearch() {
     this.params.search = '';
     this.ordersService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getOrders();
   }
 

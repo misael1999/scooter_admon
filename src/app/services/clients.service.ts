@@ -12,7 +12,7 @@ export class ClientsService {
   params;
 
   constructor(private http: HttpClient) {
-    this.station = JSON.parse(localStorage.getItem("station"));
+    this.station = JSON.parse(localStorage.getItem('station'));
 
   }
 

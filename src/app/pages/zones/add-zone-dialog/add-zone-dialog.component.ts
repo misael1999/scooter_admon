@@ -29,9 +29,9 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   lng = -97.39279966871719;
 
   constructor(private fb: FormBuilder,
-    private zoneService: ZonesService,
-    public dialogRef: MatDialogRef<AddZoneDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              private zoneService: ZonesService,
+              public dialogRef: MatDialogRef<AddZoneDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
     if (data.zone) {
       this.zone = data.zone;
@@ -135,7 +135,7 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
         return;
       }
 
-      // ======= Agregar zona ======== 
+      // ======= Agregar zona ========
       this.addZone(formData);
     }
 
@@ -207,15 +207,15 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   }
 
   parseDocument(file) {
-    let fileReader = new FileReader()
+    const fileReader = new FileReader();
     fileReader.onload = async (e: any) => {
-      let result = await this.extractGoogleCoords(e.target.result)
+      const result = await this.extractGoogleCoords(e.target.result);
 
-      //Do something with result object here
+      // Do something with result object here
       this.paths = result.polygons;
 
-    }
-    fileReader.readAsText(file)
+    };
+    fileReader.readAsText(file);
   }
 
   setPolygon(coordinates) {
@@ -235,39 +235,39 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
   }
 
   async extractGoogleCoords(plainText) {
-    let parser = new DOMParser()
-    let xmlDoc = parser.parseFromString(plainText, "text/xml")
-    let googlePolygons = []
-    let googleLine = []
-    let googleMarkers = []
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(plainText, 'text/xml');
+    let googlePolygons = [];
+    const googleLine = [];
+    const googleMarkers = [];
 
-    if (xmlDoc.documentElement.nodeName == "kml") {
+    if (xmlDoc.documentElement.nodeName == 'kml') {
 
       for (const item of xmlDoc.getElementsByTagName('Placemark') as any) {
         // let placeMarkName = item.getElementsByTagName('name')[0].childNodes[0].nodeValue.trim()
-        let polygons = item.getElementsByTagName('Polygon')
-        let lineString = item.getElementsByTagName('LineString')
-        let markers = item.getElementsByTagName('Point')
+        const polygons = item.getElementsByTagName('Polygon');
+        const lineString = item.getElementsByTagName('LineString');
+        const markers = item.getElementsByTagName('Point');
 
         /** POLYGONS PARSE **/
         for (const polygon of polygons) {
-          let coords = polygon.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
-          let points = coords.split(" ")
-          let googlePolygonsPaths = []
+          const coords = polygon.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim();
+          const points = coords.split(' ');
+          const googlePolygonsPaths = [];
           for (const point of points) {
-            let coord = point.split(",")
+            const coord = point.split(',');
             if (!this.isNumber(Number(coord))) {
-              googlePolygonsPaths.push({ lat: +coord[1], lng: +coord[0] })
+              googlePolygonsPaths.push({ lat: +coord[1], lng: +coord[0] });
             }
 
           }
-          googlePolygons.push(googlePolygonsPaths)
+          googlePolygons.push(googlePolygonsPaths);
         }
         /** LINESTRING PARSE **/
         /*      for (const line of lineString) {
                let coords = line.getElementsByTagName('coordinates')[0].childNodes[0].nodeValue.trim()
                let points = coords.split(" ")
-     
+
                let googlePolygonsPaths = []
                for (const point of points) {
                  let coord = point.split(",")
@@ -291,7 +291,7 @@ export class AddZoneDialogComponent extends ValidationForms implements OnInit {
       googlePolygons = googleLine;
     }
 
-    return { markers: googleMarkers, polygons: googlePolygons, lines: googleLine }
+    return { markers: googleMarkers, polygons: googlePolygons, lines: googleLine };
 
   }
 

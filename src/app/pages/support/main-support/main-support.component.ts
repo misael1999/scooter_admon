@@ -19,7 +19,7 @@ export class MainSupportComponent implements OnInit {
   loadingSupports = false;
   // Info
   supports = [];
-  params = { limit: 10, offset:0, is_open: "true" }
+  params = { limit: 10, offset: 0, is_open: 'true' };
   supportSelected;
 
   newMessage = null;
@@ -38,7 +38,7 @@ export class MainSupportComponent implements OnInit {
     this.supportService.getSupports(this.params)
       .subscribe((data: any) => {
         this.loadingSupports = false;
-        this.supports = data.results;        
+        this.supports = data.results;
     }, error => {
       this.loadingSupports = false;
       alert('Ha ocurrido un error al obtener los tickets de soporte');
@@ -72,8 +72,8 @@ export class MainSupportComponent implements OnInit {
   }
 
   playAudio() {
-    let audio = new Audio();
-    audio.src = "assets/sounds/message.mp3";
+    const audio = new Audio();
+    audio.src = 'assets/sounds/message.mp3';
     audio.load();
     audio.play();
   }
@@ -87,7 +87,7 @@ export class MainSupportComponent implements OnInit {
         closeOnClick: true,
         pauseOnHover: true,
         position: SnotifyPosition.centerTop
-      });        
+      });
       return;
     }
   }

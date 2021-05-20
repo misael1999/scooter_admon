@@ -15,12 +15,12 @@ export class MerchantsListComponent implements OnInit {
    pageSize = 25;
    pageIndex = 0;
    pageSizeOptions: number[] = [25, 50, 75, 100];
- 
- 
-   // MATPAGINATOR  OUTPUT 
+
+
+   // MATPAGINATOR  OUTPUT
    pageEvent: PageEvent;
- 
- 
+
+
    // PARAMETROS
    params = { limit: 25, offset: 0, page: 1, search: '', ordering: '', status: 1, information_is_complete: true };
    loadingdata: boolean;
@@ -35,24 +35,24 @@ export class MerchantsListComponent implements OnInit {
    ngOnInit(): void {
      this.getMerchants();
    }
- 
- 
-   selectMerchant(merchant){
+
+
+   selectMerchant(merchant) {
      this.merchantSelectedEvent.emit(merchant);
    }
- 
+
    showList(value) {
      this.params.status = value;
      this.getMerchants();
    }
- 
- 
+
+
    showinfoIsComplete(value) {
      this.params.information_is_complete = value;
      this.getMerchants();
    }
- 
- 
+
+
    getMerchants() {
      this.loadingdata = true;
      this.merchantsService.getMerchants(this.params)
@@ -67,24 +67,24 @@ export class MerchantsListComponent implements OnInit {
          this.loadingdata = false;
        });
    }
- 
+
    searchBy(value: string) {
      this.params.search = value;
      this.merchantsService.searchText = value;
      this.getMerchants();
    }
- 
+
    clearSearch() {
      this.params.search = '';
      this.merchantsService.searchText = '';
-     this.searchText = "";
+     this.searchText = '';
      this.getMerchants();
    }
 
    ordenamiento(value: string) {
      this.params.ordering = value;
      this.getMerchants();
-   } 
+   }
    // METHOD PAGINATOR
    getPages(e): PageEvent {
      if (this.merchants.length === 0) {

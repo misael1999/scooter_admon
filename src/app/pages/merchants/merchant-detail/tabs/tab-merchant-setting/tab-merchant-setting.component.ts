@@ -10,7 +10,7 @@ import { MerchantsService } from '../../../../../services/merchants.service';
 })
 export class TabMerchantSettingComponent extends ValidationForms implements OnInit {
   settingForm: FormGroup;
-  loadingSaveInfo=false;
+  loadingSaveInfo = false;
   merchant;
 
   @Input() merchatSetting;
@@ -20,7 +20,7 @@ export class TabMerchantSettingComponent extends ValidationForms implements OnIn
     this.merchant = this.merchantService.merchantId;
     console.log(this.merchantService.merchantId);
     this.buildSettingForm();
-    
+
   }
 
 
@@ -33,19 +33,19 @@ export class TabMerchantSettingComponent extends ValidationForms implements OnIn
 
     const info = this.settingForm.value;
 
-    
+
     this.loadingSaveInfo = true;
     console.log(info);
-    
+
     this.merchantService.updateMerchantStation(this.merchant.id, info)
       .subscribe((data: any) => {
-        this.showSwalMessage("Información actualizada correctamente");
+        this.showSwalMessage('Información actualizada correctamente');
         this.loadingSaveInfo = false;
         console.log(data);
       }, error => {
-        this.showSwalMessage("Error en actualizar", 'error');
+        this.showSwalMessage('Error en actualizar', 'error');
       });
-    
+
     // this.merchantService.opeO
 
     // this.MerchantsService.updateStation({general: info})
@@ -66,7 +66,7 @@ export class TabMerchantSettingComponent extends ValidationForms implements OnIn
     this.settingForm = this.fb.group({
       increment_price_operating: [this.merchant.increment_price_operating, Validators.required],
       has_rate_operating: [this.merchant.has_rate_operating, Validators.required],
-    })
+    });
   }
 
 }

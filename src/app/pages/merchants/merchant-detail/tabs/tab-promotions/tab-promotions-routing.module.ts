@@ -6,13 +6,13 @@ import { TypeOfPromotionsComponent } from './type-of-promotions/type-of-promotio
 
 const routes: Routes = [
     {
-        path: "", component: TabPromotionsComponent,
+        path: '', component: TabPromotionsComponent,
     },
     {
-        path: "add", component: AddPromotionComponent,
+        path: 'add', component: AddPromotionComponent,
     },
     {
-        path: "type", component: TypeOfPromotionsComponent,
+        path: 'type', component: TypeOfPromotionsComponent,
     },
     { path: '', redirectTo: '', pathMatch: 'full' }
 

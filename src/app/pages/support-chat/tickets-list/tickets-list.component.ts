@@ -8,7 +8,7 @@ import { SupportService } from 'src/app/services/support.service';
   styleUrls: ['./tickets-list.component.scss']
 })
 export class TicketsListComponent implements OnInit {
-  
+
   placement: NzDrawerPlacement = 'left';
   @Input() visible: boolean;
   @Output() is_closed = new EventEmitter<boolean>();
@@ -18,9 +18,9 @@ export class TicketsListComponent implements OnInit {
   loadingSupports = false;
   // Info
   supports = [];
-  params = { limit: 10, offset:0, is_open: "true" }
+  params = { limit: 10, offset: 0, is_open: 'true' };
   supportSelected;
- 
+
   constructor(private supportService: SupportService) {
   }
 
@@ -28,9 +28,9 @@ export class TicketsListComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    this.visible? this.getSupports() : null;
+    // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    // Add '${implements OnChanges}' to the class.
+    this.visible ? this.getSupports() : null;
   }
 
   close(): void {
@@ -42,31 +42,31 @@ export class TicketsListComponent implements OnInit {
     this.supportService.getSupports(this.params)
       .subscribe((data: any) => {
         this.loadingSupports = false;
-        this.supports = data.results;   
+        this.supports = data.results;
       //  console.log('Supports', this.supports);
-             
+
     }, error => {
       this.loadingSupports = false;
       alert('Ha ocurrido un error al obtener los tickets de soporte');
     });
   }
 
-  supportSelect(support) { 
+  supportSelect(support) {
     this.supportSelected = support;
     this.supportSelectedEvent.emit(support);
     this.close();
   }
 
   getSupportClass(supportTypeId) {
-    switch(supportTypeId) {
+    switch (supportTypeId) {
       case 1:
-        return 'badge-secondary'
+        return 'badge-secondary';
       case 2:
-        return 'badge-warning'
+        return 'badge-warning';
       case 3:
-        return 'badge-info'
+        return 'badge-info';
       default:
-        return 'badge-success'
+        return 'badge-success';
     }
   }
 }

@@ -10,7 +10,7 @@ export interface Marker {
   lng: number;
   label?: string;
   draggable: boolean;
-  name?: string
+  name?: string;
 }
 
 @Component({
@@ -73,11 +73,11 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
   makeCapitalMarkers(map: L.map): void {
     for (const m of this.markerList) {
       // console.log(this.markerList);
-      var lat = m.lat;
-      var lon = m.lng;
-      var popuText = m.name;
-      var markerList = new L.LatLng(lat, lon);
-      var market = new L.Marker(markerList, { icon: this.myIcon }).bindPopup(popuText);
+      let lat = m.lat;
+      let lon = m.lng;
+      let popuText = m.name;
+      let markerList = new L.LatLng(lat, lon);
+      let market = new L.Marker(markerList, { icon: this.myIcon }).bindPopup(popuText);
       map.addLayer(market);
     }
   }
@@ -85,10 +85,10 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
 
   makeCapitalZone(map: L.map): void {
     for (const m of this.paths) {
-      var lat = m.lat;
-      var lon = m.lng;
+      let lat = m.lat;
+      let lon = m.lng;
       console.log(lon, lat);
-      var zona = new L.polygon(lat, lon).addTo(map);
+      let zona = new L.polygon(lat, lon).addTo(map);
 
     }
   }
@@ -105,7 +105,7 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
       this.lat = this.coordinates.lat;
       this.lng = this.coordinates.lng;
       this.makeCapitalMarkers(this.map);
-      this.map.setView([this.lat, this.lng], 17)
+      this.map.setView([this.lat, this.lng], 17);
     }
   }
 

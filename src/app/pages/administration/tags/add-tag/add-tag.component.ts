@@ -20,7 +20,7 @@ export class AddTagComponent extends ValidationForms implements OnInit {
 
 
   constructor(private fb: FormBuilder, private tagsGeneralService: TagsGeneralService, private dialogRef: MatDialogRef<AddTagComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
 
     if (data.tag) {
@@ -82,7 +82,7 @@ export class AddTagComponent extends ValidationForms implements OnInit {
         }), error => {
           this.loadingCategories = false;
           console.log('Error al consultar');
-        }
+        };
   }
 
 
@@ -123,7 +123,7 @@ export class AddTagComponent extends ValidationForms implements OnInit {
       }, error => {
         this.showSwalMessage('error en actualizar serve');
         this.loadingSave = false;
-      })
+      });
   }
 
   buildUpdateForm(tag) {
@@ -144,6 +144,6 @@ export class AddTagComponent extends ValidationForms implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => {
       this.imageURL = String(reader.result);
-    }
+    };
   }
 }

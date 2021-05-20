@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'category'
 })
 export class CategoryPipe implements PipeTransform {
-  
+
   transform(value: any, ...args: any[]) {
     throw new Error('Method not implemented.');
   }

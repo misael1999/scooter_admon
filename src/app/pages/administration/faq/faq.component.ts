@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class FaqComponent implements OnInit {
   loadingFaq: boolean;
   params = { search: '' };
-  faqs: Array<any> = []
+  faqs: Array<any> = [];
   searchText;
 
   constructor(private dialog: MatDialog, private faqService: FaqService) { }
@@ -48,7 +48,7 @@ export class FaqComponent implements OnInit {
         if (data) {
           this.getFaq();
         }
-      })
+      });
   }
 
 
@@ -71,7 +71,7 @@ export class FaqComponent implements OnInit {
   clearSearch() {
     this.params.search = '';
     this.faqService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getFaq();
   }
 

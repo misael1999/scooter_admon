@@ -18,7 +18,7 @@ export class TabRatesComponent implements OnInit {
 
 
   constructor(private profileService: ProfileService,
-    private fb: FormBuilder, private snackBar: MatSnackBar) { }
+              private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.buildRateServicefForm();
@@ -34,7 +34,7 @@ export class TabRatesComponent implements OnInit {
     });
   }
 
-  // 
+  //
   addRateService(services: Array<any>): void {
     this.servicesForm = this.ratesServicesForm.get('services') as FormArray;
     services.forEach((service) => {

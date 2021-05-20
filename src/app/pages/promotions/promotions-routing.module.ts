@@ -13,7 +13,7 @@ const routes: Routes = [
         loadChildren: () => import('./promotions-by-merchant/promotions-by-merchant.module').then(m => m.PromotionsByMerchantModule)
     },
     {
-        path:'station',
+        path: 'station',
         loadChildren: () => import('./promotions-by-station/promotions-by-station.module').then(m => m.PromotionsByStationModule)
     }
 ];

@@ -14,7 +14,7 @@ export class TagsComponent implements OnInit {
   loadignTag: boolean;
   params = { limit: 25, offset: 0, search: '', ordering: '', category: '' };
   searchText;
-  constructor(private tagsGeneralService: TagsGeneralService, private dialog: MatDialog,) { }
+  constructor(private tagsGeneralService: TagsGeneralService, private dialog: MatDialog, ) { }
 
   ngOnInit(): void {
     this.getTags();
@@ -42,7 +42,7 @@ export class TagsComponent implements OnInit {
           this.tags = data.results;
         }), error => {
           this.loadignTag = false;
-        }
+        };
   }
 
 
@@ -55,7 +55,7 @@ export class TagsComponent implements OnInit {
   clearSearch() {
     this.params.search = '';
     this.tagsGeneralService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getTags();
   }
 

@@ -14,12 +14,12 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
   @Input() support;
   @Input() newMessageSocket: MessageSupportModel;
   closeOrderDetail = false;
-  @ViewChild("conversationBody") conversationBody: ElementRef;
+  @ViewChild('conversationBody') conversationBody: ElementRef;
   @ViewChild(ScrollDirective) scrollDirective!: ScrollDirective;
   messages: MessageSupportModel[] = [];
   loadingMessages;
   station;
-  params = { limit: 15, offset: 0, ordering: "-created" }
+  params = { limit: 15, offset: 0, ordering: '-created' };
   chatBodyHtml: HTMLElement;
 
   // Infinite Scroll
@@ -53,7 +53,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
     if (this.support) {
       this.supportService.getMessages(this.support.id, this.params)
         .subscribe((data: any) => {
-          this.messages = data.results.reverse();;
+          this.messages = data.results.reverse();
           // this.messages = this.messages
           this.count = data.count;
           this.loadingMessages = false;
@@ -66,19 +66,19 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const supportUpdated = changes['support'];
-    const newMessageUpdated = changes['newMessageSocket'];
+    const supportUpdated = changes.support;
+    const newMessageUpdated = changes.newMessageSocket;
 
     if (supportUpdated && supportUpdated.previousValue) {
       this.loadingMessages = true;
-      this.params = { limit: 15, offset: 0, ordering: "-created" };
+      this.params = { limit: 15, offset: 0, ordering: '-created' };
       this.scrollDirective.reset();
       this.getMessagesSupport();
     }
     if (newMessageUpdated && newMessageUpdated.currentValue) {
-      if (!this.newMessageSocket) return;
+      if (!this.newMessageSocket) { return; }
       // Comprobrar si corresponde al soporte
-      if (this.newMessageSocket.support != this.support.id) return;
+      if (this.newMessageSocket.support != this.support.id) { return; }
 
       this.newMessage(this.newMessageSocket);
       this.newMessageSocket = null;
@@ -88,13 +88,13 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
 
   scrollToBottom() {
     setTimeout(() => {
-      var xH = this.chatBodyHtml.scrollHeight;
+      let xH = this.chatBodyHtml.scrollHeight;
       this.chatBodyHtml.scrollTo({
         top: xH,
         left: 0,
         behavior: 'smooth'
       });
-    }, 100)
+    }, 100);
   }
 
   newMessage(message: MessageSupportModel) {
@@ -107,11 +107,11 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
 
   // Scroll Up
   onUp() {
-    if (this.count <= this.messages.length) return;
+    if (this.count <= this.messages.length) { return; }
     // Paginar
     this.params.offset = this.params.offset + this.params.limit;
     // Get more messages
-    this.closeOrderDetail= true;
+    this.closeOrderDetail = true;
     this.getMoreMessages(this.params);
   }
 
@@ -129,7 +129,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
         setTimeout(() => this.scrollDirective.restore());
       }, error => {
         this.loadingMore = false;
-        this.showSwalMessage("Ha ocurrido un error al obtener más mensajes", 'error');
+        this.showSwalMessage('Ha ocurrido un error al obtener más mensajes', 'error');
       });
   }
 

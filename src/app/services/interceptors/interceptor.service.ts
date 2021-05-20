@@ -49,7 +49,7 @@ export class InterceptorService implements HttpInterceptor {
       return throwError('No authorization');
     } */
 
-    
+
 
     if (errorResponse.status >= 400 && errorResponse.status <= 404  ) {
       errorResponse = error.error;

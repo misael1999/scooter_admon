@@ -48,7 +48,7 @@ export class MainClientsComponent implements OnInit {
   clearSearch() {
     this.params.search = '';
     this.clientsService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getClients();
   }
 

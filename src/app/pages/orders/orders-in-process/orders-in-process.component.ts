@@ -133,12 +133,12 @@ export class OrdersInProcessComponent implements OnInit {
   openDialogSendMessageOrder(order) {
     if (order.supports.length > 0) {
       this.router.navigateByUrl('/support');
-      return
+      return;
     }
     const dialogref = this.dialog.open(SendMessageDialogComponent, {
       disableClose: true,
       width: '30%',
-      data: { order: order }
+      data: { order }
     });
 
     dialogref.afterClosed().subscribe(data => {
@@ -157,7 +157,7 @@ export class OrdersInProcessComponent implements OnInit {
   clearSearch() {
     this.params.search = '';
     this.ordersService.searchText = '';
-    this.searchText = "";
+    this.searchText = '';
     this.getOrders();
   }
 

@@ -15,9 +15,9 @@ export class AddDeliveryComponent extends ValidationForms implements OnInit {
   loadingSave: boolean;
 
   constructor(private fb: FormBuilder,
-    private deliveryService: DeliveryMenService,
-    public dialogRef: MatDialogRef<AddDeliveryComponent>,
-    @Inject(MAT_DIALOG_DATA)
+              private deliveryService: DeliveryMenService,
+              public dialogRef: MatDialogRef<AddDeliveryComponent>,
+              @Inject(MAT_DIALOG_DATA)
     public data: any) {
     super();
     if (data.deliveryMan) {
@@ -41,7 +41,7 @@ export class AddDeliveryComponent extends ValidationForms implements OnInit {
       // ======= Actualizar repartidor ========
       this.updateDelivery(this.deliveryMan.id, delivery);
     } else {
-      // ======= Agregar repartidor ======== 
+      // ======= Agregar repartidor ========
       this.addDelivery(delivery);
     }
   }

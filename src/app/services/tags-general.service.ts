@@ -22,12 +22,12 @@ export class TagsGeneralService {
 
   editTag(idTag: number, tag: any) {
     const url = `${environment.HOST_APIV1}/tags/${idTag}/`;
-    return this.httpClient.patch(url, tag)
+    return this.httpClient.patch(url, tag);
   }
 
   deleteTag(idTag: number) {
     const url = `${environment.HOST_APIV1}/tags/${idTag}/`;
-    return this.httpClient.delete(url)
+    return this.httpClient.delete(url);
   }
 
 

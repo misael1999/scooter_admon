@@ -13,7 +13,7 @@ export class ZonesListComponent extends ValidationForms implements OnInit {
   @Output() emitEditZone = new EventEmitter<any>();
   @Output() reloadZone = new EventEmitter<any>();
 
-  constructor(private zoneService: ZonesService) { super() }
+  constructor(private zoneService: ZonesService) { super(); }
 
   ngOnInit(): void {
   }
@@ -28,7 +28,7 @@ export class ZonesListComponent extends ValidationForms implements OnInit {
         this.showSwalMessage('Zona desactivada correctamente');
         this.reloadZone.emit(true);
       }, error => {
-        this.showSwalMessage('Error al desactivar la zona', 'error')
+        this.showSwalMessage('Error al desactivar la zona', 'error');
       });
   }
 
@@ -38,7 +38,7 @@ export class ZonesListComponent extends ValidationForms implements OnInit {
       this.showSwalMessage('Zona activada correctamente');
       this.reloadZone.emit(true);
     }, error => {
-      this.showSwalMessage('Error al activar la zona', 'error')
+      this.showSwalMessage('Error al activar la zona', 'error');
     });
   }
 

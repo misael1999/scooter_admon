@@ -26,8 +26,8 @@ export class AssignDeliveryDialogComponent implements OnInit {
   };
 
   constructor(public dialogRef: MatDialogRef<AssignDeliveryDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private orderService: OrdersService, private snackBar: MatSnackBar) {
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private orderService: OrdersService, private snackBar: MatSnackBar) {
 
     this.orderId = data.orderId;
     this.typeService = data.typeService;

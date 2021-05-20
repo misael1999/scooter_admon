@@ -17,7 +17,7 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
   groupSelected;
 
   constructor(private fb: FormBuilder, private faqService: FaqService, private dialogRef: MatDialogRef<AddFaqComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
     if (data.faq) {
       this.faq = data.faq;
@@ -86,9 +86,9 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
         this.loadingSave = false;
         this.dialogRef.close(true);
       }, error => {
-        this.showSwalMessage('Opps.. Ubo un problema al actualizar')
+        this.showSwalMessage('Opps.. Ubo un problema al actualizar');
         this.loadingSave = false;
-      })
+      });
   }
   buildUpdateForm(faq) {
     this.faqForm = this.fb.group(

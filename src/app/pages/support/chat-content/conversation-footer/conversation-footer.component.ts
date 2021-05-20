@@ -16,7 +16,7 @@ export class ConversationFooterComponent extends ValidationForms implements OnIn
   messageText;
   station;
 
-  constructor(private supportService: SupportService) { super() }
+  constructor(private supportService: SupportService) { super(); }
 
   ngOnInit(): void {
     this.station = JSON.parse(localStorage.getItem('station'));
@@ -24,18 +24,18 @@ export class ConversationFooterComponent extends ValidationForms implements OnIn
 
   sendMessage(text) {
 
-    if (text == null || text == '' || text == undefined) return;
+    if (text == null || text == '' || text == undefined) { return; }
     // Mensaje temporal
     const newMessageModel = new MessageSupportModel(
       this.station.user.id,
     this.support.user,
     this.messageText,
-    new Date()) 
+    new Date());
     this.messageText = null;
-    // ======= Enviar mensaje ======== 
-    this.newMessage.emit(newMessageModel)
+    // ======= Enviar mensaje ========
+    this.newMessage.emit(newMessageModel);
 
-    this.supportService.sendMessageSupport(this.support.id,{text})
+    this.supportService.sendMessageSupport(this.support.id, {text})
     .subscribe((data: any) => {
       // this.messages.push(data);
         // this.showSwalMessage("Mensaje enviado", 'success')

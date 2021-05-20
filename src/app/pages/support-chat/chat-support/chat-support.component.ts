@@ -22,7 +22,7 @@ export class ChatSupportComponent implements OnInit {
   user;
   messages;
   chatSupport;
-  @ViewChild("conversationBody") conversationBody: ElementRef;
+  @ViewChild('conversationBody') conversationBody: ElementRef;
 
   chatBodyHtml: HTMLElement;
 
@@ -31,17 +31,17 @@ export class ChatSupportComponent implements OnInit {
 
   visible = false;
 
-  params = { limit: 10, offset:0, is_open: "true" }
-  supportSelected : any;
+  params = { limit: 10, offset: 0, is_open: 'true' };
+  supportSelected: any;
   count;
   loadingMessages;
 
-  //SOCKETS
+  // SOCKETS
   stationId = localStorage.getItem('station_id');
   token = localStorage.getItem('access_token');
   WS_SOCKET = `${environment.WS_SOCKET}/ws/support/${this.stationId}/?token=${this.token}`;
 
-  //mensagem
+  // mensagem
   newMessage = null;
 
   constructor(private supportService: SupportService,
@@ -58,16 +58,16 @@ export class ChatSupportComponent implements OnInit {
     this.visible = !this.visible;
   }
 
-  supportSelect(event){
+  supportSelect(event) {
     console.log('Evento', event);
-    this.supportSelected = event; 
+    this.supportSelected = event;
     this.getMessagesSupport();
   }
 
   getMessagesSupport() {
     if (this.supportSelected) {
       console.log('Si hay soporte', this.supportSelected);
-      
+
       this.supportService.getMessages(this.supportSelected.id, this.params)
         .subscribe((data: any) => {
           this.messages = data.results;
@@ -76,7 +76,7 @@ export class ChatSupportComponent implements OnInit {
           this.loadingMessages = false;
          /*  this.scrollToBottom(); */
           console.log('Este es un ejemplo', this.messages);
-          
+
         }, error => {
           alert('Error al obtener los mensajes');
           this.loadingMessages = false;
@@ -87,16 +87,16 @@ export class ChatSupportComponent implements OnInit {
 
   scrollToBottom() {
     setTimeout(() => {
-      var xH = this.chatBodyHtml.scrollHeight;
+      const xH = this.chatBodyHtml.scrollHeight;
       this.chatBodyHtml.scrollTo({
         top: xH + 10000,
         left: 0,
         behavior: 'smooth'
       });
-    }, 500)
+    }, 500);
   }
 
-  //Socket para recepcion de mensajes
+  // Socket para recepcion de mensajes
   connectToWebSocketChat() {
     this.webSocketService.connect(this.WS_SOCKET).pipe(
       retryWhen((errors) => errors.pipe(delay(5000)))
@@ -111,12 +111,12 @@ export class ChatSupportComponent implements OnInit {
 
   // Autdio de mensaje de entrada
   playAudio() {
-    let audio = new Audio();
-    audio.src = "assets/sounds/message.mp3";
+    const audio = new Audio();
+    audio.src = 'assets/sounds/message.mp3';
     audio.load();
     audio.play();
   }
-  
+
 
   showNewMessageNotification() {
     if ( !this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
@@ -127,7 +127,7 @@ export class ChatSupportComponent implements OnInit {
         closeOnClick: true,
         pauseOnHover: true,
         position: SnotifyPosition.centerTop
-      });        
+      });
       return;
     }
   }
@@ -146,37 +146,37 @@ export class ChatSupportComponent implements OnInit {
   }
 
   openChatSupport() {
-    this.isClose = false
+    this.isClose = false;
     setTimeout(() => {
       this.chatBodyHtml = this.conversationBody.nativeElement;
       this.scrollToBottom();
     }, 500);
-    
+
   }
 
   sendMessage(text) {
 
-    if (text == null || text == '' || text == undefined) return;
+    if (text == null || text == '' || text == undefined) { return; }
     // Mensaje temporal
     const newMessageModel = new MessageSupportModel(
     this.station.user.id,
     this.supportSelected.user,
     this.messageText,
-    new Date()) 
+    new Date());
     this.messageText = null;
-    
 
-    // ======= Enviar mensaje ======== 
+
+    // ======= Enviar mensaje ========
     /* this.newMessage.emit(newMessageModel) */
 
-    this.supportService.sendMessageSupport(this.supportSelected.id,{text})
+    this.supportService.sendMessageSupport(this.supportSelected.id, {text})
     .subscribe((data: any) => {
       this.messages.push(data);
-      //console.log('Esta', data);
-      //console.log('Los mensajes',this.messages);
-      
+      // console.log('Esta', data);
+      // console.log('Los mensajes',this.messages);
 
-      
+
+
         // this.messages.push(data);
         // this.showSwalMessage("Mensaje enviado", 'success')
     }, error => {

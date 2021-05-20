@@ -8,7 +8,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 const modules = [
   NzIconModule,
   NzListModule
-]
+];
 
 
 @NgModule({

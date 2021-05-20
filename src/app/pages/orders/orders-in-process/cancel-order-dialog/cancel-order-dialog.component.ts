@@ -21,9 +21,9 @@ export class CancelOrderDialogComponent extends ValidationForms implements OnIni
   loadingSave: boolean;
 
   constructor(public dialogRef: MatDialogRef<CancelOrderDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private orderService: OrdersService, private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder) {
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private orderService: OrdersService, private snackBar: MatSnackBar,
+              private formBuilder: FormBuilder) {
     super();
     this.orderId = data.orderId;
   }

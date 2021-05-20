@@ -14,13 +14,13 @@ export class PromotionOnShippingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectMerchant(merchant){
+  selectMerchant(merchant) {
     this.merchant = merchant;
     this.current ++;
     console.log('El merchant', this.merchant);
   }
 
-  removeMerchant(){
+  removeMerchant() {
     this.merchant = null;
     this.current = 0;
   }

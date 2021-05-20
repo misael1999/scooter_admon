@@ -15,7 +15,7 @@ export class MainNotificationsComponent extends ValidationForms implements OnIni
   loadingSend;
 
   constructor(private fb: FormBuilder,
-     private notificationsService: NotificationsService, private snackBar: MatSnackBar) { super() }
+              private notificationsService: NotificationsService, private snackBar: MatSnackBar) { super(); }
 
   ngOnInit(): void {
     this.buildForm();
@@ -26,7 +26,7 @@ export class MainNotificationsComponent extends ValidationForms implements OnIni
       title: [null, Validators.required],
       body: [null, Validators.required],
       type: ['1', Validators.required],
-    })
+    });
   }
 
   async sendNotifications() {
@@ -34,9 +34,9 @@ export class MainNotificationsComponent extends ValidationForms implements OnIni
       alert('Formulario incompleto');
       return;
     }
-    const confirmationAction = await this.showMessageConfirm("Enviar la notificación");
+    const confirmationAction = await this.showMessageConfirm('Enviar la notificación');
 
-    if (!confirmationAction.value) return;
+    if (!confirmationAction.value) { return; }
 
     this.loadingSend = true;
     this.notificationsService.sendNotifications(this.notificationForm.value)

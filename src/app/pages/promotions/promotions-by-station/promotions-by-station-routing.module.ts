@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PromotionOnShippingComponent } from './promotion-on-shipping/promotion-on-shipping.component';
 
 const routes: Routes = [
-  { path:'shipping', component: PromotionOnShippingComponent}
+  { path: 'shipping', component: PromotionOnShippingComponent}
 ];
 
 @NgModule({

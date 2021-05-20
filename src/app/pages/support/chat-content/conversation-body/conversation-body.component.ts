@@ -21,7 +21,7 @@ export class ConversationBodyComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    
+
   }
 
 

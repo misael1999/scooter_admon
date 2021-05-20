@@ -54,7 +54,7 @@ export class MerchantsAddComponent extends ValidationForms implements OnInit {
       // ======= Update merchant ========
       this.updateMerchant(this.merchant.id, merchant);
     } else {
-      // ======= Add merchant ======== 
+      // ======= Add merchant ========
       this.addMerchant(merchant);
     }
   }

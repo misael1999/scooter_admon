@@ -36,14 +36,14 @@ export class OrdersDetailComponent implements OnInit {
       .subscribe((data: any) => {
         this.order = data;
         this.orderDetails = data.details;
-        
+
         console.log(this.order);
         console.log(this.orderDetails);
-        
+
         this.loadingOrder = false;
       }, error => {
         this.loadingOrder = false;
-        alert("Error al obtener detalles de la orden");
+        alert('Error al obtener detalles de la orden');
       });
   }
 

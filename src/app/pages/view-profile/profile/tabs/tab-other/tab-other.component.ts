@@ -22,7 +22,7 @@ export class TabOtherComponent implements OnInit {
 
 
   constructor(private profileService: ProfileService,
-    private snackBar: MatSnackBar, private fb: FormBuilder) { }
+              private snackBar: MatSnackBar, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.station = this.profileService.station;
@@ -109,7 +109,7 @@ export class TabOtherComponent implements OnInit {
   showMessageConfirm(message: string): Promise<SweetAlertResult> {
     return Swal.fire({
       title: '¿Estas seguro?',
-      text: "Desactivaras " + message,
+      text: 'Desactivaras ' + message,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

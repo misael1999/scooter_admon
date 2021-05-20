@@ -6,8 +6,8 @@ import { TagsGeneralService } from '../../../../../../services/tags-general.serv
 import { ValidationForms } from '../../../../../../utils/validations-forms';
 
 export interface Tags {
-  tags: [],
-  delete_tags: []
+  tags: [];
+  delete_tags: [];
 }
 
 
@@ -31,7 +31,7 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
 
 
   constructor(private tagsGeneralService: TagsGeneralService, private tagByMerchantService: TagByMerchantsService, private fb: FormBuilder, private dialogRef: MatDialogRef<AddTagMerchantComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
 
     this.tagsTheMerchant = data.tags.tags;
@@ -45,7 +45,7 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
   }
 
   addTag(data) {
-    this.tagsNew.push(data)
+    this.tagsNew.push(data);
     console.log(this.tagsNew);
     return this;
   }
@@ -72,12 +72,12 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
     // });
 
 
-      console.log(this.tagNueva);
+    console.log(this.tagNueva);
 
     this.tagByMerchantService.createTags(this.idMerchant, this.tagNueva)
       .subscribe((data) => {
         this.loadingSave = false;
-        this.showSwalMessage('Etiquetas Agregadas Correctamente')
+        this.showSwalMessage('Etiquetas Agregadas Correctamente');
         this.dialogRef.close(true);
       }, error => {
         this.showSwalMessage('Error al agregar');
@@ -98,7 +98,7 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
       }), error => {
         this.loadingTagGeneral = false;
         console.log('eroroe');
-      }
+      };
   }
   searchBy(value) {
     this.params.search = value;

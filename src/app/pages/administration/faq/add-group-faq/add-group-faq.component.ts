@@ -14,7 +14,7 @@ export class AddGroupFaqComponent extends ValidationForms implements OnInit {
   loadingSave: boolean;
 
   constructor(private fb: FormBuilder, private faqService: FaqService, private dialogRef: MatDialogRef<AddGroupFaqComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
     this.buildForm();
   }
@@ -30,7 +30,7 @@ export class AddGroupFaqComponent extends ValidationForms implements OnInit {
     }
     const group = this.groupForm.value;
     this.loadingSave = true;
-    this.addGroup(group)
+    this.addGroup(group);
   }
 
   addGroup(group) {
