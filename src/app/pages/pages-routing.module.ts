@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../services/guards/auth.guard';
 import { RefreshTokenGuard } from '../services/guards/refresh-token.guard';
-import { PromotionsRoutingModule } from './promotions/promotions-routing.module';
-import { PromotionsModule } from './promotions/promotions.module';
+
 
 
 const routes: Routes = [
@@ -13,20 +12,11 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: 'statistics',
-    canActivate: [AuthGuard, RefreshTokenGuard],
-    loadChildren: () => import('./statistics/statistics.module').then(m => m.StatisticsModule)
-  },
-  {
     path: 'orders',
     canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
   },
-  {
-    path: 'vehicles',
-    canActivate: [AuthGuard, RefreshTokenGuard],
-    loadChildren: () => import('./vehicles/vehicles.module').then(m => m.VehiclesModule)
-  },
+
   {
     path: 'clients',
     canActivate: [AuthGuard, RefreshTokenGuard],
@@ -46,11 +36,6 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./view-profile/view-profile.module').then(m => m.ViewProfileModule)
-  },
-  {
-    path: 'reports',
-    canActivate: [AuthGuard, RefreshTokenGuard],
-    loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)
   },
   {
     path: 'support',
