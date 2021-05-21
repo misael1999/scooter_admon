@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { delay } from 'rxjs/internal/operators/delay';
 import { retryWhen } from 'rxjs/internal/operators/retryWhen';
 import { SupportService } from 'src/app/services/support.service';
@@ -19,14 +19,16 @@ export class MainSupportComponent implements OnInit {
   loadingSupports = false;
   // Info
   supports = [];
-  params = { limit: 10, offset: 0, is_open: 'true' };
+  params = { limit: 10, offset: 0, is_open: 'true', search: '' };
   supportSelected;
 
   newMessage = null;
+  @ViewChild("chatContent") chatContent: ElementRef;
+
 
   constructor(private webSocketService: WebSocketService,
-              private supportService: SupportService,
-              private snotify: SnotifyService) { }
+    private supportService: SupportService,
+    private snotify: SnotifyService) { }
 
   ngOnInit(): void {
     this.connectToWebSocket();
@@ -39,15 +41,26 @@ export class MainSupportComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingSupports = false;
         this.supports = data.results;
-    }, error => {
-      this.loadingSupports = false;
-      alert('Ha ocurrido un error al obtener los tickets de soporte');
-    });
+      }, error => {
+        this.loadingSupports = false;
+        // alert('Ha ocurrido un error al obtener los tickets de soporte');
+      });
   }
 
   supportSelectedEvent(support) {
     this.supportSelected = support;
   }
+
+  searchChat(value) {
+    this.params.search = value;
+    this.getSupports();
+  }
+
+  openChat(event) {
+    this.chatContent.nativeElement.classList.add("open");
+    this.supportService.chatContent = this.chatContent.nativeElement;
+  }
+
 
 
   ngOnDestroy(): void {
@@ -79,7 +92,7 @@ export class MainSupportComponent implements OnInit {
   }
 
   showNewMessageNotification() {
-    if ( !this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
+    if (!this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
       const message = `Mensaje nuevo| ID:${this.newMessage.support}| Mensaje: ${this.newMessage.text}`;
       this.snotify.info(message, {
         timeout: 2000,
@@ -91,6 +104,4 @@ export class MainSupportComponent implements OnInit {
       return;
     }
   }
-
-
 }

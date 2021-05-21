@@ -9,6 +9,7 @@ import { SupportService } from 'src/app/services/support.service';
 export class ConversationBodyComponent implements OnInit, OnChanges {
 
   @Input() messages;
+  @Input() support;
   @Input() loadingMessages: boolean;
   station;
 

@@ -2,29 +2,30 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th class="text-center">Abierto</th>
+                <th>Abierto</th>
                 <th>Télefono</th>
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Encargado</th>
                 <th>Categoría</th>
-                <th class="text-center" style="width: 50px;">Acciones</th>
+                <th class="width__actions">Acciones</th>
             </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let merchant of merchants">
-                <td class="text-center">
+                <td>
                     <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>
                 </td>
                 <td> {{ merchant.phone_number }} </td>
-                <td> <u class="cursor font-weight-semibold" routerLink="detail/{{merchant.id}}"> {{ merchant.merchant_name }} </u> </td>
+                <td> <u class="cursor" routerLink="detail/{{merchant.id}}"> {{ merchant.merchant_name }} </u> </td>
                 <td> {{ merchant.email }} </td>
                 <td> {{ merchant.contact_person }} </td>
                 <td> {{ merchant.category }} </td>
-                <td class="text-center">
+                <td>
                     <button class="btn btn-info btn-sm w-100 m-b-5" *ngIf="params.information_is_complete && params.status == 1" routerLink="detail/{{merchant.id}}">Promociones</button>
                     <button class="btn btn-primary btn-sm w-100" *ngIf="params.information_is_complete && params.status == 1" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button>
+                    <button class="btn btn-info btn-sm w-100" *ngIf="params.information_is_complete && params.status == 2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Desbloquear</button>
                 </td>
             </tr>
         </tbody>

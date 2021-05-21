@@ -1,8 +1,7 @@
 <div class="conversation" *ngIf="support">
     <div class="conversation-wrapper">
-        <app-conversation-header [closeOrderDetail]="closeOrderDetail" [loadingMessages]="loadingMessages" [total]="count" [support]="support"></app-conversation-header>
-        <div [ngClass]="support.order ? 'padding-40': ''" appScroll infinite-scroll [scrollWindow]="false" [infiniteScrollUpDistance]="3"
-            [infiniteScrollThrottle]="0" (scrolledUp)="onUp()" class="conversation-body" #conversationBody>
+        <!-- <app-conversation-header [closeOrderDetail]="closeOrderDetail" [loadingMessages]="loadingMessages" [total]="count" [support]="support"></app-conversation-header> -->
+        <div appScroll infinite-scroll [scrollWindow]="false" [infiniteScrollUpDistance]="3" [infiniteScrollThrottle]="0" (scrolledUp)="onUp()" class="conversation-body" #conversationBody>
             <!-- Loader de nuevos mensajes  -->
             <div *ngIf="loadingMore" class="more">
                 <a>Cargando ...</a>
@@ -18,14 +17,13 @@
             <div *ngIf="loadingMessages" class="spinner-grow text-danger" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-            <!-- Termina loading de mensajes iniciales  -->
             <!-- BODY  -->
-            <app-conversation-body *ngIf="!loadingMessages && messages.length >0" [messages]="messages">
+            <app-conversation-body *ngIf="!loadingMessages && messages.length > 0" [support]="support" [messages]="messages">
             </app-conversation-body>
 
             <!-- TERMINA BODY  -->
         </div>
-        <app-conversation-footer (newMessage)="newMessage($event)" [support]="support"></app-conversation-footer>
 
+        <app-conversation-footer (newMessage)="newMessage($event)" [support]="support"></app-conversation-footer>
     </div>
 </div>

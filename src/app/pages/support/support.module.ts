@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SupportRoutingModule } from './support-routing.module';
 import { MainSupportComponent } from './main-support/main-support.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
@@ -13,7 +12,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { SnotifyModule, ToastDefaults, SnotifyService } from 'ng-snotify';
 import { MatDialogModule } from '@angular/material/dialog';
-
 @NgModule({
   declarations: [
     MainSupportComponent,
@@ -34,7 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   providers: [
     SnotifyService,
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
   ]
 })
 export class SupportModule { }

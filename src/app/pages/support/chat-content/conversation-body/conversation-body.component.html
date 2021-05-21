@@ -1,58 +1,12 @@
-<!-- <div class="msg justify-content-center">
-                    <div class="font-weight-semibold font-size-12"> 7:57PM </div>
-                </div> -->
-
-    <div *ngFor="let message of messages" class="msg"
-     [ngClass]="station.user.id == message.sender_by ? 'msg-sent': 'msg-recipient'">
-        <div class="m-r-10">
-            <div *ngIf="station.user.id != message.sender_by" class="avatar avatar-image">
-                <img src="assets/images/avatars/thumb-1.jpg" alt="">
-            </div>
-        </div>
-        <div class="bubble">
-            <div class="bubble-wrapper">
-                <span>{{message.text}}</span>
-            </div>
+<div *ngFor="let message of messages" class="msg">
+    <div class="m-r-10">
+        <div *ngIf="station.user.id != message.sender_by" class="avatar avatar-image">
+            <img src="assets/images/avatars/thumb-1.jpg" alt="">
         </div>
     </div>
-<!--
-                <div class="msg msg-sent">
-                    <div class="bubble">
-                        <div class="bubble-wrapper">
-                            <span>Hola, ya va en camino, llega a más tardar 11:10 AM</span>
-                        </div>
-                    </div>
-                </div> -->
-<!-- <div class="msg msg-recipient">
-                    <div class="m-r-10">
-                        <div class="avatar avatar-image">
-                            <img src="assets/images/avatars/thumb-1.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="bubble">
-                        <div class="bubble-wrapper p-5">
-                            <img src="https://s3.envato.com/files/249796117/preview.__large_preview.png" alt="https://s3.envato.com/files/249796117/preview.__large_preview.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="msg msg-recipient">
-                    <div class="bubble m-l-50">
-                        <div class="bubble-wrapper">
-                            <span>Applicator - Bootstrap 4 Admin Template</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="msg msg-recipient">
-                    <div class="bubble m-l-50">
-                        <div class="bubble-wrapper">
-                            <span>A creative, responsive and highly customizable admin template</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="msg msg-sent">
-                    <div class="bubble">
-                        <div class="bubble-wrapper">
-                            <span>Wow, that was cool!</span>
-                        </div>
-                    </div>
-                </div> -->
+    <div class="bubble">
+        <div class="bubble-wrapper">
+            <span>{{message.text}}</span>
+        </div>
+    </div>
+</div>

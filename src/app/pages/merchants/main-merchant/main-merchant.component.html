@@ -68,7 +68,7 @@
         </div>
 
         <div class="col-md-12" *ngIf="!loadingData && merchants.length > 0">
-            <app-merchant-list [merchants]="merchants" [params]="params"></app-merchant-list>
+            <app-merchant-list [merchants]="merchants" [params]="params" (reloadMerchants)="getMerchants()"></app-merchant-list>
         </div>
 
         <div class="col-md-12 d-flex justify-content-end" *ngIf="!loadingData && merchants.length > 0">

@@ -1,11 +1,11 @@
-
-<!-- <mat-progress-bar *ngIf="!station" color="accent" class="my-3" mode="indeterminate"></mat-progress-bar> -->
 <ng-snotify></ng-snotify>
 <div class="container-fluid p-h-0">
     <div class="chat chat-app row">
-        <app-ticket-list (filterSelected)="filter($event)" [supports]="supports" [loading]="loadingSupports" (supportSelectedEvent)="supportSelectedEvent($event)"></app-ticket-list>
-        <div class="chat-content" *ngIf="supportSelected">
-            <app-chat-content [newMessageSocket]="newMessage" [support]="supportSelected"></app-chat-content>
+        <app-ticket-list (filterSelected)="filter($event)" (openChatEvent)="openChat($event)" (supportSelectedEvent)="supportSelectedEvent($event)" (searchEvent)="searchChat($event)" [supports]="supports" [loading]="loadingSupports">
+        </app-ticket-list>
+
+        <div class="chat-content" #chatContent>
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

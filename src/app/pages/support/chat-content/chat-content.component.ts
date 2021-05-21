@@ -45,7 +45,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
   }
 
   ngAfterViewInit() {
-    this.chatBodyHtml = this.conversationBody.nativeElement;
+    // this.chatBodyHtml = this.conversationBody.nativeElement;
   }
 
 

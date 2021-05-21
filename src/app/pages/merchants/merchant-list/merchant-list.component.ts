@@ -1,17 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import Swal from 'sweetalert2';
+import { ValidationForms } from 'src/app/utils/validations-forms';
 
 @Component({
   selector: 'app-merchant-list',
   templateUrl: './merchant-list.component.html',
   styleUrls: ['./merchant-list.component.scss']
 })
-export class MerchantListComponent implements OnInit {
+export class MerchantListComponent extends ValidationForms implements OnInit {
   @Input() merchants;
   @Input() params;
+  @Output() reloadMerchants = new EventEmitter<boolean>();
 
-  constructor(private merchantsService: MerchantsService) { }
+
+  constructor(private merchantsService: MerchantsService) {
+    super();
+  }
 
   ngOnInit(): void {
   }
@@ -39,6 +44,34 @@ export class MerchantListComponent implements OnInit {
       }
     });
   }
+
+
+  async disabledMerchant(idMerchant) {
+    const confirmation = await this.showMessageConfirm('De bloquear al comercio');
+    if (!confirmation.value) { return; }
+
+    this.merchantsService.deleteMerchant(idMerchant)
+      .subscribe((data) => {
+        this.showSwalMessage('Repartidor bloqueado correctamente');
+        this.reloadMerchants.emit(true);
+      }, error => {
+        this.showSwalMessage(error.errors.message, 'error');
+      });
+  }
+
+  async enableMerchant(idMerchant) {
+    const confirmation = await this.showMessageConfirm('De desbloquear al repartidor');
+    if (!confirmation.value) { return; }
+
+    // this.merchantsService.unlockMerchant(idMerchant)
+    //   .subscribe((data) => {
+    //     this.showSwalMessage('Repartidor desbloqueado correctamente');
+    //     this.reloadMerchants.emit(true);
+    //   }, error => {
+    //     this.showSwalMessage(error.errors.message, 'error');
+    //   });
+  }
+
 
 
   openOrClose(isOpen, merchantId) {

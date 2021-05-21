@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,6 +9,11 @@ import { environment } from 'src/environments/environment';
 export class SupportService {
 
   stationId;
+  chatContent: HTMLElement;
+  private newMessage = new Subject<void>();
+  public newMessage$ = this.newMessage.asObservable();
+  message: any;
+
 
   constructor(private http: HttpClient) {
     this.stationId = localStorage.getItem('station_id');
