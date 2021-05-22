@@ -52,13 +52,13 @@ registerLocaleData(localeEs);
       provide: LOCALE_ID,
       useValue: 'es'
     },
-    {provide: DEFAULT_CURRENCY_CODE, useValue: 'MXN'},
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'MXN' },
     {
       provide: MatPaginatorIntl,
       useValue: getPaginatorTranslate()
     },
     { provide: NZ_I18N, useValue: en_US }
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

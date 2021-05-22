@@ -10,12 +10,6 @@ import { PageNoFound404Component } from './shared/page-no-found404/page-no-found
 
 const routes: Routes = [
   {
-    path: '', component: PagesComponent,
-    // CompleteProfileGuard
-    canActivate: [CompleteProfileGuard, AuthGuard, RefreshTokenGuard],
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
-  },
-  {
     path: 'complete-profile',
     canActivate: [AlreadyInfoCompleteGuard],
     loadChildren: () => import('./pages/complete-profile/complete-profile.module').then(m => m.CompleteProfileModule)
@@ -23,6 +17,11 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+  },
+  {
+    path: '', component: PagesComponent,
+    canActivate: [CompleteProfileGuard, AuthGuard, RefreshTokenGuard],
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
   },
   {
     path: 'not_found', component: PageNoFound404Component

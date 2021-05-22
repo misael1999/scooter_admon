@@ -27,6 +27,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   // MatPaginator Inputs
   length = 100;
   pageSize = 15;
+  pageIndex = 0;
   pageSizeOptions: number[] = [25, 50, 5, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
@@ -34,7 +35,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   // Parametros para el paginado
   params = { limit: 15, offset: 0, search: '', order_status: '1,13,14', ordering: '' };
   orders: Array<any> = [];
-  loadingOrders: boolean;
+  loadingData: boolean;
   liveData$: Subscription;
 
 
@@ -45,7 +46,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   searchText;
 
   constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
-              private dialog: MatDialog, private webSocketService: WebSocketService, private router: Router) { }
+    private dialog: MatDialog, private webSocketService: WebSocketService, private router: Router) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -125,15 +126,15 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   }
 
   getOrders() {
-    this.loadingOrders = true;
+    this.loadingData = true;
     this.ordersService.getOrders(this.params)
       .subscribe((data: any) => {
         this.orders = data.results;
-        this.loadingOrders = false;
+        this.loadingData = false;
         this.length = data.count;
         // console.log(this.orders);
       }, error => {
-        this.loadingOrders = false;
+        this.loadingData = false;
       });
   }
 
@@ -182,7 +183,7 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
       }
     });
   }
-  orderingOrders(value: string) {
+  orderBy(value: string) {
     this.params.ordering = value;
     this.getOrders();
   }

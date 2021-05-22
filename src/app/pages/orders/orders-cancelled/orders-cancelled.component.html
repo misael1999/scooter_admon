@@ -46,8 +46,8 @@
                     <thead>
                         <tr>
                             <th>Servicio</th>
-                            <th>Lugar de compra o recolección </th>
                             <th>Cliente</th>
+                            <th>Lugar de compra o recolección</th>
                             <th>Razón de rechazo</th>
                             <th>Fecha del servicio</th>
                             <th>Total</th>
@@ -60,11 +60,11 @@
                                 <span *ngIf="order.service_id == 2" class="cursor badge badge-pill badge-warning" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
                                 <span *ngIf="order.service_id == 1" class="cursor badge badge-pill badge-info" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
                             </td>
+                            <td> {{ order.customer.name }} </td>
                             <td>
                                 <span *ngIf="order.is_order_to_merchant"> {{ order.merchant.merchant_name }} </span>
                                 <span *ngIf="!order.is_order_to_merchant"> {{ order.from_address.full_address }} </span>
                             </td>
-                            <td> {{ order.customer.name }} </td>
                             <td> {{ order.reason_rejection }} </td>
                             <td> {{ order.order_date | date:'medium' }} </td>
                             <td class="text-center">

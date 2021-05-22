@@ -1,167 +1,130 @@
-<div class="container-fluid">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between">
-        <h1 class="h3 mb-0 text-gray-800">Pedidos nuevos</h1>
+<div class="container">
+    <div>
+        <h2>Pedidos nuevos</h2>
     </div>
 
-    <div class="row">
-        <div class="col-md-12 col-lg-12 p-t-15">
-            <div class="row">
+    <div class="row m-t-20">
+        <div class="col-md-3 m-b-10">
+            <select class="form-control select-form cursor" (change)="orderBy($event.target.value)">
+                <option value="">Ordenar</option>
+                <option value="distance">Distancia mas corta</option>
+                <option value="-distance">Distancia mas larga </option>
+                <option value="service_price">Precio mas bajo</option>
+                <option value="-service_price">Precio mas alto </option>
+            </select>
+        </div>
 
-                <!-- Ordering -->
-                <div class="col-md-3 col-lg-3 col-sm-12 p-b-10">
-                    <select class="form-control select-form" (change)="orderingOrders($event.target.value)">
-                        <option value="">Ordenar por:</option>
-                        <option value="distance">Distancia mas corta</option>
-                        <option value="-distance">Distancia mas larga </option>
-                        <option value="service_price">Precio mas bajo</option>
-                        <option value="-service_price">Precio mas alto </option>
-                </select>
-                </div>
-                <!-- End ordering -->
+        <div class="col-md-6 m-b-10">
+            <button (click)="getOrders()" class="btn btn-info">Recargar</button>
+        </div>
 
-
-                <!-- Reload data -->
-                <div class="col-md-6 col-lg-6 p-b-10">
-                    <button (click)="getOrders()" class="btn btn-info btn-sm">Recargar</button>
-                </div>
-                <!-- End reload data -->
-
-
-                <!-- Search by -->
-                <div class="col-md-3 col-lg-3 col-sm-12">
-                    <div class="input-group">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text " class="form-control fm-size " placeholder="Buscar por nombre " aria-label="Username " aria-describedby="basic-addon1 ">
-                        <div class="input-group-prepend cursor " (click)="searchBy(searchInput.value) ">
-                            <span *ngIf="!params.search" class="input-group-text " id="basic-addon1 ">
-                        <i class="fas fa-search "></i>
+        <div class="col-md-3 m-b-10">
+            <div class="input-group">
+                <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control" placeholder="Buscar">
+                <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
+                    <span *ngIf="!params.search" class="input-group-text">
+                        <i class="anticon anticon-search"></i>
                     </span>
-                            <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text cursor" id="basic-addon2">
-                        <i class="fas fa-times-circle"></i>
+                    <span *ngIf="params.search != ''" (click)="clearSearch()" class="input-group-text">
+                        <i class="anticon anticon-close"></i>
                     </span>
-                        </div>
-                    </div>
                 </div>
-                <!-- End search by  -->
             </div>
+        </div>
+    </div>
+
+    <div class="row m-t-10">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <app-loading-data *ngIf="loadingData"></app-loading-data>
+            <app-no-found-data *ngIf="!loadingData && orders.length == 0"> </app-no-found-data>
+        </div>
+
+        <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingData && orders.length > 0">
+            <mat-paginator (page)="pageEvent = getPages($event)" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions">
+            </mat-paginator>
         </div>
 
 
-
-
-        <div class="col-md-12 col-lg-12 p-t-15">
-
-            <!-- Preloader -->
-            <div class="col-lg-12 d-flex justify-content-center" *ngIf="loadingOrders">
-                <div class="spinner-border text-primary my-5" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-            <!-- End Preloader -->
-
-
-            <div class="col-md-12 col-lg-12" *ngIf="!loadingOrders && orders.length > 0">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Servicio</th>
-                                <th>Cliente</th>
-                                <th>Numero del cliente</th>
-                                <th>Lugar de origen o compra</th>
-                                <th>Lugar de entrega</th>
-                                <th>Hora del pedido </th>
-                                <th>Hr. limite para responder </th>
-                                <th>Estatus </th>
-                                <th class="text-center">Acciones </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let order of orders">
-                                <td>
-                                    <span *ngIf="order.service_id == 3" class="badge bg-secondary text-dark">Lo que sea</span>
-                                    <span *ngIf="order.service_id == 2" class="badge bg-warning text-dark">{{order.service}}</span>
-                                    <span *ngIf="order.service_id == 1" class="badge bg-info text-dark">{{order.service}}</span>
-
-                                    <br>
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDialogDetailProducts(order)">Detalles</a> </li>
-                                    </ol>
-                                </td>
-                                <td>{{order.customer.name}}</td>
-                                <td>{{order.customer.phone_number}}</td>
-
-                                <td>
-                                    <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
+        <div class="col-md-12" *ngIf="!loadingData && orders.length > 0">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Cliente</th>
+                            <th>Numero del cliente</th>
+                            <th>Lugar de compra o recolección</th>
+                            <th>Lugar de entrega</th>
+                            <th>Fecha del servicio</th>
+                            <th>Hr. limite para responder</th>
+                            <th>Estatus </th>
+                            <th class="width__actions">Acciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of orders">
+                            <td>
+                                <span *ngIf="order.service_id == 3" class="cursor badge badge-pill badge-secondary" (click)="openDialogDetailProducts(order)">Lo que sea  </span>
+                                <span *ngIf="order.service_id == 2" class="cursor badge badge-pill badge-warning" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
+                                <span *ngIf="order.service_id == 1" class="cursor badge badge-pill badge-info" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
+                            </td>
+                            <td> {{ order.customer.name }} </td>
+                            <td> {{ order.customer.phone_number }} </td>
+                            <td>
+                                <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa </a> </li>
                                         </ol>
                                 </span>
 
-                                    <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
+                                <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa  </a> </li>
                                         </ol>
                                 </span>
-                                </td>
+                            </td>
 
 
-                                <td> {{ order.to_address.full_address }} <br>
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa </a> </li>
-                                    </ol>
-                                </td>
+                            <td> {{ order.to_address.full_address }} <br>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa </a> </li>
+                                </ol>
+                            </td>
 
-                                <td> {{ order.order_date | date:'medium'}} </td>
-                                <td> {{ order.maximum_response_time | date:'medium'}} </td>
-                                <td> {{order.order_status.name}}</td>
-                                <td class="text-center">
+                            <td> {{ order.order_date | date:'medium'}} </td>
+                            <td> {{ order.maximum_response_time | date:'medium'}} </td>
+                            <td> {{order.order_status.name}}</td>
+                            <td>
+                                <button (click)="openDialogAssignDelivery(order)" *ngIf="order.order_status.id == 13" class="btn btn-info btn-sm w-100 m-b-5">
+                                    Asignar
+                                </button>
 
+                                <button (click)="openDialogRejectOrder(order.id)" *ngIf="order.order_status.id == 13" class="btn btn-primary btn-sm w-100 m-b-5">
+                                    Rechazar
+                                </button>
 
+                                <button (click)="openDialogSendMessageOrder(order)" class="btn btn-success btn-sm w-100 m-b-5">                            
+                                    Mensaje
+                                </button>
 
-                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogAssignDelivery(order)" style="width: 90%;" class="btn btn-success btn-sm mb-1">Asignar</button>
-
-                                    <button *ngIf="order.order_status.id == 13" (click)="openDialogRejectOrder(order.id)" style="width: 90%;" class="btn btn-danger btn-sm">Rechazar</button>
-
-                                    <button (click)="openDialogSendMessageOrder(order)" style="width: 90%;" class="btn btn-success btn-sm mt-1">
-                                        
-                                        Mensaje
-                                    </button>
-
-                                    <!-- Botones poara aceptar por comercio -->
-
-                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="accepOrderMerchant(order.id)" style="width: 90%;" class="btn btn-success btn-sm m-b-5">
-                                        Aceptar
-                                       
-                                    </button>
-                                    <button *ngIf="order.is_order_to_merchant && order.order_status.id == 14" [disabled]="loadingAcceptOrder" (click)="rejectOrderMerchant(order.id)" style="width: 90%;" class="btn btn-danger btn-sm">Rechazar</button>
-
-
-
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                <!-- Botones poara aceptar por comercio -->
+                                <button (click)="accepOrderMerchant(order.id)" *ngIf="order.is_order_to_merchant && order.order_status.id == 14" class="btn btn-info btn-sm w-100 m-b-5">
+                                    Aceptar                                    
+                                </button>
+                                <button (click)="rejectOrderMerchant(order.id)" *ngIf="order.is_order_to_merchant && order.order_status.id == 14" class="btn btn-primary btn-sm">
+                                    Rechazar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
 
-
-
-            <!-- Paginator -->
-            <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingOrders && orders.length > 0">
-                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)">
-                </mat-paginator>
-            </div>
-            <!-- End Paginator -->
-
-
-            <!-- Component no data -->
-            <app-no-found-data *ngIf="!loadingOrders && orders.length == 0"  [message]="'No hay pedidos que mostrar'">
-            </app-no-found-data>
-            <!-- End Component no data -->
+        <div class="col-lg-12 d-flex justify-content-end" *ngIf="!loadingData && orders.length > 0">
+            <mat-paginator (page)="pageEvent = getPages($event)" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions">
+            </mat-paginator>
         </div>
     </div>
 </div>
