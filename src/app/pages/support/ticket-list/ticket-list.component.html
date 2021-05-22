@@ -21,17 +21,14 @@
                 </div>
                 <div class="p-l-15">
                     <h5 class="m-b-0">{{support.customer}}</h5>
-                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                    <!-- <p class="msg-overflow m-b-0 text-muted font-size-13">
                         Asunto: <span class="badge" [ngClass]="getSupportClass(support.support_type_id)">{{support.support_type}}</span>
-                    </p>
+                    </p> -->
                     <p *ngIf="support.support_type_id == 3" class="msg-overflow m-b-0 text-muted font-size-13">
                         Asunto: {{support.issue}}
                     </p>
                     <p class="msg-overflow m-b-0 text-muted font-size-13">
                         Estatus: <span>{{support.support_status}}</span>
-                        <!-- <span class="badge" 
-                        [ngClass]="support.support_status_id == 1 ? 'badge-success': 'badge-danger'"
-                        >{{support.support_status}}</span> -->
                     </p>
                     <p class="msg-overflow m-b-0 text-muted font-size-13">
                         Fecha: <span>{{support.created | date:'medium'}}</span>

@@ -5,6 +5,7 @@ import { SupportService } from 'src/app/services/support.service';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { environment } from 'src/environments/environment';
 import { SnotifyPosition, SnotifyService } from 'ng-snotify';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-support',
@@ -14,21 +15,32 @@ import { SnotifyPosition, SnotifyService } from 'ng-snotify';
 export class MainSupportComponent implements OnInit {
   stationId = localStorage.getItem('station_id');
   token = localStorage.getItem('access_token');
+  supportId;
   WS_SOCKET = `${environment.WS_SOCKET}/ws/support/${this.stationId}/?token=${this.token}`;
-
+  user;
   loadingSupports = false;
+  @ViewChild("chatContent") chatContent: ElementRef;
+
   // Info
   supports = [];
   params = { limit: 10, offset: 0, is_open: 'true', search: '' };
   supportSelected;
-
   newMessage = null;
-  @ViewChild("chatContent") chatContent: ElementRef;
 
-
-  constructor(private webSocketService: WebSocketService,
+  constructor(
+    private webSocketService: WebSocketService,
     private supportService: SupportService,
-    private snotify: SnotifyService) { }
+    private activatedRoute: ActivatedRoute,
+    private snotify: SnotifyService,
+    private router: Router) {
+    this.user = JSON.parse(localStorage.getItem('user_client'));
+    if (this.activatedRoute.snapshot.firstChild) {
+      this.activatedRoute.firstChild
+        .params.subscribe((params) => {
+          this.supportId = params.chatId;
+        });
+    }
+  }
 
   ngOnInit(): void {
     this.connectToWebSocket();
@@ -41,10 +53,30 @@ export class MainSupportComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingSupports = false;
         this.supports = data.results;
+        this.countNewMessages();
+        if (data.total_record > 0 && !this.supportId) {
+          this.supportSelected = this.supports[0];
+          this.router.navigateByUrl('/support/' + this.supports[0].id + '/messages');
+          setTimeout(() => {
+            this.supportSelected.messagesNotViewed = 0;
+            this.supports[0] = this.supportSelected;
+          }, 3000);
+        } else if (this.supportId) {
+          this.openChat(this.supportId);
+        }
       }, error => {
         this.loadingSupports = false;
         // alert('Ha ocurrido un error al obtener los tickets de soporte');
       });
+  }
+
+  countNewMessages() {
+    this.supports.forEach((chat) => {
+      chat.messagesNotViewed = 0;
+      // chat.chat_messages.forEach((message) => {
+      //   if (message.viewed === false && message.sender_by_id != this.user.ID) { chat.messagesNotViewed = chat.messagesNotViewed + 1; }
+      // });
+    });
   }
 
   supportSelectedEvent(support) {
@@ -72,7 +104,6 @@ export class MainSupportComponent implements OnInit {
       retryWhen((errors) => errors.pipe(delay(5000)))
     ).subscribe((data: any) => {
       if (data.data.type && data.data.type === 'NEW_MESSAGE_SUPPORT') {
-        this.playAudio();
         this.newMessage = data.data.message;
         this.showNewMessageNotification();
       }
@@ -92,15 +123,17 @@ export class MainSupportComponent implements OnInit {
   }
 
   showNewMessageNotification() {
+    this.playAudio();
+    const message = `${this.newMessage.message}`;
     if (!this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
-      const message = `Mensaje nuevo| ID:${this.newMessage.support}| Mensaje: ${this.newMessage.text}`;
-      this.snotify.info(message, {
+      const snotifyMessage = this.snotify.success(message ? message : 'Imagen recibida', 'Mensaje nuevo', {
         timeout: 2000,
         showProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         position: SnotifyPosition.centerTop
       });
+      snotifyMessage.id = 1;
       return;
     }
   }

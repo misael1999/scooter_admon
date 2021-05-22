@@ -23,6 +23,10 @@ export class WebSocketService {
       console.error('Did not send data, open a connection first');
     }
   }
+  getCurrentSocket() {
+    return this.connection$.asObservable();
+  }
+
 
   closeConnection() {
     if (this.connection$) {

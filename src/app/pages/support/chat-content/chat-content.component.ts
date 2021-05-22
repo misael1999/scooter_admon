@@ -3,6 +3,8 @@ import { ScrollDirective } from 'src/app/directives/scroll.directive';
 import { MessageSupportModel } from 'src/app/models/message_support.model';
 import { SupportService } from 'src/app/services/support.service';
 import { ValidationForms } from 'src/app/utils/validations-forms';
+import { ActivatedRoute } from '@angular/router';
+import { WebSocketService } from '../../../services/web-socket.service';
 
 @Component({
   selector: 'app-chat-content',
@@ -10,17 +12,20 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
   styleUrls: ['./chat-content.component.scss']
 })
 export class ChatContentComponent extends ValidationForms implements OnInit, OnChanges, AfterViewInit {
-
-  @Input() support;
+  support;
+  supportId: number;
   @Input() newMessageSocket: MessageSupportModel;
+  @Input() newMessageService: any;
+  @Output() closeChatEvent = new EventEmitter<any>();
   closeOrderDetail = false;
   @ViewChild('conversationBody') conversationBody: ElementRef;
   @ViewChild(ScrollDirective) scrollDirective!: ScrollDirective;
   messages: MessageSupportModel[] = [];
   loadingMessages;
-  station;
-  params = { limit: 15, offset: 0, ordering: '-created' };
+  params = { limit: 15, offset: 0, page: 1, ordering: '-created' };
   chatBodyHtml: HTMLElement;
+  chatGroups: [] = [];
+  station;
 
   // Infinite Scroll
   throttle = 300;
@@ -32,9 +37,20 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
   loadingMore: boolean;
   savedHeight;
 
-
-
-  constructor(private supportService: SupportService) { super(); }
+  constructor(
+    private supportService: SupportService,
+    private activatedRoute: ActivatedRoute,
+    private webSocketService: WebSocketService
+  ) {
+    super();
+    this.activatedRoute.params.subscribe((params) => {
+      this.params = { limit: 15, offset: 0, page: 1, ordering: '-created' };
+      this.messages = [];
+      this.chatGroups = [];
+      this.supportId = params.chatId;
+      this.getChat(this.supportId);
+    });
+  }
 
   ngOnInit(): void {
     this.station = JSON.parse(localStorage.getItem('station'));
@@ -42,6 +58,24 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
       this.loadingMessages = true;
       this.getMessagesSupport();
     }
+
+    this.webSocketService.getCurrentSocket()
+      .subscribe((payload: any) => {
+        switch (payload.type_notification) {
+          case 'NEW_CHAT_MESSAGE':
+            if (payload.data.chat_id != this.support.id) { return; }
+            this.newMessageChatSocket(payload);
+            return;
+          case 'ALL_MESSAGES_VIEWED':
+            if (payload.data.ID != this.support.id) { return; }
+            this.allMessagesViewedSocket(payload);
+            return;
+          case 'MESSAGE_VIEWED':
+            if (payload.data.chat_id != this.support.id) { return; }
+            this.messageViewedSocket(payload);
+            return;
+        }
+      });
   }
 
   ngAfterViewInit() {
@@ -71,7 +105,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
 
     if (supportUpdated && supportUpdated.previousValue) {
       this.loadingMessages = true;
-      this.params = { limit: 15, offset: 0, ordering: '-created' };
+      this.params = { limit: 15, offset: 0, page: 1, ordering: '-created' };
       this.scrollDirective.reset();
       this.getMessagesSupport();
     }
@@ -84,6 +118,21 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
       this.newMessageSocket = null;
 
     }
+  }
+
+  getChat(chatId) {
+    // this.supportService.get
+    //   .subscribe((data: IChat) => {
+    //     this.chat = data;
+
+    //     this.loadingMessages = true;
+    //     this.getMessagesChat();
+    //     setTimeout(() => {
+    //       this.chatBodyHtml = this.conversationBody.nativeElement;
+    //     });
+    //   }, error => {
+    //     this.showSwalMessage('Ha ocurrido un error al consultar el chat', 'error');
+    //   });
   }
 
   scrollToBottom() {
@@ -133,4 +182,33 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
       });
   }
 
+
+  newMessageChatSocket(payload) {
+    // this.supportService.updateNewMessage(payload.data);
+    // this.newMessage(payload.data);
+    // this.newMessageSocket = null;
+    // this.messages.push(payload.data);
+    // this.messageService.markMessageAsViewed(this.chat.ID, payload.data.ID, {})
+    //   .subscribe();
+  }
+
+  allMessagesViewedSocket(payload) {
+    // this.chatGroups = this.chatGroups.map((chat) => {
+    //   chat.messages = chat.messages.map((message) => { message.viewed = true; message.viewed_date = new Date(); return message; });
+    //   return chat;
+    // });
+  }
+
+  messageViewedSocket(payload) {
+    // this.chatGroups = this.chatGroups.map((chat) => {
+    //   chat.messages = chat.messages.map((message) => {
+    //     if (message.ID == payload.message_id) {
+    //       message.viewed = true;
+    //       message.viewed_date = new Date();
+    //     }
+    //     return message;
+    //   });
+    //   return chat;
+    // });
+  }
 }

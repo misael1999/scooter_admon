@@ -7,6 +7,14 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SupportService {
+  private messageChanges = new Subject<any>();
+  public messageChanges$ = this.messageChanges.asObservable();
+
+  private floatingChatChanges = new Subject<any>();
+  public floatingChatChanges$ = this.floatingChatChanges.asObservable();
+
+  private openFloatingSupplierChat = new Subject<any>();
+  public openFloatingSupplierChat$ = this.floatingChatChanges.asObservable();
 
   stationId;
   chatContent: HTMLElement;

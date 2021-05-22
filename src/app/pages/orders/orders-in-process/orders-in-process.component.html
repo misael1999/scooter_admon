@@ -50,6 +50,7 @@
                     <thead>
                         <tr>
                             <th>Servicio</th>
+                            <th>N° de orden</th>
                             <th>Cliente</th>
                             <th>Número del cliente</th>
                             <th>Lugar de compra o recolección</th>
@@ -57,17 +58,21 @@
                             <th>Estatus</th>
                             <th>Fecha del solicitud</th>
                             <th>Total</th>
-                            <th style="width: 50px;">Acciones</th>
+                            <th class="width__actions">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
                             <tr *ngFor="let order of orders">
                                 <td>
-                                    <span *ngIf="order.service_id == 3" class="cursor badge badge-pill badge-secondary" (click)="openDialogDetailProducts(order)">Lo que sea  </span>
-                                    <span *ngIf="order.service_id == 2" class="cursor badge badge-pill badge-warning" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
-                                    <span *ngIf="order.service_id == 1" class="cursor badge badge-pill badge-info" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
+                                    <div class="text-center" (click)="openDialogDetailProducts(order)">
+                                        <span *ngIf="order.service_id == 3" class="cursor badge badge-pill badge-secondary">Lo que sea </span>
+                                        <span *ngIf="order.service_id == 2" class="cursor badge badge-pill badge-warning">{{order.service}} </span>
+                                        <span *ngIf="order.service_id == 1" class="cursor badge badge-pill badge-info">{{order.service}} </span>
+                                        <p class="cursor p-0 text-info font-weight-semibold">Detalles</p>
+                                    </div>
                                 </td>
+                                <td> {{ order.id }} </td>
                                 <td>{{order.customer.name}}</td>
                                 <td>{{order.customer.phone_number}}</td>
                                 <td>

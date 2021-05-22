@@ -44,6 +44,7 @@ export class DeliveredOrdersComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.orders = data.results;
+        console.log(this.orders);
         this.length = data.count;
         this.ordersService.params = this.params;
         this.pageSize = this.params.limit;

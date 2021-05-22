@@ -48,6 +48,7 @@
                     <thead>
                         <tr>
                             <th>Servicio</th>
+                            <th>N° de Orden</th>
                             <th>Cliente</th>
                             <th style="min-width: 200px;">Lugar de compra o recolección</th>
                             <th style="min-width: 200px;">Lugar de entrega</th>
@@ -57,10 +58,14 @@
                     <tbody>
                         <tr *ngFor="let order of orders">
                             <td>
-                                <span *ngIf="order.service_id == 3" class="cursor badge badge-pill badge-secondary" (click)="openDialogDetailProducts(order)">Lo que sea  </span>
-                                <span *ngIf="order.service_id == 2" class="cursor badge badge-pill badge-warning" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
-                                <span *ngIf="order.service_id == 1" class="cursor badge badge-pill badge-info" (click)="openDialogDetailProducts(order)">{{order.service}} </span>
+                                <div class="text-center" (click)="openDialogDetailProducts(order)">
+                                    <span *ngIf="order.service_id == 3" class="cursor badge badge-pill badge-secondary">Lo que sea </span>
+                                    <span *ngIf="order.service_id == 2" class="cursor badge badge-pill badge-warning">{{order.service}} </span>
+                                    <span *ngIf="order.service_id == 1" class="cursor badge badge-pill badge-info">{{order.service}} </span>
+                                    <p class="cursor p-0 text-info font-weight-semibold">Detalles</p>
+                                </div>
                             </td>
+                            <td> {{ order.id }} </td>
                             <td> {{ order.customer.name }} </td>
                             <td>
                                 <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
