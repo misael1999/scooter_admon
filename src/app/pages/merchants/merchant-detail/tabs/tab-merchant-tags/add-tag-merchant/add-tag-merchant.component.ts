@@ -21,23 +21,19 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
   loadingTagGeneral: boolean;
   loadingSave: boolean;
   params = { limit: 50, offset: 0, search: '', ordering: '' };
-  idMerchant;
+  merchantId;
   tagsGeneral: Array<any> = [];
   tagsTheMerchant: Array<any> = [];
-  tagsNew = [];
-  tagNnew2 = [];
-  tagNueva: Tags;
-
+  tagsAdd = [];
+  tagsDelete = [];
 
 
   constructor(private tagsGeneralService: TagsGeneralService, private tagByMerchantService: TagByMerchantsService, private fb: FormBuilder, private dialogRef: MatDialogRef<AddTagMerchantComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
 
-    this.tagsTheMerchant = data.tags.tags;
-    this.idMerchant = data.tags.id;
-    console.log(this.idMerchant);
-    console.log(this.tagsTheMerchant);
+    this.tagsTheMerchant = data.tags; 
+    this.merchantId = data.merchantId;
   }
 
   ngOnInit(): void {
@@ -45,48 +41,40 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
   }
 
   addTag(data) {
-    this.tagsNew.push(data);
-    console.log(this.tagsNew);
-    return this;
+    data.is_select? null: this.tagsAdd.push(data.id);
   }
 
   deleteTag(data) {
-    this.tagsNew = this.tagsNew.filter(s => s !== data);
-    console.log(this.tagsNew);
-    return this.tagsNew;
+    if (data.is_select) {
+      this.tagsDelete.push(data.id)
+    }else{
+      let index  = this.tagsAdd.indexOf(data.id);
+      this.tagsAdd.splice(index, 1);
+      
+    }
   }
 
-
   guardar() {
-    console.log(this.tagsNew);
+    let tags = {
+      tags: this.tagsAdd,
+      delete_tags: this.tagsDelete
+    }
+    console.log('Tags', tags);
+    
+
     this.loadingSave = true;
-    // this.tagNueva.tags = this.tagsNew.forEach((this.tagNueva: any) =>{
 
-    // });
-
-
-    // this.merchantsTemp.forEach((merchant: any) => {
-    //   if (category.name == merchant.category) {
-    //     category.count++;
-    //   }
-    // });
-
-
-    console.log(this.tagNueva);
-
-    this.tagByMerchantService.createTags(this.idMerchant, this.tagNueva)
+    this.tagByMerchantService.createTags(this.merchantId, tags)
       .subscribe((data) => {
+        console.log('Data', data);
         this.loadingSave = false;
         this.showSwalMessage('Etiquetas Agregadas Correctamente');
         this.dialogRef.close(true);
       }, error => {
-        this.showSwalMessage('Error al agregar');
+        this.showSwalMessage('Error al agregar','error');
         this.loadingSave = false;
       });
   }
-
-
-
 
   getTagGeneral() {
     this.loadingTagGeneral = true;
@@ -94,12 +82,24 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
       .subscribe((data: any) => {
         this.tagsGeneral = data.results;
         this.loadingTagGeneral = false;
-        // console.log('FFFF', this.tagsGeneral);
+        this.parseTags();
       }), error => {
         this.loadingTagGeneral = false;
-        console.log('eroroe');
+        console.log('error', error);
       };
   }
+
+  parseTags(){
+    console.log('Entra en parse');
+    this.tagsGeneral.forEach((tag) =>{
+      this.tagsTheMerchant.forEach((tagM) =>{
+        if (tag.id == tagM.tag_id) {
+         tag.is_select = true 
+        }
+      })
+    })
+  }
+
   searchBy(value) {
     this.params.search = value;
     this.getTagGeneral();

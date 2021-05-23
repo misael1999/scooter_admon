@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MerchantsService } from 'src/app/services/merchants.service';
+import { AddTagMerchantComponent } from '../tab-merchant-tags/add-tag-merchant/add-tag-merchant.component';
 
 @Component({
   selector: 'app-tab-merchant-general',
@@ -9,7 +11,8 @@ import { MerchantsService } from 'src/app/services/merchants.service';
 export class TabMerchantGeneralComponent implements OnInit {
   merchant;
 
-  constructor(private merchantsService: MerchantsService) {
+  constructor(private merchantsService: MerchantsService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {

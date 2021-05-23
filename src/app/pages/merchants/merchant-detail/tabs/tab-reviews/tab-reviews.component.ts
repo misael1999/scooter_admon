@@ -9,7 +9,7 @@ import { MerchantsService } from 'src/app/services/merchants.service';
 export class TabReviewsComponent implements OnInit {
   loadingData: boolean;
   reviews;
-
+  params = { limit:10}
   constructor(private merchantsService: MerchantsService) { }
 
   ngOnInit(): void {
@@ -18,7 +18,7 @@ export class TabReviewsComponent implements OnInit {
 
   getReviews() {
     this.loadingData = true;
-    this.merchantsService.getReviews(this.merchantsService.merchantId)
+    this.merchantsService.getReviews(this.merchantsService.merchantId, this.params)
       .subscribe((data: any) => {
         this.loadingData = false;
         this.reviews = data;
