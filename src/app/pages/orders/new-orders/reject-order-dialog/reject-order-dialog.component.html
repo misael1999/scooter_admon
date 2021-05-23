@@ -1,38 +1,35 @@
-<h1 mat-dialog-title class="d-flex justify-content-between">
-    Rechazar orden
-    <button mat-dialog-close mat-flat-button color="primary">
-      <i class="ti ti-close"></i>
-    </button>
-  
-  </h1>
-  <div mat-dialog-content>
+<div class="header__modal">
+    <div class="close">
+        <i mat-dialog-close class="fas fa-close"></i>
+    </div>
+</div>
+
+<h3>Rechazar Orden</h3>
+<div mat-dialog-content>
     <div class="row d-flex justify-content-center">
         <form [formGroup]="rejectForm">
             <div class="form-group">
                 <label>Ingresa la razón del rechazo *</label>
-                <input  formControlName="reason_rejection" type="text" class="form-control-eco w-100"
-                [ngClass]="{'has-error error': isFieldInvalid(rejectForm, 'reason_rejection'),
+                <input formControlName="reason_rejection" type="text" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(rejectForm, 'reason_rejection'),
                   'has-success valid': isFieldValid(rejectForm, 'reason_rejection')}">
-                  <!-- MESSAGES ERRORS  -->
-                  <div class="invalid-feedback-form" *ngIf="isFieldInvalid(rejectForm, 'reason_rejection')">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(rejectForm, 'reason_rejection')">
                     <span *ngIf="isFieldHasError(rejectForm, 'reason_rejection','required')">Este campo es
                       requerido</span>
-                  </div>
-              </div>
+                </div>
+            </div>
         </form>
     </div>
-  </div>
-  <div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
-    <button [disabled]="loadingSave" (click)="rejectOrder()"
-     class="btn btn-secondary w-50">
-     Rechazar orden
-     <div class="load" *ngIf="loadingSave">
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span class="sr-only">Loading...</span>
-       </div>
-     <!-- <div class="load">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <span class="sr-only">Loading...</span>
-     </div> -->
-    </button>
-  </div>
+</div>
+
+
+<div class="mt-2 d-flex justify-content-center">
+    <button [disabled]="loadingSave" (click)="rejectOrder()" class="btn btn-primary w-50">
+      <span *ngIf="!loadingSave">Enviar mensaje </span>
+      <div  *ngIf="loadingSave" class="spinner-border" role="status">
+          <span class="sr-only">
+              Loading...
+          </span>
+     </div>
+  </button>
+</div>

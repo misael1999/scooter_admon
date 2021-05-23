@@ -14,8 +14,10 @@
         <tbody>
             <tr *ngFor="let client of clients">
                 <td>
-                    <img class="avatar__client rounded-circle" *ngIf="client.picture_url" [src]="client.picture_url" alt="avatar" onerror="this.onerror=null;this.src='assets/img/user.png';">
-                    <img class="avatar__client rounded-circle" *ngIf="!client.picture_url" src="assets/img/user.png" alt="avatar">
+                    <div class="avatar avatar-icon">
+                        <img [src]="client.picture_url" alt="avatar" onerror="this.onerror=null;this.src='assets/img/user.png';">
+                        <img src="assets/img/user.png" alt="avatar">
+                    </div>
                 </td>
                 <td><u class="cursor" routerLink="{{client.id}}/detail"> {{ client.name }} </u></td>
                 <td> {{ client.user.username }} </td>

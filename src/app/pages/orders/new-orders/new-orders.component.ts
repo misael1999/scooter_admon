@@ -24,33 +24,31 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   stationId = localStorage.getItem('station_id');
   token = localStorage.getItem('access_token');
   WS_SOCKET = `${environment.WS_SOCKET}/ws/orders/${this.stationId}/?token=${this.token}`;
-  // MatPaginator Inputs
   length = 100;
-  pageSize = 15;
   pageIndex = 0;
-  pageSizeOptions: number[] = [25, 50, 5, 100];
-  // MatPaginator Output
+  pageSize = 25;
   pageEvent: PageEvent;
-
-  // Parametros para el paginado
-  params = { limit: 15, offset: 0, search: '', order_status: '1,13,14', ordering: '' };
+  pageSizeOptions: number[] = [25, 50, 75, 100];
   orders: Array<any> = [];
   loadingData: boolean;
+  params = { limit: 15, offset: 0, search: '', order_status: '1,13,14', ordering: '' };
   liveData$: Subscription;
-
-
+  searchText;
 
 
   loadingAcceptOrder: boolean;
   loadingRejectOrder: boolean;
-  searchText;
 
-  constructor(private ordersService: OrdersService, private snackBar: MatSnackBar,
-    private dialog: MatDialog, private webSocketService: WebSocketService, private router: Router) { }
+  constructor(
+    private ordersService: OrdersService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private webSocketService: WebSocketService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getOrders();
-    // this.connectToWebSocket();
+    this.connectToWebSocket();
   }
 
   openDialogDetailProducts(order = null) {
@@ -62,27 +60,8 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   }
 
 
-  openDialogSendMessageOrder(order) {
 
-    if (order.supports.length > 0) {
-      this.router.navigateByUrl('/support');
-      return;
-    }
 
-    const dialogref = this.dialog.open(SendMessageDialogComponent, {
-      disableClose: true,
-      width: '30%',
-      // minHeight: '400px',
-      // minWidth: '350px',
-      data: { order }
-    });
-
-    dialogref.afterClosed().subscribe(data => {
-      if (data) {
-        this.getOrders();
-      }
-    });
-  }
   rejectOrderMerchant(orderId) {
     const dialogref = this.dialog.open(RejectOrderMerchantComponent, {
       disableClose: true,
@@ -240,5 +219,20 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   }
 
 
-
+  openDialogSendMessageOrder(order) {
+    if (order.supports.length > 0) {
+      this.router.navigateByUrl(`/support/${order.supports[0]}/messages`);
+      return;
+    }
+    const dialogref = this.dialog.open(SendMessageDialogComponent, {
+      disableClose: true,
+      width: '450px',
+      data: { order }
+    });
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.getOrders();
+      }
+    });
+  }
 }

@@ -1,36 +1,34 @@
-<h1 mat-dialog-title class="d-flex justify-content-between">
-    Enviar mensaje
-    <button mat-dialog-close>
-      <i class="anticon anticon-close"></i>
-    </button>
+<div class="header__modal">
+    <div class="close">
+        <i mat-dialog-close class="fas fa-close"></i>
+    </div>
+</div>
 
-</h1>
-<div mat-dialog-content>
-    <div class="row d-flex justify-content-center">
+<h3>Enviar mensaje</h3>
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-11">
         <form [formGroup]="supportForm">
             <div class="form-group">
-                <label>Ingresa el mensaje *</label>
-                <textarea formControlName="text" type="text" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(supportForm, 'text'),
+                <label class="form-label">Escribe un mensaje </label>
+                <textarea formControlName="text" type="text" class="form-control w-100" rows="4" [ngClass]="{'has-error error': isFieldInvalid(supportForm, 'text'),
                   'has-success valid': isFieldValid(supportForm, 'text')}"></textarea>
-                <!-- MESSAGES ERRORS  -->
-                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(supportForm, 'text')">
-                    <span *ngIf="hasFieldError(supportForm, 'text','required')">Este campo es
-                      requerido</span>
+                <div class="message-errors" *ngIf="isFieldInvalid(supportForm, 'text')">
+                    <span *ngIf="hasFieldError(supportForm, 'text','required')">Este campo es requerido</span>
+                    <span *ngIf="hasFieldError(supportForm, 'text','maxlength')">Ingresa maximo 10 caracteres</span>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
+
+<div class="mt-2 d-flex justify-content-center">
     <button [disabled]="loadingSave" (click)="sendMessage()" class="btn btn-primary w-50">
-     Enviar mensaje
-     <div class="load" *ngIf="loadingSave">
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span class="sr-only">Loading...</span>
+        <span *ngIf="!loadingSave">Enviar mensaje </span>
+        <div  *ngIf="loadingSave" class="spinner-border" role="status">
+            <span class="sr-only">
+                Loading...
+            </span>
        </div>
-     <!-- <div class="load">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <span class="sr-only">Loading...</span>
-     </div> -->
     </button>
 </div>

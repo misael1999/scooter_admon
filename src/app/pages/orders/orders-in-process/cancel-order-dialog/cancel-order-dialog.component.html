@@ -1,30 +1,28 @@
-<h1 mat-dialog-title class="d-flex justify-content-between">
-    Cancelar orden
-    <button mat-dialog-close mat-flat-button color="primary">
-      <i class="ti ti-close"></i>
-    </button>
-  
-  </h1>
-  <div mat-dialog-content>
+<div class="header__modal">
+    <div class="close">
+        <i mat-dialog-close class="fas fa-close"></i>
+    </div>
+</div>
+
+<h3>Cancelar orden del comercio </h3>
+<div mat-dialog-content>
     <div class="row d-flex justify-content-center">
         <form [formGroup]="rejectForm">
             <div class="form-group">
                 <label>Ingresa la razón de la cancelación *</label>
-                <input  formControlName="reason_rejection" type="text" class="form-control-eco w-100"
-                [ngClass]="{'has-error error': isFieldInvalid(rejectForm, 'reason_rejection'),
+                <input formControlName="reason_rejection" type="text" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(rejectForm, 'reason_rejection'),
                   'has-success valid': isFieldValid(rejectForm, 'reason_rejection')}">
-                  <!-- MESSAGES ERRORS  -->
-                  <div class="invalid-feedback-form" *ngIf="isFieldInvalid(rejectForm, 'reason_rejection')">
+                <!-- MESSAGES ERRORS  -->
+                <div class="invalid-feedback-form" *ngIf="isFieldInvalid(rejectForm, 'reason_rejection')">
                     <span *ngIf="hasFieldError(rejectForm, 'reason_rejection','required')">Este campo es
                       requerido</span>
-                  </div>
-              </div>
+                </div>
+            </div>
         </form>
     </div>
-  </div>
-  <div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
-    <button [disabled]="loadingSave" (click)="rejectOrder()"
-     class="btn btn-secondary w-50">
+</div>
+<div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
+    <button [disabled]="loadingSave" (click)="rejectOrder()" class="btn btn-secondary w-50">
      Rechazar orden
      <div class="load" *ngIf="loadingSave">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -35,4 +33,4 @@
       <span class="sr-only">Loading...</span>
      </div> -->
     </button>
-  </div>
+</div>

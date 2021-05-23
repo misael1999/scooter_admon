@@ -55,6 +55,7 @@ export class OrdersInProcessComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.orders = data.results;
+        console.log(this.orders);
         this.length = data.count;
         this.ordersService.params = this.params;
         this.pageSize = this.params.limit;
@@ -99,9 +100,7 @@ export class OrdersInProcessComponent implements OnInit {
   openDialogCancelOrder(orderId) {
     const dialogref = this.dialog.open(CancelOrderDialogComponent, {
       disableClose: true,
-      width: '40%',
-      minHeight: '300px',
-      minWidth: '300px',
+      width: '400px',
       data: { orderId }
     });
 
@@ -132,12 +131,12 @@ export class OrdersInProcessComponent implements OnInit {
 
   openDialogSendMessageOrder(order) {
     if (order.supports.length > 0) {
-      this.router.navigateByUrl('/support');
+      this.router.navigateByUrl(`/support/${order.supports[0]}/messages`);
       return;
     }
     const dialogref = this.dialog.open(SendMessageDialogComponent, {
       disableClose: true,
-      width: '30%',
+      width: '450px',
       data: { order }
     });
 

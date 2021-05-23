@@ -118,11 +118,16 @@
                                         Cancelar
                                     </button>
 
-                                    <button (click)="endOrderMerchant(order.id)" *ngIf="order.order_status.id == 15" class="btn btn-info btn-sm m-b-5 w-100">
+                                    <!-- Buttons for actions by merchant -->
+                                    <button (click)="endOrderMerchant(order.id)" *ngIf="order.order_status.id == 15" class="btn btn-info btn-sm m-b-5 p-r-0 p-l-0 w-100">
                                         Terminar
+                                        <i class="anticon anticon-shop"></i>
                                     </button>
 
-                                    <button (click)="rejectOrderMerchant(order.id)" *ngIf="order.order_status.id == 15" class="btn btn-danger btn-sm w-100">Cancelar</button>
+                                    <button (click)="rejectOrderMerchant(order.id)" *ngIf="order.order_status.id == 15" class="btn btn-danger btn-sm p-r-0 p-l-0 w-100">
+                                        Cancelar
+                                        <i class="anticon anticon-shop"></i>
+                                    </button>
                                 </td>
                             </tr>
                     </tbody>
