@@ -1,0 +1,30 @@
+<div class="container">
+    <div>
+        <h2 class="m-0">Detalle del usuario</h2>
+        <nav class="breadcrumb breadcrumb-dash">
+            <a routerLink="/clients" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Usuarios</a>
+            <span class="breadcrumb-item active">Detalle del usuario</span>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center" *ngIf="loadingData">
+            <app-loading-data> </app-loading-data>
+        </div>
+    </div>
+
+    <div class="row p-t-20">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="profile" routerLinkActive="active" data-toggle="tab" role="tab" aria-selected="true">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="order-history" routerLinkActive="active" data-toggle="tab" role="tab" aria-selected="false">Historial de órdenes</a>
+                </li>
+            </ul>
+            <div class="tab-content m-t-15" id="myTabContent">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

@@ -39,7 +39,8 @@
                             "./node_modules/leaflet/dist/leaflet.css",
                             "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
                             "src/assets/scss/angular-theme.scss",
-                            "src/assets/css/animate.css"
+                            "src/assets/css/animate.css",
+                            "node_modules/@ctrl/ngx-emoji-mart/picker.css"
                         ],
                         "scripts": [
                             "src/assets/js/vendors.min.js",

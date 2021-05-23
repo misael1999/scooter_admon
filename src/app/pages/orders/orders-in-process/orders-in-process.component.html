@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p-h-0">
     <div>
         <h2>Pedidos en proceso</h2>
     </div>
@@ -118,7 +118,7 @@
                                         Cancelar
                                     </button>
 
-                                    <button (click)="endOrderMerchant(order.id)" *ngIf="order.order_status.id == 15" class="btn btn-secondary btn-sm m-b-5 w-100">
+                                    <button (click)="endOrderMerchant(order.id)" *ngIf="order.order_status.id == 15" class="btn btn-info btn-sm m-b-5 w-100">
                                         Terminar
                                     </button>
 

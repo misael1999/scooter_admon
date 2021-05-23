@@ -12,6 +12,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { SnotifyModule, ToastDefaults, SnotifyService } from 'ng-snotify';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 @NgModule({
   declarations: [
     MainSupportComponent,
@@ -28,6 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     InfiniteScrollModule,
     DirectivesModule,
+    PickerModule,
     SnotifyModule
   ],
   providers: [

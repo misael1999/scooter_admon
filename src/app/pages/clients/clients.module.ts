@@ -10,6 +10,9 @@ import { HistoryOrdersComponent } from './info-client/history-orders/history-ord
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MainClientsComponent } from './main-clients/main-clients.component';
+import { ClientDetailComponent } from './client-detail/client-detail.component';
+import { ProfileComponent } from './client-detail/tabs/profile/profile.component';
+import { OrderHistoryComponent } from './client-detail/tabs/order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { MainClientsComponent } from './main-clients/main-clients.component';
     InfoClientComponent,
     CardInfoComponent,
     HistoryOrdersComponent,
-    MainClientsComponent
+    MainClientsComponent,
+    ClientDetailComponent,
+    ProfileComponent,
+    OrderHistoryComponent
   ],
   imports: [
     CommonModule,

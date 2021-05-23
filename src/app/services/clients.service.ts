@@ -21,13 +21,18 @@ export class ClientsService {
     return this.http.get(url, { params });
   }
 
-  getClientId(idCustomer: number, params = {}) {
+  getClientById(idCustomer: number) {
     const url = `${environment.HOST_APIV1}/customers/${idCustomer}/`;
-    return this.http.get(url, { params });
+    return this.http.get(url);
   }
+
   getCustomerByDate(idCustomer: number, params = {}) {
     const url = `${environment.HOST_APIV1}/stations/${this.station.id}/customers/${idCustomer}/`;
     return this.http.get(url, { params });
   }
 
+  getAddressesByClient(idClient) {
+    const url = `${environment.HOST_APIV1}/customers/${idClient}/addresses/`;
+    return this.http.get(url);
+  }
 }

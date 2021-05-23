@@ -1,0 +1,55 @@
+.preview-image {
+    width: 70px;
+    height: 70px;
+}
+
+.image-temp {
+    position: relative;
+    .icon-delete {
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: -1px;
+        color: red;
+        font-size: 130%;
+        font-weight: bold;
+    }
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile+label {
+    width: auto;
+    padding: 7px 10px;
+    // height: 40px;
+    // width: 40px;
+    color: #ffffff;
+    &.disabled {
+        background-color: #f2f2f2 !important;
+    }
+    /* 10px 20px */
+}
+
+.inputfile:focus+label,
+.inputfile.has-focus+label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile:focus+label,
+.inputfile.has-focus+label,
+.inputfile+label:hover {
+    cursor: pointer;
+}
+
+textarea {
+    outline: 0;
+    resize: none !important;
+}
