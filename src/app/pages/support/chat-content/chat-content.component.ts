@@ -99,6 +99,23 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
     }
   }
 
+  getChat(supportId) {
+    this.loadingMessages = true;
+    this.supportService.getMessages(supportId, this.params)
+      .subscribe((data: any) => {
+        this.support = data.results;
+        this.loadingMessages = false;
+        this.count = data.count;
+        // this.groupMessages(this.messages);
+        this.scrollToBottom();
+        setTimeout(() => {
+          this.chatBodyHtml = this.conversationBody.nativeElement;
+        });
+      }, error => {
+        this.showSwalMessage('Ha ocurrido un error al consultar el chat', 'error');
+      });
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     const supportUpdated = changes.support;
     const newMessageUpdated = changes.newMessageSocket;
@@ -120,20 +137,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
     }
   }
 
-  getChat(chatId) {
-    // this.supportService.get
-    //   .subscribe((data: IChat) => {
-    //     this.chat = data;
 
-    //     this.loadingMessages = true;
-    //     this.getMessagesChat();
-    //     setTimeout(() => {
-    //       this.chatBodyHtml = this.conversationBody.nativeElement;
-    //     });
-    //   }, error => {
-    //     this.showSwalMessage('Ha ocurrido un error al consultar el chat', 'error');
-    //   });
-  }
 
   scrollToBottom() {
     setTimeout(() => {

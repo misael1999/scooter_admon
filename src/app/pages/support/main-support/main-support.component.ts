@@ -6,6 +6,7 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
 import { environment } from 'src/environments/environment';
 import { SnotifyPosition, SnotifyService } from 'ng-snotify';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StationModel } from '../../../models/station.model';
 
 @Component({
   selector: 'app-main-support',
@@ -17,7 +18,7 @@ export class MainSupportComponent implements OnInit {
   token = localStorage.getItem('access_token');
   supportId;
   WS_SOCKET = `${environment.WS_SOCKET}/ws/support/${this.stationId}/?token=${this.token}`;
-  user;
+  user: StationModel;
   loadingSupports = false;
   @ViewChild("chatContent") chatContent: ElementRef;
 
@@ -33,7 +34,8 @@ export class MainSupportComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private snotify: SnotifyService,
     private router: Router) {
-    this.user = JSON.parse(localStorage.getItem('user_client'));
+    this.user = JSON.parse(localStorage.getItem('station'));
+
     if (this.activatedRoute.snapshot.firstChild) {
       this.activatedRoute.firstChild
         .params.subscribe((params) => {
@@ -53,9 +55,11 @@ export class MainSupportComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingSupports = false;
         this.supports = data.results;
-        this.countNewMessages();
-        if (data.total_record > 0 && !this.supportId) {
+        console.log(this.supports, data);
+        // this.countNewMessages();
+        if (data.count > 0 && !this.supportId) {
           this.supportSelected = this.supports[0];
+          console.log(this.supportSelected);
           this.router.navigateByUrl('/support/' + this.supports[0].id + '/messages');
           setTimeout(() => {
             this.supportSelected.messagesNotViewed = 0;
@@ -66,17 +70,21 @@ export class MainSupportComponent implements OnInit {
         }
       }, error => {
         this.loadingSupports = false;
-        // alert('Ha ocurrido un error al obtener los tickets de soporte');
       });
   }
 
   countNewMessages() {
     this.supports.forEach((chat) => {
       chat.messagesNotViewed = 0;
-      // chat.chat_messages.forEach((message) => {
-      //   if (message.viewed === false && message.sender_by_id != this.user.ID) { chat.messagesNotViewed = chat.messagesNotViewed + 1; }
-      // });
+      chat.chat_messages.forEach((message) => {
+        if (message.viewed === false && message.sender_by_id != this.user.id) { chat.messagesNotViewed = chat.messagesNotViewed + 1; }
+      });
     });
+  }
+
+  deleteChat() {
+    this.supportId = null;
+    this.getSupports();
   }
 
   supportSelectedEvent(support) {

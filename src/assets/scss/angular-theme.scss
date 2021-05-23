@@ -1,5 +1,4 @@
 @import '~@angular/material/theming';
-
 // Plus imports for other components in your app.
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -19,32 +18,39 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // Include the alternative theme styles inside of a block with a CSS class. You can make this
 // CSS class whatever you want. In this example, any component inside of an element with
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
-
 .main-snackbar {
-  background: #2db421;
-  color: white !important;
+    background: #2db421;
+    color: white !important;
 }
 
 .error-snackbar {
-  background: #1092ce;
-  color: white;
-  text-align: center;
-  font-size: 120%;
-  font-weight: bold;
+    background: #1092ce;
+    color: white;
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .custom-background {
-  background: rgba(204, 204, 204, 0.9);
+    background: rgba(204, 204, 204, 0.9);
 }
 
 .custom-background:before,
 .custom-background:after {
-  content: "";
-  display: block;
-  clear: both;
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.full-screen-modal .mat-dialog-container {
+    max-width: none;
+    position: absolute;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100vh !important;
 }
 
 .custom-dialog-container .mat-dialog-container {
-  padding: 0 !important;
-  margin: 0px 0px 5px 0px  !important;
+    padding: 0 !important;
+    margin: 0px 0px 0px 0px !important;
 }

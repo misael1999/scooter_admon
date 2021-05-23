@@ -7,23 +7,24 @@ import { SupportService } from 'src/app/services/support.service';
   styleUrls: ['./conversation-body.component.scss']
 })
 export class ConversationBodyComponent implements OnInit, OnChanges {
-
   @Input() messages;
   @Input() support;
   @Input() loadingMessages: boolean;
-  station;
+  @Input() chatGroups;
 
+  station;
 
   constructor(private supportService: SupportService) {
     this.station = JSON.parse(localStorage.getItem('station'));
   }
 
   ngOnInit() {
+
+    console.log(this.messages, 'message');
+    console.log(this.support, 'support');
+    console.log(this.chatGroups, 'chat');
+
   }
 
-  ngOnChanges() {
-
-  }
-
-
+  ngOnChanges() { }
 }
