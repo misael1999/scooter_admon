@@ -69,8 +69,13 @@ export class MerchantsService {
   }
 
   // Get review by merchant
-  getReviews(merchantId) {
+  getReviews(merchantId, params = {}) {
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/ratings/`;
+    return this.http.get(url,  { params });
+  }
+  //Get tags by merchant 
+  getTags(merchantId){
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/tags/`;
     return this.http.get(url);
   }
 

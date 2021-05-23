@@ -22,11 +22,6 @@
                     </div>
                 </div>
 
-
-
-
-
-
                 <div class="col-md-6">
                     <div class="row">
                         <div class="d-md-block d-none border-left col-1"></div>
@@ -77,24 +72,23 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
+                    <!-- Desciption -->
                     <h5>Descripción </h5>
                     <p> {{ merchant.description }} </p>
                     <hr>
-                    <h5>Etiquetas</h5>
-                    <h5 class="m-t-20">
-                        <span class="badge badge-pill badge-default font-weight-normal m-r-10 m-b-10" *ngFor="let tag of merchant.tags"> {{ tag.tag_name }} </span>
-                    </h5>
-
-
+                    <!-- Tags merchant -->
+                    <app-tab-merchant-tags></app-tab-merchant-tags>
+                    <!-- Ratings -->
+                    <h5>Ratings </h5>
+                    <app-tab-reviews></app-tab-reviews>
                 </div>
             </div>
-
         </div>
+
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h5>Horario</h5>
-
                     <div class="table-responsive">
                         <table class="table table-hover table-sm">
                             <thead>

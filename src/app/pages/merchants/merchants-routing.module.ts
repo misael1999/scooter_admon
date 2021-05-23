@@ -7,6 +7,7 @@ import { TabMerchantSummaryComponent } from './merchant-detail/tabs/tab-merchant
 import { TabMerchantSettingComponent } from './merchant-detail/tabs/tab-merchant-setting/tab-merchant-setting.component';
 import { TabProductsComponent } from './merchant-detail/tabs/tab-products/tab-products.component';
 import { TabReviewsComponent } from './merchant-detail/tabs/tab-reviews/tab-reviews.component';
+import { TabMerchantTagsComponent } from './merchant-detail/tabs/tab-merchant-tags/tab-merchant-tags.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,9 @@ const routes: Routes = [
       },
       {
         path: 'reviews', component: TabReviewsComponent
+      },
+      {
+        path: 'tags', component: TabMerchantTagsComponent
       },
       {
         path: 'promotions',
