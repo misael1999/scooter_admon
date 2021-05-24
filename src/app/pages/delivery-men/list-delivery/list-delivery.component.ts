@@ -53,7 +53,9 @@ export class ListDeliveryComponent extends ValidationForms implements OnInit {
     });
     dialogRef.afterClosed()
       .subscribe((data: any) => {
-        this.reloadDeliveryMens.emit(true);
+        if (data) {
+          this.reloadDeliveryMens.emit(true);
+        }
       });
   }
 }

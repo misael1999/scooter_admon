@@ -21,7 +21,9 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
   loadingData: boolean;
   searchText;
 
-  constructor(private dialog: MatDialog, private deliveryService: DeliveryMenService) {
+  constructor(
+    private dialog: MatDialog,
+    private deliveryService: DeliveryMenService) {
     super();
   }
 
@@ -44,15 +46,16 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
       });
   }
 
-  openDialogAddDelivery(deliveryMan = null) {
-    console.log(deliveryMan, 'Data add');
+  openDialogAddDelivery() {
     const dialogRef = this.dialog.open(AddDeliveryComponent, {
       width: '850px',
-      data: { deliveryMan }
+      data: {}
     });
     dialogRef.afterClosed()
       .subscribe((data: any) => {
-        this.getDeliveryMens();
+        if (data) {
+          this.getDeliveryMens();
+        }
       });
   }
 

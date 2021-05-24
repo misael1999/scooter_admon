@@ -63,8 +63,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <td>
-                                <span class="text-center cursor" (click)="openDialogDetailProducts(order)">
+                            <td class="text-center">
+                                <span class="cursor" (click)="openDialogDetailProducts(order)">
                                     <span *ngIf="order.service_id == 3" class="badge badge-pill badge-secondary">Lo que sea </span>
                                 <span *ngIf="order.service_id == 2" class="badge badge-pill badge-warning">{{order.service}} </span>
                                 <span *ngIf="order.service_id == 1" class="badge badge-pill badge-info">{{order.service}} </span>
@@ -102,6 +102,9 @@
                             <td> {{ order.maximum_response_time | date:'medium'}} </td>
                             <td> {{order.order_status.name}}</td>
                             <td>
+                                <button (click)="openDialogSendMessageOrder(order)" class="btn btn-success btn-sm w-100 m-b-5">                            
+                                    Mensaje
+                                </button>
                                 <button (click)="openDialogAssignDelivery(order)" *ngIf="order.order_status.id == 13" class="btn btn-info btn-sm w-100 m-b-5">
                                     Asignar
                                 </button>
@@ -110,11 +113,7 @@
                                     Rechazar
                                 </button>
 
-                                <button (click)="openDialogSendMessageOrder(order)" class="btn btn-success btn-sm w-100 m-b-5">                            
-                                    Mensaje
-                                </button>
-
-                                <!-- Botones poara aceptar por comercio -->
+                                <!-- Botones para acciones de comercio -->
                                 <button (click)="accepOrderMerchant(order.id)" *ngIf="order.is_order_to_merchant && order.order_status.id == 14" class="btn btn-info btn-sm w-100 m-b-5 p-r-0 p-l-0">
                                     Aceptar 
                                     <i class="anticon anticon-shop"></i>

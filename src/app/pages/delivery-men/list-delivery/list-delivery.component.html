@@ -6,8 +6,9 @@
                 <th>Teléfono</th>
                 <th>Placas</th>
                 <th>Ultima ubicación</th>
+                <th>Reputación</th>
                 <th>Estatus</th>
-                <th class="text-center" style="width: 50px">Acciones</th>
+                <th class="width__actions">Acciones</th>
             </tr>
         </thead>
 
@@ -17,11 +18,12 @@
                 <td> {{ delivery.phone_number }}</td>
                 <td> {{ delivery.vehicle_plate }}</td>
                 <td> {{ delivery.last_time_update_location | date:'medium' }} </td>
+                <td> {{ delivery.reputation }} </td>
                 <td> {{ delivery.delivery_status }} </td>
-                <td class="text-center">
-                    <button *ngIf="params.status == 1" (click)="disabledDelivery(delivery.id)" class="btn btn-primary btn-sm m-b-5 w-100">Bloquear</button>
+                <td>
+                    <button *ngIf="params.status == 1" (click)="openDialogEditDelivery(delivery)" class="btn btn-info btn-sm w-100 m-b-5">Editar</button>
+                    <button *ngIf="params.status == 1" (click)="disabledDelivery(delivery.id)" class="btn btn-primary btn-sm w-100">Bloquear</button>
                     <button *ngIf="params.status == 2" (click)="enableDelivery(delivery.id)" class="btn btn-info btn-sm w-100">Desbloquear</button>
-                    <button *ngIf="params.status == 1" (click)="openDialogEditDelivery(delivery)" class="btn btn-info btn-sm w-100">Editar</button>
                 </td>
             </tr>
         </tbody>
