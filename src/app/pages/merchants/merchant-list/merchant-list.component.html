@@ -29,7 +29,7 @@
                 <td> {{ merchant.contact_person }} </td>
                 <td> {{ merchant.category }} </td>
                 <td>
-                    <button class="btn btn-info btn-sm w-100 m-b-5 p-l-0 p-r-0" *ngIf="params.information_is_complete && params.status == 1" routerLink="detail/{{merchant.id}}">Promocion</button>
+                    <button class="btn btn-info btn-sm w-100 m-b-5 p-l-0 p-r-0 title__promotion" *ngIf="params.information_is_complete && params.status == 1" routerLink="detail/{{merchant.id}}">Crear promoción</button>
                     <button class="btn btn-primary btn-sm w-100" *ngIf="params.information_is_complete && params.status == 1" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button>
                     <button class="btn btn-info btn-sm w-100" *ngIf="params.information_is_complete && params.status == 2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Desbloquear</button>
                 </td>

@@ -22,7 +22,6 @@ export class SupportService {
   public newMessage$ = this.newMessage.asObservable();
   message: any;
 
-
   constructor(private http: HttpClient) {
     this.stationId = localStorage.getItem('station_id');
   }
@@ -52,5 +51,16 @@ export class SupportService {
     const url = `${environment.HOST_APIV1}/stations/${this.stationId}/support/${supportId}/open_or_close/`;
     return this.http.patch(url, { is_open });
   }
+
+  newFloatingSupplierChat(data, is_chat_id = false) {
+    const payload: any = { is_chat_id };
+    is_chat_id ? (payload.chat_id = data) : (payload.supplier = data);
+    this.floatingChatChanges.next(payload);
+  }
+
+  openFloatingChat(payload, is_chat_id = false) {
+    this.openFloatingSupplierChat.next({ payload, is_chat_id });
+  }
+
 
 }

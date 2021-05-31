@@ -2,28 +2,23 @@ import { FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import { regexp } from './regexp';
 
 export class GlobalValidator {
-
     static mailFormat(control: FormControl): ValidationResult {
-
         if (control.value !== '' && !regexp.email.test(control.value)) {
             return { incorrectMailFormat: true };
         }
-
         return null;
     }
 
-
-
     static phoneFormat(control: FormControl): ValidationResult {
         let count = 0;
-
-        // tslint:disable-next-line:forin
+        let isIncorrect;
         for (const i in control.value) {
             const char = control.value[i];
-            if (!isNaN(char) && char !== ' ') { count++; }
+            if (!isNaN(char) && char !== ' ') { count++; } else {
+                isIncorrect = true;
+            }
         }
-
-        return count === 10 || (count === 0 && control.value.length === 0) ? null : { incorrectPhoneFormat: true };
+        return count === 10 && !isIncorrect ? null : { incorrectPhoneFormat: true };
     }
 
     static phoneOrMail(control: FormControl): ValidationResult {
@@ -38,7 +33,6 @@ export class GlobalValidator {
         return (c: AbstractControl): ValidationResult | null => {
             const controlValue = c.value.toString();
             let amount = '';
-            // tslint:disable-next-line:forin
             for (const i in controlValue) {
                 const char = controlValue[i];
                 if (!isNaN(char) || char === '.') { amount += char; }
@@ -57,13 +51,10 @@ export class GlobalValidator {
 
     static phoneNotRequiredFormat(control: FormControl): ValidationResult {
         let count = 0;
-
-        // tslint:disable-next-line:forin
         for (const i in control.value) {
             const char = control.value[i];
             if (!isNaN(char) && char !== ' ') { count++; }
         }
-
         return count === 10 || (count === 0 && !control.value) ? null : { incorrectPhoneFormat: true };
     }
 
@@ -84,6 +75,7 @@ export class GlobalValidator {
         }
         return null;
     }
+
     static onlyIntegerNumbers(control: FormControl): ValidationResult {
         if (control.value !== '' && !regexp.onlyIntegerNumbers.test(control.value)) {
             return {
@@ -104,14 +96,13 @@ export class GlobalValidator {
 
     static confirmPassword(control: AbstractControl) {
         const password = control.get('password').value; // to get value in input tag
-        const confirmPassword = control.get('confirmPassword').value; // to get value in input tag
-        if (password !== confirmPassword) {
-            control.get('confirmPassword').setErrors( {matchPassword: true} );
-        } else {
-            return null;
+        const confirmPassword = control.get('confirm_password').value; // to get value in input tag
+        if (password != confirmPassword) {
+            control.get('confirm_password').setErrors({ matchPassword: true });
+        } else if (password) {
+            control.get('confirm_password').setErrors(null);
         }
     }
-
 }
 
 

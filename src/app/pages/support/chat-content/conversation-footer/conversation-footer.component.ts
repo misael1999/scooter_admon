@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { MessageSupportModel } from 'src/app/models/message_support.model';
 import { SupportService } from 'src/app/services/support.service';
 import { ValidationForms } from 'src/app/utils/validations-forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-conversation-footer',
@@ -11,6 +12,7 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
 export class ConversationFooterComponent extends ValidationForms implements OnInit {
   @Input() support;
   @ViewChild('inputFile') inputFile: ElementRef;
+  chatId;
 
   @Output() newMessage = new EventEmitter<MessageSupportModel>();
   messageText = '';
@@ -20,11 +22,24 @@ export class ConversationFooterComponent extends ValidationForms implements OnIn
   isEmojiPickerVisible: boolean;
   i18nEmojis;
 
-  constructor(private supportService: SupportService) { super(); }
+  constructor(
+    private supportService: SupportService,
+    private activatedRoute: ActivatedRoute
+
+  ) {
+    super();
+    this.activatedRoute.params.subscribe((params) => {
+      this.chatId = params.chatId;
+      console.log(params);
+
+    });
+  }
 
   ngOnInit(): void {
     this.setTraductionEmojis();
     this.station = JSON.parse(localStorage.getItem('station'));
+    console.log(this.support);
+
   }
 
   sendMessage(text) {
@@ -38,9 +53,10 @@ export class ConversationFooterComponent extends ValidationForms implements OnIn
       new Date());
     this.messageText = null;
     // ======= Enviar mensaje ========
+    console.log(this.support);
     this.newMessage.emit(newMessageModel);
 
-    this.supportService.sendMessageSupport(this.support.id, { text })
+    this.supportService.sendMessageSupport(this.chatId, { text })
       .subscribe((data: any) => {
         // this.messages.push(data);
         // this.showSwalMessage("Mensaje enviado", 'success')

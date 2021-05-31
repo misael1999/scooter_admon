@@ -17,9 +17,13 @@ export class ConversationHeaderComponent extends ValidationForms implements OnIn
   @Input() loadingMessages;
   @Input() closeOrderDetail = false;
 
-  constructor(private dialog: MatDialog, private supportService: SupportService) { super(); }
+  constructor(
+    private dialog: MatDialog,
+    private supportService: SupportService
+  ) { super(); }
 
   ngOnInit(): void {
+    console.log(this.support);
   }
 
   openDialogDetailProducts(order = null) {

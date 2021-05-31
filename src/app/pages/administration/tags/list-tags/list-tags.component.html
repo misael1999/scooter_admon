@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Area</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th class="width__actions">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tag of tags">
+                <td>
+                    <div class="avatar avatar-image">
+                        <img *ngIf="tag.picture" [src]="tag.picture" alt="avatar_usuario">
+                        <img *ngIf="!tag.picture" src="assets/img/user.png" alt="avatar_usuario">
+                    </div>
+                </td>
+                <td>Tehuacán</td>
+                <td> {{tag.name}} </td>
+                <td> {{tag.category}} </td>
+                <td class="text-center">
+                    <button class="btn btn-info btn-sm w-100 m-b-5" (click)="eneableTag(tag.id)">Editar</button>
+                    <button class="btn btn-primary btn-sm w-100" (click)="disableTag(tag.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

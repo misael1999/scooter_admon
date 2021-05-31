@@ -9,7 +9,6 @@ export const environment = {
 
   // SOCKET
   WS_SOCKET: 'wss://api.lospedidos.site/ws',
-  // WS_SOCKET: 'wss://www.scooter-app.team/ws',
   firebase: {
     apiKey: 'AIzaSyDcAruMxBUQlW9S672oSoe1dyr7l8WIxlU',
     authDomain: 'scooter-277719.firebaseapp.com',

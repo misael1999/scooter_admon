@@ -1,12 +1,12 @@
-<div *ngFor="let message of messages" class="msg">
+<div *ngFor="let suppor of support" class="msg">
     <div class="m-r-10">
-        <div *ngIf="station.user.id != message.sender_by" class="avatar avatar-image">
+        <div *ngIf="station.user.id != suppor.sender_by" class="avatar avatar-image">
             <img src="assets/images/avatars/thumb-1.jpg" alt="">
         </div>
     </div>
     <div class="bubble">
         <div class="bubble-wrapper">
-            <span>{{message.text}}</span>
+            <span>{{suppor.text}}</span>
         </div>
     </div>
 </div>

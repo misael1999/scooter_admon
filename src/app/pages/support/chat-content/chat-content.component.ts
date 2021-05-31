@@ -78,6 +78,35 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
       });
   }
 
+  newMessageChatSocket(payload) {
+    // this.messageService.updateNewMessage(payload.data);
+    // this.newMessage(payload.data);
+    // this.newMessageSocket = null;
+    // this.messages.push(payload.data);
+    // this.messageService.markMessageAsViewed(this.chat.ID, payload.data.ID, {})
+    //   .subscribe();
+  }
+
+  allMessagesViewedSocket(payload) {
+    // this.chatGroups = this.chatGroups.map((chat) => {
+    //   chat.messages = chat.messages.map((message) => { message.viewed = true; message.viewed_date = new Date(); return message; });
+    //   return chat;
+    // });
+  }
+
+  messageViewedSocket(payload) {
+    // this.chatGroups = this.chatGroups.map((chat) => {
+    //   chat.messages = chat.messages.map((message) => {
+    //     if (message.ID == payload.message_id) {
+    //       message.viewed = true;
+    //       message.viewed_date = new Date();
+    //     }
+    //     return message;
+    //   });
+    //   return chat;
+    // });
+  }
+
   ngAfterViewInit() {
     // this.chatBodyHtml = this.conversationBody.nativeElement;
   }
@@ -100,14 +129,13 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
   }
 
   getChat(supportId) {
-    this.loadingMessages = true;
     this.supportService.getMessages(supportId, this.params)
       .subscribe((data: any) => {
         this.support = data.results;
         this.loadingMessages = false;
         this.count = data.count;
-        // this.groupMessages(this.messages);
-        this.scrollToBottom();
+        console.log(this.support);
+        // this.scrollToBottom();
         setTimeout(() => {
           this.chatBodyHtml = this.conversationBody.nativeElement;
         });
@@ -186,33 +214,25 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
       });
   }
 
-
-  newMessageChatSocket(payload) {
-    // this.supportService.updateNewMessage(payload.data);
-    // this.newMessage(payload.data);
-    // this.newMessageSocket = null;
-    // this.messages.push(payload.data);
-    // this.messageService.markMessageAsViewed(this.chat.ID, payload.data.ID, {})
-    //   .subscribe();
-  }
-
-  allMessagesViewedSocket(payload) {
-    // this.chatGroups = this.chatGroups.map((chat) => {
-    //   chat.messages = chat.messages.map((message) => { message.viewed = true; message.viewed_date = new Date(); return message; });
-    //   return chat;
-    // });
-  }
-
-  messageViewedSocket(payload) {
-    // this.chatGroups = this.chatGroups.map((chat) => {
-    //   chat.messages = chat.messages.map((message) => {
-    //     if (message.ID == payload.message_id) {
-    //       message.viewed = true;
-    //       message.viewed_date = new Date();
-    //     }
-    //     return message;
-    //   });
-    //   return chat;
-    // });
+  groupMessages(chatMessages, isNewMessage = false) {
+    chatMessages.forEach((message: any) => {
+      // Verificar que no exista esa fecha en la agrupación
+      // Si no existe la agregamos
+      // const index = this.chatGroups.findIndex(group => group.date == moment(message.CreatedAt).format('YYYY-MM-DD'));
+      // if (index < 0) {
+      //   const newGroup = { date: moment(message.CreatedAt).format('YYYY-MM-DD'), messages: [message] };
+      //   if (isNewMessage) {
+      //     this.chatGroups.push(newGroup);
+      //     return;
+      //   }
+      //   this.chatGroups.unshift(newGroup);
+      // } else {
+      //   if (isNewMessage) {
+      //     this.chatGroups[index].messages.push(message);
+      //     return;
+      //   }
+      //   this.chatGroups[index].messages.unshift(message);
+      // }
+    });
   }
 }

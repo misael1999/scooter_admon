@@ -7,6 +7,7 @@ import { SuccessDialogComponent } from './alerts/success-dialog/success-dialog.c
 import { NoFoundDataComponent } from './no-found-data/no-found-data.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { LoadingDataComponent } from './loading-data/loading-data.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -21,7 +22,7 @@ import { LoadingDataComponent } from './loading-data/loading-data.component';
   imports: [
     CommonModule,
     MatDialogModule,
-    AngularMaterialModule
+    AngularMaterialModule,
   ],
   entryComponents: [
     ConfirmSignupDialogComponent,
@@ -33,7 +34,8 @@ import { LoadingDataComponent } from './loading-data/loading-data.component';
     ErrorDialogComponent,
     LoadingDataComponent,
     SuccessDialogComponent,
-    NoFoundDataComponent
+    NoFoundDataComponent,
+    AngularMaterialModule
   ]
 })
 export class SharedModule { }

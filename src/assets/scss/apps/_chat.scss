@@ -235,6 +235,7 @@ $chat-list-width: 380px;
                 .chat-input {
                     border: 0px;
                     line-height: $chat-footer-height;
+                    line-height: normal;
                     outline: 0;
                     width: 100%;
                     max-width: 600px;

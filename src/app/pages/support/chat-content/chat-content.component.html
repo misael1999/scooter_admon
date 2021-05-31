@@ -19,7 +19,7 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <!-- BODY  -->
-            <app-conversation-body *ngIf="!loadingMessages && messages.length > 0" [support]="support" [chatGroups]="chatGroups" [messages]="messages">
+            <app-conversation-body *ngIf="support.length > 0" [support]="support" [chatGroups]="chatGroups" [messages]="messages">
             </app-conversation-body>
 
             <!-- TERMINA BODY  -->
