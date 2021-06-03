@@ -32,9 +32,7 @@ export class ClientDetailComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.dataClient = data;
-        console.log(this.dataClient);
         this.getAddress();
-
       }, error => {
         this.loadingData = false;
       });
@@ -45,8 +43,6 @@ export class ClientDetailComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.address = data.results;
-        console.log(this.address);
-
       }, error => {
         this.loadingData = false;
       });

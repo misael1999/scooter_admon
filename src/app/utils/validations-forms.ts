@@ -4,10 +4,16 @@ import Swal, { SweetAlertResult, SweetAlertType } from 'sweetalert2';
 export class ValidationForms {
     constructor() { }
 
+    isFieldTouched(group: FormGroup, field: string): boolean {
+        return (group.get(field)?.touched);
+    }
+
+    isFieldDirty(group: FormGroup, field: string): boolean {
+        return (group.get(field)?.dirty);
+    }
+
     isFieldInvalid(group: FormGroup, field: string): boolean {
-        return (
-            (group.get(field).invalid && group.get(field).touched)
-        );
+        return ((group.get(field).invalid && group.get(field).touched));
     }
 
     isFieldValid(group: FormGroup, field: string): boolean {

@@ -5,7 +5,6 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import * as commons_functions from 'src/app/utils/functions';
 import { ValidationForms } from 'src/app/utils/validations-forms';
-import { GlobalValidator } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +12,10 @@ import { GlobalValidator } from 'src/app/utils/validators';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends ValidationForms implements OnInit {
-  fecha = new Date().getFullYear();
+  year = new Date().getFullYear();
   loginForm: FormGroup;
-  loadingLogin = false;
+  loadingLogin: boolean;
+  fieldType = 'password'
 
   constructor(
     private authService: AuthService,
@@ -27,7 +27,6 @@ export class LoginComponent extends ValidationForms implements OnInit {
 
   ngOnInit() {
     this.buildLoginForm();
-    this.fecha;
   }
 
   login() {

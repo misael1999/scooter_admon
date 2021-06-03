@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { MerchantModel } from '../models/merchant.model';
 import { StationModel } from '../models/station.model';
 
 @Injectable({
@@ -71,10 +70,10 @@ export class MerchantsService {
   // Get review by merchant
   getReviews(merchantId, params = {}) {
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/ratings/`;
-    return this.http.get(url,  { params });
+    return this.http.get(url, { params });
   }
   //Get tags by merchant 
-  getTags(merchantId){
+  getTags(merchantId) {
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/tags/`;
     return this.http.get(url);
   }

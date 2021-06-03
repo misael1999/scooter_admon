@@ -49,10 +49,9 @@ export class MerchantListComponent extends ValidationForms implements OnInit {
   async disabledMerchant(idMerchant) {
     const confirmation = await this.showMessageConfirm('De bloquear al comercio');
     if (!confirmation.value) { return; }
-
     this.merchantsService.deleteMerchant(idMerchant)
       .subscribe((data) => {
-        this.showSwalMessage('Repartidor bloqueado correctamente');
+        this.showSwalMessage('Comercio bloqueado correctamente');
         this.reloadMerchants.emit(true);
       }, error => {
         this.showSwalMessage(error.errors.message, 'error');
@@ -60,7 +59,7 @@ export class MerchantListComponent extends ValidationForms implements OnInit {
   }
 
   async enableMerchant(idMerchant) {
-    const confirmation = await this.showMessageConfirm('De desbloquear al repartidor');
+    const confirmation = await this.showMessageConfirm('De bloquear al comercio');
     if (!confirmation.value) { return; }
 
     // this.merchantsService.unlockMerchant(idMerchant)
@@ -75,13 +74,10 @@ export class MerchantListComponent extends ValidationForms implements OnInit {
 
 
   openOrClose(isOpen, merchantId) {
-    console.log(isOpen);
-    console.log(merchantId);
     this.merchantsService.opeOrcloseMerchant(merchantId, isOpen)
       .subscribe((data) => {
       }, error => {
-        alert('Ha ocurrido un error al cerrar el comercio');
+        this.showSwalMessage(error.errors.message, 'error');
       });
   }
-
 }

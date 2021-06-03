@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as common_functions from 'src/app/utils/functions';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { ValidationForms } from 'src/app/utils/validations-forms';
+import { GlobalValidator } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
-
+export class ForgotPasswordComponent extends ValidationForms implements OnInit {
+  year = new Date().getFullYear();
   forgotForm: FormGroup;
   loadingForgot: boolean;
 
@@ -19,15 +21,18 @@ export class ForgotPasswordComponent implements OnInit {
   message = 'Se ha enviado un correo a darka99_19@hotmail.com para continuar con el proceso de recuperado de contraseña';
   title = 'Solicitud exitosa';
 
-  constructor(private fb: FormBuilder,
-              private authService: AuthService, private alertService: AlertsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private alertService: AlertsService) {
+    super()
+  }
 
   ngOnInit(): void {
     this.buildForgotForm();
   }
 
   sendEmail() {
-
     if (this.forgotForm.invalid) {
       common_functions.markAsTouched(this.forgotForm);
       return;
@@ -39,39 +44,19 @@ export class ForgotPasswordComponent implements OnInit {
      para continuar con el proceso de recuperado de contraseña `;
 
     this.authService.forgotPassword(email)
-    .subscribe(data => {
+      .subscribe(data => {
         this.loadingForgot = false;
         this.success = true;
         // this.alertService.openAlertConfirmSignup(null, 'Solicitud existosa', message);
       }, error => {
         this.loadingForgot = false;
-        this.alertService.openErrorDialog(null, 'Opps..', error.errors.message);
+        this.showSwalMessage(error.errors.message, 'error')
       });
-
   }
 
   buildForgotForm() {
     this.forgotForm = this.fb.group({
-      username: [null, common_functions.globalValidEmail]
+      username: [null, [Validators.required, GlobalValidator.mailFormat]]
     });
   }
-
-  isFieldInvalid(form: FormGroup, field: string) {
-    return (
-      (!form.get(field).valid && form.get(field).touched)
-    );
-  }
-
-  isFieldValid(form: FormGroup, field: string) {
-    return (
-      (form.get(field).valid && form.get(field).touched)
-    );
-  }
-
-  isFieldHasError(form: FormGroup, field: string, error: string) {
-    return (
-      (form.get(field).hasError(error))
-    );
-  }
-
 }
