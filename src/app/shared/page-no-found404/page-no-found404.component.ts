@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-no-found404.component.scss']
 })
 export class PageNoFound404Component implements OnInit {
+  year = new Date().getFullYear();
 
   constructor() { }
 

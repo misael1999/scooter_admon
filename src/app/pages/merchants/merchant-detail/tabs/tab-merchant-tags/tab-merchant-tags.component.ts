@@ -14,8 +14,8 @@ export class TabMerchantTagsComponent implements OnInit {
   loadingData;
 
   constructor(private merchantsService: MerchantsService,
-              private tagsGeneralService: TagsGeneralService,
-              private dialog: MatDialog) {
+    private tagsGeneralService: TagsGeneralService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -26,12 +26,10 @@ export class TabMerchantTagsComponent implements OnInit {
     this.loadingData = true;
     this.merchantsService.getTags(this.merchantsService.merchantId)
       .subscribe((data: any) => {
-        console.log('Esta es la data', data.results);
         this.merchantTags = data.results;
         this.loadingData = false;
       }), error => {
         this.loadingData = false;
-        console.log('eroroe');
       };
   }
 

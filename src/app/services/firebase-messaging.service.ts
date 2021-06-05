@@ -28,10 +28,10 @@ export class FirebaseMessagingService {
   updateToken(token) {
     // we can change this function to request our backend service
     const URL = `${environment.HOST_APIV1}/devices/`;
-    return this.http.post(URL, {registration_id: token, type: 'web'})
+    return this.http.post(URL, { registration_id: token, type: 'web' })
       .subscribe(data => {
         localStorage.setItem('is_token_save', 'true');
-      }, error => {});
+      }, error => { });
   }
 
   /**
@@ -42,7 +42,7 @@ export class FirebaseMessagingService {
   requestPermission() {
     this.angularFireMessaging.requestToken.subscribe(
       (token) => {
-        if (localStorage.getItem('is_token_save') === 'true') {
+        if (localStorage.getItem('is_token_save') === 'true') {
           return;
         }
         this.updateToken(token);
@@ -59,7 +59,6 @@ export class FirebaseMessagingService {
   receiveMessage() {
     this.angularFireMessaging.messages.subscribe(
       (payload) => {
-        console.log('new message received. ', payload);
         this.currentMessage.next(payload);
       });
   }

@@ -29,10 +29,10 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
 
 
   constructor(private tagsGeneralService: TagsGeneralService, private tagByMerchantService: TagByMerchantsService, private fb: FormBuilder, private dialogRef: MatDialogRef<AddTagMerchantComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
 
-    this.tagsTheMerchant = data.tags; 
+    this.tagsTheMerchant = data.tags;
     this.merchantId = data.merchantId;
   }
 
@@ -41,16 +41,16 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
   }
 
   addTag(data) {
-    data.is_select? null: this.tagsAdd.push(data.id);
+    data.is_select ? null : this.tagsAdd.push(data.id);
   }
 
   deleteTag(data) {
     if (data.is_select) {
       this.tagsDelete.push(data.id)
-    }else{
-      let index  = this.tagsAdd.indexOf(data.id);
+    } else {
+      let index = this.tagsAdd.indexOf(data.id);
       this.tagsAdd.splice(index, 1);
-      
+
     }
   }
 
@@ -59,19 +59,17 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
       tags: this.tagsAdd,
       delete_tags: this.tagsDelete
     }
-    console.log('Tags', tags);
-    
+
 
     this.loadingSave = true;
 
     this.tagByMerchantService.createTags(this.merchantId, tags)
       .subscribe((data) => {
-        console.log('Data', data);
         this.loadingSave = false;
         this.showSwalMessage('Etiquetas Agregadas Correctamente');
         this.dialogRef.close(true);
       }, error => {
-        this.showSwalMessage('Error al agregar','error');
+        this.showSwalMessage('Error al agregar', 'error');
         this.loadingSave = false;
       });
   }
@@ -89,12 +87,12 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
       };
   }
 
-  parseTags(){
+  parseTags() {
     console.log('Entra en parse');
-    this.tagsGeneral.forEach((tag) =>{
-      this.tagsTheMerchant.forEach((tagM) =>{
+    this.tagsGeneral.forEach((tag) => {
+      this.tagsTheMerchant.forEach((tagM) => {
         if (tag.id == tagM.tag_id) {
-         tag.is_select = true 
+          tag.is_select = true
         }
       })
     })

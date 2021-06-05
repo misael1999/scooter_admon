@@ -20,11 +20,10 @@ export class TabMerchantSummaryComponent implements OnInit {
   loadingData: boolean;
 
   constructor(private merchantService: MerchantsService,
-              private dialog: MatDialog) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.merchant = this.merchantService.merchantId;
-    console.log(this.merchantService.merchantId);
 
     const now = new Date();
     const numberMonth = now.getMonth() + 1;
@@ -47,7 +46,6 @@ export class TabMerchantSummaryComponent implements OnInit {
     this.loadingData = true;
     this.merchantService.getSummaryMerchant(this.merchant.id, { month })
       .subscribe((data) => {
-        // console.log(data);
         this.dataSummary = data;
         this.loadingData = false;
 

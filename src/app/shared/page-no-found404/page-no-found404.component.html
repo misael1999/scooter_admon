@@ -1,21 +1,35 @@
-        <div class="container-fluid">
-
-            <!-- 404 Error Text -->
-            <div class="text-center">
-              <div class="error mx-auto" data-text="404">404</div>
-              <p class="lead text-gray-800 mb-5">Pagina no encontrada</p>
-              <p class="text-gray-500 mb-0">Parece que encontraste una falla en la matriz ...</p>
-              <a href="index.html">&larr; Regresar al inicio</a>
+<div class="app">
+    <div class="container-fluid">
+        <div class="d-flex full-height p-v-20 flex-column justify-content-between">
+            <div class="d-none d-md-flex p-h-40">
+                <img src="assets/img/los_pedi.svg" width="100" alt="">
             </div>
-  
-          </div>
-    
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Scooter </span>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="p-v-30">
+                            <h1 class="font-weight-semibold display-1 text-primary lh-1-2">404</h1>
+                            <h2 class="font-weight-light font-size-30"> ¡Ups! Parece que te perdiste </h2>
+                            <p class="lead m-b-30">No pudimos encontrar lo que buscabas.</p>
+                            <a routerLink="/" class="btn btn-primary btn-tone">Regresar a inicio</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 m-l-auto">
+                        <img class="img-fluid" src="assets/images/others/error-1.png" alt="">
+                    </div>
+                </div>
             </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
+            <div class="d-none d-md-flex  p-h-40 justify-content-between">
+                <span class="">© {{ year }} Los Pedidos</span>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a class="text-dark text-link" href="">Aviso de privacidad</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="text-dark text-link" href="">Políticas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,13 +10,13 @@ import { PageNoFound404Component } from './shared/page-no-found404/page-no-found
 
 const routes: Routes = [
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+  },
+  {
     path: 'complete-profile',
     canActivate: [AlreadyInfoCompleteGuard],
     loadChildren: () => import('./pages/complete-profile/complete-profile.module').then(m => m.CompleteProfileModule)
-  },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: '', component: PagesComponent,
@@ -27,7 +27,6 @@ const routes: Routes = [
     path: 'not_found', component: PageNoFound404Component
   },
   { path: '**', component: PageNoFound404Component }
-
 ];
 
 @NgModule({

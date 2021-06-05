@@ -8,27 +8,26 @@ import { StationModel } from 'src/app/models/station.model';
 })
 export class CompleteProfileGuard implements CanActivate {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      // Verify that the station exists and does not have a complete configuration  ========
+    // Verify that the station exists and does not have a complete configuration  ========
 
-      const station = JSON.parse(localStorage.getItem('station'));
-      const information_is_complete = localStorage.getItem('information_is_complete');
-      // console.log('INFORMACIÓN COMPLETADA');
-      // console.log(information_is_complete);
-      if (station) {
-        if (information_is_complete == 'false') {
-            this.router.navigate(['/complete-profile/']);
-            return false;
-        }
-        return true;
+    const station = JSON.parse(localStorage.getItem('station'));
+    const information_is_complete = localStorage.getItem('information_is_complete');
+
+    if (station) {
+      if (information_is_complete == 'false') {
+        this.router.navigate(['/complete-profile/']);
+        return false;
       }
+      return true;
+    }
 
-      return false;
+    return false;
   }
 
 }

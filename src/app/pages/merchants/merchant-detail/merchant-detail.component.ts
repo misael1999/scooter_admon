@@ -21,8 +21,7 @@ export class MerchantDetailComponent extends ValidationForms implements OnInit {
       this.getMerchant(params.id);
     });
     this.merchantsService.merchantId = this.merchantId;
-    console.log('El nuevo id es ', this.merchantId);
-    
+
   }
 
   ngOnInit(): void {

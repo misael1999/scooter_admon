@@ -46,13 +46,11 @@ export class InfoDeliveryComponent implements OnInit {
     this.deliveryService.getDeliveryById(this.idDelivery, params)
       .subscribe((data: any) => {
         this.infoDelivery = data;
-        console.log(this.infoDelivery);
       }, error => {
         if (error.errors.code === 'not_found') {
           this.router.navigate(['not_found']);
           return;
         }
-        console.log(error.errors.code);
       });
   }
 

@@ -22,7 +22,7 @@
                 <td><u class="cursor" routerLink="{{client.id}}/detail"> {{ client.name }} </u></td>
                 <td> {{ client.user.username }} </td>
                 <td>
-                    <span *ngIf="!client.phone_number"><small>Sin agregar</small></span>
+                    <span *ngIf="!client.phone_number"><small>No agregado </small></span>
                     <span *ngIf="client.phone_number"> {{ client.phone_number }} </span>
                 </td>
                 <td> {{ client.created | date:'medium' }} </td>

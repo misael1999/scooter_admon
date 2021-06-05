@@ -17,7 +17,6 @@ export class TabMerchantGeneralComponent implements OnInit {
 
   ngOnInit(): void {
     this.merchant = this.merchantsService.merchant;
-    console.log('Data profile', this.merchant);
   }
 }
 

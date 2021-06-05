@@ -1,14 +1,20 @@
 <div class="container">
-    <!-- Page Heading -->
     <div class="d-flex justify-content-between align-items-start">
         <h2>Comercios</h2>
-        <button class="btn btn-primary" (click)="dialogAddMerchant()">Agregar</button>
+        <button class="btn btn-primary" (click)="openDialogAddMerchant()">Agregar</button>
     </div>
 
     <div class="row p-t-20">
-        <!-- Order by -->
         <div class="col-md-2 p-b-10">
-            <select class="form-control select-form" [(ngModel)]="params.ordering" (change)="ordenamiento($event.target.value)">
+            <select class="form-control select-form" (change)="showList($event.target.value)" [(ngModel)]="params.status">
+                <option value="">Ver por</option>
+                <option value="1">Disponibles</option>
+                <option value="2">Bloqueados</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 p-b-10">
+            <select class="form-control select-form" [(ngModel)]="params.ordering" (change)="orderBy($event.target.value)">
                 <option value="">Ordenar por</option>
                 <option value="-name">Fecha de ingreso</option>
                 <option value="-last_name">Nombre</option>
@@ -16,17 +22,6 @@
             </select>
         </div>
 
-        <!-- View by status -->
-        <div class="col-md-2 p-b-10">
-            <select (change)="showList($event.target.value)" [(ngModel)]="params.status" class="form-control select-form">
-                <option value="">Ver por</option>
-                <option value="1">Disponibles</option>
-                <option value="2">Bloqueados</option>
-            </select>
-        </div>
-
-
-        <!-- Show view information complete -->
         <div class="col-md-3 p-b-10">
             <select (change)="showinfoIsComplete($event.target.value)" [(ngModel)]="params.information_is_complete" class="form-control select-form">
                 <option value="">Mostrar por</option>
@@ -35,10 +30,8 @@
             </select>
         </div>
 
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
 
-
-        <!-- Search by -->
         <div class="col-md-3 p-b-10">
             <div class="input-group">
                 <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control" placeholder="Buscar por">

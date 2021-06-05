@@ -19,7 +19,6 @@ export class InfoClientComponent implements OnInit {
 
   constructor(private clientService: ClientsService, private activatedRouted: ActivatedRoute, private router: Router) {
     this.idCustomer = this.activatedRouted.snapshot.params.id;
-    console.log('ID', this.idCustomer);
   }
 
   ngOnInit(): void {
@@ -28,16 +27,12 @@ export class InfoClientComponent implements OnInit {
 
   selectFromDate(fromDate) {
     const momentDate = new Date(fromDate);
-    console.log(momentDate);
-
-    console.log(fromDate);
 
     this.from_date = moment(fromDate).format('2020-01-01');
     if (this.from_date && this.to_date) {
       this.getCustomerId({ from_date: this.from_date, to_date: this.to_date });
 
     }
-    // console.log(from_date);
   }
 
   selectTodate(toDate) {
@@ -47,20 +42,16 @@ export class InfoClientComponent implements OnInit {
       this.getCustomerId({ from_date: this.from_date, to_date: this.to_date });
 
     }
-    // console.log(to_date);
   }
 
 
   getCustomerId(params = {}) {
-    console.log('Date ', params);
     this.loadingData = true;
     this.clientService.getCustomerByDate(this.idCustomer, params)
       .subscribe((data: any) => {
         this.loadingData = false;
         this.dataCustomer = data;
-        console.log(this.dataCustomer);
       }, error => {
-        console.log(error);
         this.loadingData = false;
       });
   }

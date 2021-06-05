@@ -105,7 +105,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   allowCancellations = true;
 
   constructor(private configService: ConfigAccountService, private router: Router,
-              private _formBuilder: FormBuilder, private alertService: AlertsService) { }
+    private _formBuilder: FormBuilder, private alertService: AlertsService) { }
 
   ngOnInit(): void {
     this.station = JSON.parse(localStorage.getItem('station'));
@@ -127,7 +127,6 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   }
 
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
   }
 
   ngAfterContentInit() {
@@ -221,12 +220,12 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   addSchedule(schedule) {
     if (schedule.checked) {
       const index = this.scheduleSelected.findIndex((schedu) =>
-      schedu.schedule_id === schedule.schedule_id);
+        schedu.schedule_id === schedule.schedule_id);
 
       // If exist schedule, then update it
       delete schedule.checked;
       if (index >= 0) {
-        this.scheduleSelected[index] = {...schedule};
+        this.scheduleSelected[index] = { ...schedule };
         return;
       }
       // If not exist schedule, then add in array
@@ -335,7 +334,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       return false;
     }
     // Save in object to update info
-    this.stationConfig.general = {picture: this.binaryString};
+    this.stationConfig.general = { picture: this.binaryString };
     return true;
   }
 
@@ -344,8 +343,10 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       this.addressForm.markAllAsTouched();
       return false;
     }
-    this.stationConfig.address = {...this.addressForm.value,
-       point: {lat: this.currentMarker.lat, lng: this.currentMarker.lng}};
+    this.stationConfig.address = {
+      ...this.addressForm.value,
+      point: { lat: this.currentMarker.lat, lng: this.currentMarker.lng }
+    };
     return true;
   }
 
@@ -484,9 +485,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   }
 
   isFieldInvalid(form: FormGroup, field: string) {
-    /*     console.log(form.get(field).valid);
-        console.log(form.get(field).value);
-        console.log(form.get(field).touched); */
+
     return (
       (!form.get(field).valid && form.get(field).touched)
     );

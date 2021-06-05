@@ -13,7 +13,7 @@ export function markAsTouched(form: FormGroup) {
 
 export const globalValid = [GlobalValidator.noSpecialCharacters, Validators.required, Validators.maxLength(CONSTANTS.MAX_LENGTH_GLOBAL)];
 export const optionalGlobalValid = [GlobalValidator.noSpecialCharacters,
-    Validators.maxLength(CONSTANTS.MAX_LENGTH_GLOBAL)];
+Validators.maxLength(CONSTANTS.MAX_LENGTH_GLOBAL)];
 export const globalValidNumbers = [GlobalValidator.noSpecialCharacters, Validators.required];
 export const globalValidEmail = [GlobalValidator.mailFormat, Validators.required];
 export const globalValidPhoneNumber = [GlobalValidator.phoneFormat, Validators.required];

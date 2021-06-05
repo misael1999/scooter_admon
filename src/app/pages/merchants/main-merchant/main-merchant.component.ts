@@ -15,26 +15,25 @@ export class MainMerchantComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent;
   pageSizeOptions: number[] = [25, 50, 75, 100];
-  // PARAMETROS
-  params = { limit: 25, offset: 0, page: 1, search: '', ordering: '', status: 1, information_is_complete: true };
+  params = { limit: 25, offset: 0, search: '', ordering: '', status: 1, information_is_complete: true };
   loadingData: boolean;
   merchants: Array<any> = [];
   searchText;
-  statusFilter: boolean;
 
-  constructor(private merchantsService: MerchantsService, private dialog: MatDialog) { }
+  constructor(
+    private merchantsService: MerchantsService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getMerchants();
   }
 
-  dialogAddMerchant(merchant = null) {
+  openDialogAddMerchant() {
     const dialogRef = this.dialog.open(MerchantsAddComponent, {
       disableClose: true,
       width: '90%',
-      data: { merchant }
+      data: {}
     });
-
     dialogRef.afterClosed()
       .subscribe((data: any) => {
         if (data) {
@@ -42,21 +41,6 @@ export class MainMerchantComponent implements OnInit {
         }
       });
   }
-
-
-
-  showList(value) {
-    this.params.status = value;
-    this.getMerchants();
-
-  }
-
-
-  showinfoIsComplete(value) {
-    this.params.information_is_complete = value;
-    this.getMerchants();
-  }
-
 
   getMerchants() {
     this.loadingData = true;
@@ -72,6 +56,21 @@ export class MainMerchantComponent implements OnInit {
       });
   }
 
+  orderBy(value) {
+    this.params.ordering = value;
+    this.getMerchants();
+  }
+
+  showList(value) {
+    this.params.status = value;
+    this.getMerchants();
+  }
+
+  showinfoIsComplete(value) {
+    this.params.information_is_complete = value;
+    this.getMerchants();
+  }
+
   searchBy(value: string) {
     this.params.search = value;
     this.merchantsService.searchText = value;
@@ -85,12 +84,6 @@ export class MainMerchantComponent implements OnInit {
     this.getMerchants();
   }
 
-
-  ordenamiento(value: string) {
-    this.params.ordering = value;
-    this.getMerchants();
-  }
-  // METHOD PAGINATOR
   getPages(e): PageEvent {
     if (this.merchants.length === 0) {
       this.pageSize = 25;
@@ -103,5 +96,4 @@ export class MainMerchantComponent implements OnInit {
     this.params.offset = this.params.limit * e.pageIndex;
     this.getMerchants();
   }
-
 }

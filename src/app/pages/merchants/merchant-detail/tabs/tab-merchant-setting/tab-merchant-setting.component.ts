@@ -18,7 +18,6 @@ export class TabMerchantSettingComponent extends ValidationForms implements OnIn
 
   ngOnInit(): void {
     this.merchant = this.merchantService.merchantId;
-    console.log(this.merchantService.merchantId);
     this.buildSettingForm();
 
   }
@@ -35,13 +34,11 @@ export class TabMerchantSettingComponent extends ValidationForms implements OnIn
 
 
     this.loadingSaveInfo = true;
-    console.log(info);
 
     this.merchantService.updateMerchantStation(this.merchant.id, info)
       .subscribe((data: any) => {
         this.showSwalMessage('Información actualizada correctamente');
         this.loadingSaveInfo = false;
-        console.log(data);
       }, error => {
         this.showSwalMessage('Error en actualizar', 'error');
       });
