@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  HOST_APIV1: 'https://api.lospedidos.site/api/v1',
-  // HOST_APIV1: 'https://dev.lospedidos.site/api/v1',
+  // HOST_APIV1: 'https://api.lospedidos.site/api/v1',
+  HOST_APIV1: 'https://dev.lospedidos.site/api/v1',
 
 
   // HOST_APIV1: 'http://127.0.0.1:8000/api/v1',

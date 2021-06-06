@@ -15,7 +15,7 @@ export class LoginComponent extends ValidationForms implements OnInit {
   year = new Date().getFullYear();
   loginForm: FormGroup;
   loadingLogin: boolean;
-  fieldType = 'password'
+  fieldType = 'password';
 
   constructor(
     private authService: AuthService,
@@ -44,7 +44,7 @@ export class LoginComponent extends ValidationForms implements OnInit {
         this.router.navigate(['/dashboard']);
       }, error => {
         this.loadingLogin = false;
-        this.alertService.openErrorDialog(null, 'Opss..', error.errors.message);
+        // this.alertService.openErrorDialog(null, 'Opss..', error.errors.message);
       });
   }
 

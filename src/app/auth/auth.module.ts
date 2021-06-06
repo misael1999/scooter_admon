@@ -5,8 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
-
 @NgModule({
   declarations: [
     LoginComponent,

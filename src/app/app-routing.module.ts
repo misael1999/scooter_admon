@@ -7,7 +7,6 @@ import { CompleteProfileGuard } from './services/guards/complete-profile.guard';
 import { AlreadyInfoCompleteGuard } from './services/guards/already-info-complete.guard';
 import { PageNoFound404Component } from './shared/page-no-found404/page-no-found404.component';
 
-
 const routes: Routes = [
   {
     path: 'auth',

@@ -256,7 +256,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
         this.router.navigate(['/dashboard']);
       }, (err) => {
         this.loadingUpdateConfig = false;
-        this.alertService.openErrorDialog(null, 'Oppss..', err.errors.message);
+        // this.alertService.openErrorDialog(null, 'Oppss..', err.errors.message);
       });
   }
 
