@@ -20,7 +20,10 @@ export class OrdersCancelledComponent implements OnInit {
   loadingData: boolean;
   searchText;
 
-  constructor(private ordersService: OrdersService, private dialog: MatDialog) { }
+  constructor(
+    private ordersService: OrdersService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -28,8 +31,7 @@ export class OrdersCancelledComponent implements OnInit {
 
   openDialogDetailProducts(order) {
     this.dialog.open(OrdersDetailComponent, {
-      height: '78%',
-      width: '70%',
+      width: '600px',
       data: { order }
     });
   }

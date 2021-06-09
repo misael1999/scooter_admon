@@ -13,11 +13,10 @@ export class TabProductsComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent;
   pageSizeOptions: number[] = [25, 50, 75, 100];
-  // PARAMETROS
-  params = { limit: 25, offset: 0, page: 1, search: '', ordering: '', status: 1 };
+  params = { limit: 25, offset: 0, search: '', ordering: '', status: 1 };
   loadingData: boolean;
   products;
-
+  searchText;
 
   constructor(private merchantsService: MerchantsService) { }
 
@@ -30,19 +29,41 @@ export class TabProductsComponent implements OnInit {
     this.merchantsService.getProductsByMerchant(this.merchantsService.merchantId, this.params)
       .subscribe((data: any) => {
         this.loadingData = false;
-        this.products = data;
+        this.products = data.results;
         this.length = data.count;
         console.log(this.products);
-
         this.merchantsService.params = this.params;
         this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {
-        console.log(error);
         this.loadingData = false;
       });
   }
 
-  // METHOD PAGINATOR
+
+  orderBy(value) {
+    this.params.ordering = value;
+    this.getProducts()
+  }
+
+  showList(value) {
+    this.params.status = value;
+    this.getProducts();
+  }
+
+  searchBy(value: string) {
+    this.params.search = value;
+    this.merchantsService.searchText = value;
+    this.getProducts()
+  }
+
+  clearSearch() {
+    this.params.search = '';
+    this.merchantsService.searchText = '';
+    this.searchText = '';
+    this.getProducts();
+  }
+
+
   getPages(e): PageEvent {
     if (this.products.length === 0) {
       this.pageSize = 25;
@@ -55,6 +76,4 @@ export class TabProductsComponent implements OnInit {
     this.params.offset = this.params.limit * e.pageIndex;
     this.getProducts();
   }
-
-
 }

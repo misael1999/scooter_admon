@@ -19,19 +19,19 @@
                     <mat-slide-toggle (toggleChange)="openOrClose(!merchant.is_open, merchant.id); merchant.is_open=!merchant.is_open" [checked]="merchant.is_open"></mat-slide-toggle>
                 </td>
                 <td>
-                    <div class="avatar avatar-icon">
+                    <div class="avatar avatar-image">
                         <img [src]="merchant.picture" alt="merchant_avatar" onerror="this.onerror=null;this.src='assets/img/user.png';">
                     </div>
                 </td>
-                <td> <u class="cursor text-link" routerLink="detail/{{merchant.id}}"> {{ merchant.merchant_name }} </u> </td>
+                <td> <u class="cursor font-weight-bold" routerLink="detail/{{merchant.id}}"> {{ merchant.merchant_name }} </u></td>
                 <td> {{ merchant.phone_number }} </td>
                 <td> {{ merchant.email }} </td>
                 <td> {{ merchant.contact_person }} </td>
                 <td> {{ merchant.category }} </td>
                 <td>
                     <button class="btn btn-info btn-sm w-100 m-b-5" *ngIf="params.information_is_complete && params.status == 1" routerLink="detail/{{merchant.id}}">Promoción</button>
-                    <button class="btn btn-primary btn-sm w-100" *ngIf="params.information_is_complete && params.status == 1" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Bloquear</button>
-                    <button class="btn btn-info btn-sm w-100" *ngIf="params.information_is_complete && params.status == 2" (click)="deleteMerchant(merchant.id,merchant.merchant_name)">Desbloquear</button>
+                    <button class="btn btn-primary btn-sm w-100" *ngIf="params.information_is_complete && params.status == 1" (click)="disabledMerchant(merchant.id)">Bloquear</button>
+                    <button class="btn btn-info btn-sm w-100" *ngIf="params.information_is_complete && params.status == 2" (click)="enableMerchant(merchant.id)">Desbloquear</button>
                 </td>
             </tr>
         </tbody>

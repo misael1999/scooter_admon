@@ -1,1 +1,33 @@
-<p>list-products works!</p>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Disponibilidad</th>
+                <th class="width__actions">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>
+                    <div class="avatar avatar-image">
+                        <img [src]="product.picture" alt="picture">
+                    </div>
+                </td>
+                <td> {{ product.name }} </td>
+                <td> {{ product.category.name }} </td>
+                <td> $ {{ product.price }} </td>
+                <td> {{ product.is_available }} </td>
+                <td>
+                    <button class="btn btn-info btn-sm m-b-5 w-100">Editar</button>
+                    <button class="btn btn-primary btn-sm w-100" *ngIf="params.status == 1">Bloquear</button>
+                    <button class="btn btn-primary btn-sm w-100" *ngIf="params.status == 2">Desbloquear</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

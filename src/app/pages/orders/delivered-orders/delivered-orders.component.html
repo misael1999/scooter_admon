@@ -5,17 +5,15 @@
 
     <div class="row m-t-20">
         <div class="col-md-3 m-b-10">
-            <select class="form-control select-form cursor" (change)="orderBy($event.target.value)">
-                <option value="">Ordenar</option>
-                <option value="distance">Distancia mas corta</option>
-                <option value="-distance">Distancia mas larga </option>
-                <option value="service_price">Precio mas bajo</option>
-                <option value="-service_price">Precio mas alto </option>
+            <select class="form-control select-form cursor" [(ngModel)]="params.ordering" (change)="orderBy($event.target.value)">
+                <option value="">Ordenar por</option>
+                <option value="distance">Distancia más corta</option>
+                <option value="-distance">Distancia más larga </option>
+                <option value="service_price">Precio más bajo</option>
+                <option value="-service_price">Precio más alto </option>
             </select>
         </div>
-
         <div class="col-md-6"></div>
-
         <div class="col-md-3 m-b-10">
             <div class="input-group">
                 <input #searchInput (keyup.enter)="searchBy(searchInput.value)" [(ngModel)]="searchText" type="text" class="form-control" placeholder="Buscar">
@@ -47,46 +45,40 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th>#orden</th>
                             <th>Servicio</th>
-                            <th>N° de Orden</th>
                             <th>Cliente</th>
-                            <th style="min-width: 200px;">Lugar de compra o recolección</th>
-                            <th style="min-width: 200px;">Lugar de entrega</th>
-                            <th>Fecha de Entrega</th>
+                            <th>Lugar de compra o recolección</th>
+                            <th>Lugar de entrega</th>
+                            <th>Fecha del servicio</th>
+                            <th>Fecha de entrega</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let order of orders">
-                            <td>
-                                <div class="text-center" (click)="openDialogDetailProducts(order)">
-                                    <span *ngIf="order.service_id == 3" class="cursor badge badge-pill badge-secondary">Lo que sea </span>
-                                    <span *ngIf="order.service_id == 2" class="cursor badge badge-pill badge-warning">{{order.service}} </span>
-                                    <span *ngIf="order.service_id == 1" class="cursor badge badge-pill badge-info">{{order.service}} </span>
-                                    <p class="cursor p-0 text-info font-weight-semibold">Detalles</p>
-                                </div>
-                            </td>
                             <td> {{ order.id }} </td>
+                            <td class="text-center">
+                                <span *ngIf="order.service_id == 3" class="badge badge-pill badge-secondary">Lo que sea </span>
+                                <span *ngIf="order.service_id == 2" class="badge badge-pill badge-warning">{{order.service}} </span>
+                                <span *ngIf="order.service_id == 1" class="badge badge-pill badge-info">{{order.service}} </span>
+                                <p class="cursor p-0 m-0 text-info font-weight-semibold" (click)="openDialogDetailProducts(order)">Detalles</p>
+                            </td>
                             <td> {{ order.customer.name }} </td>
                             <td>
-                                <span *ngIf="order.is_order_to_merchant == true"> {{ order.merchant.merchant_name }} <br>                                
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.merchant_location)">Ver mapa </a> </li>
-                                        </ol>
+                                <span *ngIf="order.is_order_to_merchant">
+                                    <span> {{ order.merchant.merchant_name }} </span>
+                                <p class="cursor p-0 m-0 text-info font-weight-semibold" (click)="openDirection(order.merchant_location)">Ver mapa</p>
                                 </span>
-
-                                <span *ngIf="order.is_order_to_merchant == false"> {{ order.from_address.full_address }} <br>
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.from_address.point)">Ver mapa </a> </li>
-                                        </ol>
+                                <span *ngIf="!order.is_order_to_merchant"> 
+                                    <span> {{ order.from_address.full_address }}  </span>
+                                <p class="cursor p-0 m-0 text-info font-weight-semibold" (click)="openDirection(order.from_address.point)">Ver mapa</p>
                                 </span>
                             </td>
-
-
-                            <td> {{ order.to_address.full_address }} <br>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item" style="color: #1890FF;"> <a (click)="openDirection(order.to_address.point)">Ver mapa</a> </li>
-                                </ol>
+                            <td>
+                                <span>{{ order.to_address.full_address }}</span>
+                                <p class="cursor p-0 m-0 text-info font-weight-semibold" (click)="openDirection(order.to_address.point)">Ver mapa</p>
                             </td>
+                            <td> {{ order.order_date | date:'medium'}} </td>
                             <td> {{ order.date_delivered_order | date:'medium'}} </td>
                         </tr>
                     </tbody>

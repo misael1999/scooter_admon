@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list-products',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-products.component.scss']
 })
 export class ListProductsComponent implements OnInit {
+  @Input() products;
+  @Input() params;
+  @Output() reloadProducts = new EventEmitter<boolean>();
 
   constructor() { }
 

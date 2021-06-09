@@ -13,11 +13,11 @@ import { GlobalValidator } from 'src/app/utils/validators';
 })
 export class RecoverPasswordComponent extends ValidationForms implements OnInit {
   year = new Date().getFullYear();
+  recoverForm: FormGroup;
+  loadingRecover: boolean;
   fieldType = 'password';
   fieldType2 = 'password';
-  recoverForm: FormGroup;
-  token: string;
-  loadingRecover: boolean;
+  token;
 
   constructor(
     private fb: FormBuilder,
@@ -25,10 +25,10 @@ export class RecoverPasswordComponent extends ValidationForms implements OnInit 
     private activatedRoute: ActivatedRoute) {
     super();
     // ======= GET PARAMS { TOKEN } ========
-    // this.activatedRoute.queryParams
-    //   .subscribe(params => {
-    //     this.token = params.token;
-    //   });
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        this.token = params.token;
+      });
   }
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class RecoverPasswordComponent extends ValidationForms implements OnInit 
   buildRecoverForm() {
     this.recoverForm = this.fb.group({
       password: [null, [Validators.required, GlobalValidator.passwordFormat, Validators.minLength(8)]],
-      // confirmPassword: [null, [Validators.required, GlobalValidator.passwordFormat, Validators.minLength(8)]],
+      confirmPassword: [null, [Validators.required, GlobalValidator.passwordFormat, Validators.minLength(8)]],
     }, { validators: GlobalValidator.confirmPassword });
   }
 }

@@ -111,6 +111,7 @@ export class OrdersInProcessComponent implements OnInit {
     });
   }
 
+
   openDialogReassignDelivery(order) {
     console.log(order);
     const dialogref = this.dialog.open(ReasignOrderComponent, {
@@ -163,6 +164,10 @@ export class OrdersInProcessComponent implements OnInit {
   orderBy(value: string) {
     this.params.ordering = value;
     this.getOrders();
+  }
+
+  sendMessageByWhats(number) {
+    window.open(`https://api.whatsapp.com/send?phone=52${number}`, '_blank');
   }
 
   getPages(e): PageEvent {

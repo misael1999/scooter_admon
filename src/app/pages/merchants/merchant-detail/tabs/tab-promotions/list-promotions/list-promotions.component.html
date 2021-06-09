@@ -1,0 +1,34 @@
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Inicio</th>
+                <th>Termino</th>
+                <th>Descuento</th>
+                <th>Compra mínima</th>
+                <th class="width__actions">Acciones</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let promotion of promotions">
+                <td> Descuento en envio </td>
+                <td> {{ promotion.from_date | date:'medium' }} </td>
+                <td> {{ promotion.to_date | date:'medium' }} </td>
+                <td>
+                    <span *ngIf="promotion.is_discount_percentage"> {{ promotion.rule.discount_amount }} % </span>
+                    <span *ngIf="!promotion.is_discount_percentage"> ${{ promotion.rule.discount_amount }} MXN  </span>
+
+                </td>
+                <td> {{ promotion.rule.minimum_order_price }} </td>
+                <td>
+                    <button class="btn btn-info btn-sm m-b-5 w-100">Editar</button>
+                    <button class="btn btn-primary btn-sm m-b-5 w-100">Desactivar</button>
+                    <!-- <button class="btn btn-primary btn-sm m-b-5 w-100">Activar</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

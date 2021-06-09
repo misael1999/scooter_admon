@@ -19,7 +19,6 @@ export class LoginComponent extends ValidationForms implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private alertService: AlertsService,
     private fb: FormBuilder,
     private router: Router) {
     super();

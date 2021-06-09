@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MerchantsService } from 'src/app/services/merchants.service';
-import Swal from 'sweetalert2';
 import { ValidationForms } from 'src/app/utils/validations-forms';
 
 @Component({
@@ -13,42 +12,17 @@ export class MerchantListComponent extends ValidationForms implements OnInit {
   @Input() params;
   @Output() reloadMerchants = new EventEmitter<boolean>();
 
-
-  constructor(private merchantsService: MerchantsService) {
+  constructor(
+    private merchantsService: MerchantsService) {
     super();
   }
 
-  ngOnInit(): void {
-  }
-
-  deleteMerchant(id, nombre) {
-    Swal.fire({
-      title: 'Bloquear',
-      text: `Esta seguro de bloquear a ${nombre}`,
-      type: 'warning',
-      showConfirmButton: true,
-      confirmButtonText: 'Bloquear',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-    }).then(resp => {
-      if (resp.value) {
-        this.merchantsService.deleteMerchant(id)
-          .subscribe(data => {
-            Swal.fire({
-              title: 'Bloqueado',
-              type: 'success',
-              text: 'El comercio ha sido bloqueado',
-              timer: 2000
-            });
-          });
-      }
-    });
-  }
-
+  ngOnInit(): void { }
 
   async disabledMerchant(idMerchant) {
     const confirmation = await this.showMessageConfirm('De bloquear al comercio');
     if (!confirmation.value) { return; }
+
     this.merchantsService.deleteMerchant(idMerchant)
       .subscribe((data) => {
         this.showSwalMessage('Comercio bloqueado correctamente');
@@ -59,19 +33,17 @@ export class MerchantListComponent extends ValidationForms implements OnInit {
   }
 
   async enableMerchant(idMerchant) {
-    const confirmation = await this.showMessageConfirm('De bloquear al comercio');
+    const confirmation = await this.showMessageConfirm('De desbloquear al comercio');
     if (!confirmation.value) { return; }
 
     // this.merchantsService.unlockMerchant(idMerchant)
     //   .subscribe((data) => {
-    //     this.showSwalMessage('Repartidor desbloqueado correctamente');
+    //     this.showSwalMessage('Comercio desbloqueado correctamente');
     //     this.reloadMerchants.emit(true);
     //   }, error => {
     //     this.showSwalMessage(error.errors.message, 'error');
     //   });
   }
-
-
 
   openOrClose(isOpen, merchantId) {
     this.merchantsService.opeOrcloseMerchant(merchantId, isOpen)
