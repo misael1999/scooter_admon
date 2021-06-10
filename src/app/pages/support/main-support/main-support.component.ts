@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { delay } from 'rxjs/internal/operators/delay';
-import { retryWhen } from 'rxjs/internal/operators/retryWhen';
 import { SupportService } from 'src/app/services/support.service';
-import { WebSocketService } from 'src/app/services/web-socket.service';
 import { environment } from 'src/environments/environment';
-import { SnotifyPosition, SnotifyService } from 'ng-snotify';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StationModel } from '../../../models/station.model';
+import { delay, retryWhen, take } from 'rxjs/operators';
+import { StationModel } from 'src/app/models/station.model';
+import { SnotifyPosition, SnotifyService } from 'ng-snotify';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
   selector: 'app-main-support',
@@ -21,10 +20,9 @@ export class MainSupportComponent implements OnInit {
   user: StationModel;
   loadingSupports = false;
   @ViewChild("chatContent") chatContent: ElementRef;
-
   // Info
   supports = [];
-  params = { limit: 10, offset: 0, is_open: 'true', search: '' };
+  params = { limit: 15, offset: 0, is_open: 'true', search: '' };
   supportSelected;
   newMessage = null;
 
@@ -36,6 +34,7 @@ export class MainSupportComponent implements OnInit {
     private router: Router) {
     this.user = JSON.parse(localStorage.getItem('station'));
 
+    // Verificamos si viene de alguna ruta especifica
     if (this.activatedRoute.snapshot.firstChild) {
       this.activatedRoute.firstChild
         .params.subscribe((params) => {
@@ -55,11 +54,10 @@ export class MainSupportComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingSupports = false;
         this.supports = data.results;
-        console.log(this.supports, data);
-        // this.countNewMessages();
+        this.countNewMessages();
+
         if (data.count > 0 && !this.supportId) {
           this.supportSelected = this.supports[0];
-          console.log(this.supportSelected);
           this.router.navigateByUrl('/support/' + this.supports[0].id + '/messages');
           setTimeout(() => {
             this.supportSelected.messagesNotViewed = 0;
@@ -91,9 +89,20 @@ export class MainSupportComponent implements OnInit {
     this.supportSelected = support;
   }
 
+  setNewChatMessage(chatMessage: any) {
+    this.supports.forEach((chat) => {
+      if (chat.id == chatMessage.id) {
+        chat.chat_messages.unshift(chatMessage);
+      }
+    });
+  }
+
   searchChat(value) {
     this.params.search = value;
     this.getSupports();
+  }
+  chatSelectedEvent(chat) {
+    this.supportSelected = chat;
   }
 
   openChat(event) {
@@ -101,18 +110,17 @@ export class MainSupportComponent implements OnInit {
     this.supportService.chatContent = this.chatContent.nativeElement;
   }
 
-
-
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
   }
 
   connectToWebSocket() {
-    this.webSocketService.connect(this.WS_SOCKET).pipe(
-      retryWhen((errors) => errors.pipe(delay(5000)))
+    this.webSocketService.connectToChat().pipe(
+      retryWhen((errors) => errors.pipe(delay(10000), take(5)))
     ).subscribe((data: any) => {
-      if (data.data.type && data.data.type === 'NEW_MESSAGE_SUPPORT') {
-        this.newMessage = data.data.message;
+      if (data.type_notification && data.type_notification === 'NEW_CHAT_MESSAGE') {
+        this.newMessage = data.data;
+        this.setNewChatMessage(this.newMessage);
         this.showNewMessageNotification();
       }
     });
@@ -133,13 +141,13 @@ export class MainSupportComponent implements OnInit {
   showNewMessageNotification() {
     this.playAudio();
     const message = `${this.newMessage.message}`;
-    if (!this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
+    if (this.newMessage.id != this.supportId) {
       const snotifyMessage = this.snotify.success(message ? message : 'Imagen recibida', 'Mensaje nuevo', {
         timeout: 2000,
         showProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
-        position: SnotifyPosition.centerTop
+        position: SnotifyPosition.rightBottom
       });
       snotifyMessage.id = 1;
       return;

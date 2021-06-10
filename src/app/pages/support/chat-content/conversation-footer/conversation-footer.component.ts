@@ -11,9 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ConversationFooterComponent extends ValidationForms implements OnInit {
   @Input() support;
-  @ViewChild('inputFile') inputFile: ElementRef;
   chatId;
-
   @Output() newMessage = new EventEmitter<MessageSupportModel>();
   messageText = '';
   station;
@@ -25,71 +23,42 @@ export class ConversationFooterComponent extends ValidationForms implements OnIn
   constructor(
     private supportService: SupportService,
     private activatedRoute: ActivatedRoute
-
   ) {
     super();
     this.activatedRoute.params.subscribe((params) => {
       this.chatId = params.chatId;
-      console.log(params);
-
     });
   }
 
   ngOnInit(): void {
     this.setTraductionEmojis();
     this.station = JSON.parse(localStorage.getItem('station'));
-    console.log(this.support);
-
   }
 
   sendMessage(text) {
+    text = text?.trim() ?? '';
+    if (text === '' && !this.binaryString) { return; }
 
-    if (text == null || text == '' || text == undefined) { return; }
+    let fileMedia;
+    if (this.binaryString) {
+      fileMedia = 'data:image/png;base64,' + this.binaryString;
+    }
+
     // Mensaje temporal
     const newMessageModel = new MessageSupportModel(
       this.station.user.id,
       this.support.user,
       this.messageText,
       new Date());
-    this.messageText = null;
-    // ======= Enviar mensaje ========
-    console.log(this.support);
+
+    this.messageText = '';
     this.newMessage.emit(newMessageModel);
 
     this.supportService.sendMessageSupport(this.chatId, { text })
       .subscribe((data: any) => {
-        // this.messages.push(data);
-        // this.showSwalMessage("Mensaje enviado", 'success')
       }, error => {
         alert('Error al enviar el mensaje');
       });
-
-  }
-
-  selectFileMedia(evt) {
-
-    const file = evt.target.files[0];
-
-    if (!file) {
-      // formTemp.get('picture').setValue(this.sliders[index].picture);
-      // this.slidersArrayForm.controls[index] = formTemp;
-      return;
-    }
-    if (file.type.indexOf('image') < 0 && file.type.indexOf('application/pdf') < 0) {
-
-      // this.myInputVariable.nativeElement.value = '';
-      this.showSwalMessage('El archivo seleccionado no es tipo permitido', 'error');
-      // formTemp.get('picture').setValue(this.sliders[index].picture);
-      // this.slidersArrayForm.controls[index] = formTemp;
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = this.handleReaderLoaded.bind(this);
-    reader.readAsBinaryString(file);
-    // setTimeout(() => {
-    //   this.updatedDocument(documentId, this.binaryString, file.name);
-    // }, 100);
   }
 
   addEmoji(event) {
@@ -137,14 +106,5 @@ export class ConversationFooterComponent extends ValidationForms implements OnIn
         6: 'Dark Skin Tone',
       },
     };
-  }
-
-  handleReaderLoaded(e) {
-    this.binaryString = btoa(e.target.result);
-  }
-
-  deleteImage() {
-    this.binaryString = null;
-    this.inputFile.nativeElement.value = null;
   }
 }

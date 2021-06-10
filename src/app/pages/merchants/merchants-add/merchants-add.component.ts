@@ -37,7 +37,6 @@ export class MerchantsAddComponent extends ValidationForms implements OnInit {
     this.merchantsService.getCategories()
       .subscribe((data: any) => {
         this.categories = data.results;
-        console.log(this.categories);
       }, error => {
         alert('No es posible obtener categorias');
       });

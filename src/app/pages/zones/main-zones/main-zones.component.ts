@@ -22,7 +22,7 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
   promotions_zones_activated: boolean;
 
   constructor(private zonesService: ZonesService,
-              private dialog: MatDialog, private profileService: ProfileService) { super(); }
+    private dialog: MatDialog, private profileService: ProfileService) { super(); }
 
   ngOnInit(): void {
     this.getStation();
@@ -32,7 +32,6 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
 
   getStation() {
     this.station = JSON.parse(localStorage.getItem('station'));
-    // console.log(this.station);
     if (this.station.promotions_zones_activated !== null) {
       this.promotions_zones_activated = this.station.promotions_zones_activated;
       this.restricted_zones_activated = this.station.restricted_zones_activated;
@@ -105,7 +104,6 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
     this.zonesService.getZones()
       .subscribe((data: any) => {
         this.zones = data.results;
-        // console.log(this.zones);
       }, error => {
         alert(error.errors.message);
       });
@@ -133,7 +131,6 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
         this.paths.push({ lat: coordinate[1], lng: coordinate[0] });
       }
     }
-    console.log(this.paths);
   }
 
   /*   setPolygonesByZones(zones) {

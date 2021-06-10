@@ -42,7 +42,6 @@ export class SupportService {
   }
 
   openConversationWithClient(stationId, body) {
-    console.log(stationId);
     const url = `${environment.HOST_APIV1}/stations/${stationId}/support/`;
     return this.http.post(url, body);
   }

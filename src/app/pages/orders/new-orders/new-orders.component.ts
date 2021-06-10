@@ -98,7 +98,6 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
 
 
   openDialogAssignDelivery(order) {
-    console.log(order);
     const dialogref = this.dialog.open(AssignDeliveryDialogComponent, {
       disableClose: true,
       width: '60%',
@@ -148,7 +147,6 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
   }
 
   openDirection(addres) {
-    console.log(addres);
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
@@ -166,7 +164,6 @@ export class NewOrdersComponent implements OnInit, OnDestroy {
     });
 
     snackBarRef.afterDismissed().subscribe(() => {
-      console.log('The snack-bar was dismissed');
     });
   }
 

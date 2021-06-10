@@ -20,9 +20,9 @@ export class RejectOrderDialogComponent implements OnInit {
   loadingSave: boolean;
 
   constructor(public dialogRef: MatDialogRef<RejectOrderDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData,
-              private orderService: OrdersService, private snackBar: MatSnackBar,
-              private formBuilder: FormBuilder) {
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private orderService: OrdersService, private snackBar: MatSnackBar,
+    private formBuilder: FormBuilder) {
     this.orderId = data.orderId;
   }
 
@@ -53,9 +53,7 @@ export class RejectOrderDialogComponent implements OnInit {
   }
 
   isFieldInvalid(form: FormGroup, field: string) {
-    /*     console.log(form.get(field).valid);
-        console.log(form.get(field).value);
-        console.log(form.get(field).touched); */
+
     return (
       (!form.get(field).valid && form.get(field).touched)
     );

@@ -16,8 +16,7 @@ export class PromotionOnShippingComponent implements OnInit {
 
   selectMerchant(merchant) {
     this.merchant = merchant;
-    this.current ++;
-    console.log('El merchant', this.merchant);
+    this.current++;
   }
 
   removeMerchant() {

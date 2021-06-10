@@ -134,8 +134,6 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
         this.support = data.results;
         this.loadingMessages = false;
         this.count = data.count;
-        console.log(this.support);
-        // this.scrollToBottom();
         setTimeout(() => {
           this.chatBodyHtml = this.conversationBody.nativeElement;
         });

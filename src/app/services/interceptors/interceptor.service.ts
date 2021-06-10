@@ -32,26 +32,24 @@ export class InterceptorService implements HttpInterceptor {
 
   handlingError(error: HttpErrorResponse) {
     let errorResponse = error;
-    console.log(errorResponse.status);
     console.warn(errorResponse);
-    console.log(errorResponse.message);
 
     if (errorResponse.status >= 500) {
       this.router.navigate(['internal-server-error']);
       return throwError('internal server error');
     }
-/*     if (errorResponse.status == 401) {
-      Swal.fire({
-        type: 'info',
-        title: 'Oops...',
-        text: 'Sesión expirada',
-      });
-      return throwError('No authorization');
-    } */
+    /*     if (errorResponse.status == 401) {
+          Swal.fire({
+            type: 'info',
+            title: 'Oops...',
+            text: 'Sesión expirada',
+          });
+          return throwError('No authorization');
+        } */
 
 
 
-    if (errorResponse.status >= 400 && errorResponse.status <= 404  ) {
+    if (errorResponse.status >= 400 && errorResponse.status <= 404) {
       errorResponse = error.error;
 
       // Cuando descargamos un archivo y tenemos un error, lo recibimos en tipo blob a si que los convirtimos en json
@@ -68,11 +66,11 @@ export class InterceptorService implements HttpInterceptor {
           }); */
         };
       } else {
-       /*  Swal.fire({
-          type: 'info',
-          title: 'Oops...',
-          text: errorResponse.message,
-        }); */
+        /*  Swal.fire({
+           type: 'info',
+           title: 'Oops...',
+           text: errorResponse.message,
+         }); */
       }
     }
     return throwError(errorResponse);

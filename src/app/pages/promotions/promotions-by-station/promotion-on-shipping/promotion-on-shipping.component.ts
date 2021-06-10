@@ -33,10 +33,10 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
   selectedClients: Array<any> = [];
 
   constructor(private clientsService: ClientsService,
-              private promotionsService: PromotionsService,
-              private dialog: MatDialog,
-              private fb: FormBuilder,
-              private router: Router) {
+    private promotionsService: PromotionsService,
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private router: Router) {
     super();
   }
 
@@ -82,7 +82,6 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
 
     this.promotionsService.createPromotion(params)
       .subscribe((data: any) => {
-        console.log(data);
         Swal.fire({
           title: data.message,
           type: 'success',
@@ -99,7 +98,6 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
     this.clientsService.getClients(this.params)
       .subscribe((data: any) => {
         this.clients = data.results;
-        // console.log(this.clients);
         this.length = data.count;
         this.mapClients();
         this.loadingClient = false;
@@ -109,14 +107,12 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
   }
 
   mapClients() {
-    console.log('Entra en mapear');
 
     this.clients.forEach((client) => {
       this.selectedClients.forEach((sClient) => {
 
         if (sClient.id == client.id) {
           client.is_selected = true;
-          console.log('Entro');
 
         }
       });
@@ -134,7 +130,6 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
       } else {
         const index = this.selectedClients.indexOf(client);
         this.selectedClients.splice(index, 1);
-        console.log('Es falso index', index);
       }
     }
   }

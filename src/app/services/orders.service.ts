@@ -68,4 +68,9 @@ export class OrdersService {
     const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/cancel_order_merchant/`;
     return this.http.put(url, data);
   }
+
+  returnMoneyCustomer(orderId) {
+    const url = `${environment.HOST_APIV1}/stations/${this.stationId}/orders/${orderId}/return_money/`;
+    return this.http.patch(url, {});
+  }
 }

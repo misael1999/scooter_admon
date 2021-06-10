@@ -9,7 +9,7 @@ import { MerchantsService } from 'src/app/services/merchants.service';
 export class TabReviewsComponent implements OnInit {
   loadingData: boolean;
   reviews;
-  params = { limit:10}
+  params = { limit: 10 }
   constructor(private merchantsService: MerchantsService) { }
 
   ngOnInit(): void {
@@ -22,9 +22,7 @@ export class TabReviewsComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.reviews = data;
-        console.log(this.reviews);
       }, error => {
-        console.log(error);
         this.loadingData = false;
       });
   }

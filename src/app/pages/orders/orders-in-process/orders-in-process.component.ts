@@ -45,7 +45,6 @@ export class OrdersInProcessComponent implements OnInit {
   }
 
   openDirection(addres) {
-    console.log(addres);
     window.open(`https://maps.google.com/?q=${addres.coordinates[1]},${addres.coordinates[0]}`, '_blank');
   }
 
@@ -55,7 +54,6 @@ export class OrdersInProcessComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.orders = data.results;
-        console.log(this.orders);
         this.length = data.count;
         this.ordersService.params = this.params;
         this.pageSize = this.params.limit;
@@ -113,7 +111,6 @@ export class OrdersInProcessComponent implements OnInit {
 
 
   openDialogReassignDelivery(order) {
-    console.log(order);
     const dialogref = this.dialog.open(ReasignOrderComponent, {
       disableClose: true,
       width: '60%',

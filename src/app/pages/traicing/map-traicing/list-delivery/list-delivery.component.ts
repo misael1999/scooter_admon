@@ -57,7 +57,6 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
       }
     }
     this.markers.emit(markerList);
-    // console.log(this.markers);
     this.deliverys = delivery_men;
   }
 
@@ -70,7 +69,6 @@ export class ListDeliveryComponent implements OnInit, OnDestroy {
         lng: delivery.location.coordinates[0]
       };
       this.location.emit(coordinates);
-      // console.log(this.location);
     }
   }
 

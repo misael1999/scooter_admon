@@ -45,8 +45,8 @@ export class ChatSupportComponent implements OnInit {
   newMessage = null;
 
   constructor(private supportService: SupportService,
-              private webSocketService: WebSocketService,
-              private snotify: SnotifyService) { }
+    private webSocketService: WebSocketService,
+    private snotify: SnotifyService) { }
 
   ngOnInit(): void {
     this.station = JSON.parse(localStorage.getItem('station'));
@@ -59,14 +59,12 @@ export class ChatSupportComponent implements OnInit {
   }
 
   supportSelect(event) {
-    console.log('Evento', event);
     this.supportSelected = event;
     this.getMessagesSupport();
   }
 
   getMessagesSupport() {
     if (this.supportSelected) {
-      console.log('Si hay soporte', this.supportSelected);
 
       this.supportService.getMessages(this.supportSelected.id, this.params)
         .subscribe((data: any) => {
@@ -74,8 +72,7 @@ export class ChatSupportComponent implements OnInit {
           // this.messages = this.messages
           this.count = data.count;
           this.loadingMessages = false;
-         /*  this.scrollToBottom(); */
-          console.log('Este es un ejemplo', this.messages);
+          /*  this.scrollToBottom(); */
 
         }, error => {
           alert('Error al obtener los mensajes');
@@ -119,7 +116,7 @@ export class ChatSupportComponent implements OnInit {
 
 
   showNewMessageNotification() {
-    if ( !this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
+    if (!this.supportSelected || (this.newMessage.support != this.supportSelected.id)) {
       const message = `Mensaje nuevo| ID:${this.newMessage.support}| Mensaje: ${this.newMessage.text}`;
       this.snotify.info(message, {
         timeout: 2000,
@@ -134,15 +131,15 @@ export class ChatSupportComponent implements OnInit {
 
 
   getSupportChat() {
-   /*  this.messagesService.getSupportChat()
-      .subscribe((data: any) => {
-        this.chatSupport = data.data
-        if (this.chatSupport) {
-          this.getMessagesSupport();
-        }
-      }, error => {
-        // alert("NO SE ENCONTRO EL CHAT");
-      }); */
+    /*  this.messagesService.getSupportChat()
+       .subscribe((data: any) => {
+         this.chatSupport = data.data
+         if (this.chatSupport) {
+           this.getMessagesSupport();
+         }
+       }, error => {
+         // alert("NO SE ENCONTRO EL CHAT");
+       }); */
   }
 
   openChatSupport() {
@@ -159,55 +156,53 @@ export class ChatSupportComponent implements OnInit {
     if (text == null || text == '' || text == undefined) { return; }
     // Mensaje temporal
     const newMessageModel = new MessageSupportModel(
-    this.station.user.id,
-    this.supportSelected.user,
-    this.messageText,
-    new Date());
+      this.station.user.id,
+      this.supportSelected.user,
+      this.messageText,
+      new Date());
     this.messageText = null;
 
 
     // ======= Enviar mensaje ========
     /* this.newMessage.emit(newMessageModel) */
 
-    this.supportService.sendMessageSupport(this.supportSelected.id, {text})
-    .subscribe((data: any) => {
-      this.messages.push(data);
-      // console.log('Esta', data);
-      // console.log('Los mensajes',this.messages);
+    this.supportService.sendMessageSupport(this.supportSelected.id, { text })
+      .subscribe((data: any) => {
+        this.messages.push(data);
 
 
 
         // this.messages.push(data);
         // this.showSwalMessage("Mensaje enviado", 'success')
-    }, error => {
-      alert('Error al enviar el mensaje');
-    });
+      }, error => {
+        alert('Error al enviar el mensaje');
+      });
 
   }
 
   createChatMessage(message, file) {
-  /*   this.messagesService.createChatMessage(this.chatSupport.ID, { message: message, file_media: file, is_chat_support: true })
-      .subscribe((data: any) => {
-        // this.messages.push(data);
-        // this.showSwalMessage("Mensaje enviado", 'success')
-      }, error => {
-        alert("Error al crear el mensaje, intentalo más tarde");
-        // this.showSwalMessage("Error al enviar el mensaje", 'error')
-      }); */
+    /*   this.messagesService.createChatMessage(this.chatSupport.ID, { message: message, file_media: file, is_chat_support: true })
+        .subscribe((data: any) => {
+          // this.messages.push(data);
+          // this.showSwalMessage("Mensaje enviado", 'success')
+        }, error => {
+          alert("Error al crear el mensaje, intentalo más tarde");
+          // this.showSwalMessage("Error al enviar el mensaje", 'error')
+        }); */
   }
 
   createChatOrMessage(message, file) {
-   /*  this.messagesService.createChatOrMessage({ message, file_media: file, is_chat_support: true })
-      .subscribe((data: any) => {
-        if (data.message == "Chat created") {
-          this.chatSupport = data.data;
-        }
-        // this.messages.push(data);
-        // this.showSwalMessage("Mensaje enviado", 'success')
-      }, error => {
-        alert("Error al crear el mensaje, intentalo más tarde");
-        // this.showSwalMessage("Error al enviar el mensaje", 'error')
-      }); */
+    /*  this.messagesService.createChatOrMessage({ message, file_media: file, is_chat_support: true })
+       .subscribe((data: any) => {
+         if (data.message == "Chat created") {
+           this.chatSupport = data.data;
+         }
+         // this.messages.push(data);
+         // this.showSwalMessage("Mensaje enviado", 'success')
+       }, error => {
+         alert("Error al crear el mensaje, intentalo más tarde");
+         // this.showSwalMessage("Error al enviar el mensaje", 'error')
+       }); */
   }
 
   selectFileMedia(evt) {

@@ -22,10 +22,8 @@ export class SendMessageDialogComponent extends ValidationForms implements OnIni
     public dialogRef: MatDialogRef<SendMessageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
     super();
-    console.log(data.order);
     this.idStation = data.order.station_object.id;
     this.idOrder = data.order.id;
-    console.log(this.idStation);
   }
 
   ngOnInit(): void {
@@ -56,7 +54,6 @@ export class SendMessageDialogComponent extends ValidationForms implements OnIni
       station: 1,
       order: this.idOrder
     };
-    console.log(data);
     this.supportService.openConversationWithClient(this.idStation, data)
       .subscribe((resp: any) => {
         this.showSwalMessage('Mensaje enviado', 'success');

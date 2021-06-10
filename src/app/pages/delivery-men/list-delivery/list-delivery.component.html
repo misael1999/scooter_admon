@@ -5,18 +5,25 @@
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Placas</th>
+                <th>Modelo</th>
+                <th>Vehículo</th>
                 <th>Ultima ubicación</th>
                 <th>Reputación</th>
                 <th>Estatus</th>
                 <th class="width__actions">Acciones</th>
             </tr>
         </thead>
-
         <tbody>
             <tr *ngFor="let delivery of deliveryMens">
-                <td> <u class="cursor" routerLink="{{delivery.id}}/detail"> {{ delivery.name }} {{delivery.last_name}} </u> </td>
+                <td> <u class="cursor font-weight-semibold" routerLink="{{delivery.id}}/detail"> {{ delivery.name }} {{delivery.last_name}} </u> </td>
                 <td> {{ delivery.phone_number }}</td>
                 <td> {{ delivery.vehicle_plate }}</td>
+                <td> {{ delivery.vehicle_model }}</td>
+                <td>
+                    <span *ngIf="delivery.vehicle_type == 3">Automóvil</span>
+                    <span *ngIf="delivery.vehicle_type == 2">Bicicleta</span>
+                    <span *ngIf="delivery.vehicle_type == 1">Motocicleta</span>
+                </td>
                 <td> {{ delivery.last_time_update_location | date:'medium' }} </td>
                 <td> {{ delivery.reputation }} </td>
                 <td> {{ delivery.delivery_status }} </td>

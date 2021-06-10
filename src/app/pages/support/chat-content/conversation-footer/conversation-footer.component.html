@@ -1,23 +1,8 @@
 <div class="conversation-footer">
 
-    <div *ngIf="binaryString" class="image-temp">
-        <i (click)="deleteImage()" class="anticon anticon-close icon-delete"></i>
-        <img class="preview-image mr-1" [src]="'data:image/png;base64,' + binaryString" alt="">
-    </div>
-
-    <!-- <input [(ngModel)]="messageText" (keyup.enter)="sendMessage(inputMessage.value)" #inputMessage class="chat-input" type="text" placeholder="Escribe el mensaje..."> -->
-    <textarea maxlength="500" [(ngModel)]="messageText" #inputMessage class="chat-input" type="text" placeholder="Escribe el mensaje..."></textarea>
+    <textarea maxlength="500" [(ngModel)]="messageText" #inputMessage class="chat-input" type="text" placeholder="Escribe el mensaje."></textarea>
 
     <ul class="list-inline d-flex align-items-center m-b-0">
-
-        <!-- <li class="list-inline-item m-r-15 mt-2">
-            <input #inputFile accept="image/*" (change)="selectFileMedia($event)" type="file" name="file-1" id="file-1" class="inputfile inputfile-1" />
-            <label for="file-1">
-                <a class="text-primary font-size-20 h-100 w-100" title="Archivos">
-                    <i class="text-primary anticon anticon-paper-clip"></i>
-                </a>
-            </label>
-        </li> -->
 
         <li class="list-inline-item m-r-15">
             <a (click)="openEmoji()" class="text-primary font-size-20 d-none d-md-block" href="javascript:void(0);" data-toggle="tooltip" title="Emoji">
@@ -33,7 +18,6 @@
                 <i class="fa fa-paper-plane"></i>
             </button>
         </li>
-
     </ul>
 </div>
 

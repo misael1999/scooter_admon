@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationForms } from 'src/app/utils/validations-forms';
-import { SupportService } from '../../../services/support.service';
+import { SupportService } from 'src/app/services/support.service';
 
 @Component({
   selector: 'app-ticket-list',
@@ -20,21 +20,10 @@ export class TicketListComponent extends ValidationForms implements OnInit {
 
   constructor(private supportService: SupportService) {
     super();
-    this.supportService.newMessage$.subscribe((message: any) => {
-      console.log('DAra', this.supports);
-
-      const chatIndex = this.supports.findIndex((chat) => chat.ID == message.chat_id);
-      if (chatIndex < 0) return;
-      const chatTemp = this.supports[chatIndex];
-      chatTemp.chat_messages.unshift(message);
-      this.supports.splice(chatIndex, 1);
-      this.supports.unshift(chatTemp);
-    })
   }
 
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   supportSelect(support) {
     this.supportSelected = support;
@@ -59,7 +48,7 @@ export class TicketListComponent extends ValidationForms implements OnInit {
   }
 
   searchChat(value) {
-    if (value == "" || value == null) {
+    if (value == '' || value == null) {
       return;
     }
     this.isSearch = true;
@@ -67,15 +56,13 @@ export class TicketListComponent extends ValidationForms implements OnInit {
     this.searchEvent.emit(value);
   }
 
-  cleanSearch() {
+  clearSearch() {
     this.searchText = null;
     this.isSearch = false;
     this.searchEvent.emit('');
   }
 
   openMobile() {
-    // this.openChatEvent.emit("open");
+    // this.openChatEvent.emit('open');
   }
-
-
 }

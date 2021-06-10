@@ -23,7 +23,6 @@ export class ConversationHeaderComponent extends ValidationForms implements OnIn
   ) { super(); }
 
   ngOnInit(): void {
-    console.log(this.support);
   }
 
   openDialogDetailProducts(order = null) {
@@ -46,8 +45,7 @@ export class ConversationHeaderComponent extends ValidationForms implements OnIn
   }
 
   async openOrCloseSupport(is_open) {
-    console.log(this.support);
-    console.log(is_open);
+
 
     const confirmationAction = await this.showMessageConfirm('De abrir o cerrar el soporte');
 

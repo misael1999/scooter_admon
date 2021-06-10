@@ -43,12 +43,11 @@ export class TicketsListComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingSupports = false;
         this.supports = data.results;
-      //  console.log('Supports', this.supports);
 
-    }, error => {
-      this.loadingSupports = false;
-      alert('Ha ocurrido un error al obtener los tickets de soporte');
-    });
+      }, error => {
+        this.loadingSupports = false;
+        alert('Ha ocurrido un error al obtener los tickets de soporte');
+      });
   }
 
   supportSelect(support) {

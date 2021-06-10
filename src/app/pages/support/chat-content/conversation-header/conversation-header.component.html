@@ -1,14 +1,14 @@
 <div class="conversation-header justify-content-between">
     <div class="media align-items-center">
-        <a href="javascript:void(0);" class="chat-close m-r-20 d-md-none d-block text-dark font-size-18 m-t-5" >
+        <a href="javascript:void(0);" class="chat-close m-r-20 d-md-none d-block text-dark font-size-18 m-t-5">
             <i class="anticon anticon-left-circle"></i>
         </a>
         <div class="avatar avatar-image">
-            <img src="assets/images/avatars/thumb-1.jpg" alt="">
+            <img src="assets/img/user.png">
         </div>
         <div class="p-l-15">
             <h6 class="m-b-0">{{support.customer}}</h6>
-            <span *ngIf="!loadingMessages" class="badge badge-warning">{{total}} mensajes</span>
+            <span *ngIf="!loadingMessages" class="badge badge-pill badge-info">{{total}} mensajes</span>
         </div>
 
     </div>

@@ -83,12 +83,10 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
         this.parseTags();
       }), error => {
         this.loadingTagGeneral = false;
-        console.log('error', error);
       };
   }
 
   parseTags() {
-    console.log('Entra en parse');
     this.tagsGeneral.forEach((tag) => {
       this.tagsTheMerchant.forEach((tagM) => {
         if (tag.id == tagM.tag_id) {

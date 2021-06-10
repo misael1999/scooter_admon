@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { SupportService } from 'src/app/services/support.service';
 
 @Component({
   selector: 'app-conversation-body',
@@ -14,17 +13,11 @@ export class ConversationBodyComponent implements OnInit, OnChanges {
 
   station;
 
-  constructor(private supportService: SupportService) {
+  constructor() {
     this.station = JSON.parse(localStorage.getItem('station'));
   }
 
-  ngOnInit() {
-
-    console.log(this.messages, 'message');
-    console.log(this.support, 'support');
-    console.log(this.chatGroups, 'chat');
-
-  }
+  ngOnInit() { }
 
   ngOnChanges() { }
 }

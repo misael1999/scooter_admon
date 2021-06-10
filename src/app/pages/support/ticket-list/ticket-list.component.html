@@ -1,37 +1,38 @@
 <div class="chat-list">
     <div class="chat-user-tool">
-        <i class="anticon anticon-search search-icon p-r-10 font-size-20"></i>
         <input placeholder="Buscar" [(ngModel)]="searchText" #searchInput (keyup.enter)="searchChat(searchInput.value)">
         <select (change)="filterSupport($event.target.value)" class="form-control form-control-sm">
             <option selected value="true">Abiertos</option>
             <option value="false">Cerrados</option>
         </select>
     </div>
-    <div class="chat-user-list" *ngIf="supports">
-        <div class="d-flex justify-content-center my-1">
-            <div *ngIf="loading" class="spinner-grow" role="status">
+
+    <div class="chat-user-list">
+        <div class="d-flex justify-content-center my-2">
+            <div *ngIf="loading" class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
             <span *ngIf="!loading && supports.length == 0">No hay conversaciones que mostrar</span>
         </div>
+
         <a (click)="openMobile()" *ngFor="let support of supports" [routerLink]="[support.id + '/messages']" routerLinkActive="active" class="chat-list-item p-h-25" href="javascript:void(0);">
             <div class="media align-items-center">
                 <div class="avatar avatar-image">
-                    <img src="assets/images/avatars/thumb-1.jpg" alt="">
+                    <img src="assets/img/user.png">
                 </div>
                 <div class="p-l-15">
-                    <h5 class="m-b-0">{{support.customer}}</h5>
-                    <!-- <p class="msg-overflow m-b-0 text-muted font-size-13">
-                        Asunto: <span class="badge" [ngClass]="getSupportClass(support.support_type_id)">{{support.support_type}}</span>
-                    </p> -->
-                    <p *ngIf="support.support_type_id == 3" class="msg-overflow m-b-0 text-muted font-size-13">
+                    <h5 class="m-b-0"> {{ support.customer }} </h5>
+                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                        Asunto: <span class="badge badge-pill" [ngClass]="getSupportClass(support.support_type_id)">{{support.support_type}}</span>
+                    </p>
+                    <p *ngIf="support.support_type_id == 3" class="text-muted p-0 m-0 font-size-12">
                         Asunto: {{support.issue}}
                     </p>
-                    <p class="msg-overflow m-b-0 text-muted font-size-13">
+                    <p class="text-muted p-0 m-0 font-size-12">
                         Estatus: <span>{{support.support_status}}</span>
                     </p>
-                    <p class="msg-overflow m-b-0 text-muted font-size-13">
-                        Fecha: <span>{{support.created | date:'medium'}}</span>
+                    <p class="text-muted p-0 m-0 font-size-12">
+                        Fecha: <span> {{ support.created | date:'medium' }} </span>
                     </p>
                 </div>
             </div>

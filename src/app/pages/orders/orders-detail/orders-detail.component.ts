@@ -23,7 +23,6 @@ export class OrdersDetailComponent {
       this.order = data.order;
       this.orderDetails = data.order.details;
     }
-    console.log(this.order);
   }
 
   getOrder(orderId) {

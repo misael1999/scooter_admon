@@ -3,13 +3,14 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { PageEvent } from '@angular/material/paginator';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ValidationForms } from 'src/app/utils/validations-forms';
 
 @Component({
   selector: 'app-orders-cancelled',
   templateUrl: './orders-cancelled.component.html',
   styleUrls: ['./orders-cancelled.component.scss']
 })
-export class OrdersCancelledComponent implements OnInit {
+export class OrdersCancelledComponent extends ValidationForms implements OnInit {
   length = 100;
   pageSize = 25;
   pageIndex = 0;
@@ -19,11 +20,12 @@ export class OrdersCancelledComponent implements OnInit {
   orders: Array<any> = [];
   loadingData: boolean;
   searchText;
+  dateDay = Date();
 
   constructor(
     private ordersService: OrdersService,
     private dialog: MatDialog
-  ) { }
+  ) { super() }
 
   ngOnInit(): void {
     this.getOrders();
@@ -68,6 +70,20 @@ export class OrdersCancelledComponent implements OnInit {
     this.params.ordering = value;
     this.getOrders();
   }
+
+
+  async returnMoney(idOrder) {
+    const confirmation = await this.showMessageConfirm('De devolver el dinero');
+    if (!confirmation.value) { return; }
+    this.ordersService.returnMoneyCustomer(idOrder)
+      .subscribe((data) => {
+        this.showSwalMessage('El dinero será devuelto aproximadamente en 2 días');
+        this.getOrders();
+      }, error => {
+        this.showSwalMessage(error.errors.message, 'error');
+      });
+  }
+
 
   getPages(e): PageEvent {
     if (this.orders.length === 0) {

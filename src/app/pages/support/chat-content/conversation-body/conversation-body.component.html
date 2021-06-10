@@ -1,12 +1,19 @@
-<div *ngFor="let suppor of support" class="msg">
-    <div class="m-r-10">
-        <div *ngIf="station.user.id != suppor.sender_by" class="avatar avatar-image">
-            <img src="assets/images/avatars/thumb-1.jpg" alt="">
+<div *ngFor="let suppor of support" class="msg" [ngClass]="station.user.id == suppor.sender_by ? 'msg-sent': 'msg-recipient'">
+
+    <div class="m-r-10" *ngIf="station.user.id != suppor.sender_by">
+        <div class="avatar avatar-image">
+            <img src="assets/img/user.png">
         </div>
     </div>
+
     <div class="bubble">
         <div class="bubble-wrapper">
             <span>{{suppor.text}}</span>
+            <span style="font-size: 80%; color: gray; margin-left: 5px;">
+                {{ suppor.created | date: 'shortTime' }}                         
+                <i *ngIf="suppor.sender_by == station.user.id && !suppor.viewed" class="fas fa-check-double ml-1" style="color: #A8AAAC;" ></i>                       
+                <i *ngIf="suppor.sender_by == station.user.id && suppor.viewed" class="fas fa-check-double ml-1 text-primary" style="color: #34B7F1;" ></i>                       
+            </span>
         </div>
     </div>
 </div>

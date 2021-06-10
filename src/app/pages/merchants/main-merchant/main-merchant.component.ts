@@ -48,7 +48,6 @@ export class MainMerchantComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.merchants = data.results;
-        console.log(this.merchants);
         this.length = data.count;
         this.merchantsService.params = this.params;
         this.pageIndex = (this.params.offset / this.params.limit);

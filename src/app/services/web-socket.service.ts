@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,15 @@ export class WebSocketService {
 
   connect(URL): Observable<any> {
     this.connection$ = webSocket(URL);
+    return this.connection$.asObservable();
+  }
+
+  connectToChat(): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    const WS_SOCKET = `${environment.WS_SOCKET}/ws/chats?token=${token}`;
+    if (!this.connection$) {
+      this.connection$ = webSocket(WS_SOCKET);
+    }
     return this.connection$.asObservable();
   }
 

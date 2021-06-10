@@ -32,8 +32,8 @@ export class PromotionsListComponent implements OnInit {
 
 
   constructor(private promotinsService: PromotionsService,
-              private dialog: MatDialog,
-              private fb: FormBuilder) {
+    private dialog: MatDialog,
+    private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -45,7 +45,6 @@ export class PromotionsListComponent implements OnInit {
     this.loadingPromotions = true;
     this.promotinsService.getCustomersPromotions(this.params).subscribe((data: any) => {
       this.promotions = data.results;
-      console.log(this.promotions);
       this.length = data.count;
       this.loadingPromotions = false;
     }, error => {

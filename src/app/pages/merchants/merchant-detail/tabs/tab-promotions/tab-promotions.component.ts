@@ -34,7 +34,6 @@ export class TabPromotionsComponent implements OnInit {
       .subscribe((data: any) => {
         this.loadingData = false;
         this.promotions = data.results;
-        console.log(this.promotions);
         this.length = data.count;
         this.merchantsService.params = this.params;
         this.pageIndex = (this.params.offset / this.params.limit);

@@ -67,12 +67,10 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
     this.getArea();
     // var mymap = L.map('mapid').setView([51.505, -0.09], 13);
     // var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-    // console.log(this.markerList);
   }
 
   makeCapitalMarkers(map: L.map): void {
     for (const m of this.markerList) {
-      // console.log(this.markerList);
       let lat = m.lat;
       let lon = m.lng;
       let popuText = m.name;
@@ -87,7 +85,6 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
     for (const m of this.paths) {
       let lat = m.lat;
       let lon = m.lng;
-      console.log(lon, lat);
       let zona = new L.polygon(lat, lon).addTo(map);
 
     }

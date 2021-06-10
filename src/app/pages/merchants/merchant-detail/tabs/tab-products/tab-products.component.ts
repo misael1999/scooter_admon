@@ -31,7 +31,6 @@ export class TabProductsComponent implements OnInit {
         this.loadingData = false;
         this.products = data.results;
         this.length = data.count;
-        console.log(this.products);
         this.merchantsService.params = this.params;
         this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {

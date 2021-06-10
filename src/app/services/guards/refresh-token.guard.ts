@@ -24,11 +24,11 @@ export class RefreshTokenGuard implements CanActivate {
     const expired = this.expired(payload.exp);
 
     if (expired) {
-/*       Swal.fire({
-        title: 'Sesión expirada',
-        text: 'Por su seguridad debe de volver a iniciar sesión',
-        type: 'info',
-      }); */
+      /*       Swal.fire({
+              title: 'Sesión expirada',
+              text: 'Por su seguridad debe de volver a iniciar sesión',
+              type: 'info',
+            }); */
 
       this.authService.logout();
       return false;
@@ -68,7 +68,6 @@ export class RefreshTokenGuard implements CanActivate {
   expired(expirationDate: number) {
 
     const now = new Date().getTime() / 1000;
-    // console.log('ENTRO');
 
     if (expirationDate < now) {
       return true;

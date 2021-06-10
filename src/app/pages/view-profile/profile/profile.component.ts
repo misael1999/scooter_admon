@@ -20,10 +20,8 @@ export class ProfileComponent implements OnInit {
     this.profileService.getStation()
       .subscribe((data: any) => {
         this.station = data;
-        // console.log('La informacion', this.station);
         this.profileService.station = this.station;
       }, error => {
-        console.log(error);
         // return;
       });
   }
