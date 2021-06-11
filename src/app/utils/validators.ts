@@ -96,15 +96,14 @@ export class GlobalValidator {
 
     static confirmPassword(control: AbstractControl) {
         const password = control.get('password').value; // to get value in input tag
-        const confirmPassword = control.get('confirm_password').value; // to get value in input tag
+        const confirmPassword = control.get('confirmPassword').value; // to get value in input tag
         if (password != confirmPassword) {
-            control.get('confirm_password').setErrors({ matchPassword: true });
+            control.get('confirmPassword').setErrors({ matchPassword: true });
         } else if (password) {
-            control.get('confirm_password').setErrors(null);
+            control.get('confirmPassword').setErrors(null);
         }
     }
 }
-
 
 interface ValidationResult {
     [key: string]: boolean;

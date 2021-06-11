@@ -15,6 +15,7 @@ export class RecoverPasswordComponent extends ValidationForms implements OnInit 
   year = new Date().getFullYear();
   recoverForm: FormGroup;
   loadingRecover: boolean;
+  success: boolean;
   fieldType = 'password';
   fieldType2 = 'password';
   token;
@@ -45,6 +46,7 @@ export class RecoverPasswordComponent extends ValidationForms implements OnInit 
     this.authService.recoverPassword(this.token, password)
       .subscribe(data => {
         this.loadingRecover = false;
+        this.success = true;
         this.showSwalMessage('Vuelve a iniciar sesión con tu nueva contraseña')
       }, error => {
         this.loadingRecover = false;

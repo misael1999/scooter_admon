@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import * as commons_functions from 'src/app/utils/functions';
 import { ValidationForms } from 'src/app/utils/validations-forms';
+import { GlobalValidator } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-login',
@@ -55,16 +55,16 @@ export class LoginComponent extends ValidationForms implements OnInit {
     localStorage.setItem('station', JSON.stringify(data.station));
   }
 
-  // buildLoginForm() {
-  //   this.loginForm = this.fb.group({
-  //     username: [null, [Validators.required, GlobalValidator.mailFormat]],
-  //     password: [null, [Validators.required, Validators.minLength(8), GlobalValidator.passwordFormat]]
-  //   });
-  // }
   buildLoginForm() {
     this.loginForm = this.fb.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required]
+      username: [null, [Validators.required, GlobalValidator.mailFormat]],
+      password: [null, [Validators.required, Validators.minLength(8), GlobalValidator.passwordFormat]]
     });
   }
+  // buildLoginForm() {
+  //   this.loginForm = this.fb.group({
+  //     username: [null, Validators.required],
+  //     password: [null, Validators.required]
+  //   });
+  // }
 }
