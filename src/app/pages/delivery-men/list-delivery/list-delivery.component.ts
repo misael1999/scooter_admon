@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeliveryMenService } from 'src/app/services/delivery-men.service';
 import { ValidationForms } from 'src/app/utils/validations-forms';
 import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
+import { DeliveryMenModel } from 'src/app/models/delivery-men-model';
 
 @Component({
   selector: 'app-list-delivery',
@@ -10,11 +11,14 @@ import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
   styleUrls: ['./list-delivery.component.scss']
 })
 export class ListDeliveryComponent extends ValidationForms implements OnInit {
-  @Input() deliveryMens;
+  @Input() deliveryMens: DeliveryMenModel;
   @Input() params;
   @Output() reloadDeliveryMens = new EventEmitter<boolean>();
 
-  constructor(private dialog: MatDialog, private deliveryService: DeliveryMenService) {
+  constructor(
+    private dialog: MatDialog,
+    private deliveryService: DeliveryMenService
+  ) {
     super();
   }
 

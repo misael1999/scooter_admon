@@ -3,26 +3,27 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OrdersService } from 'src/app/services/orders.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { ValidationForms } from 'src/app/utils/validations-forms';
 export interface DialogData {
   orderId: number;
 }
-
 @Component({
   selector: 'app-reject-order-dialog',
   templateUrl: './reject-order-dialog.component.html',
   styleUrls: ['./reject-order-dialog.component.scss']
 })
-export class RejectOrderDialogComponent implements OnInit {
-
+export class RejectOrderDialogComponent extends ValidationForms implements OnInit {
   rejectForm: FormGroup;
   orderId: number;
   loadingSave: boolean;
 
   constructor(public dialogRef: MatDialogRef<RejectOrderDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private orderService: OrdersService, private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder) {
+              @Inject(MAT_DIALOG_DATA)
+    public data: DialogData,
+              private orderService: OrdersService,
+              private snackBar: MatSnackBar,
+              private formBuilder: FormBuilder) {
+    super();
     this.orderId = data.orderId;
   }
 
@@ -33,7 +34,7 @@ export class RejectOrderDialogComponent implements OnInit {
   rejectOrder() {
     if (this.rejectForm.invalid) {
       this.rejectForm.markAllAsTouched();
-      return true;
+      return;
     }
     this.orderService.rejectOrder(this.orderId, this.rejectForm.value)
       .subscribe((data: any) => {
@@ -52,25 +53,6 @@ export class RejectOrderDialogComponent implements OnInit {
     });
   }
 
-  isFieldInvalid(form: FormGroup, field: string) {
-
-    return (
-      (!form.get(field).valid && form.get(field).touched)
-    );
-  }
-
-  isFieldValid(form: FormGroup, field: string) {
-    return (
-      (form.get(field).valid && form.get(field).touched)
-    );
-  }
-
-  isFieldHasError(form: FormGroup, field: string, error: string) {
-    return (
-      (form.get(field).hasError(error))
-    );
-  }
-
   showMessageSuccess(message) {
     this.snackBar.open(message, 'Aceptar', {
       duration: 3000,
@@ -84,5 +66,4 @@ export class RejectOrderDialogComponent implements OnInit {
       panelClass: ['error-snackbar']
     });
   }
-
 }

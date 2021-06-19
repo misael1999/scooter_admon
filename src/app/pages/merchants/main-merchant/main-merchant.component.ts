@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { MerchantsAddComponent } from '../merchants-add/merchants-add.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MerchantModel } from 'src/app/models/merchant.model';
 
 @Component({
   selector: 'app-main-merchant',
@@ -17,7 +18,7 @@ export class MainMerchantComponent implements OnInit {
   pageSizeOptions: number[] = [25, 50, 75, 100];
   params = { limit: 25, offset: 0, search: '', ordering: '', status: 1, information_is_complete: true };
   loadingData: boolean;
-  merchants: Array<any> = [];
+  merchants: MerchantModel[] = [];
   searchText;
 
   constructor(
@@ -49,6 +50,7 @@ export class MainMerchantComponent implements OnInit {
         this.loadingData = false;
         this.merchants = data.results;
         this.length = data.count;
+
         this.merchantsService.params = this.params;
         this.pageIndex = (this.params.offset / this.params.limit);
       }, error => {

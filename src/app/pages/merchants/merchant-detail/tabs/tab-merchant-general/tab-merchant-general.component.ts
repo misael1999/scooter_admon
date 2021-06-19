@@ -12,7 +12,7 @@ export class TabMerchantGeneralComponent implements OnInit {
   merchant;
 
   constructor(private merchantsService: MerchantsService,
-    private dialog: MatDialog) {
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {

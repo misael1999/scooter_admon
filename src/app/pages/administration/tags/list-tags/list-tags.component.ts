@@ -30,7 +30,7 @@ export class ListTagsComponent extends ValidationForms implements OnInit {
 
       }, error => {
         this.showSwalMessage(error.errors.message, 'error');
-      })
+      });
   }
 
   async eneableTag(tagId) {
@@ -43,6 +43,6 @@ export class ListTagsComponent extends ValidationForms implements OnInit {
 
       }, error => {
         this.showSwalMessage(error.errors.message, 'error');
-      })
+      });
   }
 }

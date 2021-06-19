@@ -20,7 +20,7 @@ export class AddTagComponent extends ValidationForms implements OnInit {
 
 
   constructor(private fb: FormBuilder, private tagsGeneralService: TagsGeneralService, private dialogRef: MatDialogRef<AddTagComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
 
     if (data.tag) {

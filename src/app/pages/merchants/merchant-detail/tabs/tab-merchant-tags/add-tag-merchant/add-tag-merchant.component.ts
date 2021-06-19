@@ -29,7 +29,7 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
 
 
   constructor(private tagsGeneralService: TagsGeneralService, private tagByMerchantService: TagByMerchantsService, private fb: FormBuilder, private dialogRef: MatDialogRef<AddTagMerchantComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
 
     this.tagsTheMerchant = data.tags;
@@ -46,19 +46,19 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
 
   deleteTag(data) {
     if (data.is_select) {
-      this.tagsDelete.push(data.id)
+      this.tagsDelete.push(data.id);
     } else {
-      let index = this.tagsAdd.indexOf(data.id);
+      const index = this.tagsAdd.indexOf(data.id);
       this.tagsAdd.splice(index, 1);
 
     }
   }
 
   guardar() {
-    let tags = {
+    const tags = {
       tags: this.tagsAdd,
       delete_tags: this.tagsDelete
-    }
+    };
 
 
     this.loadingSave = true;
@@ -90,10 +90,10 @@ export class AddTagMerchantComponent extends ValidationForms implements OnInit {
     this.tagsGeneral.forEach((tag) => {
       this.tagsTheMerchant.forEach((tagM) => {
         if (tag.id == tagM.tag_id) {
-          tag.is_select = true
+          tag.is_select = true;
         }
-      })
-    })
+      });
+    });
   }
 
   searchBy(value) {

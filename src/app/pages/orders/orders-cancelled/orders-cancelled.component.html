@@ -1,6 +1,6 @@
 <div class="container p-h-0">
     <div>
-        <h2>Pedidos cancelados o rechazados</h2>
+        <h2>Pedidos cancelados o ignorados</h2>
     </div>
 
     <div class="row p-t-20">
@@ -88,16 +88,12 @@
                                 </span>
                             </td>
                             <td>
-                                <button
-                                    *ngIf="order.is_payment_online && order.order_status.id == 7 || order.is_payment_online && order.order_status.id == 8"
-                                    (click)="returnMoney(order.id)" class="btn btn-info btn-sm w-100 m-b-5">
+                                <button *ngIf="order.is_payment_online && order.order_status.id == 7 || 
+                                    order.is_payment_online && order.order_status.id == 8 || 
+                                    order.is_payment_online && order.order_status.id == 17"
+                                    (click)="returnMoney(order.id)" class="btn btn-info btn-sm w-100">
                                     Devolver dinero
                                 </button>
-                                <!-- <button *ngIf="order.order_date | date:'shortDate' ===  {{ dateDay | date:'shortDate'}}"
-                                    class="btn btn-primary btn-sm w-100">
-                                    Reactivar
-                                    {{ order.order_date | date:'shortDate' }} {{ dateDay | date:'shortDate' }}
-                                </button> -->
                             </td>
                         </tr>
                     </tbody>

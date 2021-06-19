@@ -43,7 +43,7 @@ export class LoginComponent extends ValidationForms implements OnInit {
         this.router.navigate(['/dashboard']);
       }, error => {
         this.loadingLogin = false;
-        // this.alertService.openErrorDialog(null, 'Opss..', error.errors.message);
+        this.showSwalMessage(error.errors.message, 'error');
       });
   }
 
@@ -58,13 +58,13 @@ export class LoginComponent extends ValidationForms implements OnInit {
   buildLoginForm() {
     this.loginForm = this.fb.group({
       username: [null, [Validators.required, GlobalValidator.mailFormat]],
-      password: [null, [Validators.required, Validators.minLength(8), GlobalValidator.passwordFormat]]
+      password: [null, [Validators.required, Validators.minLength(8)]]
     });
   }
   // buildLoginForm() {
   //   this.loginForm = this.fb.group({
-  //     username: [null, Validators.required],
-  //     password: [null, Validators.required]
+  //     username: [null, [Validators.required, GlobalValidator.mailFormat]],
+  //     password: [null, [Validators.required, Validators.minLength(8), GlobalValidator.passwordFormat]]
   //   });
   // }
 }

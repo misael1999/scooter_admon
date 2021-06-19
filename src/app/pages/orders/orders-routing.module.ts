@@ -5,7 +5,6 @@ import { OrdersInProcessComponent } from './orders-in-process/orders-in-process.
 import { DeliveredOrdersComponent } from './delivered-orders/delivered-orders.component';
 import { OrdersCancelledComponent } from './orders-cancelled/orders-cancelled.component';
 
-
 const routes: Routes = [
   {
     path: 'news', component: NewOrdersComponent,
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: '', redirectTo: 'news', pathMatch: 'full' }
 
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

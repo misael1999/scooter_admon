@@ -4,28 +4,27 @@
     </div>
 </div>
 
-<h3>Rechazar orden del comercio</h3>
+<h4>Rechazar orden del comercio</h4>
 
 <div class="row d-flex justify-content-center">
     <div class="col-md-11">
         <form [formGroup]="rejectForm">
             <div class="form-group">
                 <label>Ingresa la razón de rechazo</label>
-                <!-- <input formControlName="reason_rejection" type="text" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(rejectForm, 'reason_rejection'),
-                  'has-success valid': isFieldValid(rejectForm, 'reason_rejection')}"> -->
-
-                <textarea formControlName="reason_rejection" type="text" class="form-control w-100" rows="3" [ngClass]="{'has-error error': isFieldInvalid(rejectForm, 'reason_rejection'),
-                  'has-success valid': isFieldValid(rejectForm, 'reason_rejection')}"></textarea>
-
-
-                <div class="message-errors" *ngIf="isFieldInvalid(rejectForm, 'text')">
-                    <span *ngIf="hasFieldError(rejectForm, 'reason_rejection','required')">Este campo es requerido</span>
+                <div class="input-group">
+                    <textarea formControlName="reason_rejection" type="text" class="form-control w-100"
+                        [ngClass]="(isFieldInvalid(rejectForm, 'reason_rejection'))? 'is-invalid': 'valid'" rows="3">
+                    </textarea>
+                </div>
+                <div class="message-errors" *ngIf="isFieldInvalid(rejectForm, 'reason_rejection')">
+                    <span *ngIf="hasFieldError(rejectForm, 'reason_rejection','required')">
+                        Este campo es requerido</span>
                 </div>
             </div>
         </form>
     </div>
-
 </div>
+
 
 <div class="mt-2 d-flex justify-content-center">
     <button [disabled]="loadingSave" (click)="rejectOrder()" type="submit" class="btn btn-primary w-50">
@@ -34,6 +33,6 @@
             <span class="sr-only">
                 Loading...
             </span>
-       </div>
+        </div>
     </button>
 </div>

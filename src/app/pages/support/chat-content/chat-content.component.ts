@@ -167,7 +167,7 @@ export class ChatContentComponent extends ValidationForms implements OnInit, OnC
 
   scrollToBottom() {
     setTimeout(() => {
-      let xH = this.chatBodyHtml.scrollHeight;
+      const xH = this.chatBodyHtml.scrollHeight;
       this.chatBodyHtml.scrollTo({
         top: xH,
         left: 0,

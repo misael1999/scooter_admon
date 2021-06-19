@@ -32,8 +32,8 @@ export class PromotionsListComponent implements OnInit {
 
 
   constructor(private promotinsService: PromotionsService,
-    private dialog: MatDialog,
-    private fb: FormBuilder) {
+              private dialog: MatDialog,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {

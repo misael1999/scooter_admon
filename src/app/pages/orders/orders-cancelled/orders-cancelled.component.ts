@@ -25,7 +25,7 @@ export class OrdersCancelledComponent extends ValidationForms implements OnInit 
   constructor(
     private ordersService: OrdersService,
     private dialog: MatDialog
-  ) { super() }
+  ) { super(); }
 
   ngOnInit(): void {
     this.getOrders();
@@ -33,7 +33,8 @@ export class OrdersCancelledComponent extends ValidationForms implements OnInit 
 
   openDialogDetailProducts(order) {
     this.dialog.open(OrdersDetailComponent, {
-      width: '600px',
+      width: '800px',
+      maxHeight: '500px',
       data: { order }
     });
   }
@@ -71,7 +72,6 @@ export class OrdersCancelledComponent extends ValidationForms implements OnInit 
     this.getOrders();
   }
 
-
   async returnMoney(idOrder) {
     const confirmation = await this.showMessageConfirm('De devolver el dinero');
     if (!confirmation.value) { return; }
@@ -83,7 +83,6 @@ export class OrdersCancelledComponent extends ValidationForms implements OnInit 
         this.showSwalMessage(error.errors.message, 'error');
       });
   }
-
 
   getPages(e): PageEvent {
     if (this.orders.length === 0) {

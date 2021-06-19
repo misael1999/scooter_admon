@@ -41,7 +41,7 @@ export class TabProductsComponent implements OnInit {
 
   orderBy(value) {
     this.params.ordering = value;
-    this.getProducts()
+    this.getProducts();
   }
 
   showList(value) {
@@ -52,7 +52,7 @@ export class TabProductsComponent implements OnInit {
   searchBy(value: string) {
     this.params.search = value;
     this.merchantsService.searchText = value;
-    this.getProducts()
+    this.getProducts();
   }
 
   clearSearch() {

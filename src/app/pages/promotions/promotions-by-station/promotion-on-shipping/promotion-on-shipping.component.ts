@@ -33,10 +33,10 @@ export class PromotionOnShippingComponent extends ValidationForms implements OnI
   selectedClients: Array<any> = [];
 
   constructor(private clientsService: ClientsService,
-    private promotionsService: PromotionsService,
-    private dialog: MatDialog,
-    private fb: FormBuilder,
-    private router: Router) {
+              private promotionsService: PromotionsService,
+              private dialog: MatDialog,
+              private fb: FormBuilder,
+              private router: Router) {
     super();
   }
 

@@ -105,7 +105,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   allowCancellations = true;
 
   constructor(private configService: ConfigAccountService, private router: Router,
-    private _formBuilder: FormBuilder, private alertService: AlertsService) { }
+              private _formBuilder: FormBuilder, private alertService: AlertsService) { }
 
   ngOnInit(): void {
     this.station = JSON.parse(localStorage.getItem('station'));

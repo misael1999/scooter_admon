@@ -71,11 +71,11 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
 
   makeCapitalMarkers(map: L.map): void {
     for (const m of this.markerList) {
-      let lat = m.lat;
-      let lon = m.lng;
-      let popuText = m.name;
-      let markerList = new L.LatLng(lat, lon);
-      let market = new L.Marker(markerList, { icon: this.myIcon }).bindPopup(popuText);
+      const lat = m.lat;
+      const lon = m.lng;
+      const popuText = m.name;
+      const markerList = new L.LatLng(lat, lon);
+      const market = new L.Marker(markerList, { icon: this.myIcon }).bindPopup(popuText);
       map.addLayer(market);
     }
   }
@@ -83,9 +83,9 @@ export class MapLocationComponent implements AfterViewInit, OnInit, OnChanges {
 
   makeCapitalZone(map: L.map): void {
     for (const m of this.paths) {
-      let lat = m.lat;
-      let lon = m.lng;
-      let zona = new L.polygon(lat, lon).addTo(map);
+      const lat = m.lat;
+      const lon = m.lng;
+      const zona = new L.polygon(lat, lon).addTo(map);
 
     }
   }

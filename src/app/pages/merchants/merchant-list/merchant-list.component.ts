@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MerchantsService } from 'src/app/services/merchants.service';
 import { ValidationForms } from 'src/app/utils/validations-forms';
+import { MerchantModel } from 'src/app/models/merchant.model';
 
 @Component({
   selector: 'app-merchant-list',
@@ -8,7 +9,7 @@ import { ValidationForms } from 'src/app/utils/validations-forms';
   styleUrls: ['./merchant-list.component.scss']
 })
 export class MerchantListComponent extends ValidationForms implements OnInit {
-  @Input() merchants;
+  @Input() merchants: MerchantModel;
   @Input() params;
   @Output() reloadMerchants = new EventEmitter<boolean>();
 

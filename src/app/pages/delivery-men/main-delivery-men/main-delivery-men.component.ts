@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { DeliveryMenService } from 'src/app/services/delivery-men.service';
 import { ValidationForms } from 'src/app/utils/validations-forms';
 import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
+import { DeliveryMenModel } from 'src/app/models/delivery-men-model';
 
 @Component({
   selector: 'app-main-delivery-men',
@@ -17,7 +18,7 @@ export class MainDeliveryMenComponent extends ValidationForms implements OnInit 
   pageEvent: PageEvent;
   pageSizeOptions: number[] = [25, 50, 75, 100];
   params = { limit: 25, offset: 0, search: '', ordering: '', status: 1 };
-  deliveryMens: Array<any> = [];
+  deliveryMens: DeliveryMenModel[] = [];
   loadingData: boolean;
   searchText;
 

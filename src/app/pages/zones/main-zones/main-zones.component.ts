@@ -22,7 +22,7 @@ export class MainZonesComponent extends ValidationForms implements OnInit {
   promotions_zones_activated: boolean;
 
   constructor(private zonesService: ZonesService,
-    private dialog: MatDialog, private profileService: ProfileService) { super(); }
+              private dialog: MatDialog, private profileService: ProfileService) { super(); }
 
   ngOnInit(): void {
     this.getStation();

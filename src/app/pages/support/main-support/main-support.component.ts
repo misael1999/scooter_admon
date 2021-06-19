@@ -19,7 +19,7 @@ export class MainSupportComponent implements OnInit {
   WS_SOCKET = `${environment.WS_SOCKET}/ws/support/${this.stationId}/?token=${this.token}`;
   user: StationModel;
   loadingSupports = false;
-  @ViewChild("chatContent") chatContent: ElementRef;
+  @ViewChild('chatContent') chatContent: ElementRef;
   // Info
   supports = [];
   params = { limit: 15, offset: 0, is_open: 'true', search: '' };
@@ -106,7 +106,7 @@ export class MainSupportComponent implements OnInit {
   }
 
   openChat(event) {
-    this.chatContent.nativeElement.classList.add("open");
+    this.chatContent.nativeElement.classList.add('open');
     this.supportService.chatContent = this.chatContent.nativeElement;
   }
 

@@ -1,7 +1,9 @@
 import { FormGroup } from '@angular/forms';
 import Swal, { SweetAlertResult, SweetAlertType } from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class ValidationForms {
+
     constructor() { }
 
     isFieldTouched(group: FormGroup, field: string): boolean {
@@ -12,8 +14,8 @@ export class ValidationForms {
         return (group.get(field)?.dirty);
     }
 
-    isFieldInvalid(group: FormGroup, field: string): boolean {
-        return ((group.get(field).invalid && group.get(field).touched));
+    isFieldInvalid(group: FormGroup, ...fields: string[]): boolean {
+        return fields.some(field => group.get(field)?.invalid && group.get(field)?.touched);
     }
 
     isFieldValid(group: FormGroup, field: string): boolean {

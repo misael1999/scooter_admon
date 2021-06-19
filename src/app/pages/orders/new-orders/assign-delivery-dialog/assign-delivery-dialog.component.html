@@ -1,10 +1,10 @@
-<h1 mat-dialog-title class="d-flex justify-content-between">
-  Asignar orden a repartidor
-  <button mat-dialog-close mat-flat-button color="primary">
-    <i class="ti ti-close"></i>
-  </button>
+<div class="header__modal">
+  <div class="close">
+    <i mat-dialog-close class="fas fa-close"></i>
+  </div>
+</div>
+<h4>Asignar orden a repartidor</h4>
 
-</h1>
 <div mat-dialog-content>
   <p>
     Listado de repartidores mas cercanos
@@ -22,7 +22,8 @@
 
   <div class="div-list">
     <ul class="list-group animate__animated animate__fadeIn" *ngIf="!loading && deliveryMen.length > 0">
-      <li [ngClass]="{'selected': selectedDelivery == delivery.id}" (click)="selectDelivery(delivery.id)" class="list-group-item item" *ngFor="let delivery of deliveryMen">
+      <li [ngClass]="{'selected': selectedDelivery == delivery.id}" (click)="selectDelivery(delivery.id)"
+        class="list-group-item item" *ngFor="let delivery of deliveryMen">
         <div mat-card-avatar class="example-header-image"></div>
         <span>
           Nombre: {{delivery.name}} {{delivery.last_name}}</span>
@@ -46,11 +47,11 @@
 </div>
 <div class="mt-5 d-flex justify-content-center" mat-dialog-actions>
   <button (click)="assignDeliveryToOrder()" [disabled]="!selectedDelivery || loadingSave"
-   class="btn btn-secondary w-50">
-   Aceptar
-   <div class="load" *ngIf="loadingSave">
-    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-    <span class="sr-only">Loading...</span>
-   </div>
+    class="btn btn-secondary w-50">
+    Aceptar
+    <div class="load" *ngIf="loadingSave">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span class="sr-only">Loading...</span>
+    </div>
   </button>
 </div>

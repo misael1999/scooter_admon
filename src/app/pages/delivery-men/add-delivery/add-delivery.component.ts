@@ -15,9 +15,9 @@ export class AddDeliveryComponent extends ValidationForms implements OnInit {
   loadingSave: boolean;
 
   constructor(private fb: FormBuilder,
-    private deliveryService: DeliveryMenService,
-    public dialogRef: MatDialogRef<AddDeliveryComponent>,
-    @Inject(MAT_DIALOG_DATA)
+              private deliveryService: DeliveryMenService,
+              public dialogRef: MatDialogRef<AddDeliveryComponent>,
+              @Inject(MAT_DIALOG_DATA)
     public data: any) {
     super();
     if (data.deliveryMan) {

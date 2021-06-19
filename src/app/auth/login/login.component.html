@@ -1,5 +1,6 @@
 <div class="app">
-    <div class="container-fluid p-h-0 p-v-20 bg full-height d-flex" style="background-image: url('assets/img/login-3.png')">
+    <div class="container-fluid p-h-0 p-v-20 bg full-height d-flex"
+        style="background-image: url('assets/img/login-3.png')">
         <div class="d-flex flex-column justify-content-between w-100">
             <div class="container d-flex justify-content-center h-100">
                 <div class="row align-items-center w-100">
@@ -15,41 +16,51 @@
                                     <div class="form-group">
                                         <label class="font-weight-semibold">Correo</label>
                                         <div class="input-group">
-                                            <input formControlName="username" type="text" class="form-control" [ngClass]="(isFieldInvalid(loginForm, 'username'))? 'is-invalid': 'valid'">
+                                            <input formControlName="username" type="text" class="form-control"
+                                                [ngClass]="(isFieldInvalid(loginForm, 'username'))? 'is-invalid': 'valid'">
                                         </div>
                                         <div *ngIf="isFieldInvalid(loginForm, 'username') " class="message-errors">
-                                            <span *ngIf="hasFieldError(loginForm, 'username', 'required') ">Este campo es requerido.</span>
-                                            <span *ngIf="hasFieldError(loginForm, 'username', 'minlength')">Introduzca una dirección de correo electrónico válida.</span>
+                                            <span *ngIf="hasFieldError(loginForm, 'username', 'required') ">Este campo
+                                                es requerido.</span>
+                                            <span *ngIf="hasFieldError(loginForm, 'username', 'minlength')">Introduzca
+                                                una dirección de correo electrónico válida.</span>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="font-weight-semibold">Contraseña</label>
-                                        <a class="float-right font-size-13 text-muted" routerLink="/auth/forgot-password">¿Olvidaste tu contraseña?</a>
+                                        <a class="float-right font-size-13 text-muted"
+                                            routerLink="/auth/forgot-password">¿Olvidaste tu contraseña?</a>
                                         <div class="input-group">
-                                            <input formControlName="password" [type]="fieldType" class="form-control" [ngClass]="(isFieldInvalid(loginForm, 'password'))? 'is-invalid': 'valid'">
+                                            <input formControlName="password" [type]="fieldType" class="form-control"
+                                                [ngClass]="(isFieldInvalid(loginForm, 'password'))? 'is-invalid': 'valid'">
                                             <div class="input-group-prepend cursor">
                                                 <div class="input-group-prepend">
-                                                    <span *ngIf="fieldType == 'password'" (click)="fieldType = 'text'" class="input-group-text">
-                                                  <i class="fa fa-eye-slash"></i>
-                                                </span>
-                                                    <span *ngIf="fieldType == 'text'" (click)="fieldType = 'password'" class="input-group-text">
-                                                  <i class="fa fa-eye"></i>
-                                                </span>
+                                                    <span *ngIf="fieldType == 'password'" (click)="fieldType = 'text'"
+                                                        class="input-group-text">
+                                                        <i class="fa fa-eye-slash"></i>
+                                                    </span>
+                                                    <span *ngIf="fieldType == 'text'" (click)="fieldType = 'password'"
+                                                        class="input-group-text">
+                                                        <i class="fa fa-eye"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div *ngIf="isFieldInvalid(loginForm, 'password') " class="message-errors">
-                                            <span *ngIf="hasFieldError(loginForm, 'password', 'minlength')">Ingresa mínimo 8 caracteres</span>
-                                            <span *ngIf="hasFieldError(loginForm, 'password', 'required') ">Este campo es requerido</span>
+                                            <span *ngIf="hasFieldError(loginForm, 'password', 'minlength')">Ingresa
+                                                mínimo 8 caracteres</span>
+                                            <span *ngIf="hasFieldError(loginForm, 'password', 'required') ">Este campo
+                                                es requerido</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="d-flex align-items-center justify-content-end">
-                                            <button (keyup.enter)="login()" [disabled]="loadingLogin" (click)="login()" type="button" class="btn btn-primary btn-block">
-                                                <span *ngIf="!loadingLogin" >
+                                            <button (keyup.enter)="login()" [disabled]="loadingLogin" (click)="login()"
+                                                type="button" class="btn btn-primary btn-block">
+                                                <span *ngIf="!loadingLogin">
                                                     Iniciar sesión
-                                                </span>                                          
+                                                </span>
                                                 <div *ngIf="loadingLogin" class="spinner-border" role="status">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>

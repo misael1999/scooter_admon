@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./client-detail.component.scss']
 })
 export class ClientDetailComponent implements OnInit {
-  7
+  7;
   loadingData: boolean;
   idClient: number;
   dataClient;

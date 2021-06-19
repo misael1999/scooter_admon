@@ -20,7 +20,7 @@ export class TabMerchantSummaryComponent implements OnInit {
   loadingData: boolean;
 
   constructor(private merchantService: MerchantsService,
-    private dialog: MatDialog) { }
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.merchant = this.merchantService.merchantId;

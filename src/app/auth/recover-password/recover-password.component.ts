@@ -47,10 +47,10 @@ export class RecoverPasswordComponent extends ValidationForms implements OnInit 
       .subscribe(data => {
         this.loadingRecover = false;
         this.success = true;
-        this.showSwalMessage('Vuelve a iniciar sesión con tu nueva contraseña')
+        this.showSwalMessage('Vuelve a iniciar sesión con tu nueva contraseña');
       }, error => {
         this.loadingRecover = false;
-        this.showSwalMessage(error.errors.message, 'error')
+        this.showSwalMessage(error.errors.message, 'error');
       });
   }
 

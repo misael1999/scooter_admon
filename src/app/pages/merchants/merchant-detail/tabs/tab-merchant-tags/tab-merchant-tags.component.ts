@@ -14,8 +14,8 @@ export class TabMerchantTagsComponent implements OnInit {
   loadingData;
 
   constructor(private merchantsService: MerchantsService,
-    private tagsGeneralService: TagsGeneralService,
-    private dialog: MatDialog) {
+              private tagsGeneralService: TagsGeneralService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {

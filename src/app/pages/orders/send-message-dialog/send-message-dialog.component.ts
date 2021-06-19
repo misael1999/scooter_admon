@@ -17,10 +17,10 @@ export class SendMessageDialogComponent extends ValidationForms implements OnIni
   idOrder: number;
 
   constructor(private fb: FormBuilder,
-    private supportService: SupportService,
-    private router: Router,
-    public dialogRef: MatDialogRef<SendMessageDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {
+              private supportService: SupportService,
+              private router: Router,
+              public dialogRef: MatDialogRef<SendMessageDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data) {
     super();
     this.idStation = data.order.station_object.id;
     this.idOrder = data.order.id;

@@ -21,7 +21,7 @@ export class ForgotPasswordComponent extends ValidationForms implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService) {
-    super()
+    super();
   }
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class ForgotPasswordComponent extends ValidationForms implements OnInit {
         this.success = true;
       }, error => {
         this.loadingForgot = false;
-        this.showSwalMessage(error.errors.message, 'error')
+        this.showSwalMessage(error.errors.message, 'error');
       });
   }
 

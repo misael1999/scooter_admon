@@ -17,7 +17,7 @@ export class AddFaqComponent extends ValidationForms implements OnInit {
   groupSelected;
 
   constructor(private fb: FormBuilder, private faqService: FaqService, private dialogRef: MatDialogRef<AddFaqComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
     if (data.faq) {
       this.faq = data.faq;

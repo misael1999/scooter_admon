@@ -3,11 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OrdersService } from 'src/app/services/orders.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ValidationForms } from '../../../../utils/validations-forms';
-
-export interface DialogData {
-  orderId: number;
-}
+import { ValidationForms } from 'src/app/utils/validations-forms';
+import { DialogData } from '../assign-delivery-dialog/assign-delivery-dialog.component';
 
 @Component({
   selector: 'app-reject-order-merchant',
@@ -15,15 +12,16 @@ export interface DialogData {
   styleUrls: ['./reject-order-merchant.component.scss']
 })
 export class RejectOrderMerchantComponent extends ValidationForms implements OnInit {
-
   rejectForm: FormGroup;
   orderId: number;
   loadingSave: boolean;
 
   constructor(public dialogRef: MatDialogRef<RejectOrderMerchantComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private orderService: OrdersService, private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder) {
+              @Inject(MAT_DIALOG_DATA)
+    public data: DialogData,
+              private orderService: OrdersService,
+              private snackBar: MatSnackBar,
+              private formBuilder: FormBuilder) {
     super();
     this.orderId = data.orderId;
   }
@@ -35,7 +33,7 @@ export class RejectOrderMerchantComponent extends ValidationForms implements OnI
   rejectOrder() {
     if (this.rejectForm.invalid) {
       this.rejectForm.markAllAsTouched();
-      return true;
+      return;
     }
     this.loadingSave = true;
     this.orderService.rejectOrderMerchant(this.orderId, this.rejectForm.value)
@@ -55,9 +53,6 @@ export class RejectOrderMerchantComponent extends ValidationForms implements OnI
     });
   }
 
-
-
-
   showMessageSuccess(message) {
     this.snackBar.open(message, 'Aceptar', {
       duration: 3000,
@@ -71,5 +66,4 @@ export class RejectOrderMerchantComponent extends ValidationForms implements OnI
       panelClass: ['error-snackbar']
     });
   }
-
 }

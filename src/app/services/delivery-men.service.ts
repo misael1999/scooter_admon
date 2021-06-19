@@ -46,6 +46,4 @@ export class DeliveryMenService {
     const url = `${environment.HOST_APIV1}/stations/${stationId}/delivery_men/${idDelivery}/`;
     return this.httpClient.delete(url);
   }
-
-
 }

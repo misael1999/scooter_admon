@@ -45,8 +45,8 @@ export class ChatSupportComponent implements OnInit {
   newMessage = null;
 
   constructor(private supportService: SupportService,
-    private webSocketService: WebSocketService,
-    private snotify: SnotifyService) { }
+              private webSocketService: WebSocketService,
+              private snotify: SnotifyService) { }
 
   ngOnInit(): void {
     this.station = JSON.parse(localStorage.getItem('station'));
